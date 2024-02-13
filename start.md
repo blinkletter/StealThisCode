@@ -13,12 +13,12 @@ We will use *Python* only as a **tool**. All code will be written for you in the
 
 ## Things to Steal
 
-All the code that you will need in the first half of our exercises will be available in the information pages for the lab or tutorial in question. This book is intended to provide some basic examples of *Python* code for performing calculations and visualizing data. You will see that the programs that you are using during our tutorials we all stolen from this book and changed to suit you.
+**All the code** that you will need in the first half of our exercises will be **available** in the information pages for the lab or tutorial in question. This book is intended to provide some basic **examples** of *Python* code for performing **calculations and visualizing data**. You will see that the programs that you are using during our tutorials we all stolen from this book and changed to suit you. Examine, play with, and **steal the code** in the interactive notebooks linked below.
 
 
->**Title**: [Basic Math with *Python*](uncertainties.ipynb) <br>
+>**Title**: [Using *Uncertainty*](uncertainties.ipynb) <br>
 >**Tools**: *Uncertainties*, *NumPy*  <br>
->**Skills**: Basic math operations, using the tools of *NumPy* and their versions provided by the *Uncertainties* package.   
+>**Skills**: Math operations with uncertain values, using the tools of *NumPy* and their versions provided by the *Uncertainties* package.   
 
 
 ---

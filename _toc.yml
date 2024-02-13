@@ -4,7 +4,7 @@
 format: jb-book
 root: start
 parts:
-    - caption: Steal Code for Math
+    - caption: Math
       chapters:
         - file: uncertainties.ipynb
 

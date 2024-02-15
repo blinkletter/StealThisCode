@@ -41,7 +41,7 @@ We will use *Python* only as a **tool**. All code will be written for you in the
 
 >**Title**: [Advanced Plotting Example](2_4_Fancy_1.ipynb) <br>
 >**Tools**: *MatPlotLib*, *NumPy*, *SciPy*  <br>
->**Skills**: All of the above plus advanced plotting using axes objects   
+>**Skills**: All of the above plus advanced plotting using axes objects. Two plots in one figure.   
 
 ---
 These is a **Juptyter-book** that was built from a set of **interactive *Python* Jupyter notebooks**. The original notebook for any given chapter can be obtained using the **download link** at the top of the page.

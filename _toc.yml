@@ -13,3 +13,4 @@ parts:
         - file: 2_1_Plotting.ipynb
         - file: 2_2_Curve_Fits.ipynb
         - file: 2_3_Curve_Fits.ipynb
+        - file: 2_4_Fancy_1.ipynb

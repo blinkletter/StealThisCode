@@ -1,0 +1,22 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: start
+parts:
+    - caption: Tutorial 2
+      chapters:
+        - file: T02/T2_AcidBaseMath
+        - file: T02/T2_Exercise
+        - file: T02/T2_TitrModel
+    - caption: Tutorial 3
+      chapters:
+        - file: T03/T3_Galactsidase_enzyme_kinetics.ipynb
+        - file: T03/T3_MM_Intro_basics_functions
+    - caption: Tutorial 4
+      chapters:
+        - file: T04/T4_InhibitionA.ipynb
+        - file: T04/T4_MM_Intro_fun
+        - file: T04/Tutorial_4_exercises_Answers.ipynb
+
+

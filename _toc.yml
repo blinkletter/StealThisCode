@@ -4,10 +4,6 @@
 format: jb-book
 root: start
 parts:
-    - caption: Math
-      chapters:
-        - file: 1_1_Calculator.ipynb
-        - file: uncertainties.ipynb
     - caption: Plots
       chapters:
         - file: 2_1_Plotting.ipynb

@@ -3,11 +3,12 @@
 <!DOCTYPE html>
 
 
-<html >
+<html lang="en" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
     <title>Using Uncertainty &#8212; Steal this Code</title>
   
   
@@ -44,6 +45,7 @@
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
@@ -68,7 +70,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="next" title="Plotting Data" href="2_1_Plotting.html" />
     <link rel="prev" title="Basic Math with Python" href="1_1_Calculator.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="None"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
   
   
@@ -361,11 +363,11 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <div class="tex2jax_ignore mathjax_ignore section" id="using-uncertainty">
-<h1>Using Uncertainty<a class="headerlink" href="#using-uncertainty" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="using-uncertainty">
+<h1>Using Uncertainty<a class="headerlink" href="#using-uncertainty" title="Permalink to this heading">#</a></h1>
 <p>How do you <strong>propagate uncertainty</strong> through a series of calculation? There are <strong>rules</strong> and I know a few of them but <em>Python</em> can do math with uncertain numbers and handle all that for you.</p>
-<div class="section" id="the-uncertainties-package">
-<h2>The <em>Uncertainties</em> Package<a class="headerlink" href="#the-uncertainties-package" title="Permalink to this headline">#</a></h2>
+<section id="the-uncertainties-package">
+<h2>The <em>Uncertainties</em> Package<a class="headerlink" href="#the-uncertainties-package" title="Permalink to this heading">#</a></h2>
 <p>There is an open-source <em>Python</em> package that provides the tools to <strong>handle uncertainties</strong> in all the <strong>math operations</strong> that are performed by the <em>Math</em> and <em>NumPy</em> packages. This package is call <em>Uncertainties</em> and you can find <a class="reference external" href="https://uncertainties-python-package.readthedocs.io/en/latest/">documentation here</a>.</p>
 <p>The <strong><em>Uncertainties</em> package</strong> is not yet part of the <em>Python</em> standard library and <strong>must be installed</strong> into a <em>Python</em> instance when using Google <em>Colab</em>. The code below will set up all the packages for our demonstration and install the <em>Uncertainties</em> package.</p>
 <div class="cell tag_hide-input docutils container">
@@ -386,7 +388,7 @@ document.write(`
 <span class="c1">### Install UNCERTAINTIES package </span>
 <span class="c1">####################################</span>
 
-<span class="o">!</span>pip install uncertainties               ## to install <span class="k">in</span> Colab. 
+<span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>uncertainties<span class="w">               </span>##<span class="w"> </span>to<span class="w"> </span>install<span class="w"> </span><span class="k">in</span><span class="w"> </span>Colab.<span class="w"> </span>
                                          
 
 <span class="c1">####################################</span>
@@ -403,9 +405,9 @@ document.write(`
 </div>
 </details>
 </div>
-</div>
-<div class="section" id="creating-uncertain-numbers">
-<h2>Creating Uncertain Numbers<a class="headerlink" href="#creating-uncertain-numbers" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="creating-uncertain-numbers">
+<h2>Creating Uncertain Numbers<a class="headerlink" href="#creating-uncertain-numbers" title="Permalink to this heading">#</a></h2>
 <p>An uncertain number is a data object that contains the <strong>nominal value</strong> and the <strong>standard deviation</strong> together. In the <em>Uncertainties</em> package there are two commands that will <strong>create an uncertain number</strong>, <code class="docutils literal notranslate"><span class="pre">un.ufloat()</span></code> and <code class="docutils literal notranslate"><span class="pre">un.ufloat_fromstr()</span></code>. Consider the examples below for two numbers:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split} a = 4.2 \pm 0.9 \\
@@ -445,9 +447,9 @@ An uncertain value created using the ufloat_fromstr() function
 </div>
 </details>
 </div>
-</div>
-<div class="section" id="using-uncertain-numbers">
-<h2>Using Uncertain Numbers<a class="headerlink" href="#using-uncertain-numbers" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="using-uncertain-numbers">
+<h2>Using Uncertain Numbers<a class="headerlink" href="#using-uncertain-numbers" title="Permalink to this heading">#</a></h2>
 <p>In the code below you can see the use of these uncertain numbers with <em>Python</em> and <em>NumPy</em> <strong>operators and functions</strong>. Observe that we use the <em>UNumPy</em> sublibrary of the <em>Uncertainties</em>  package when calling a <em>NumPy</em> function such as <code class="docutils literal notranslate"><span class="pre">unp.log10()</span></code> or <code class="docutils literal notranslate"><span class="pre">unp.sin()</span></code>.</p>
 <div class="cell tag_hide-input tag_hide-output docutils container">
 <details class="hide above-input">
@@ -459,13 +461,13 @@ An uncertain value created using the ufloat_fromstr() function
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### Demonstrate error propagation</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Some math with uncertain values&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;a + b: </span><span class="si">{</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;a - b: </span><span class="si">{</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;a * b: </span><span class="si">{</span><span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;a / b: </span><span class="si">{</span><span class="n">a</span> <span class="o">/</span> <span class="n">b</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;a + b: </span><span class="si">{</span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;a - b: </span><span class="si">{</span><span class="n">a</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">b</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;a * b: </span><span class="si">{</span><span class="n">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;a / b: </span><span class="si">{</span><span class="n">a</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">b</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;log b: </span><span class="si">{</span><span class="n">unp</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;sin a (in radians): </span><span class="si">{</span><span class="n">unp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;sin a (in degrees): </span><span class="si">{</span><span class="n">unp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">a</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">180</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;sin a (in degrees): </span><span class="si">{</span><span class="n">unp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">180</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -489,9 +491,9 @@ sin a (in degrees): 0.073+/-0.016
 </div>
 </details>
 </div>
-</div>
-<div class="section" id="arrays-with-uncertainty">
-<h2>Arrays with Uncertainty<a class="headerlink" href="#arrays-with-uncertainty" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="arrays-with-uncertainty">
+<h2>Arrays with Uncertainty<a class="headerlink" href="#arrays-with-uncertainty" title="Permalink to this heading">#</a></h2>
 <p>One can have an <strong>array of uncertain numbers</strong>. It may be created just by adding uncertain values into an array or by using the <code class="docutils literal notranslate"><span class="pre">unp.uarray()</span></code> function with an array of nominal values and an array of uncertainties. Examine the code below.</p>
 <div class="cell tag_hide-input tag_hide-output docutils container">
 <details class="hide above-input">
@@ -546,9 +548,9 @@ The second array with a log10() function applied
 </div>
 </details>
 </div>
-</div>
-<div class="section" id="extracting-values-from-uncertainties">
-<h2>Extracting Values from Uncertainties<a class="headerlink" href="#extracting-values-from-uncertainties" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="extracting-values-from-uncertainties">
+<h2>Extracting Values from Uncertainties<a class="headerlink" href="#extracting-values-from-uncertainties" title="Permalink to this heading">#</a></h2>
 <p>If you need to get the <strong>nominal value</strong> or the <strong>uncertainty</strong> from an <em>Uncertainties</em> object then you can use the <code class="docutils literal notranslate"><span class="pre">un.nominal_value()</span></code> and the <code class="docutils literal notranslate"><span class="pre">un.std_dev()</span></code> functions as demonstrated below.</p>
 <p>For <em>NumPy</em> arrays of uncertain values we would use <code class="docutils literal notranslate"><span class="pre">unp.nominal_values()</span></code> and <code class="docutils literal notranslate"><span class="pre">unp.std_devs()</span></code> to get arrays of the values and errors</p>
 <div class="cell tag_hide-input tag_hide-output docutils container">
@@ -595,12 +597,12 @@ An uncertain array followed by the nominal and the error components
 </div>
 </details>
 </div>
-</div>
-<div class="section" id="summary">
-<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this heading">#</a></h2>
 <p>You can <strong>create values that include uncertainty and propagate that uncertainty</strong> through your calculations using the <em>Uncertainties</em> package. Uncertain values can used singly or in arrays.</p>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {

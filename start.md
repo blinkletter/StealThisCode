@@ -19,7 +19,7 @@ We will use *Python* only as a **tool**. All code will be written for you in the
 
 >**Title**: [Basic Math with *Python*](1_1_Calculator.ipynb) <br>
 >**Tools**: *Python* math operators, *NumPy*  <br>
->**Skills**: Basic math operations and math functions using the tools of *NumPy*. Math with *NumPy* arrays.   
+>**Skills**: Basic math operations and math functions using the tools of *NumPy*. Math with *NumPy* arrays, formatting numbers in f-strings.   
 
 >**Title**: [Using *Uncertainty*](uncertainties.ipynb) <br>
 >**Tools**: *Uncertainties*, *NumPy*  <br>
@@ -39,6 +39,9 @@ We will use *Python* only as a **tool**. All code will be written for you in the
 >**Tools**: *MatPlotLib*, *NumPy*, *SciPy*  <br>
 >**Skills**: Curve fits to x,y data. Styling plots. Some more advanced styling.   
 
+>**Title**: [Advanced Plotting Example](2_4_Fancy_1.ipynb) <br>
+>**Tools**: *MatPlotLib*, *NumPy*, *SciPy*  <br>
+>**Skills**: All of the above plus advanced plotting using axes objects   
 
 ---
 These is a **Juptyter-book** that was built from a set of **interactive *Python* Jupyter notebooks**. The original notebook for any given chapter can be obtained using the **download link** at the top of the page.

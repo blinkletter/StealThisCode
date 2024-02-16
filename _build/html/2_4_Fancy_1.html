@@ -3,12 +3,11 @@
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Advanced Plotting Example &#8212; Steal this Code</title>
   
   
@@ -45,7 +44,6 @@
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
@@ -69,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="Curve Fits" href="2_3_Curve_Fits.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:language" content="None"/>
   </head>
   
   
@@ -349,6 +347,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-old-way">The Old Way</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-new-way">The New Way</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-plots">Multiple Plots</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-multiple-plots">More Multiple Plots</a></li>
 </ul>
             </nav>
         </div>
@@ -360,11 +359,11 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="advanced-plotting-example">
-<h1>Advanced Plotting Example<a class="headerlink" href="#advanced-plotting-example" title="Permalink to this heading">#</a></h1>
+  <div class="tex2jax_ignore mathjax_ignore section" id="advanced-plotting-example">
+<h1>Advanced Plotting Example<a class="headerlink" href="#advanced-plotting-example" title="Permalink to this headline">#</a></h1>
 <p>So far we have been calling <em>PyPlot</em> commands to add to and alter a <strong>plot figure</strong>. This figure is, in fact, a <strong>data object</strong> with its own built-in functions that can be accessed directly rather than through <em>PyPlot</em> commands. A <strong>figure</strong> will contains one or more ‘axes’. Each <strong>axis</strong> is a plot and have their own buil-in functions for adding points, lines and text. In this example I will <strong>steal the code</strong> from the previous notebook and <strong>change it</strong> to use figures and axis objects to create the same plot as before. Contrast and compare.</p>
-<section id="the-old-way">
-<h2>The Old Way<a class="headerlink" href="#the-old-way" title="Permalink to this heading">#</a></h2>
+<div class="section" id="the-old-way">
+<h2>The Old Way<a class="headerlink" href="#the-old-way" title="Permalink to this headline">#</a></h2>
 <p>Below is the code stolen from the <strong>previous</strong> notebook. It will take a data set and produce a plot with a curve fit.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
@@ -480,9 +479,9 @@ The KM is 3.809 +/- 0.3326
 </div>
 </div>
 </div>
-</section>
-<section id="the-new-way">
-<h2>The New Way<a class="headerlink" href="#the-new-way" title="Permalink to this heading">#</a></h2>
+</div>
+<div class="section" id="the-new-way">
+<h2>The New Way<a class="headerlink" href="#the-new-way" title="Permalink to this headline">#</a></h2>
 <p>Below is the code above using the <strong>object-oriented</strong> style available in <em>MatPlotLib</em>. Rather than create a plot and send it <em>PyPlot</em> commands to add points and other elements we will create a <strong>figure object</strong> that contains and <strong>axis object</strong>.</p>
 <p><strong>NOTE:</strong> all this code is almost identical to the previous notebook.  <strong>I stole it all</strong>. Compare the linear fit notebook with this one and <strong>observe where I made changes</strong>. The major change is the function being defined for the curve fit. I also changed variable names to better describe what we are doing. That is all.</p>
 <div class="cell tag_hide-input docutils container">
@@ -603,9 +602,9 @@ The KM is 3.809 +/- 0.3326
 </div>
 </div>
 </div>
-</section>
-<section id="multiple-plots">
-<h2>Multiple Plots<a class="headerlink" href="#multiple-plots" title="Permalink to this heading">#</a></h2>
+</div>
+<div class="section" id="multiple-plots">
+<h2>Multiple Plots<a class="headerlink" href="#multiple-plots" title="Permalink to this headline">#</a></h2>
 <p>I will steal the code above and repeat the Michaelis-Menten plot. I will also steal the code for the Lineweaver-Burke linear fit and plot <strong>a second plot</strong> for that in the same figure. We will have <strong>two plots in one figure</strong>.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">plt.subfigures()</span></code> is used again and this time we will set a <span class="math notranslate nohighlight">\(2 \times 1\)</span> grid of axes rather than the single <span class="math notranslate nohighlight">\(1 \times 1\)</span> arrangement used above.</p>
 <p>Examine the code below. Observe how I address each axes object. the <code class="docutils literal notranslate"><span class="pre">plt.subfigures()</span></code> function returned a figure object and a <strong>list of two axes objects</strong>. I will address each axes object by its position in the list. Otherwise I will plot exactly as above and make one plot in one axes object and then another in the other axes object.</p>
@@ -806,8 +805,371 @@ The y-intercept is 0.01263 +/- 0.00065
 <img alt="_images/ebabb2919980c6fc1d6b3b912f279b43ca2b4889b211302d32a0759a0b23b8c6.png" src="_images/ebabb2919980c6fc1d6b3b912f279b43ca2b4889b211302d32a0759a0b23b8c6.png" />
 </div>
 </div>
-</section>
-</section>
+</div>
+<div class="section" id="more-multiple-plots">
+<h2>More Multiple Plots<a class="headerlink" href="#more-multiple-plots" title="Permalink to this headline">#</a></h2>
+<p>I will <strong>steal</strong> the code above and <strong>repeat</strong> the two plots. Then I will add two more plots for a total of four. Observe how this is set up in the <code class="docutils literal notranslate"><span class="pre">plt.subplots()</span></code> function at the beginning when we create a <span class="math notranslate nohighlight">\(2 \times 2\)</span> grid of axes.</p>
+<p>After that I just add two <strong>copies</strong> of the code linear plots done different ways and address the new axes accordingly. Examine the code below.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>   <span class="c1">### load in the plotting tools from the MatPlotLib package</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">curve_fit</span>   <span class="c1">### load in the curve_fit function from the SciPy package</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1">#########################################</span>
+<span class="c1">### Set up the data lists</span>
+<span class="c1">#########################################</span>
+
+<span class="n">conc</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.1</span><span class="p">,</span> <span class="mf">2.2</span><span class="p">,</span> <span class="mf">2.7</span><span class="p">,</span> <span class="mf">3.8</span><span class="p">,</span> <span class="mf">4.7</span><span class="p">,</span> <span class="mf">7.9</span><span class="p">,</span> <span class="mf">9.4</span><span class="p">]</span>     <span class="c1">### units are mM</span>
+<span class="n">rates</span> <span class="o">=</span> <span class="p">[</span><span class="mf">18.7</span><span class="p">,</span> <span class="mf">28.6</span><span class="p">,</span> <span class="mf">35.0</span><span class="p">,</span>  <span class="mf">39.4</span><span class="p">,</span> <span class="mf">46.5</span><span class="p">,</span> <span class="mf">54.1</span><span class="p">,</span> <span class="mf">58.5</span><span class="p">]</span>   <span class="c1">### units are uM/min</span>
+
+<span class="n">conc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">conc</span><span class="p">)</span>    <span class="c1">### Convert my lists into NumPy arrays</span>
+<span class="n">rates</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">rates</span><span class="p">)</span>  <span class="c1">###  that can be used in math operations</span>
+
+<span class="c1">### set x and y so that we never need to change the plotting code below</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">conc</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">rates</span>
+
+<span class="c1">#########################################</span>
+<span class="c1">### Create curve fit function</span>
+<span class="c1">#########################################</span>
+                   
+<span class="k">def</span> <span class="nf">MM_fit</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">Vmax</span><span class="p">,</span> <span class="n">KM</span><span class="p">):</span>            <span class="c1">### a function that accepts a list of x values and values for slope and intercept</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">Vmax</span> <span class="o">*</span> <span class="p">(</span><span class="n">s</span> <span class="o">/</span> <span class="p">(</span><span class="n">s</span> <span class="o">+</span> <span class="n">KM</span><span class="p">))</span>       <span class="c1">### then calculates values for y</span>
+    <span class="k">return</span> <span class="n">v</span>                        <span class="c1">### and send then back as the result of the function</span>
+
+<span class="n">parameters</span><span class="p">,</span> <span class="n">statistics</span> <span class="o">=</span> <span class="n">curve_fit</span><span class="p">(</span><span class="n">MM_fit</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="n">Vmax</span><span class="p">,</span> <span class="n">KM</span> <span class="o">=</span> <span class="n">parameters</span>               <span class="c1">### the parameters contains slope and intercept, in order</span>
+
+<span class="n">perr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">statistics</span><span class="p">))</span> <span class="c1">### the statistics object can be used to calculate standard deviations</span>
+<span class="n">Vmax_stdev</span><span class="p">,</span> <span class="n">KM_stdev</span> <span class="o">=</span> <span class="n">perr</span>         <span class="c1">### the standard errors for slope and intercept accessed in order</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The Vmax is </span><span class="si">{</span><span class="n">Vmax</span><span class="si">:</span><span class="s2">0.3f</span><span class="si">}</span><span class="s2"> +/- </span><span class="si">{</span><span class="n">Vmax_stdev</span><span class="si">:</span><span class="s2">0.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The KM is </span><span class="si">{</span><span class="n">KM</span><span class="si">:</span><span class="s2">0.3f</span><span class="si">}</span><span class="s2"> +/- </span><span class="si">{</span><span class="n">KM_stdev</span><span class="si">:</span><span class="s2">0.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>                   <span class="c1">### display the plot in this notebook</span>
+
+<span class="c1">#########################################</span>
+<span class="c1">### Make a line using the calculated vmax and KM</span>
+<span class="c1">#########################################</span>
+
+<span class="n">max_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>                   <span class="c1">### obtain the maximum x value</span>
+<span class="n">x_fit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_x</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>  <span class="c1">### Make an array of 100 points between zero and the max x value</span>
+<span class="n">y_fit</span> <span class="o">=</span> <span class="n">MM_fit</span><span class="p">(</span><span class="n">x_fit</span><span class="p">,</span> <span class="n">Vmax</span><span class="p">,</span> <span class="n">KM</span><span class="p">)</span>     <span class="c1">### calculate the y values using the function that we curve fit</span>
+            
+<span class="c1">#########################################</span>
+<span class="c1">### Make a figure onject that contains a single axis object</span>
+<span class="c1">### the pyplot.subplots command will ctraete these two objects</span>
+<span class="c1">#########################################</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">rcdefaults</span><span class="p">()</span>                    <span class="c1">### resets the plot defaults so we always start in the same place</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">),</span> <span class="n">layout</span> <span class="o">=</span> <span class="s1">&#39;tight&#39;</span><span class="p">)</span>  <span class="c1">### Four plots in a wider and longer figure</span>
+
+
+<span class="c1">#########################################</span>
+<span class="c1">### Plot the line using the x_fit, y_fit points</span>
+<span class="c1">#########################################t</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_fit</span><span class="p">,</span> <span class="n">y_fit</span><span class="p">,</span> 
+        <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span>            <span class="c1">### use a line between points</span>
+        <span class="n">linewidth</span><span class="o">=</span><span class="s1">&#39;0.5&#39;</span><span class="p">,</span>            <span class="c1">### make the line thin</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span>            <span class="c1">### the line is black</span>
+        <span class="n">zorder</span> <span class="o">=</span> <span class="mi">0</span>                  <span class="c1">### everything is in layer 0 (the bottom layer in this case)</span>
+        <span class="p">)</span>
+
+<span class="c1">#########################################</span>
+<span class="c1">### Plot the data with style</span>
+<span class="c1">#########################################</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> 
+        <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span>                 <span class="c1">### Plot the x and y data </span>
+        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span>              <span class="c1">### markers are this color</span>
+        <span class="n">edgecolors</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span>       <span class="c1">### outline of markers is this color</span>
+        <span class="n">linewidths</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>           <span class="c1">### outline of markers is this wide</span>
+        <span class="n">s</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span>                       <span class="c1">### &quot;s&quot; is &quot;size&quot;. sqrt(64) = 8 points wide</span>
+        <span class="n">zorder</span> <span class="o">=</span> <span class="mi">1</span>                  <span class="c1">### everything is in layer 1 (the top layer in this case)</span>
+        <span class="p">)</span>
+
+<span class="c1">#########################################</span>
+<span class="c1">### Add more style</span>
+<span class="c1">#########################################</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">ylabel</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\nu$&quot;</span><span class="p">,</span> 
+        <span class="n">xlabel</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$[S]$&quot;</span><span class="p">,</span>
+        <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Michaelis-Menten&quot;</span><span class="p">,</span>
+        <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>                  
+        <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">83</span><span class="p">]</span>      
+      <span class="p">)</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>   <span class="c1">### Make right spine invisible</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>     <span class="c1">### Make top spine invisible</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>    <span class="c1">### Make left spine invisible</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;bottom&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>  <span class="c1">### Make bottom spine invisible</span>
+
+<span class="c1">###########################################################################</span>
+<span class="c1">####################### AND NOW, THE SECOND PLOT ##########################</span>
+<span class="c1">###########################################################################</span>
+
+<span class="c1">#########################################</span>
+<span class="c1">### Line fit function</span>
+<span class="c1">#########################################</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">conc</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">rates</span>
+
+<span class="k">def</span> <span class="nf">linear</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">slope</span><span class="p">,</span> <span class="n">intercept</span><span class="p">):</span>   <span class="c1">### a function that accepts a list of x values and values for slope and intercept</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">slope</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">intercept</span>      <span class="c1">### then calculates values for y</span>
+    <span class="k">return</span> <span class="n">y</span>                       <span class="c1">### and send then back as the result of the function</span>
+
+<span class="n">parameters</span><span class="p">,</span> <span class="n">statistics</span> <span class="o">=</span> <span class="n">curve_fit</span><span class="p">(</span><span class="n">linear</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="n">slope</span><span class="p">,</span> <span class="n">intercept</span> <span class="o">=</span> <span class="n">parameters</span>       <span class="c1">### the parameters contains slope and intercept, in order</span>
+
+<span class="n">perr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">statistics</span><span class="p">))</span> <span class="c1">### the statistics object can be used to calculate standard deviations</span>
+<span class="n">slope_stdev</span><span class="p">,</span> <span class="n">int_stdev</span> <span class="o">=</span> <span class="n">perr</span>       <span class="c1">### the standard errors for slope and intercept accessed in order</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The LB slope is </span><span class="si">{</span><span class="n">slope</span><span class="si">:</span><span class="s2">0.5f</span><span class="si">}</span><span class="s2"> +/- </span><span class="si">{</span><span class="n">slope_stdev</span><span class="si">:</span><span class="s2">0.5f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The LB y-intercept is </span><span class="si">{</span><span class="n">intercept</span><span class="si">:</span><span class="s2">0.5f</span><span class="si">}</span><span class="s2"> +/- </span><span class="si">{</span><span class="n">int_stdev</span><span class="si">:</span><span class="s2">0.5f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="c1">#########################################</span>
+<span class="c1">### Make a line using the calculated slope and intercept</span>
+<span class="c1">#########################################</span>
+
+<span class="n">max_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>                   <span class="c1">### obtain the maximum x value</span>
+<span class="n">x_fit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_x</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>  <span class="c1">### Make an array of 100 points between zero and the max x value</span>
+<span class="n">y_fit</span> <span class="o">=</span> <span class="n">linear</span><span class="p">(</span><span class="n">x_fit</span><span class="p">,</span> <span class="n">slope</span><span class="p">,</span> <span class="n">intercept</span><span class="p">)</span>     <span class="c1">### calculate the y values using the function that we curve fit</span>
+            
+<span class="c1">#########################################</span>
+<span class="c1">### Plot the line using the x_fit, y_fit points</span>
+<span class="c1">#########################################</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_fit</span><span class="p">,</span> <span class="n">y_fit</span><span class="p">,</span> 
+        <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span>            <span class="c1">### use a line between points</span>
+        <span class="n">linewidth</span><span class="o">=</span><span class="s1">&#39;0.5&#39;</span><span class="p">,</span>            <span class="c1">### make the line thin</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span>            <span class="c1">### the line is black</span>
+        <span class="n">zorder</span> <span class="o">=</span> <span class="mi">0</span>                  <span class="c1">### everything is in layer 0 (the bottom layer in this case)</span>
+        <span class="p">)</span>
+
+<span class="c1">#########################################</span>
+<span class="c1">### Plot the data with style</span>
+<span class="c1">#########################################</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> 
+        <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span>                 <span class="c1">### Plot the x and y data </span>
+        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span>              <span class="c1">### markers are this color</span>
+        <span class="n">edgecolors</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span>       <span class="c1">### outline of markers is this color</span>
+        <span class="n">linewidths</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>           <span class="c1">### outline of markers is this wide</span>
+        <span class="n">s</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span>                       <span class="c1">### &quot;s&quot; is &quot;size&quot;. sqrt(64) = 8 points wide</span>
+        <span class="n">zorder</span> <span class="o">=</span> <span class="mi">1</span>                  <span class="c1">### everything is in layer 1 (the top layer in this case)</span>
+        <span class="p">)</span>
+
+<span class="c1">#########################################</span>
+<span class="c1">### Add more style</span>
+<span class="c1">#########################################</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">ylabel</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$1 / \nu$&quot;</span><span class="p">,</span> 
+        <span class="n">xlabel</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$1 / [S]$&quot;</span><span class="p">,</span>
+        <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Lineweaver-Burke&quot;</span><span class="p">,</span>
+        <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>                  
+        <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.06</span><span class="p">]</span>      
+      <span class="p">)</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>   <span class="c1">### Make right spine invisible</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>     <span class="c1">### Make top spine invisible</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>    <span class="c1">### Make left spine invisible</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;bottom&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>  <span class="c1">### Make bottom spine invisible</span>
+
+
+
+
+
+<span class="c1">###########################################################################</span>
+<span class="c1">####################### AND NOW, THE THIRD PLOT ##########################</span>
+<span class="c1">###########################################################################</span>
+
+<span class="c1">#########################################</span>
+<span class="c1">### Line fit function</span>
+<span class="c1">#########################################</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">rates</span> <span class="o">/</span> <span class="n">conc</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">rates</span> 
+
+<span class="k">def</span> <span class="nf">linear</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">slope</span><span class="p">,</span> <span class="n">intercept</span><span class="p">):</span>   <span class="c1">### a function that accepts a list of x values and values for slope and intercept</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">slope</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">intercept</span>      <span class="c1">### then calculates values for y</span>
+    <span class="k">return</span> <span class="n">y</span>                       <span class="c1">### and send then back as the result of the function</span>
+
+<span class="n">parameters</span><span class="p">,</span> <span class="n">statistics</span> <span class="o">=</span> <span class="n">curve_fit</span><span class="p">(</span><span class="n">linear</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="n">slope</span><span class="p">,</span> <span class="n">intercept</span> <span class="o">=</span> <span class="n">parameters</span>       <span class="c1">### the parameters contains slope and intercept, in order</span>
+
+<span class="n">perr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">statistics</span><span class="p">))</span> <span class="c1">### the statistics object can be used to calculate standard deviations</span>
+<span class="n">slope_stdev</span><span class="p">,</span> <span class="n">int_stdev</span> <span class="o">=</span> <span class="n">perr</span>       <span class="c1">### the standard errors for slope and intercept accessed in order</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The EH slope is </span><span class="si">{</span><span class="n">slope</span><span class="si">:</span><span class="s2">0.5f</span><span class="si">}</span><span class="s2"> +/- </span><span class="si">{</span><span class="n">slope_stdev</span><span class="si">:</span><span class="s2">0.5f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The EH y-intercept is </span><span class="si">{</span><span class="n">intercept</span><span class="si">:</span><span class="s2">0.5f</span><span class="si">}</span><span class="s2"> +/- </span><span class="si">{</span><span class="n">int_stdev</span><span class="si">:</span><span class="s2">0.5f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="c1">#########################################</span>
+<span class="c1">### Make a line using the calculated slope and intercept</span>
+<span class="c1">#########################################</span>
+
+<span class="n">max_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>                   <span class="c1">### obtain the maximum x value</span>
+<span class="n">x_fit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_x</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>  <span class="c1">### Make an array of 100 points between zero and the max x value</span>
+<span class="n">y_fit</span> <span class="o">=</span> <span class="n">linear</span><span class="p">(</span><span class="n">x_fit</span><span class="p">,</span> <span class="n">slope</span><span class="p">,</span> <span class="n">intercept</span><span class="p">)</span>     <span class="c1">### calculate the y values using the function that we curve fit</span>
+            
+<span class="c1">#########################################</span>
+<span class="c1">### Plot the line using the x_fit, y_fit points</span>
+<span class="c1">#########################################</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_fit</span><span class="p">,</span> <span class="n">y_fit</span><span class="p">,</span> 
+        <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span>            <span class="c1">### use a line between points</span>
+        <span class="n">linewidth</span><span class="o">=</span><span class="s1">&#39;0.5&#39;</span><span class="p">,</span>            <span class="c1">### make the line thin</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span>            <span class="c1">### the line is black</span>
+        <span class="n">zorder</span> <span class="o">=</span> <span class="mi">0</span>                  <span class="c1">### everything is in layer 0 (the bottom layer in this case)</span>
+        <span class="p">)</span>
+
+<span class="c1">#########################################</span>
+<span class="c1">### Plot the data with style</span>
+<span class="c1">#########################################</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> 
+        <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span>                 <span class="c1">### Plot the x and y data </span>
+        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span>              <span class="c1">### markers are this color</span>
+        <span class="n">edgecolors</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span>       <span class="c1">### outline of markers is this color</span>
+        <span class="n">linewidths</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>           <span class="c1">### outline of markers is this wide</span>
+        <span class="n">s</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span>                       <span class="c1">### &quot;s&quot; is &quot;size&quot;. sqrt(64) = 8 points wide</span>
+        <span class="n">zorder</span> <span class="o">=</span> <span class="mi">1</span>                  <span class="c1">### everything is in layer 1 (the top layer in this case)</span>
+        <span class="p">)</span>
+
+<span class="c1">#########################################</span>
+<span class="c1">### Add more style</span>
+<span class="c1">#########################################</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">ylabel</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\nu$&quot;</span><span class="p">,</span>
+             <span class="n">xlabel</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\nu / [S]$&quot;</span><span class="p">,</span> 
+             <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Eadie-Hofstee&quot;</span><span class="p">,</span>
+             <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">],</span>                  
+             <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>      
+           <span class="p">)</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>   <span class="c1">### Make right spine invisible</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>     <span class="c1">### Make top spine invisible</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>    <span class="c1">### Make left spine invisible</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;bottom&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>  <span class="c1">### Make bottom spine invisible</span>
+
+
+
+
+
+<span class="c1">###########################################################################</span>
+<span class="c1">####################### AND NOW, THE FOURTH PLOT ##########################</span>
+<span class="c1">###########################################################################</span>
+
+<span class="c1">#########################################</span>
+<span class="c1">### Line fit function</span>
+<span class="c1">#########################################</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">conc</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">conc</span> <span class="o">/</span> <span class="n">rates</span>
+
+<span class="k">def</span> <span class="nf">linear</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">slope</span><span class="p">,</span> <span class="n">intercept</span><span class="p">):</span>   <span class="c1">### a function that accepts a list of x values and values for slope and intercept</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">slope</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">intercept</span>      <span class="c1">### then calculates values for y</span>
+    <span class="k">return</span> <span class="n">y</span>                       <span class="c1">### and send then back as the result of the function</span>
+
+<span class="n">parameters</span><span class="p">,</span> <span class="n">statistics</span> <span class="o">=</span> <span class="n">curve_fit</span><span class="p">(</span><span class="n">linear</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="n">slope</span><span class="p">,</span> <span class="n">intercept</span> <span class="o">=</span> <span class="n">parameters</span>       <span class="c1">### the parameters contains slope and intercept, in order</span>
+
+<span class="n">perr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">statistics</span><span class="p">))</span> <span class="c1">### the statistics object can be used to calculate standard deviations</span>
+<span class="n">slope_stdev</span><span class="p">,</span> <span class="n">int_stdev</span> <span class="o">=</span> <span class="n">perr</span>       <span class="c1">### the standard errors for slope and intercept accessed in order</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The HW slope is </span><span class="si">{</span><span class="n">slope</span><span class="si">:</span><span class="s2">0.5f</span><span class="si">}</span><span class="s2"> +/- </span><span class="si">{</span><span class="n">slope_stdev</span><span class="si">:</span><span class="s2">0.5f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The HW y-intercept is </span><span class="si">{</span><span class="n">intercept</span><span class="si">:</span><span class="s2">0.5f</span><span class="si">}</span><span class="s2"> +/- </span><span class="si">{</span><span class="n">int_stdev</span><span class="si">:</span><span class="s2">0.5f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="c1">#########################################</span>
+<span class="c1">### Make a line using the calculated slope and intercept</span>
+<span class="c1">#########################################</span>
+
+<span class="n">max_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>                   <span class="c1">### obtain the maximum x value</span>
+<span class="n">x_fit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_x</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>  <span class="c1">### Make an array of 100 points between zero and the max x value</span>
+<span class="n">y_fit</span> <span class="o">=</span> <span class="n">linear</span><span class="p">(</span><span class="n">x_fit</span><span class="p">,</span> <span class="n">slope</span><span class="p">,</span> <span class="n">intercept</span><span class="p">)</span>     <span class="c1">### calculate the y values using the function that we curve fit</span>
+            
+<span class="c1">#########################################</span>
+<span class="c1">### Plot the line using the x_fit, y_fit points</span>
+<span class="c1">#########################################</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_fit</span><span class="p">,</span> <span class="n">y_fit</span><span class="p">,</span> 
+        <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span>            <span class="c1">### use a line between points</span>
+        <span class="n">linewidth</span><span class="o">=</span><span class="s1">&#39;0.5&#39;</span><span class="p">,</span>            <span class="c1">### make the line thin</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span>            <span class="c1">### the line is black</span>
+        <span class="n">zorder</span> <span class="o">=</span> <span class="mi">0</span>                  <span class="c1">### everything is in layer 0 (the bottom layer in this case)</span>
+        <span class="p">)</span>
+
+<span class="c1">#########################################</span>
+<span class="c1">### Plot the data with style</span>
+<span class="c1">#########################################</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> 
+        <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span>                 <span class="c1">### Plot the x and y data </span>
+        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span>              <span class="c1">### markers are this color</span>
+        <span class="n">edgecolors</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span>       <span class="c1">### outline of markers is this color</span>
+        <span class="n">linewidths</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>           <span class="c1">### outline of markers is this wide</span>
+        <span class="n">s</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span>                       <span class="c1">### &quot;s&quot; is &quot;size&quot;. sqrt(64) = 8 points wide</span>
+        <span class="n">zorder</span> <span class="o">=</span> <span class="mi">1</span>                  <span class="c1">### everything is in layer 1 (the top layer in this case)</span>
+        <span class="p">)</span>
+
+<span class="c1">#########################################</span>
+<span class="c1">### Add more style</span>
+<span class="c1">#########################################</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">ylabel</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$[S] / \nu$&quot;</span><span class="p">,</span> 
+        <span class="n">xlabel</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$[S]$&quot;</span><span class="p">,</span>
+        <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Hanes-Woolf&quot;</span><span class="p">,</span>
+        <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>                  
+        <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.20</span><span class="p">]</span>      
+      <span class="p">)</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>   <span class="c1">### Make right spine invisible</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>     <span class="c1">### Make top spine invisible</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>    <span class="c1">### Make left spine invisible</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;bottom&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>  <span class="c1">### Make bottom spine invisible</span>
+
+
+
+<span class="c1">#########################################</span>
+<span class="c1">### Output the plot</span>
+<span class="c1">#########################################</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;plot.pdf&quot;</span><span class="p">)</span>     <span class="c1">### export the plot as this</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>                                       <span class="c1">### display the plot in this notebook</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The Vmax is 81.538 +/- 3.1087
+The KM is 3.809 +/- 0.3326
+The LB slope is 0.04545 +/- 0.00151
+The LB y-intercept is 0.01263 +/- 0.00065
+The EH slope is -3.67490 +/- 0.29862
+The EH y-intercept is 80.16888 +/- 3.41799
+The HW slope is 0.01228 +/- 0.00041
+The HW y-intercept is 0.04665 +/- 0.00221
+</pre></div>
+</div>
+<img alt="_images/da4c4d5250410011a4dacf55b7d0967fdc941b4ff564be1e570f15e36870bef8.png" src="_images/da4c4d5250410011a4dacf55b7d0967fdc941b4ff564be1e570f15e36870bef8.png" />
+</div>
+</div>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -870,6 +1232,7 @@ The y-intercept is 0.01263 +/- 0.00065
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-old-way">The Old Way</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-new-way">The New Way</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-plots">Multiple Plots</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-multiple-plots">More Multiple Plots</a></li>
 </ul>
   </nav></div>
 

@@ -3,12 +3,11 @@
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Curve Fits &#8212; Steal this Code</title>
   
   
@@ -45,7 +44,6 @@
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
@@ -70,7 +68,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="next" title="Advanced Plotting Example" href="2_4_Fancy_1.html" />
     <link rel="prev" title="Linear Fits" href="2_2_Curve_Fits.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:language" content="None"/>
   </head>
   
   
@@ -363,11 +361,11 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="curve-fits">
-<h1>Curve Fits<a class="headerlink" href="#curve-fits" title="Permalink to this heading">#</a></h1>
+  <div class="tex2jax_ignore mathjax_ignore section" id="curve-fits">
+<h1>Curve Fits<a class="headerlink" href="#curve-fits" title="Permalink to this headline">#</a></h1>
 <p>We fit a linear function in the previous notebook. Let us <strong>steal all that code</strong> and repurpose it to fit the arbitrary function that defines the <strong>Michaelis-Menten equation</strong>.</p>
-<section id="non-linear-curve-fits">
-<h2>Non-linear Curve Fits<a class="headerlink" href="#non-linear-curve-fits" title="Permalink to this heading">#</a></h2>
+<div class="section" id="non-linear-curve-fits">
+<h2>Non-linear Curve Fits<a class="headerlink" href="#non-linear-curve-fits" title="Permalink to this headline">#</a></h2>
 <p>We can fit the x,y data to the asymptotic Michaelis-Menten equation and obtain <span class="math notranslate nohighlight">\(\rm K_M\)</span> and <span class="math notranslate nohighlight">\(\rm V{max}\)</span> using a least squares minimization.</p>
 <div class="math notranslate nohighlight">
 \[ \nu = V_{max} \frac{[S]}{[S] + K_M}\]</div>
@@ -424,9 +422,9 @@ document.write(`
 <img alt="_images/057e184a00d4f3ff7d071d56fb8647adc5d905925c99dec6912a8fa5cd155102.png" src="_images/057e184a00d4f3ff7d071d56fb8647adc5d905925c99dec6912a8fa5cd155102.png" />
 </div>
 </div>
-</section>
-<section id="the-curve-fit">
-<h2>The Curve Fit<a class="headerlink" href="#the-curve-fit" title="Permalink to this heading">#</a></h2>
+</div>
+<div class="section" id="the-curve-fit">
+<h2>The Curve Fit<a class="headerlink" href="#the-curve-fit" title="Permalink to this headline">#</a></h2>
 <p>The plot above clearly is a curve. What <strong>sparameters</strong> would fit this data best? Let us perform a curve fit in the example below. Note the function definition. We must <strong>define a function and then optimize the parameters</strong> to fit the data.</p>
 <p><strong>NOTE:</strong> all this code is almost identical to the previous notebook.  <strong>I stole it all</strong>. Compare the linear fit notebook with this one and <strong>observe where I made changes</strong>. The major change is the function being defined for the curve fit. I also changed variable names to better describe what we are doing. That is all.</p>
 <div class="cell tag_hide-input docutils container">
@@ -460,9 +458,9 @@ The KM is 3.809 +/- 0.3326
 </div>
 </div>
 </div>
-</section>
-<section id="add-the-line">
-<h2>Add the Line<a class="headerlink" href="#add-the-line" title="Permalink to this heading">#</a></h2>
+</div>
+<div class="section" id="add-the-line">
+<h2>Add the Line<a class="headerlink" href="#add-the-line" title="Permalink to this headline">#</a></h2>
 <p>We now have values for slope and intercept. We will <strong>visualize</strong> this proposed line fit with the data. First we make a series of numbers from zero to the end of the x-axis data and then we use the slope and intercept to calculate the y-axis values according to our line fit. Then we steal the code for plotting the points and add an extra command to <strong>plot the line</strong>. Examine the code below.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
@@ -528,9 +526,9 @@ The KM is 3.809 +/- 0.3326
 </div>
 </div>
 </div>
-</section>
-<section id="the-fancy-version">
-<h2>The Fancy Version<a class="headerlink" href="#the-fancy-version" title="Permalink to this heading">#</a></h2>
+</div>
+<div class="section" id="the-fancy-version">
+<h2>The Fancy Version<a class="headerlink" href="#the-fancy-version" title="Permalink to this headline">#</a></h2>
 <p>I will <strong>steal the code</strong> for the more styled plot in the previous notebook and present the plot of data with the line fit again but with <strong>more style</strong>.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
@@ -600,12 +598,12 @@ The KM is 3.809 +/- 0.3326
 </div>
 </div>
 </div>
-</section>
-<section id="the-benefits-of-theft">
-<h2>The Benefits of Theft<a class="headerlink" href="#the-benefits-of-theft" title="Permalink to this heading">#</a></h2>
+</div>
+<div class="section" id="the-benefits-of-theft">
+<h2>The Benefits of Theft<a class="headerlink" href="#the-benefits-of-theft" title="Permalink to this headline">#</a></h2>
 <p>I took the code for the linear fits and made <strong>one major change</strong> (changed the function being fit) and several minor ones (variable names and labels). It took me 3 minutes to write a curve fit notebook for non-linear curve fits when I started with the <strong>previous notebook</strong> on linear fits. Steal freely, admit to it in detail, and give credit where credit is due. That is the way of science.</p>
-</section>
-</section>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {

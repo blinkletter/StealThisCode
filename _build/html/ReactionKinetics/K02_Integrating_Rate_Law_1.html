@@ -360,7 +360,10 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-matplotlib-plotting-tools">Using <em>MatPlotLib</em> Plotting Tools</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-do-this">Why Do This?</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -523,7 +526,7 @@ document.write(`
 <p>…and we know that…</p>
 <div class="math notranslate nohighlight">
 \[ [A]_t = [A]_0 - x_t \]</div>
-<p>So we can combine the two equation abaove and we get an expression for <span class="math notranslate nohighlight">\([A]_t\)</span> in terms of <span class="math notranslate nohighlight">\(t\)</span>…</p>
+<p>So we can combine the two equation above and we get an expression for <span class="math notranslate nohighlight">\([A]_t\)</span> in terms of <span class="math notranslate nohighlight">\(t\)</span>…</p>
 <div class="math notranslate nohighlight">
 \[  [A]_0 - [A]_t = [A]_0 - [A]_0 e^{-k t} \]</div>
 <div class="math notranslate nohighlight">
@@ -592,7 +595,7 @@ document.write(`
 <span class="n">display</span><span class="p">(</span><span class="n">At_expr</span><span class="p">)</span>      
 
 
-<span class="n">At_expr</span> <span class="o">=</span> <span class="n">At_expr</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">A0</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span><span class="mi">1</span><span class="p">})</span>   <span class="c1">### Substitute values for the constants</span>
+<span class="n">At_expr</span> <span class="o">=</span> <span class="n">At_expr</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">A0</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span><span class="mf">1.2</span><span class="p">})</span>   <span class="c1">### Substitute values for the constants</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After substituting values for the constnats, A(t) is...&quot;</span><span class="p">)</span>
 <span class="n">display</span><span class="p">(</span><span class="n">At_expr</span><span class="p">)</span>                         
@@ -628,8 +631,8 @@ document.write(`
 </pre></div>
 </div>
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle 0.1 e^{- t}\]</div>
-<img alt="../_images/353787d4b05849e0be705c27599fe89d139ddb8191100bb0ea89a8619b0d202e.png" src="../_images/353787d4b05849e0be705c27599fe89d139ddb8191100bb0ea89a8619b0d202e.png" />
+\[\displaystyle 0.1 e^{- 1.2 t}\]</div>
+<img alt="../_images/e09a7b5b17d6c9f0b06ce2a9b39d8d2b38e88cefaa17fec1a1629c9f0ba61f55.png" src="../_images/e09a7b5b17d6c9f0b06ce2a9b39d8d2b38e88cefaa17fec1a1629c9f0ba61f55.png" />
 </div>
 </details>
 </div>
@@ -645,18 +648,22 @@ document.write(`
 <span class="expanded">Hide code cell source</span>
 </summary>
 <div class="cell_input above-output-prompt docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">At_expr</span><span class="p">)</span>                         
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
+
+<span class="n">display</span><span class="p">(</span><span class="n">At_expr</span><span class="p">)</span>                         
 
 <span class="n">f</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">lambdify</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">At_expr</span><span class="p">,</span> <span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
 <span class="n">t_line</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
 
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">t_line</span>           <span class="c1">### I always plot x and y so I can more easily reuse plotting code</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">t_line</span><span class="p">)</span>        
 
-<span class="n">plt</span><span class="o">.</span><span class="n">rcdefaults</span><span class="p">()</span>                    <span class="c1">### resets the plot defaults so we always start in the same place</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcdefaults</span><span class="p">()</span>    <span class="c1">### resets the plot defaults so we always start in the same place</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>  
 
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_line</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">t_line</span><span class="p">),</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span>
         <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span>            <span class="c1">### use a line between points</span>
         <span class="n">linewidth</span><span class="o">=</span><span class="s1">&#39;0.5&#39;</span><span class="p">,</span>            <span class="c1">### make the line thin</span>
         <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span>            <span class="c1">### the line is black</span>
@@ -691,8 +698,8 @@ document.write(`
 </summary>
 <div class="cell_output docutils container">
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle 0.1 e^{- t}\]</div>
-<img alt="../_images/8e73a42fdd38a2b24ddf7980ddd48731f9543a57d118cf8f58582c3da7435091.png" src="../_images/8e73a42fdd38a2b24ddf7980ddd48731f9543a57d118cf8f58582c3da7435091.png" />
+\[\displaystyle 0.1 e^{- 1.2 t}\]</div>
+<img alt="../_images/bcec9bed94ab06e5d198a7da9c13a4134e7e3bfa6a01c733374c1fc2ce51deba.png" src="../_images/bcec9bed94ab06e5d198a7da9c13a4134e7e3bfa6a01c733374c1fc2ce51deba.png" />
 </div>
 </details>
 </div>
@@ -702,6 +709,10 @@ document.write(`
 <h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">#</a></h2>
 <p>We have also solved the rate law for a first-order reaction by defining the rate law as a differential equation and using the <code class="docutils literal notranslate"><span class="pre">dsolve</span></code> function of <em>SymPy</em>. This gives us an analytical solution that we can use to calculate the concentration of the reactant at any time point.</p>
 <p>We have also plotted the integrated rate law using the tools of <em>SymPy</em> and also by converting the result into a function and plotting the calculate <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> values using the tools of <em>MatPlotLib</em>.</p>
+<div class="section" id="why-do-this">
+<h3>Why Do This?<a class="headerlink" href="#why-do-this" title="Permalink to this headline">#</a></h3>
+<p>Finding an analytical solution to a differential equation will give an intergrated rate law that provides the concentration of a reactant at any time point. This could be used to fit experimental data and obtain reaction parameters. Integrated rate laws for first order reactions can be linearized easily but other rate laws cannot. Being able to construct an function to which data can be fit is a useful skill.</p>
+</div>
 </div>
 </div>
 
@@ -774,7 +785,10 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-matplotlib-plotting-tools">Using <em>MatPlotLib</em> Plotting Tools</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-do-this">Why Do This?</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

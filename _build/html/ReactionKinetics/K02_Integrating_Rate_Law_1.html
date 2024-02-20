@@ -389,8 +389,9 @@ document.write(`
 <p>Substitute this into the equation for rate and we get…</p>
 <div class="math notranslate nohighlight">
 \[ -\frac{d}{d t}([A]_0 - x) = k([A]_0 - x) \]</div>
-<p>…which can be simplified to give…
-$<span class="math notranslate nohighlight">\(   \frac{d x}{d t} = k([A]_0 - x) \)</span>$</p>
+<p>…which can be simplified to give…</p>
+<div class="math notranslate nohighlight">
+\[   \frac{d x}{d t} = k([A]_0 - x) \]</div>
 <p>In your first year calculus class you would solve this by collecting the differentials for <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(t\)</span> on either side of the equation and then integrating each side over the span of time.</p>
 <div class="math notranslate nohighlight">
 \[ \frac{d x}{[A]_0 - x} = k\,dt \]</div>
@@ -448,10 +449,12 @@ $<span class="math notranslate nohighlight">\(   \frac{d x}{d t} = k([A]_0 - x) 
 </div>
 <div class="section" id="using-sympy-substitutions">
 <h3>Using <em>SymPy</em> Substitutions<a class="headerlink" href="#using-sympy-substitutions" title="Permalink to this headline">#</a></h3>
-<p>Below is the same operationa as above but here I will demonstrate the symbolic math features of <em>SymPy</em>. Here we start with the rate law and use <em>SymPy</em> to make the substitutions discussed above. We will start with…
-$<span class="math notranslate nohighlight">\( -\frac{d}{dt}[A]_t = k[A]_t \)</span>$</p>
-<p>…and then substitute in the expression for <span class="math notranslate nohighlight">\(A_t\)</span> in terms of <span class="math notranslate nohighlight">\(x\)</span> using <em>SymPy</em>
-$<span class="math notranslate nohighlight">\( [A]_t = [A]_0 - x \)</span>$</p>
+<p>Below is the same operationa as above but here I will demonstrate the symbolic math features of <em>SymPy</em>. Here we start with the rate law and use <em>SymPy</em> to make the substitutions discussed above. We will start with…</p>
+<div class="math notranslate nohighlight">
+\[ -\frac{d}{dt}[A]_t = k[A]_t \]</div>
+<p>…and then substitute in the expression for <span class="math notranslate nohighlight">\(A_t\)</span> in terms of <span class="math notranslate nohighlight">\(x\)</span> using <em>SymPy</em></p>
+<div class="math notranslate nohighlight">
+\[ [A]_t = [A]_0 - x \]</div>
 <p>We will the solve the differential that is prosuced by the substitution. Observe we get the same answer.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">

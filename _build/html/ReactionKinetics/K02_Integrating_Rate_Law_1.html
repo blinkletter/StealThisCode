@@ -1,0 +1,828 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Integrating Rate Laws &#8212; Steal this Code</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tufte.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'ReactionKinetics/K02_Integrating_Rate_Law_1';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Free Symbolic Math" href="K01_solving_with_sympy.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../start.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/Ouroboros-benzene.svg.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/Ouroboros-benzene.svg.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../start.html">
+                    Steal This Code
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Math</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../1_1_Calculator.html">Basic Math with <em>Python</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../uncertainties.html">Using Uncertainty</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Plots</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../2_1_Plotting.html">Plotting Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2_2_Curve_Fits.html">Linear Fits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2_3_Curve_Fits.html">Curve Fits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2_4_Fancy_1.html">Advanced Plotting Example</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">SymPy</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="K01_solving_with_sympy.html">Free Symbolic Math</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Integrating Rate Laws</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/blinkletter/StealThisCode/blob/main/./ReactionKinetics/K02_Integrating_Rate_Law_1.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/ReactionKinetics/K02_Integrating_Rate_Law_1.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Integrating Rate Laws</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integrating-first-order-reactions">Integrating First Order Reactions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-substitution">Using Substitution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-sympy-substitutions">Using <em>SymPy</em> Substitutions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-final-answer">The Final Answer</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-sympy-expressions">Plotting <em>SymPy</em> Expressions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-sympy-plotting-tools">Using <em>SymPy</em> Plotting Tools</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-matplotlib-plotting-tools">Using <em>MatPlotLib</em> Plotting Tools</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="tex2jax_ignore mathjax_ignore section" id="integrating-rate-laws">
+<h1>Integrating Rate Laws<a class="headerlink" href="#integrating-rate-laws" title="Permalink to this headline">#</a></h1>
+<p><em>SymPy</em> can perform integration and differentiation operations on many expressions. Let us explore integrating the simple rate equations that you are familiar with.</p>
+<div class="section" id="integrating-first-order-reactions">
+<h2>Integrating First Order Reactions<a class="headerlink" href="#integrating-first-order-reactions" title="Permalink to this headline">#</a></h2>
+<p>A basic first order reaction might be described as such…</p>
+<div class="math notranslate nohighlight">
+\[ A \xrightarrow{k} B \]</div>
+<p>The rate can be expressed as the disappearance of A over time and is equal to the rate constant multiplied by the concentration of reacatant at a given time point…</p>
+<div class="math notranslate nohighlight">
+\[ -\frac{d}{dt}[A]_t = k[A]_t \]</div>
+<p>We can state that the amount of reactant consumed at a give time point is <span class="math notranslate nohighlight">\(x\)</span> and that the concentration of reactant is the initial concentration less this value.</p>
+<div class="math notranslate nohighlight">
+\[ [A]_t = [A]_0 - x \]</div>
+<p>Substitute this into the equation for rate and we get…</p>
+<div class="math notranslate nohighlight">
+\[ -\frac{d}{d t}([A]_0 - x) = k([A]_0 - x) \]</div>
+<p>…which can be simplified to give…
+$<span class="math notranslate nohighlight">\(   \frac{d x}{d t} = k([A]_0 - x) \)</span>$</p>
+<p>In your first year calculus class you would solve this by collecting the differentials for <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(t\)</span> on either side of the equation and then integrating each side over the span of time.</p>
+<div class="math notranslate nohighlight">
+\[ \frac{d x}{[A]_0 - x} = k\,dt \]</div>
+<div class="math notranslate nohighlight">
+\[ \int_0^x \frac{d x}{[A]_0 - x} = \int_0^t k\,dt \]</div>
+<div class="section" id="using-substitution">
+<h3>Using Substitution<a class="headerlink" href="#using-substitution" title="Permalink to this headline">#</a></h3>
+<p>We have <em>SymPy</em> to perform the integration for us. This is accomplished by using the <code class="docutils literal notranslate"><span class="pre">sympy.dsolve()</span></code> function. We will be asking <span class="math notranslate nohighlight">\(SymPy\)</span> to solve the differential equation stated above like so…</p>
+<div class="math notranslate nohighlight">
+\[ \text{sym.dsolve}\left( \frac{d x}{d t} = k([A]_0 - x) \right) \]</div>
+<p>Examine the code below. Observe that we established a differential equation, <code class="docutils literal notranslate"><span class="pre">diffeq</span></code> and then applied the <code class="docutils literal notranslate"><span class="pre">sympy.dsolve</span></code> function to it. In this case, we know that <span class="math notranslate nohighlight">\(x_t = 0\)</span> and we use the “initial conditions” parameter of <code class="docutils literal notranslate"><span class="pre">dsolve</span></code> to set set that fact. This will give us the definite integral starting a time = <span class="math notranslate nohighlight">\(0\)</span> to time = <span class="math notranslate nohighlight">\(t\)</span>.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sym</span>
+
+<span class="n">t</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>     <span class="c1">### create x as a &#39;symbol&#39;, not a variable</span>
+<span class="n">k</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>     <span class="c1">### create k as a &#39;symbol&#39;</span>
+<span class="n">A0</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;A0&#39;</span><span class="p">)</span>   <span class="c1">### create A0 as a &#39;symbol&#39;</span>
+
+<span class="n">xt</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="s1">&#39;x_t&#39;</span><span class="p">)</span>    <span class="c1">### create x as a &#39;function&#39;, not a variable</span>
+
+<span class="n">lhs</span> <span class="o">=</span> <span class="n">xt</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>       <span class="c1">### differential of x(t) w.r.t. t</span>
+<span class="n">rhs</span> <span class="o">=</span> <span class="n">k</span><span class="o">*</span><span class="p">(</span><span class="n">A0</span> <span class="o">-</span> <span class="n">xt</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The differential equation is...&quot;</span><span class="p">)</span>
+<span class="n">diffeq</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">)</span>   <span class="c1">### create a sympy equation</span>
+<span class="n">display</span><span class="p">(</span><span class="n">diffeq</span><span class="p">)</span>             <span class="c1">### display that equation</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The integrated equation starting at x=0 when t=0 is...&quot;</span><span class="p">)</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">dsolve</span><span class="p">(</span><span class="n">diffeq</span><span class="p">,</span> <span class="n">ics</span><span class="o">=</span><span class="p">{</span><span class="n">xt</span><span class="p">(</span><span class="mi">0</span><span class="p">):</span> <span class="mi">0</span><span class="p">})</span>     <span class="c1">### Solve the differential equation. </span>
+                                            <span class="c1">### Initial condition is x(t) = 0 when t = 0</span>
+<span class="n">display</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The differential equation is...
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \frac{d}{d t} x_{t}{\left(t \right)} = k \left(A_{0} - x_{t}{\left(t \right)}\right)\]</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The integrated equation starting at x=0 when t=0 is...
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle x_{t}{\left(t \right)} = A_{0} - A_{0} e^{- k t}\]</div>
+</div>
+</div>
+</div>
+<div class="section" id="using-sympy-substitutions">
+<h3>Using <em>SymPy</em> Substitutions<a class="headerlink" href="#using-sympy-substitutions" title="Permalink to this headline">#</a></h3>
+<p>Below is the same operationa as above but here I will demonstrate the symbolic math features of <em>SymPy</em>. Here we start with the rate law and use <em>SymPy</em> to make the substitutions discussed above. We will start with…
+$<span class="math notranslate nohighlight">\( -\frac{d}{dt}[A]_t = k[A]_t \)</span>$</p>
+<p>…and then substitute in the expression for <span class="math notranslate nohighlight">\(A_t\)</span> in terms of <span class="math notranslate nohighlight">\(x\)</span> using <em>SymPy</em>
+$<span class="math notranslate nohighlight">\( [A]_t = [A]_0 - x \)</span>$</p>
+<p>We will the solve the differential that is prosuced by the substitution. Observe we get the same answer.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sym</span>
+
+<span class="n">t</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>     <span class="c1">### create x as a &#39;symbol&#39;, not a variable</span>
+<span class="n">k</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>     <span class="c1">### create k as a &#39;symbol&#39;</span>
+<span class="n">At</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;A_t&#39;</span><span class="p">)</span>  <span class="c1">### create At as a &#39;symbol&#39;</span>
+<span class="n">A0</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;A0&#39;</span><span class="p">)</span>   <span class="c1">### create A0 as a &#39;symbol&#39;</span>
+
+<span class="n">xt</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="s1">&#39;x_t&#39;</span><span class="p">)</span>    <span class="c1">### create x as a &#39;function&#39;, not a variable</span>
+
+<span class="n">lhs</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">Derivative</span><span class="p">(</span><span class="o">-</span><span class="n">At</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span> <span class="c1">### Using Derivative function to get differential of A(t) w.r.t. t</span>
+                            <span class="c1">### could not used At.diff(t) because At is not a function </span>
+<span class="n">rhs</span> <span class="o">=</span> <span class="n">k</span><span class="o">*</span><span class="p">(</span><span class="n">At</span><span class="p">)</span>
+
+<span class="n">diffeq</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">)</span>   <span class="c1">### create a sympy equation</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The initial differential equation is...&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">diffeq</span><span class="p">)</span>             <span class="c1">### display that equation</span>
+
+<span class="n">diffeq</span> <span class="o">=</span> <span class="n">diffeq</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">At</span><span class="p">:</span> <span class="p">(</span><span class="n">A0</span> <span class="o">-</span> <span class="n">xt</span><span class="p">(</span><span class="n">t</span><span class="p">))})</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After substituting the differential equation is...&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">diffeq</span><span class="p">)</span>             <span class="c1">### display that equation</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The integrated equation starting at x=0 when t=0 is...&quot;</span><span class="p">)</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">dsolve</span><span class="p">(</span><span class="n">diffeq</span><span class="p">,</span> <span class="n">ics</span><span class="o">=</span><span class="p">{</span><span class="n">xt</span><span class="p">(</span><span class="mi">0</span><span class="p">):</span> <span class="mi">0</span><span class="p">})</span>     <span class="c1">### Solve the differential equation. </span>
+                                            <span class="c1">### Initial condition is x(t) = 0 when t = 0</span>
+<span class="n">display</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+<span class="c1">#dir(diffeq)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The initial differential equation is...
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \frac{d}{d t} \left(- A_{t}\right) = A_{t} k\]</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>After substituting the differential equation is...
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \frac{\partial}{\partial t} \left(- A_{0} + x_{t}{\left(t \right)}\right) = k \left(A_{0} - x_{t}{\left(t \right)}\right)\]</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The integrated equation starting at x=0 when t=0 is...
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle x_{t}{\left(t \right)} = A_{0} - A_{0} e^{- k t}\]</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="the-final-answer">
+<h2>The Final Answer<a class="headerlink" href="#the-final-answer" title="Permalink to this headline">#</a></h2>
+<p>We now have an expression for <span class="math notranslate nohighlight">\(x(t)\)</span>…</p>
+<div class="math notranslate nohighlight">
+\[ x_t = [A]_0 - [A]_0 e^{-k t}\]</div>
+<p>…and we know that…</p>
+<div class="math notranslate nohighlight">
+\[ [A]_t = [A]_0 - x_t \]</div>
+<p>So we can combine the two equation abaove and we get an expression for <span class="math notranslate nohighlight">\([A]_t\)</span> in terms of <span class="math notranslate nohighlight">\(t\)</span>…</p>
+<div class="math notranslate nohighlight">
+\[  [A]_0 - [A]_t = [A]_0 - [A]_0 e^{-k t} \]</div>
+<div class="math notranslate nohighlight">
+\[  [A]_t = [A]_0 e^{-k t} \]</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>     <span class="c1">### create x as a &#39;symbol&#39;, not a variable or function</span>
+<span class="c1">#At = sym.symbols(&#39;A_t&#39;)  ### reset At as a &#39;symbol&#39;</span>
+
+<span class="n">xt</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">rhs</span>   <span class="c1">### Get the expression for x(t)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The expression for x(t) is...&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">xt</span><span class="p">)</span>
+
+<span class="n">eq2</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">At</span><span class="p">,</span> <span class="n">A0</span><span class="o">-</span><span class="n">x</span><span class="p">)</span>  <span class="c1">### create an equation that defines A(t) in terms of A0 and x</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The equation for A(t) in terms of x(t) is...&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">eq2</span><span class="p">)</span>
+
+<span class="n">eq2</span> <span class="o">=</span> <span class="n">eq2</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">xt</span><span class="p">)</span>  <span class="c1">### xt is an expression for x. Substitute x for xt.</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The equation for A(t) after substituting in the term for x(t)&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">eq2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The expression for x(t) is...
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle A_{0} - A_{0} e^{- k t}\]</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The equation for A(t) in terms of x(t) is...
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle A_{t} = A_{0} - x\]</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The equation for A(t) after substituting in the term for x(t)
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle A_{t} = A_{0} e^{- k t}\]</div>
+</div>
+</div>
+</div>
+<div class="section" id="plotting-sympy-expressions">
+<h2>Plotting <em>SymPy</em> Expressions<a class="headerlink" href="#plotting-sympy-expressions" title="Permalink to this headline">#</a></h2>
+<p>It is useful to plot the result of our integration to see if it is as expected.</p>
+<div class="section" id="using-sympy-plotting-tools">
+<h3>Using <em>SymPy</em> Plotting Tools<a class="headerlink" href="#using-sympy-plotting-tools" title="Permalink to this headline">#</a></h3>
+<p><em>SymPy</em> contains plotting tools that can plot an expression without needing to calculate <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> values. The <code class="docutils literal notranslate"><span class="pre">sympy.plotting.plot()</span></code> dunction will plot the expression. This is different than the <em>MatPlotLib</em> set of plotting tools although there are similarities.</p>
+<p>We will need to substitutre in values for the constants, <span class="math notranslate nohighlight">\(A_0\)</span> and <span class="math notranslate nohighlight">\(k\)</span>, and then extract the right-hand-side of the equation to get the expression that defines <span class="math notranslate nohighlight">\(x_t\)</span>. We then use that expression in the <code class="docutils literal notranslate"><span class="pre">sympy.plotting.plot()</span></code> function. Consider the example of the code below.</p>
+<div class="cell tag_hide-input tag_hide-output docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">At_expr</span> <span class="o">=</span> <span class="n">eq2</span><span class="o">.</span><span class="n">rhs</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The expression that describes A(t) is...&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">At_expr</span><span class="p">)</span>      
+
+
+<span class="n">At_expr</span> <span class="o">=</span> <span class="n">At_expr</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">A0</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span><span class="mi">1</span><span class="p">})</span>   <span class="c1">### Substitute values for the constants</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After substituting values for the constnats, A(t) is...&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">At_expr</span><span class="p">)</span>                         
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">plotting</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">At_expr</span><span class="p">,</span> <span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span>
+                  <span class="n">line_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> 
+                  <span class="n">title</span><span class="o">=</span><span class="s1">&#39;First Order Plot&#39;</span><span class="p">,</span>
+                  <span class="n">xlabel</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;$t\;/\;min$&quot;</span><span class="p">,</span>
+                  <span class="n">ylabel</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;$[A] \; / \; mole\,L^{-1}$&quot;</span><span class="p">,</span>
+                  <span class="n">axis</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                  <span class="n">xlim</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+                  <span class="n">ylim</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">.10</span><span class="p">),</span>
+                  <span class="n">size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span>
+                  <span class="n">show</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;test.pdf&quot;</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The expression that describes A(t) is...
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle A_{0} e^{- k t}\]</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>After substituting values for the constnats, A(t) is...
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle 0.1 e^{- t}\]</div>
+<img alt="../_images/353787d4b05849e0be705c27599fe89d139ddb8191100bb0ea89a8619b0d202e.png" src="../_images/353787d4b05849e0be705c27599fe89d139ddb8191100bb0ea89a8619b0d202e.png" />
+</div>
+</details>
+</div>
+</div>
+<div class="section" id="using-matplotlib-plotting-tools">
+<h3>Using <em>MatPlotLib</em> Plotting Tools<a class="headerlink" href="#using-matplotlib-plotting-tools" title="Permalink to this headline">#</a></h3>
+<p><em>SymPy</em> plotting tools are powerful and useful but I am much more familiar with the plotting features of the <em>MatPlotLib</em> library. To use this plotting method I must plot actual values of <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>.</p>
+<p>First I will convert the expresion for x(t) to</p>
+<div class="cell tag_hide-input tag_hide-output docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">At_expr</span><span class="p">)</span>                         
+
+
+<span class="n">f</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">lambdify</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">At_expr</span><span class="p">,</span> <span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
+<span class="n">t_line</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">rcdefaults</span><span class="p">()</span>                    <span class="c1">### resets the plot defaults so we always start in the same place</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>  
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_line</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">t_line</span><span class="p">),</span>
+        <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span>            <span class="c1">### use a line between points</span>
+        <span class="n">linewidth</span><span class="o">=</span><span class="s1">&#39;0.5&#39;</span><span class="p">,</span>            <span class="c1">### make the line thin</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span>            <span class="c1">### the line is black</span>
+        <span class="n">zorder</span> <span class="o">=</span> <span class="mi">0</span>                  <span class="c1">### everything is in layer 0 (the bottom layer in this case)</span>
+        <span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span> <span class="n">xlabel</span><span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;$t\;/\;min$&quot;</span><span class="p">,</span> 
+        <span class="n">ylabel</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$[A] \; / \; mole\,L^{-1}$&quot;</span><span class="p">,</span>
+        <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;First Order Plot&quot;</span><span class="p">,</span>
+        <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>                  
+        <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>      
+      <span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>   <span class="c1">### Make right spine invisible</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>     <span class="c1">### Make top spine invisible</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>    <span class="c1">### Make left spine invisible</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;bottom&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>  <span class="c1">### Make bottom spine invisible</span>
+
+<span class="c1">#########################################</span>
+<span class="c1">### Output the plot</span>
+<span class="c1">#########################################</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;plot.pdf&quot;</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>     <span class="c1">### export the plot as this</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>     
+</pre></div>
+</div>
+</div>
+</details>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle 0.1 e^{- t}\]</div>
+<img alt="../_images/8e73a42fdd38a2b24ddf7980ddd48731f9543a57d118cf8f58582c3da7435091.png" src="../_images/8e73a42fdd38a2b24ddf7980ddd48731f9543a57d118cf8f58582c3da7435091.png" />
+</div>
+</details>
+</div>
+</div>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">#</a></h2>
+<p>We have also solved the rate law for a first-order reaction by defining the rate law as a differential equation and using the <code class="docutils literal notranslate"><span class="pre">dsolve</span></code> function of <em>SymPy</em>. This gives us an analytical solution that we can use to calculate the concentration of the reactant at any time point.</p>
+<p>We have also plotted the integrated rate law using the tools of <em>SymPy</em> and also by converting the result into a function and plotting the calculate <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> values using the tools of <em>MatPlotLib</em>.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./ReactionKinetics"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="K01_solving_with_sympy.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Free Symbolic Math</p>
+      </div>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integrating-first-order-reactions">Integrating First Order Reactions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-substitution">Using Substitution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-sympy-substitutions">Using <em>SymPy</em> Substitutions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-final-answer">The Final Answer</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-sympy-expressions">Plotting <em>SymPy</em> Expressions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-sympy-plotting-tools">Using <em>SymPy</em> Plotting Tools</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-matplotlib-plotting-tools">Using <em>MatPlotLib</em> Plotting Tools</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Barry Linkletter
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

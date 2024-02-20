@@ -14,3 +14,7 @@ parts:
         - file: 2_2_Curve_Fits.ipynb
         - file: 2_3_Curve_Fits.ipynb
         - file: 2_4_Fancy_1.ipynb
+    - caption: SymPy
+      chapters:
+        - file: ReactionKinetics/K01_solving_with_sympy.ipynb
+        - file: ReactionKinetics/K02_Integrating_Rate_Law_1.ipynb

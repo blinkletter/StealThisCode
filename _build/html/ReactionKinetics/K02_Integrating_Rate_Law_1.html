@@ -3,11 +3,12 @@
 <!DOCTYPE html>
 
 
-<html >
+<html lang="en" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
     <title>Integrating Rate Laws &#8212; Steal this Code</title>
   
   
@@ -44,6 +45,7 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
@@ -65,9 +67,10 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'ReactionKinetics/K02_Integrating_Rate_Law_1';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Integrating thye M ichaelis-Menten rate Law" href="K03_Integrating_MM.html" />
     <link rel="prev" title="Free Symbolic Math" href="K01_solving_with_sympy.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="None"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
   
   
@@ -172,6 +175,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="K01_solving_with_sympy.html">Free Symbolic Math</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Integrating Rate Laws</a></li>
+<li class="toctree-l1"><a class="reference internal" href="K03_Integrating_MM.html">Integrating thye M ichaelis-Menten rate Law</a></li>
 </ul>
 
     </div>
@@ -375,11 +379,11 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <div class="tex2jax_ignore mathjax_ignore section" id="integrating-rate-laws">
-<h1>Integrating Rate Laws<a class="headerlink" href="#integrating-rate-laws" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="integrating-rate-laws">
+<h1>Integrating Rate Laws<a class="headerlink" href="#integrating-rate-laws" title="Permalink to this heading">#</a></h1>
 <p><em>SymPy</em> can perform integration and differentiation operations on many expressions. Let us explore integrating the simple rate equations that you are familiar with.</p>
-<div class="section" id="integrating-first-order-reactions">
-<h2>Integrating First Order Reactions<a class="headerlink" href="#integrating-first-order-reactions" title="Permalink to this headline">#</a></h2>
+<section id="integrating-first-order-reactions">
+<h2>Integrating First Order Reactions<a class="headerlink" href="#integrating-first-order-reactions" title="Permalink to this heading">#</a></h2>
 <p>A basic first order reaction might be described as such…</p>
 <div class="math notranslate nohighlight">
 \[ A \xrightarrow{k} B \]</div>
@@ -400,8 +404,8 @@ document.write(`
 \[ \frac{d x}{[A]_0 - x} = k\,dt \]</div>
 <div class="math notranslate nohighlight">
 \[ \int_0^x \frac{d x}{[A]_0 - x} = \int_0^t k\,dt \]</div>
-<div class="section" id="using-substitution">
-<h3>Using Substitution<a class="headerlink" href="#using-substitution" title="Permalink to this headline">#</a></h3>
+<section id="using-substitution">
+<h3>Using Substitution<a class="headerlink" href="#using-substitution" title="Permalink to this heading">#</a></h3>
 <p>We have <em>SymPy</em> to perform the integration for us. This is accomplished by using the <code class="docutils literal notranslate"><span class="pre">sympy.dsolve()</span></code> function. We will be asking <span class="math notranslate nohighlight">\(SymPy\)</span> to solve the differential equation stated above like so…</p>
 <div class="math notranslate nohighlight">
 \[ \text{sym.dsolve}\left( \frac{d x}{d t} = k([A]_0 - x) \right) \]</div>
@@ -449,9 +453,9 @@ document.write(`
 \[\displaystyle x_{t}{\left(t \right)} = A_{0} - A_{0} e^{- k t}\]</div>
 </div>
 </div>
-</div>
-<div class="section" id="using-sympy-substitutions">
-<h3>Using <em>SymPy</em> Substitutions<a class="headerlink" href="#using-sympy-substitutions" title="Permalink to this headline">#</a></h3>
+</section>
+<section id="using-sympy-substitutions">
+<h3>Using <em>SymPy</em> Substitutions<a class="headerlink" href="#using-sympy-substitutions" title="Permalink to this heading">#</a></h3>
 <p>Below is the same operationa as above but here I will demonstrate the symbolic math features of <em>SymPy</em>. Here we start with the rate law and use <em>SymPy</em> to make the substitutions discussed above. We will start with…</p>
 <div class="math notranslate nohighlight">
 \[ -\frac{d}{dt}[A]_t = k[A]_t \]</div>
@@ -516,10 +520,10 @@ document.write(`
 \[\displaystyle x_{t}{\left(t \right)} = A_{0} - A_{0} e^{- k t}\]</div>
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="the-final-answer">
-<h2>The Final Answer<a class="headerlink" href="#the-final-answer" title="Permalink to this headline">#</a></h2>
+</section>
+</section>
+<section id="the-final-answer">
+<h2>The Final Answer<a class="headerlink" href="#the-final-answer" title="Permalink to this heading">#</a></h2>
 <p>We now have an expression for <span class="math notranslate nohighlight">\(x(t)\)</span>…</p>
 <div class="math notranslate nohighlight">
 \[ x_t = [A]_0 - [A]_0 e^{-k t}\]</div>
@@ -574,12 +578,12 @@ document.write(`
 \[\displaystyle A_{t} = A_{0} e^{- k t}\]</div>
 </div>
 </div>
-</div>
-<div class="section" id="plotting-sympy-expressions">
-<h2>Plotting <em>SymPy</em> Expressions<a class="headerlink" href="#plotting-sympy-expressions" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="plotting-sympy-expressions">
+<h2>Plotting <em>SymPy</em> Expressions<a class="headerlink" href="#plotting-sympy-expressions" title="Permalink to this heading">#</a></h2>
 <p>It is useful to plot the result of our integration to see if it is as expected.</p>
-<div class="section" id="using-sympy-plotting-tools">
-<h3>Using <em>SymPy</em> Plotting Tools<a class="headerlink" href="#using-sympy-plotting-tools" title="Permalink to this headline">#</a></h3>
+<section id="using-sympy-plotting-tools">
+<h3>Using <em>SymPy</em> Plotting Tools<a class="headerlink" href="#using-sympy-plotting-tools" title="Permalink to this heading">#</a></h3>
 <p><em>SymPy</em> contains plotting tools that can plot an expression without needing to calculate <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> values. The <code class="docutils literal notranslate"><span class="pre">sympy.plotting.plot()</span></code> dunction will plot the expression. This is different than the <em>MatPlotLib</em> set of plotting tools although there are similarities.</p>
 <p>We will need to substitutre in values for the constants, <span class="math notranslate nohighlight">\(A_0\)</span> and <span class="math notranslate nohighlight">\(k\)</span>, and then extract the right-hand-side of the equation to get the expression that defines <span class="math notranslate nohighlight">\(x_t\)</span>. We then use that expression in the <code class="docutils literal notranslate"><span class="pre">sympy.plotting.plot()</span></code> function. Consider the example of the code below.</p>
 <div class="cell tag_hide-input tag_hide-output docutils container">
@@ -636,9 +640,9 @@ document.write(`
 </div>
 </details>
 </div>
-</div>
-<div class="section" id="using-matplotlib-plotting-tools">
-<h3>Using <em>MatPlotLib</em> Plotting Tools<a class="headerlink" href="#using-matplotlib-plotting-tools" title="Permalink to this headline">#</a></h3>
+</section>
+<section id="using-matplotlib-plotting-tools">
+<h3>Using <em>MatPlotLib</em> Plotting Tools<a class="headerlink" href="#using-matplotlib-plotting-tools" title="Permalink to this heading">#</a></h3>
 <p><em>SymPy</em> plotting tools are powerful and useful but I am much more familiar with the plotting features of the <em>MatPlotLib</em> library. To use this plotting method I must plot actual values of <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>.</p>
 <p>First I will convert the expresion for x(t) to</p>
 <div class="cell tag_hide-input tag_hide-output docutils container">
@@ -703,18 +707,18 @@ document.write(`
 </div>
 </details>
 </div>
-</div>
-</div>
-<div class="section" id="summary">
-<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">#</a></h2>
+</section>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this heading">#</a></h2>
 <p>We have also solved the rate law for a first-order reaction by defining the rate law as a differential equation and using the <code class="docutils literal notranslate"><span class="pre">dsolve</span></code> function of <em>SymPy</em>. This gives us an analytical solution that we can use to calculate the concentration of the reactant at any time point.</p>
 <p>We have also plotted the integrated rate law using the tools of <em>SymPy</em> and also by converting the result into a function and plotting the calculate <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> values using the tools of <em>MatPlotLib</em>.</p>
-<div class="section" id="why-do-this">
-<h3>Why Do This?<a class="headerlink" href="#why-do-this" title="Permalink to this headline">#</a></h3>
-<p>Finding an analytical solution to a differential equation will give an intergrated rate law that provides the concentration of a reactant at any time point. This could be used to fit experimental data and obtain reaction parameters. Integrated rate laws for first order reactions can be linearized easily but other rate laws cannot. Being able to construct an function to which data can be fit is a useful skill.</p>
-</div>
-</div>
-</div>
+<section id="why-do-this">
+<h3>Why Do This?<a class="headerlink" href="#why-do-this" title="Permalink to this heading">#</a></h3>
+<p>Finding an analytical solution to a differential equation will give an intergrated rate law that provides the concentration of a reactant at any time point. This could be used to fit experimental data and obtain reaction parameters. Integrated rate laws for first order reactions can be linearized easily but some rate laws cannot. Being able to construct an function to which data can be fit is a useful skill.</p>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -755,6 +759,15 @@ document.write(`
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">Free Symbolic Math</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="K03_Integrating_MM.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Integrating thye M ichaelis-Menten rate Law</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div></div>
   

@@ -19,3 +19,4 @@ parts:
         - file: ReactionKinetics/K01_solving_with_sympy.ipynb
         - file: ReactionKinetics/K02_Integrating_Rate_Law_1.ipynb
         - file: ReactionKinetics/K03_Integrating_MM.ipynb
+        - file: ReactionKinetics/K04_NumericIntegration.ipynb

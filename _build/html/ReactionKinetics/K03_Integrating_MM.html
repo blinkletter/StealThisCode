@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Integrating thye Michaelis-Menten rate Law &#8212; Steal this Code</title>
+    <title>Integrating the Michaelis-Menten Rate Law &#8212; Steal this Code</title>
   
   
   
@@ -67,6 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'ReactionKinetics/K03_Integrating_MM';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Numeric Integration" href="K04_NumericIntegration.html" />
     <link rel="prev" title="Integrating Rate Laws" href="K02_Integrating_Rate_Law_1.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -174,7 +175,11 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="K01_solving_with_sympy.html">Free Symbolic Math</a></li>
 <li class="toctree-l1"><a class="reference internal" href="K02_Integrating_Rate_Law_1.html">Integrating Rate Laws</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Integrating thye Michaelis-Menten rate Law</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Integrating the Michaelis-Menten Rate Law</a></li>
+<li class="toctree-l1"><a class="reference internal" href="K04_NumericIntegration.html">Numeric Integration</a></li>
+
+
+
 </ul>
 
     </div>
@@ -342,7 +347,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Integrating thye Michaelis-Menten rate Law</h1>
+    <h1>Integrating the Michaelis-Menten Rate Law</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -363,6 +368,8 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-fit-against-data">Plot the Fit Against Data</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-data-with-fixed-s-0">Plotting Data with Fixed <span class="math notranslate nohighlight">\([S]_0\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extra">Extra</a></li>
 </ul>
             </nav>
         </div>
@@ -374,8 +381,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="integrating-thye-michaelis-menten-rate-law">
-<h1>Integrating thye Michaelis-Menten rate Law<a class="headerlink" href="#integrating-thye-michaelis-menten-rate-law" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="integrating-the-michaelis-menten-rate-law">
+<h1>Integrating the Michaelis-Menten Rate Law<a class="headerlink" href="#integrating-the-michaelis-menten-rate-law" title="Permalink to this heading">#</a></h1>
 <p>Some rate laws are not easily integrated without very advanced mathematics. For example, below is the rate law for an enzyme catalyzed reaction (the famous Michaelis-Menten equation) and its analytical intergrated form…</p>
 <div class="math notranslate nohighlight">
 \[-\frac{d[S]}{dt} = V_{max}\frac{[S]}{K_M + [S]} \]</div>
@@ -525,14 +532,17 @@ document.write(`
 <span class="expanded">Hide code cell source</span>
 </summary>
 <div class="cell_input above-output-prompt docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">KM_value</span> <span class="o">=</span> <span class="mf">1.5</span>        <span class="c1">### set KM value</span>
-<span class="n">Vmax_value</span> <span class="o">=</span> <span class="mf">9.9</span>      <span class="c1">### set Vmax value</span>
-<span class="n">S0_value</span> <span class="o">=</span> <span class="mf">1.0</span>        <span class="c1">### set initial substrate concentration value</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">E_conc</span> <span class="o">=</span> <span class="mf">1e-6</span>
+<span class="n">KM_value</span> <span class="o">=</span> <span class="mf">0.005</span>          <span class="c1">### set KM value</span>
+<span class="n">kcat_value</span> <span class="o">=</span> <span class="mf">1E2</span>     <span class="c1">### set Vmax value</span>
+<span class="n">S0_value</span> <span class="o">=</span> <span class="mf">.05</span>         <span class="c1">### set initial substrate concentration value</span>
 
-<span class="n">time_end</span> <span class="o">=</span> <span class="mi">1</span>          <span class="c1">### The end time</span>
+<span class="n">Vmax_value</span> <span class="o">=</span> <span class="n">E_conc</span> <span class="o">*</span> <span class="n">kcat_value</span>
+
+<span class="n">time_end</span> <span class="o">=</span> <span class="mi">1200</span>          <span class="c1">### The end time</span>
 <span class="n">n_points</span> <span class="o">=</span> <span class="mi">100</span>        <span class="c1">### number of points - increase if needed</span>
 
-<span class="n">xmax</span> <span class="o">=</span> <span class="n">time_end</span>
+<span class="n">xmax</span> <span class="o">=</span> <span class="n">time_end</span>       <span class="c1">### change these as you wish</span>
 <span class="n">ymax</span> <span class="o">=</span> <span class="n">S0_value</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The integrated rate law for the MM equation&quot;</span><span class="p">)</span>
@@ -548,7 +558,7 @@ document.write(`
 <span class="n">p</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">plotting</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">St_expr</span><span class="p">,</span> <span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">time_end</span><span class="p">),</span>
                     <span class="n">line_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> 
                     <span class="n">title</span><span class="o">=</span><span class="s1">&#39;MM reaction Plot&#39;</span><span class="p">,</span>
-                    <span class="n">xlabel</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;$t\;/\;min$&quot;</span><span class="p">,</span>
+                    <span class="n">xlabel</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;$t\;/\;s$&quot;</span><span class="p">,</span>
                     <span class="n">ylabel</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;$[S] \; / \; mole\,L^{-1}$&quot;</span><span class="p">,</span>
                     <span class="n">axis</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
                     <span class="n">xlim</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">xmax</span><span class="p">),</span>
@@ -577,8 +587,8 @@ document.write(`
 </pre></div>
 </div>
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle S_{t} = 1.5 W\left(1.29848936070312 e^{- 6.6 t}\right)\]</div>
-<img alt="../_images/d1ac781e3b6b4ac2fcb2fd71badb08a3723d2ec9f5a29d287599ccd86eb2ec79.png" src="../_images/d1ac781e3b6b4ac2fcb2fd71badb08a3723d2ec9f5a29d287599ccd86eb2ec79.png" />
+\[\displaystyle S_{t} = 0.005 W\left(220264.657948067 e^{- 0.02 t}\right)\]</div>
+<img alt="../_images/b5fe3ac337db1d5352e3449c074bb9de969975e0d8cf7a55526c6a529d36de4a.png" src="../_images/b5fe3ac337db1d5352e3449c074bb9de969975e0d8cf7a55526c6a529d36de4a.png" />
 </div>
 </details>
 </div>
@@ -603,12 +613,14 @@ document.write(`
 <span class="c1">### Set up parameters</span>
 <span class="c1">##########################</span>
 
+<span class="n">E_conc</span> <span class="o">=</span> <span class="mf">1e-6</span>
+<span class="n">KM_value</span> <span class="o">=</span> <span class="mf">0.005</span>          <span class="c1">### set KM value</span>
+<span class="n">kcat_value</span> <span class="o">=</span> <span class="mf">1E2</span>     <span class="c1">### set Vmax value</span>
+<span class="n">S0_value</span> <span class="o">=</span> <span class="mf">.05</span>         <span class="c1">### set initial substrate concentration value</span>
 
-<span class="n">KM_value</span> <span class="o">=</span> <span class="mf">2.1</span>        <span class="c1">### set KM value</span>
-<span class="n">Vmax_value</span> <span class="o">=</span> <span class="mf">10.7</span>      <span class="c1">### set Vmax value</span>
-<span class="n">S0_value</span> <span class="o">=</span> <span class="mf">7.5</span>         <span class="c1">### set initial substrate concentration value</span>
+<span class="n">Vmax_value</span> <span class="o">=</span> <span class="n">E_conc</span> <span class="o">*</span> <span class="n">kcat_value</span>
 
-<span class="n">time_end</span> <span class="o">=</span> <span class="mi">2</span>          <span class="c1">### The end time</span>
+<span class="n">time_end</span> <span class="o">=</span> <span class="mi">1200</span>          <span class="c1">### The end time</span>
 <span class="n">n_points</span> <span class="o">=</span> <span class="mi">100</span>        <span class="c1">### number of points - increase if needed</span>
 
 <span class="n">xmax</span> <span class="o">=</span> <span class="n">time_end</span>       <span class="c1">### change these as you wish</span>
@@ -643,11 +655,11 @@ document.write(`
          <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span>            <span class="c1">### the line is black</span>
          <span class="n">zorder</span> <span class="o">=</span> <span class="mi">0</span>                  <span class="c1">### everything is in layer 0 (the bottom layer in this case)</span>
         <span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span> <span class="n">xlabel</span><span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;$t\;/\;min$&quot;</span><span class="p">,</span> 
-        <span class="n">ylabel</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$[S] \; / \; mmole\,L^{-1}$&quot;</span><span class="p">,</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span> <span class="n">xlabel</span><span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;$t\;/\;s$&quot;</span><span class="p">,</span> 
+        <span class="n">ylabel</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$[S] \; / \; mole\,L^{-1}$&quot;</span><span class="p">,</span>
         <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;MM Reaction&quot;</span><span class="p">,</span>
-        <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">xmax</span><span class="p">],</span>                  
-        <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="p">]</span>      
+        <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mf">0.00</span><span class="p">,</span> <span class="n">xmax</span><span class="p">],</span>                  
+        <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">ymax</span><span class="p">]</span>      
        <span class="p">)</span>
 
 <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span><span class="s1">&#39;right&#39;</span><span class="p">,</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span><span class="s1">&#39;left&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>   <span class="c1">### Make all spines invisible</span>
@@ -674,7 +686,7 @@ document.write(`
 </div>
 <div class="output text_latex math notranslate nohighlight">
 \[\displaystyle S_{t} = K_{M} W\left(\frac{S_{0} e^{\frac{S_{0} - V_{max} t}{K_{M}}}}{K_{M}}\right)\]</div>
-<img alt="../_images/ed6359f5817e6efb9c51adc087473c5e436210c66750d62cad17f1e4e3e2300d.png" src="../_images/ed6359f5817e6efb9c51adc087473c5e436210c66750d62cad17f1e4e3e2300d.png" />
+<img alt="../_images/9ca1f89937b97a8e3eed1bdfe0c0519e16e3108cf73c1f618819acdad7edd615.png" src="../_images/9ca1f89937b97a8e3eed1bdfe0c0519e16e3108cf73c1f618819acdad7edd615.png" />
 </div>
 </details>
 </div>
@@ -723,14 +735,17 @@ document.write(`
 <span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">120</span><span class="p">])</span>  <span class="c1">### the time points(every 15 seconds)</span>
 <span class="n">time</span> <span class="o">=</span> <span class="n">time</span><span class="o">/</span><span class="mi">60</span>                                       <span class="c1">### convert to minutes</span>
 
-<span class="n">conc</span> <span class="o">=</span> <span class="p">[</span><span class="mf">2.50</span><span class="p">,</span> <span class="mf">1.09</span><span class="p">,</span> <span class="mf">0.62</span><span class="p">,</span> <span class="mf">0.31</span><span class="p">,</span> <span class="mf">0.14</span><span class="p">,</span> <span class="mf">0.065</span><span class="p">,</span> <span class="mf">0.019</span><span class="p">,</span> <span class="mf">0.016</span><span class="p">]</span>   <span class="c1">### measured concentration of substrate</span>
+<span class="c1">#conc = [2.50, 1.09, 0.62, 0.31, 0.14, 0.065, 0.019, 0.016]   ### measured concentration of substrate (less error)</span>
+<span class="c1">#conc = [2.50, 1.10, 0.62, 0.31, 0.15, 0.062, 0.042, 0.014]   ### measured concentration of substrate (more error)</span>
+<span class="n">conc</span> <span class="o">=</span> <span class="p">[</span><span class="mf">2.50</span><span class="p">,</span> <span class="mf">1.15</span><span class="p">,</span> <span class="mf">0.61</span><span class="p">,</span> <span class="mf">0.33</span><span class="p">,</span> <span class="mf">0.17</span><span class="p">,</span> <span class="mf">0.052</span><span class="p">,</span> <span class="mf">0.081</span><span class="p">,</span> <span class="mf">0.021</span><span class="p">]</span>   <span class="c1">### measured concentration of substrate (even more error)</span>
+
 
 
 <span class="c1">##########################</span>
 <span class="c1">### create function </span>
 <span class="c1">##########################</span>
 
-<span class="n">f</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">lambdify</span><span class="p">([</span><span class="n">t</span><span class="p">,</span><span class="n">S0</span><span class="p">,</span> <span class="n">KM</span><span class="p">,</span> <span class="n">Vmax</span><span class="p">],</span> <span class="n">eq</span><span class="o">.</span><span class="n">rhs</span><span class="p">)</span>   <span class="c1">### create function in terms of t, S0, KM and Vmax</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">lambdify</span><span class="p">([</span><span class="n">t</span><span class="p">,</span> <span class="n">S0</span><span class="p">,</span> <span class="n">KM</span><span class="p">,</span> <span class="n">Vmax</span><span class="p">],</span> <span class="n">eq</span><span class="o">.</span><span class="n">rhs</span><span class="p">)</span>   <span class="c1">### create function in terms of t, S0, KM and Vmax</span>
 
 
 <span class="c1">##########################</span>
@@ -773,22 +788,22 @@ document.write(`
     Model(_lambdifygenerated)
 [[Fit Statistics]]
     # fitting method   = leastsq
-    # function evals   = 43
+    # function evals   = 47
     # data points      = 16
     # variables        = 3
-    chi-square         = 1.0540e-04
-    reduced chi-square = 8.1077e-06
-    Akaike info crit   = -184.885275
-    Bayesian info crit = -182.567508
-    R-squared          = 0.99997938
+    chi-square         = 0.00537412
+    reduced chi-square = 4.1339e-04
+    Akaike info crit   = -121.979986
+    Bayesian info crit = -119.662220
+    R-squared          = 0.99894078
 [[Variables]]
-    S_0:    2.49975441 +/- 0.00283735 (0.11%) (init = 1)
-    K_M:    1.46115619 +/- 0.03386285 (2.32%) (init = 1)
-    V_max:  5.23618753 +/- 0.06675019 (1.27%) (init = 1)
+    S_0:    2.50462763 +/- 0.02024944 (0.81%) (init = 1)
+    K_M:    1.46261768 +/- 0.23720238 (16.22%) (init = 1)
+    V_max:  5.12188074 +/- 0.45682722 (8.92%) (init = 1)
 [[Correlations]] (unreported correlations are &lt; 0.100)
-    C(K_M, V_max) = +0.9894
-    C(S_0, V_max) = +0.3328
-    C(S_0, K_M)   = +0.2465
+    C(K_M, V_max) = +0.9891
+    C(S_0, V_max) = +0.3440
+    C(S_0, K_M)   = +0.2560
 </pre></div>
 </div>
 </div>
@@ -815,20 +830,6 @@ document.write(`
 <span class="n">x</span> <span class="o">=</span> <span class="n">time</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">conc</span>
 
-<span class="c1">#########################################</span>
-<span class="c1">### Create curve fit function</span>
-<span class="c1">#########################################</span>
-                   
-<span class="k">def</span> <span class="nf">MM_fit</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">Vmax</span><span class="p">,</span> <span class="n">KM</span><span class="p">):</span>            <span class="c1">### a function that accepts a list of x values and values for slope and intercept</span>
-    <span class="n">v</span> <span class="o">=</span> <span class="n">Vmax</span> <span class="o">*</span> <span class="p">(</span><span class="n">s</span> <span class="o">/</span> <span class="p">(</span><span class="n">s</span> <span class="o">+</span> <span class="n">KM</span><span class="p">))</span>       <span class="c1">### then calculates values for y</span>
-    <span class="k">return</span> <span class="n">v</span>                        <span class="c1">### and send then back as the result of the function</span>
-
-<span class="n">parameters</span><span class="p">,</span> <span class="n">statistics</span> <span class="o">=</span> <span class="n">curve_fit</span><span class="p">(</span><span class="n">MM_fit</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-
-<span class="n">Vmax</span><span class="p">,</span> <span class="n">KM</span> <span class="o">=</span> <span class="n">parameters</span>               <span class="c1">### the parameters contains slope and intercept, in order</span>
-
-<span class="n">perr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">statistics</span><span class="p">))</span> <span class="c1">### the statistics object can be used to calculate standard deviations</span>
-<span class="n">Vmax_stdev</span><span class="p">,</span> <span class="n">KM_stdev</span> <span class="o">=</span> <span class="n">perr</span>         <span class="c1">### the standard errors for slope and intercept accessed in order</span>
 
 <span class="c1">#########################################</span>
 <span class="c1">### Make a line using the calculate slope and intercept</span>
@@ -842,8 +843,9 @@ document.write(`
 <span class="n">max_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>                   <span class="c1">### obtain the maximum x value</span>
 <span class="n">x_fit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_x</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>  <span class="c1">### Make an array of 100 points between zero and the max x value</span>
 
-<span class="n">y_fit</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">t_line</span><span class="p">,</span> <span class="n">S0_value</span><span class="p">,</span> <span class="n">KM_value</span><span class="p">,</span> <span class="n">Vmax_value</span><span class="p">)</span>     <span class="c1">### calculate the y values using the function that we curve fit</span>
-            
+<span class="n">y_fit</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x_fit</span><span class="p">,</span> <span class="n">S0_value</span><span class="p">,</span> <span class="n">KM_value</span><span class="p">,</span> <span class="n">Vmax_value</span><span class="p">)</span>     <span class="c1">### calculate the y values using the function that we curve fit</span>
+<span class="n">y_fit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">y_fit</span><span class="p">)</span>                                <span class="c1">### keep only the real numbers</span>
+
 <span class="c1">#########################################</span>
 <span class="c1">### Make a figure onject that contains a single axis object</span>
 <span class="c1">### the pyplot.subplots command will ctraete these two objects</span>
@@ -872,25 +874,24 @@ document.write(`
         <span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span>              <span class="c1">### markers are this color</span>
         <span class="n">edgecolors</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span>       <span class="c1">### outline of markers is this color</span>
         <span class="n">linewidths</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>           <span class="c1">### outline of markers is this wide</span>
-        <span class="n">s</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span>                       <span class="c1">### &quot;s&quot; is &quot;size&quot;. sqrt(64) = 8 points wide</span>
-        <span class="n">zorder</span> <span class="o">=</span> <span class="mi">1</span>                  <span class="c1">### everything is in layer 1 (the top layer in this case)</span>
+        <span class="n">s</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>                       <span class="c1">### &quot;s&quot; is &quot;size&quot;. sqrt(64) = 8 points wide</span>
+        <span class="n">zorder</span> <span class="o">=</span> <span class="mi">2</span>                  <span class="c1">### everything is in layer 1 (the top layer in this case)</span>
         <span class="p">)</span>
+
 
 <span class="c1">#########################################</span>
 <span class="c1">### Add more style</span>
 <span class="c1">#########################################</span>
 
-<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">ylabel</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$[S] / mmole\&#39;L^{-1}$&quot;</span><span class="p">,</span> 
-        <span class="n">xlabel</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$time / min$&quot;</span><span class="p">,</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">ylabel</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$[S]\; /\; mmole\&#39;L^{-1}$&quot;</span><span class="p">,</span> 
+        <span class="n">xlabel</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$time\; /\; min$&quot;</span><span class="p">,</span>
         <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Michaelis-Menten Reaction&quot;</span><span class="p">,</span>
-        <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>                  
-        <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>      
+        <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>                  
+        <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>      
       <span class="p">)</span>
 
-<span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>   <span class="c1">### Make right spine invisible</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>     <span class="c1">### Make top spine invisible</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>    <span class="c1">### Make left spine invisible</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;bottom&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>  <span class="c1">### Make bottom spine invisible</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span><span class="s1">&#39;right&#39;</span><span class="p">,</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span><span class="s1">&#39;left&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>   <span class="c1">### Make all spines invisible</span>
+<span class="c1">#ax.spines[[&#39;left&#39;,&#39;bottom&#39;]].set_position((&#39;axes&#39;,-0.05))   ### space spines a little away from &#39;axes&#39; (plot box)</span>
 
 <span class="c1">#########################################</span>
 <span class="c1">### Output the plot</span>
@@ -912,35 +913,208 @@ document.write(`
 <span class="expanded">Hide code cell output</span>
 </summary>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/blink/anaconda3/lib/python3.11/site-packages/matplotlib/cbook/__init__.py:1335: ComplexWarning: Casting complex values to real discards the imaginary part
-  return np.asarray(x, float)
-</pre></div>
-</div>
-<img alt="../_images/decac27a58a291d1eabbd263b508b20b9d23852822ac18396cb0b70297c2334e.png" src="../_images/decac27a58a291d1eabbd263b508b20b9d23852822ac18396cb0b70297c2334e.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The Vmax is 5.236+/-0.067
-The KM is 1.461+/-0.034
-Initial conc is calculated to be 2.500+/-0.003
+<img alt="../_images/8e162217e7e7355d65597e93d12a58fb1c95e1e158b2458db26947b375b45b97.png" src="../_images/8e162217e7e7355d65597e93d12a58fb1c95e1e158b2458db26947b375b45b97.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The Vmax is 5.122+/-0.457
+The KM is 1.463+/-0.237
+Initial conc is calculated to be 2.505+/-0.020
 </pre></div>
 </div>
 </div>
 </details>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">Vmax_fit</span><span class="o">.</span><span class="n">nominal_value</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">Vmax_fit</span><span class="o">.</span><span class="n">std_dev</span><span class="p">)</span>
+</section>
+</section>
+<section id="plotting-data-with-fixed-s-0">
+<h2>Plotting Data with Fixed <span class="math notranslate nohighlight">\([S]_0\)</span><a class="headerlink" href="#plotting-data-with-fixed-s-0" title="Permalink to this heading">#</a></h2>
+<p>We prpobably know the initial concentration of substrate.  In the experiment above it was included in the data set at time zero but was still allowed to be calculated as a parameter in the curve fit. More parameters results in more degrees of freedom and can increase errors in the fitted parameters.</p>
+<p>The code below sets up the function with a set initial value for <span class="math notranslate nohighlight">\([S]_0\)</span> and only fits for the two parameters of <span class="math notranslate nohighlight">\(K_M\)</span> and <span class="math notranslate nohighlight">\(V_{max}\)</span>.</p>
+<div class="cell tag_hide-input tag_hide-output docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!pip install lmfit  ### uncomment to install if needed</span>
+
+<span class="kn">import</span> <span class="nn">lmfit</span>         <span class="c1">### must be installed with !pip install lmfit</span>
+                     <span class="c1">### uncertainties will be installed as a dependancy</span>
+                     <span class="c1">### for docs see https://lmfit.github.io/lmfit-py/</span>
+
+
+<span class="c1">##########################</span>
+<span class="c1">### experimental data </span>
+<span class="c1">##########################</span>
+
+<span class="n">init_S_conc</span> <span class="o">=</span> <span class="mf">2.5</span>
+
+<span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">30</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">120</span><span class="p">])</span>  <span class="c1">### the time points(every 15 seconds)</span>
+<span class="n">time</span> <span class="o">=</span> <span class="n">time</span><span class="o">/</span><span class="mi">60</span>                                       <span class="c1">### convert to minutes</span>
+
+<span class="c1">#conc = [1.09, 0.62, 0.31, 0.14, 0.065, 0.019, 0.016]   ### measured concentration of substrate (less error)</span>
+<span class="c1">#conc = [1.10, 0.62, 0.31, 0.15, 0.062, 0.042, 0.014]   ### measured concentration of substrate (more error)</span>
+<span class="n">conc</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.15</span><span class="p">,</span> <span class="mf">0.61</span><span class="p">,</span> <span class="mf">0.33</span><span class="p">,</span> <span class="mf">0.17</span><span class="p">,</span> <span class="mf">0.052</span><span class="p">,</span> <span class="mf">0.081</span><span class="p">,</span> <span class="mf">0.021</span><span class="p">]</span>   <span class="c1">### measured concentration of substrate (even more error)</span>
+
+
+
+<span class="c1">##########################</span>
+<span class="c1">### create function </span>
+<span class="c1">##########################</span>
+
+<span class="n">expr</span> <span class="o">=</span> <span class="n">eq</span><span class="o">.</span><span class="n">rhs</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">S0</span><span class="p">,</span> <span class="n">init_S_conc</span><span class="p">)</span>     <span class="c1">### substitute S0 for the value of init_S_conc</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">lambdify</span><span class="p">([</span><span class="n">t</span><span class="p">,</span> <span class="n">KM</span><span class="p">,</span> <span class="n">Vmax</span><span class="p">],</span> <span class="n">expr</span><span class="p">)</span>   <span class="c1">### create function in terms of t, S0, KM and Vmax</span>
+
+
+<span class="c1">##########################</span>
+<span class="c1">### use lmfit to fit data to function </span>
+<span class="c1">##########################</span>
+
+<span class="n">mod</span> <span class="o">=</span> <span class="n">lmfit</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>                            <span class="c1"># load the function f as the model to be fit</span>
+<span class="n">pars</span> <span class="o">=</span> <span class="n">mod</span><span class="o">.</span><span class="n">make_params</span><span class="p">(</span><span class="n">S_0</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">K_M</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">V_max</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>   <span class="c1"># state the parameters (use the text strings that we used above in sympy)</span>
+                                                <span class="c1"># initial values are also set here</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">mod</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">conc</span><span class="p">,</span> <span class="n">pars</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">time</span><span class="p">)</span>            <span class="c1"># use the .fit method on the model object to perform the curve fit</span>
+                                                <span class="c1"># the variable in this function is &#39;t&#39; so we must use that in the call</span>
+<span class="c1">##########################</span>
+<span class="c1">### get the results </span>
+<span class="c1">##########################</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">fit_report</span><span class="p">())</span>
+
+<span class="n">KM_fit</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">uvars</span><span class="p">[</span><span class="s1">&#39;K_M&#39;</span><span class="p">]</span>       <span class="c1">### collect parameters as uncertain values</span>
+<span class="n">Vmax_fit</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">uvars</span><span class="p">[</span><span class="s1">&#39;V_max&#39;</span><span class="p">]</span>
+
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>   <span class="c1">### load in the plotting tools from the MatPlotLib package</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">curve_fit</span>   <span class="c1">### load in the curve_fit function from the SciPy package</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1">#########################################</span>
+<span class="c1">### Set up the data lists</span>
+<span class="c1">#########################################</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">time</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">conc</span>
+
+
+<span class="c1">#########################################</span>
+<span class="c1">### Make a line using the calculate slope and intercept</span>
+<span class="c1">#########################################</span>
+
+<span class="n">S0_value</span> <span class="o">=</span>  <span class="n">S0_fit</span><span class="o">.</span><span class="n">nominal_value</span>
+<span class="n">KM_value</span> <span class="o">=</span> <span class="n">KM_fit</span><span class="o">.</span><span class="n">nominal_value</span>
+<span class="n">Vmax_value</span> <span class="o">=</span> <span class="n">Vmax_fit</span><span class="o">.</span><span class="n">nominal_value</span> 
+
+
+<span class="n">max_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>                   <span class="c1">### obtain the maximum x value</span>
+<span class="n">x_fit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_x</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>  <span class="c1">### Make an array of 100 points between zero and the max x value</span>
+
+<span class="n">y_fit</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x_fit</span><span class="p">,</span> <span class="n">KM_value</span><span class="p">,</span> <span class="n">Vmax_value</span><span class="p">)</span>     <span class="c1">### calculate the y values using the function that we curve fit</span>
+<span class="n">y_fit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">y_fit</span><span class="p">)</span>                                <span class="c1">### keep only the real numbers</span>
+
+<span class="c1">#########################################</span>
+<span class="c1">### Make a figure onject that contains a single axis object</span>
+<span class="c1">### the pyplot.subplots command will ctraete these two objects</span>
+<span class="c1">#########################################</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">rcdefaults</span><span class="p">()</span>                    <span class="c1">### resets the plot defaults so we always start in the same place</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>  
+
+<span class="c1">#########################################</span>
+<span class="c1">### Plot the line using the x_fit, y_fit points</span>
+<span class="c1">#########################################</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_fit</span><span class="p">,</span> <span class="n">y_fit</span><span class="p">,</span> 
+        <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span>            <span class="c1">### use a line between points</span>
+        <span class="n">linewidth</span><span class="o">=</span><span class="s1">&#39;0.5&#39;</span><span class="p">,</span>            <span class="c1">### make the line thin</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span>            <span class="c1">### the line is black</span>
+        <span class="n">zorder</span> <span class="o">=</span> <span class="mi">0</span>                  <span class="c1">### everything is in layer 0 (the bottom layer in this case)</span>
+        <span class="p">)</span>
+
+<span class="c1">#########################################</span>
+<span class="c1">### Plot the data with style</span>
+<span class="c1">#########################################</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> 
+        <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span>                 <span class="c1">### Plot the x and y data </span>
+        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span>              <span class="c1">### markers are this color</span>
+        <span class="n">edgecolors</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span>       <span class="c1">### outline of markers is this color</span>
+        <span class="n">linewidths</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>           <span class="c1">### outline of markers is this wide</span>
+        <span class="n">s</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>                       <span class="c1">### &quot;s&quot; is &quot;size&quot;. sqrt(64) = 8 points wide</span>
+        <span class="n">zorder</span> <span class="o">=</span> <span class="mi">2</span>                  <span class="c1">### everything is in layer 1 (the top layer in this case)</span>
+        <span class="p">)</span>
+
+
+<span class="c1">#########################################</span>
+<span class="c1">### Add more style</span>
+<span class="c1">#########################################</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">ylabel</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$[S]\; /\; mmole\&#39;L^{-1}$&quot;</span><span class="p">,</span> 
+        <span class="n">xlabel</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$time\; /\; min$&quot;</span><span class="p">,</span>
+        <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Michaelis-Menten Reaction&quot;</span><span class="p">,</span>
+        <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>                  
+        <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>      
+      <span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span><span class="s1">&#39;right&#39;</span><span class="p">,</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span><span class="s1">&#39;left&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>   <span class="c1">### Make all spines invisible</span>
+<span class="c1">#ax.spines[[&#39;left&#39;,&#39;bottom&#39;]].set_position((&#39;axes&#39;,-0.05))   ### space spines a little away from &#39;axes&#39; (plot box)</span>
+
+<span class="c1">#########################################</span>
+<span class="c1">### Output the plot</span>
+<span class="c1">#########################################</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;plot.pdf&quot;</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>     <span class="c1">### export the plot as this</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>                                       <span class="c1">### display the plot in this notebook</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The Vmax is </span><span class="si">{</span><span class="n">Vmax_fit</span><span class="si">:</span><span class="s2">0.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The KM is </span><span class="si">{</span><span class="n">KM_fit</span><span class="si">:</span><span class="s2">0.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>                   <span class="c1">### display the plot in this notebook</span>
 </pre></div>
 </div>
 </div>
+</details>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.236187533944633
-0.06675018914067331
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[Model]]
+    Model(_lambdifygenerated)
+[[Fit Statistics]]
+    # fitting method   = leastsq
+    # function evals   = 38
+    # data points      = 14
+    # variables        = 2
+    chi-square         = 0.00539584
+    reduced chi-square = 4.4965e-04
+    Akaike info crit   = -106.056578
+    Bayesian info crit = -104.778463
+    R-squared          = 0.99465558
+[[Variables]]
+    K_M:    1.44955950 +/- 0.23681684 (16.34%) (init = 1)
+    V_max:  5.08759004 +/- 0.44252445 (8.70%) (init = 1)
+[[Correlations]] (unreported correlations are &lt; 0.100)
+    C(K_M, V_max) = +0.9927
+</pre></div>
+</div>
+<img alt="../_images/c9ef60cf4bd788d3cdbfe15e438c77becd60bfefaf1da64a7075e40decbecd20.png" src="../_images/c9ef60cf4bd788d3cdbfe15e438c77becd60bfefaf1da64a7075e40decbecd20.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The Vmax is 5.088+/-0.443
+The KM is 1.450+/-0.237
 </pre></div>
 </div>
 </div>
+</details>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
+</section>
+<section id="extra">
+<h2>Extra<a class="headerlink" href="#extra" title="Permalink to this heading">#</a></h2>
+<p>The code below was used to generate the data for the curve fit above. It is presented here for archival purposes.</p>
+<div class="cell tag_hide-input tag_hide-output docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input above-output-prompt docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### Make Fake Data for curve fit</span>
 
 <span class="c1">##########################</span>
@@ -972,7 +1146,7 @@ Initial conc is calculated to be 2.500+/-0.003
 <span class="c1">#ydat = np.complex128(y)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">xdat</span><span class="p">,</span><span class="n">ydat</span><span class="p">)</span>
 <span class="n">ydat_old</span> <span class="o">=</span> <span class="n">ydat</span>
-<span class="n">ydat</span> <span class="o">=</span> <span class="n">ydat</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="mf">0.003</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">xdat</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+<span class="n">ydat</span> <span class="o">=</span> <span class="n">ydat</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">xdat</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">xdat</span><span class="p">,</span><span class="n">ydat</span><span class="p">)</span>
 <span class="n">errors</span> <span class="o">=</span> <span class="p">((</span><span class="n">ydat</span><span class="o">-</span><span class="n">ydat_old</span><span class="p">))</span>
@@ -980,18 +1154,24 @@ Initial conc is calculated to be 2.500+/-0.003
 </pre></div>
 </div>
 </div>
+</details>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.25 0.5  0.75 1.   1.25 1.5  1.75 2.  ] [1.72852951 1.09217686 0.61897403 0.31365042 0.14508538 0.06333811
  0.02682926 0.0112074 ]
-[0.25 0.5  0.75 1.   1.25 1.5  1.75 2.  ] [1.72653529 1.09094275 0.62333815 0.30771745 0.14096853 0.06463756
- 0.0186093  0.01569788]
-[-0.00199422 -0.00123411  0.00436411 -0.00593297 -0.00411686  0.00129945
- -0.00821996  0.00449048]
+[0.25 0.5  0.75 1.   1.25 1.5  1.75 2.  ] [1.79008622 1.04732806 0.6616236  0.28325197 0.13075197 0.12048696
+ 0.04551996 0.08201023]
+[ 0.06155671 -0.0448488   0.04264957 -0.03039846 -0.01433341  0.05714885
+  0.01869069  0.07080282]
 </pre></div>
 </div>
 </div>
+</details>
 </div>
-</section>
 </section>
 </section>
 
@@ -1035,6 +1215,15 @@ Initial conc is calculated to be 2.500+/-0.003
         <p class="prev-next-title">Integrating Rate Laws</p>
       </div>
     </a>
+    <a class="right-next"
+       href="K04_NumericIntegration.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Numeric Integration</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div></div>
   
 </div>
@@ -1064,6 +1253,8 @@ Initial conc is calculated to be 2.500+/-0.003
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-fit-against-data">Plot the Fit Against Data</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-data-with-fixed-s-0">Plotting Data with Fixed <span class="math notranslate nohighlight">\([S]_0\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extra">Extra</a></li>
 </ul>
   </nav></div>
 

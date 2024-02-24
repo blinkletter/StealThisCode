@@ -20,3 +20,4 @@ parts:
         - file: ReactionKinetics/K02_Integrating_Rate_Law_1.ipynb
         - file: ReactionKinetics/K03_Integrating_MM.ipynb
         - file: ReactionKinetics/K04_NumericIntegration.ipynb
+        - file: ReactionKinetics/K05_NumericIntegration_SystemEq.ipynb

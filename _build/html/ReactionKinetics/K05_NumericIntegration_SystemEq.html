@@ -390,13 +390,9 @@ ES \xrightarrow{k_{cat}} P + E \end{split}\]</div>
 <h1>Using <em>solve_ivp</em><a class="headerlink" href="#using-solve-ivp" title="Permalink to this heading">#</a></h1>
 <p>The code below calculates the instantaneous rate of change for each reactant, intermediate and product in the Michaelis-Menten system and then integrates the whole system using numerical methods. Using the reaction scheme outlined above we can define the following rates at a given moment in time.</p>
 <div class="math notranslate nohighlight">
-\[\frac{d}{dt}[S]= -(k_1 [S][E])+(k_{-1}[ES])\]</div>
-<div class="math notranslate nohighlight">
-\[\frac{d}{dt}[E] = -(k_1 [S][E])+(k_{-1}[ES])+(k_{cat}  [ES])\]</div>
-<div class="math notranslate nohighlight">
-\[\frac{d}{dt}[ES] = (k_1 [S][E])-(k_{cat}[ES])-(k_{-1}  [ES])\]</div>
-<div class="math notranslate nohighlight">
-\[\frac{d}{dt}[P] = k_{cat} [ES]\]</div>
+\[ \begin{align}\begin{aligned}\begin{split}\frac{d}{dt}[S]= -(k_1 [S][E])+(k_{-1}[ES])\\\end{split}\\\begin{split}\frac{d}{dt}[E] = -(k_1 [S][E])+(k_{-1}[ES])+(k_{cat}  [ES])\\\end{split}\\\begin{split}\frac{d}{dt}[ES] = (k_1 [S][E])-(k_{cat}[ES])-(k_{-1}  [ES])\\
+    
+\frac{d}{dt}[P] = k_{cat} [ES]\end{split}\end{aligned}\end{align} \]</div>
 <p>It is possible to integrate the differential equations for all four species in the scheme. But numeric integration is much simpler to set up in <em>Python</em>. Observe the code below. We create a function tha calculates the instantaneous rate of change for all four species from known concentrations. We will then send this function into the numeric integration tool of <em>SciPy</em>.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
@@ -451,8 +447,6 @@ ES \xrightarrow{k_{cat}} P + E \end{split}\]</div>
 <span class="n">xmax</span> <span class="o">=</span> <span class="n">time_end</span>           <span class="c1">### change these as you wish</span>
 <span class="n">ymax</span> <span class="o">=</span> <span class="n">S_conc</span>
 
-
-
 <span class="n">KM_model</span> <span class="o">=</span> <span class="p">(</span><span class="n">k_1</span> <span class="o">+</span> <span class="n">kcat</span><span class="p">)</span><span class="o">/</span><span class="n">k1</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Km: </span><span class="si">{</span><span class="n">KM_model</span><span class="si">:</span><span class="s2">0.5f</span><span class="si">}</span><span class="s2"> M&quot;</span><span class="p">)</span>
@@ -474,10 +468,6 @@ ES \xrightarrow{k_{cat}} P + E \end{split}\]</div>
 <span class="n">yarray</span> <span class="o">=</span> <span class="n">yarray</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span><span class="n">yarray</span><span class="p">)</span>
-
-
-
-
 
 <span class="c1">#fig.savefig(&quot;plot.pdf&quot;)   # use this to save the figure in PDF format</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>                 <span class="c1"># output the combined four plots</span>

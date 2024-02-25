@@ -180,7 +180,10 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
+
 <li class="toctree-l1"><a class="reference internal" href="ReactionKinetics/K05_NumericIntegration_SystemEq.html">Integrating a System</a></li>
+
+
 
 </ul>
 
@@ -412,6 +415,8 @@ document.write(`
 
 <span class="c1">### Create blank plot</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rcdefaults</span><span class="p">()</span>             <span class="c1">### resets the plot defaults so we always start in the same place</span>
+<span class="c1">#plt.style.use(&quot;../styles/tufte.mplstyle&quot;)     ### Then add a fancy style sheet   </span>
+
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>    <span class="c1">### sets the size of the plot figure in inches</span>
 
 <span class="c1">### Plot the data</span>
@@ -426,14 +431,17 @@ document.write(`
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\nu$&quot;</span><span class="p">)</span>                 <span class="c1">### label y-axis. Here we use the greek letter nu for rate.</span>
 
 <span class="c1">### Output the plot</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;plot.pdf&quot;</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>     <span class="c1">### export the plot. The bbox parameter prevents labels from being cut off</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>  <span class="c1"># otherwise the right y-label is slightly clipped</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;plot.pdf&quot;</span><span class="p">)</span>     <span class="c1">### export the plot. The bbox parameter prevents labels from being cut off</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>                                        <span class="c1">### display the plot in this notebook</span>
 </pre></div>
 </div>
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/057e184a00d4f3ff7d071d56fb8647adc5d905925c99dec6912a8fa5cd155102.png" src="_images/057e184a00d4f3ff7d071d56fb8647adc5d905925c99dec6912a8fa5cd155102.png" />
+<img alt="_images/7fe4374334d1128161c015048da35e90c75197e45372c588107cf14b085e967a.png" src="_images/7fe4374334d1128161c015048da35e90c75197e45372c588107cf14b085e967a.png" />
 </div>
 </div>
 </section>
@@ -497,6 +505,8 @@ The KM is 3.809 +/- 0.3326
 
 <span class="c1">### Create blank plot</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rcdefaults</span><span class="p">()</span>             <span class="c1">### resets the plot defaults so we always start in the same place</span>
+<span class="c1">#plt.style.use(&quot;../styles/tufte.mplstyle&quot;)     ### Then add a fancy style sheet   </span>
+
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>    <span class="c1">### sets the size of the plot figure in inches</span>
 
 
@@ -523,7 +533,9 @@ The KM is 3.809 +/- 0.3326
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\nu$&quot;</span><span class="p">)</span>                 <span class="c1">### label y-axis. Here we use the greek letter nu for rate.</span>
 
 <span class="c1">### Output the plot</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;plot.pdf&quot;</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span> <span class="c1">### export the plot. The bbox parameter prevents labels from being cut off</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>  <span class="c1"># otherwise the right y-label is slightly clipped</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;plot.pdf&quot;</span><span class="p">)</span> <span class="c1">### export the plot. The bbox parameter prevents labels from being cut off</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>                                   <span class="c1">### display the plot in this notebook</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The Vmax is </span><span class="si">{</span><span class="n">Vmax</span><span class="si">:</span><span class="s2">0.3f</span><span class="si">}</span><span class="s2"> +/- </span><span class="si">{</span><span class="n">Vmax_stdev</span><span class="si">:</span><span class="s2">0.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -533,7 +545,7 @@ The KM is 3.809 +/- 0.3326
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/5a901fc22c756c368a6327a5232473cad21e528cf5f92751e7b7e8ad20bc55d2.png" src="_images/5a901fc22c756c368a6327a5232473cad21e528cf5f92751e7b7e8ad20bc55d2.png" />
+<img alt="_images/33bb10ce5b2f4337d9f88498a16a927c1bb86960c315519d8fa7305c416274e9.png" src="_images/33bb10ce5b2f4337d9f88498a16a927c1bb86960c315519d8fa7305c416274e9.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The Vmax is 81.538 +/- 3.1087
 The KM is 3.809 +/- 0.3326
 </pre></div>
@@ -555,6 +567,8 @@ The KM is 3.809 +/- 0.3326
 
 <span class="c1">### Create blank plot</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rcdefaults</span><span class="p">()</span>             <span class="c1">### resets the plot defaults so we always start in the same place</span>
+<span class="c1">#plt.style.use(&quot;../styles/tufte.mplstyle&quot;)     ### Then add a fancy style sheet   </span>
+
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>    <span class="c1">### sets the size of the plot figure in inches</span>
 
 
@@ -589,12 +603,9 @@ The KM is 3.809 +/- 0.3326
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$[S]$&quot;</span><span class="p">)</span>                 <span class="c1">### label the x-axis. r means &quot;raw&quot; text string. $-signs are commands for the Latex math language </span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\nu$&quot;</span><span class="p">)</span>                 <span class="c1">### label y-axis. Here we use the greek letter nu for rate.</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>   <span class="c1">### Make right spine invisible</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>     <span class="c1">### Make top spine invisible</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>    <span class="c1">### Make left spine invisible</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;bottom&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>  <span class="c1">### Make bottom spine invisible</span>
-
 <span class="c1">### Output the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>  <span class="c1"># otherwise the right y-label is slightly clipped</span>
+
 <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;plot.pdf&quot;</span><span class="p">)</span>     <span class="c1">### export the plot as this</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>                  <span class="c1">### display the plot in this notebook</span>
 
@@ -605,7 +616,7 @@ The KM is 3.809 +/- 0.3326
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/4f6b143ea101713189b21019b6a7e1dcb2ce73d4d5b0143f7041b0cf3d62e445.png" src="_images/4f6b143ea101713189b21019b6a7e1dcb2ce73d4d5b0143f7041b0cf3d62e445.png" />
+<img alt="_images/c9ee03528c7dfb2d9b9af6f4420b501abb4014a0d837e03db6c2ee47e9c58c99.png" src="_images/c9ee03528c7dfb2d9b9af6f4420b501abb4014a0d837e03db6c2ee47e9c58c99.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The Vmax is 81.538 +/- 3.1087
 The KM is 3.809 +/- 0.3326
 </pre></div>

@@ -1,0 +1,991 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Integrating Rate Equations with Python &#8212; Steal this Code</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tufte.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'ReactionKinetics/OLD/IntegratedRateEqns_OLD';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../start.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/Ouroboros-benzene.svg.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/Ouroboros-benzene.svg.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../start.html">
+                    Steal This Code
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Math</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../1_1_Calculator.html">Basic Math with <em>Python</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uncertainties.html">Using Uncertainty</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Plots</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../2_1_Plotting.html">Plotting Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../2_2_Curve_Fits.html">Linear Fits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../2_3_Curve_Fits.html">Curve Fits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../2_4_Fancy_1.html">Advanced Plotting Example</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">SymPy</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../K01_solving_with_sympy.html">Free Symbolic Math</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../K02_Integrating_Rate_Law_1.html">Integrating Rate Laws</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../K03_Integrating_MM.html">Integrating the Michaelis-Menten Rate Law</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../K04_NumericIntegration.html">Numeric Integration</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../K05_NumericIntegration_SystemEq.html">Integrating a System</a></li>
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/blinkletter/StealThisCode/blob/main/./ReactionKinetics/OLD/IntegratedRateEqns_OLD.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/ReactionKinetics/OLD/IntegratedRateEqns_OLD.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Integrating Rate Equations with Python</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-integrated-rate-laws">Simple Integrated Rate Laws</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#first-order">First Order</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#second-order">Second Order</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#second-order-again">Second Order Again</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-is-easy">Simple is Easy</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consecutive-reactions">Consecutive Reactions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#observations">Observations</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#steady-state-system">Steady State System</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Observations</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#salt-inhibition">Salt Inhibition</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Observations</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integrated-michaelis-menten">Integrated Michaelis-Menten</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#notes">Notes</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="integrating-rate-equations-with-python">
+<h1>Integrating Rate Equations with Python<a class="headerlink" href="#integrating-rate-equations-with-python" title="Permalink to this heading">#</a></h1>
+<p>You have integrated the classic first order and second order rate equations. The question I would ask is why? These equations were integrated 100 years ago and the answers have been available since then. Of course, this is an example so that you know that it can be used in more complicated systems. As we will soon see, that was a lie.</p>
+<p>Once we get to even slightly more complicated systems we quickly end up with integrations that are complex and often better solved with numerical methods.</p>
+<section id="simple-integrated-rate-laws">
+<h2>Simple Integrated Rate Laws<a class="headerlink" href="#simple-integrated-rate-laws" title="Permalink to this heading">#</a></h2>
+<p>Here are the equations that we have solved already in you chemistry career.</p>
+<section id="first-order">
+<h3>First Order<a class="headerlink" href="#first-order" title="Permalink to this heading">#</a></h3>
+<p>Reaction Scheme:
+$<span class="math notranslate nohighlight">\({A}\xrightarrow{k_{obs}}{P}\)</span><span class="math notranslate nohighlight">\(
+rate Law:
+\)</span><span class="math notranslate nohighlight">\(-\frac{\partial A}{\partial t} = \frac{\partial P}{\partial t} = k_{obs}\cdot A\)</span><span class="math notranslate nohighlight">\(
+Intergrated rate equation for reactant
+\)</span><span class="math notranslate nohighlight">\( A_t = A_0 \cdot e^{-k_{obs}t}\)</span><span class="math notranslate nohighlight">\(
+Intergrated rate equation for product
+\)</span><span class="math notranslate nohighlight">\(P_t = P_\infty - \cdot P_\infty e^{-k_{obs}t}\)</span><span class="math notranslate nohighlight">\(
+Half life
+\)</span><span class="math notranslate nohighlight">\( t_{1/2} = \frac{\ln{2}}{k_{obs}}\)</span>$</p>
+</section>
+<section id="second-order">
+<h3>Second Order<a class="headerlink" href="#second-order" title="Permalink to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[{2A}\xrightarrow{k_{obs}}{P}\]</div>
+<div class="math notranslate nohighlight">
+\[-\frac{\partial A}{\partial t} = \frac{1}{2}\frac{\partial P}{\partial t} = k_{obs}\cdot A^2\]</div>
+<div class="math notranslate nohighlight">
+\[ \frac{1}{A_t} = \frac{1}{A_0} + k_{obs}\cdot t\]</div>
+<div class="math notranslate nohighlight">
+\[ t_{1/2} = \frac{1}{k_{obs}\cdot A_0}\]</div>
+</section>
+<section id="second-order-again">
+<h3>Second Order Again<a class="headerlink" href="#second-order-again" title="Permalink to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[{A + B}\xrightarrow{k_{obs}}{P}\]</div>
+<div class="math notranslate nohighlight">
+\[-\frac{\partial A}{\partial t} = -\frac{\partial B}{\partial t} = \frac{\partial P}{\partial t} = k_{obs}\cdot A\cdot B\]</div>
+<div class="math notranslate nohighlight">
+\[ \frac{A_0-x}{B_0-x} = \frac{A_0}{B_0} \cdot e^{\left( A_0-B_0 \right) \cdot k_{obs}\cdot t}\]</div>
+<p><em>where x is the progress of the reaction. e.g. <span class="math notranslate nohighlight">\(A_0-x=A_t\)</span>.</em></p>
+</section>
+<section id="simple-is-easy">
+<h3>Simple is Easy<a class="headerlink" href="#simple-is-easy" title="Permalink to this heading">#</a></h3>
+<p>Everything works well when reactions are simple and the details for the above integrations are described in the <a class="reference external" href="https://moodle31.upei.ca/mod/resource/view.php?id=623407">Integrating Rate Equations</a> tutorial document.) But what about reactions with multiple steps and reactions with multiple pathways?</p>
+</section>
+</section>
+<section id="consecutive-reactions">
+<h2>Consecutive Reactions<a class="headerlink" href="#consecutive-reactions" title="Permalink to this heading">#</a></h2>
+<p>More complex rate laws are not easily integrated (don’t let me discourage you - mathematicians are waiting to help you). I have hit the limits of my calculus powers, though. So now I will turn to the tools available in <em>Python</em></p>
+<p>Let us start with a straightforward consecutive reaction.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}A \xrightarrow{k_1} B \\ B \xrightarrow{k_2} P\end{split}\]</div>
+<p>The integration tutorial document has a section where we use the symbolic math tool, <em>Maple</em> (which is available to all UPEI students), to integrate the above rate equation. We could also use the <em>Python</em> package <em>SymPy</em>, which provides the functionality of a symbolic math system (but without the super-helpful GUI interface of <em>Maple</em>). Both methods seem like too much work to me.</p>
+<p>Let’s use numerical methods to get the concentrations over time. This will let us model a reaction and see how concentrations change over time.  It will not give us a function that we can use to curve fit data.  We would have to actually integrate the rate law using analytical methods to do that. Keep those mathematicians on speed-dial. (I have no doubt that there are methods available in the <em>Python</em> ecosystem that will optimize parameters in a numerical integration to fit a set of data. Let me know if you ever come across them and please write a detailed instruction manual for me.)</p>
+<p>In the code below we will state the rate law for each reaction and then use the tools of the <em>SciPy</em> package to integrate the system numerically.  This will give us the concentrations of reactants over time for various values of <span class="math notranslate nohighlight">\(k_1\)</span>, <span class="math notranslate nohighlight">\(k_2\)</span> and <span class="math notranslate nohighlight">\(A_0\)</span>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">scipy.integrate.odeint()</span></code> function will perform a numerical integration of a system of ordinary differential equations. The rate laws for each step make up this set of equations.</p>
+<section id="observations">
+<h3>Observations<a class="headerlink" href="#observations" title="Permalink to this heading">#</a></h3>
+<p>We can see that the concentration of A will dissappear according to first order reaction kinetics. This is because the consumption of A is a first order irreversible reaction. The concentrations of the intermediate, B, and the product, P, do not follow the simple math of first or second order kinetics. The numerical integration will calculate their concentrations according to the rates of appearance and dissappearance.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#######################</span>
+<span class="c1">### import packages ###</span>
+<span class="c1">#######################</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">odeint</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+
+<span class="c1">#########################################</span>
+<span class="c1">### Create series of time points      ###</span>
+<span class="c1">#########################################</span>
+
+<span class="n">dt</span> <span class="o">=</span> <span class="mf">0.01</span>                                    <span class="c1"># time step, delta t</span>
+<span class="n">tmax</span> <span class="o">=</span> <span class="mi">25</span>                                    <span class="c1"># max time, s</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">tmax</span><span class="p">,</span> <span class="n">num</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">tmax</span><span class="o">/</span><span class="n">dt</span><span class="p">))</span> <span class="c1"># time vector (list of time points)</span>
+<span class="n">nt</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>                                  <span class="c1"># total number of time steps</span>
+
+
+<span class="c1">############################################</span>
+<span class="c1">### Create a function that describes the ###</span>
+<span class="c1">### rates of all reactions in the system ###</span>
+<span class="c1">############################################</span>
+
+<span class="k">def</span> <span class="nf">rates</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A function that finds the instantaneous rate of each reaction when given</span>
+<span class="sd">    the concentration of each reactant</span>
+<span class="sd">    </span>
+<span class="sd">    reation scheme is A --&gt; B --&gt; C</span>
+<span class="sd">    </span>
+<span class="sd">    c is a list of concentrations</span>
+<span class="sd">    t is a list of time points</span>
+<span class="sd">    </span>
+<span class="sd">    K1 = rate constant for first step</span>
+<span class="sd">    K2 = rate constant for second step</span>
+
+<span class="sd">    A = conc of A.</span>
+<span class="sd">    B = conc of B.</span>
+<span class="sd">    C = conc of C.</span>
+<span class="sd">    </span>
+<span class="sd">    ra = instantanous rate of change in [A]</span>
+<span class="sd">    rb = instantanous rate of change in [B]</span>
+<span class="sd">    rc = instantanous rate of change in [C]</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">K1</span> <span class="o">=</span> <span class="mf">0.8</span>   <span class="c1"># these are the rate constants. Change tham and have fun.</span>
+    <span class="n">K2</span> <span class="o">=</span> <span class="mf">0.1</span>
+    
+    <span class="n">A</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="n">B</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span> <span class="n">C</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>    <span class="c1"># assign conc. from input list c</span>
+    
+    <span class="n">ra</span> <span class="o">=</span> <span class="o">-</span><span class="n">K1</span> <span class="o">*</span> <span class="n">A</span>                    <span class="c1"># rates of each reaction step with give concentration in list c</span>
+    <span class="n">rb</span> <span class="o">=</span> <span class="p">(</span><span class="n">K1</span> <span class="o">*</span> <span class="n">A</span><span class="p">)</span><span class="o">-</span><span class="p">(</span><span class="n">K2</span> <span class="o">*</span> <span class="n">B</span><span class="p">)</span>
+    <span class="n">rc</span> <span class="o">=</span> <span class="n">K2</span> <span class="o">*</span> <span class="n">B</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">ra</span><span class="p">,</span> <span class="n">rb</span><span class="p">,</span> <span class="n">rc</span><span class="p">]</span>
+
+
+<span class="c1">####################################################################</span>
+<span class="c1">### The function odeint() from scipy.integrate takes a function, ###</span>
+<span class="c1">### a list of initial conditions, and an array of time points.   ###</span>
+<span class="c1">### It returns a matrix with each column being the result for    ###</span>
+<span class="c1">### each variable at each time point.                            ###</span>
+<span class="c1">####################################################################</span>
+
+<span class="n">cc</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">rates</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">t</span><span class="p">)</span>
+<span class="c1">#display(t,cc)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">cc</span><span class="p">)</span>
+
+<span class="c1">#fig.savefig(&quot;plot.pdf&quot;)   # use this to save the figure in PDF format</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>                 <span class="c1"># output the combined four plots</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../../_images/745ddc7bde56bd25e0f1dab7750e982f5ec933b147c75e9d2e6a5d16b2c3bbe9.png" src="../../_images/745ddc7bde56bd25e0f1dab7750e982f5ec933b147c75e9d2e6a5d16b2c3bbe9.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="steady-state-system">
+<h2>Steady State System<a class="headerlink" href="#steady-state-system" title="Permalink to this heading">#</a></h2>
+<p>You will recall the example of complex reactions that you explored in physical chemistry. Here is an example where the initial reaction is reversible, followed by an irreversible reaction that produces the product.</p>
+<div class="math notranslate nohighlight">
+\[ A\rightleftharpoons B \rightarrow P\]</div>
+<p>And could be expressed with the following reactions.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}A \xrightarrow{k_1} B \\ 
+B \xrightarrow{k_{-1}} A \\
+B \xrightarrow{k_2} P\end{split}\]</div>
+<p>This may be interpreted as an equilibrium followed by a final step or as a steady-state system where the reverse reaction and the final step are fast so that the intermediate never reaches an equilibrium concentration. If <span class="math notranslate nohighlight">\(k_2 &lt;&lt; k_{-1}\)</span> then it would be a pre-equilibrium case. If <span class="math notranslate nohighlight">\(k_2 &gt;&gt; k_{-1}\)</span> then it is a steady state case. Of course, it could be in-between as well…</p>
+<section id="id1">
+<h3>Observations<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<p>The concentration of intermediate never builds up in a steady state system. It is present at a small concentration, which doesn’t change much over time in comparison to the larger changes in concentration of reactant and product. Change the values for <span class="math notranslate nohighlight">\(k_2\)</span> and <span class="math notranslate nohighlight">\(k_{-1}\)</span> and observe the results. Explore the extremes to make clear cases of a pre-equilibrium system and a steady-state system. Have fun.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#######################</span>
+<span class="c1">### import packages ###</span>
+<span class="c1">#######################</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">odeint</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+
+<span class="c1">#########################################</span>
+<span class="c1">### Create series of time points      ###</span>
+<span class="c1">#########################################</span>
+
+<span class="n">dt</span> <span class="o">=</span> <span class="mf">0.0001</span>                                <span class="c1"># time step, delta t</span>
+<span class="n">tmax</span> <span class="o">=</span> <span class="mi">25</span>                                  <span class="c1"># max time, s</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">tmax</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">tmax</span><span class="o">/</span><span class="n">dt</span><span class="p">))</span> <span class="c1"># time vector (list of time points)</span>
+<span class="n">nt</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>                                <span class="c1"># total number of time steps</span>
+
+
+<span class="c1">############################################</span>
+<span class="c1">### Create a function that describes the ###</span>
+<span class="c1">### rates of all reactions in the system ###</span>
+<span class="c1">############################################</span>
+
+<span class="k">def</span> <span class="nf">rates</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="n">K1</span> <span class="o">=</span> <span class="mi">2</span>        <span class="c1"># these are the rate constants. Change tham and have fun.</span>
+    <span class="n">K_1</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="n">K2</span> <span class="o">=</span> <span class="mi">20</span>
+    
+    <span class="n">A</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="n">B</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span> <span class="n">C</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>      <span class="c1"># assign initial conc. from input list c</span>
+    
+    <span class="n">ra</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">K1</span> <span class="o">*</span> <span class="n">A</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">K_1</span> <span class="o">*</span> <span class="n">B</span><span class="p">)</span>          <span class="c1"># rates of each reaction step with give concentration in list c</span>
+    <span class="n">rb</span> <span class="o">=</span> <span class="p">(</span><span class="n">K1</span> <span class="o">*</span> <span class="n">A</span><span class="p">)</span><span class="o">-</span><span class="p">(</span><span class="n">K2</span> <span class="o">*</span> <span class="n">B</span><span class="p">)</span><span class="o">-</span><span class="p">(</span><span class="n">K_1</span> <span class="o">*</span> <span class="n">B</span><span class="p">)</span>
+    <span class="n">rc</span> <span class="o">=</span> <span class="n">K2</span> <span class="o">*</span> <span class="n">B</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">ra</span><span class="p">,</span> <span class="n">rb</span><span class="p">,</span> <span class="n">rc</span><span class="p">]</span>
+
+
+<span class="c1">####################################################################</span>
+<span class="c1">### The function odeint() from scipy.integrate takes a function, ###</span>
+<span class="c1">### a list of initial conditions, and an array of time points.   ###</span>
+<span class="c1">### It returns a matrix with each column being the result for    ###</span>
+<span class="c1">### each variable at each time point.                            ###</span>
+<span class="c1">####################################################################</span>
+
+<span class="n">cc</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">rates</span><span class="p">,</span> <span class="p">[</span><span class="mf">.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">t</span><span class="p">)</span>
+<span class="c1">#display(t,cc)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">cc</span><span class="p">)</span>
+
+<span class="c1">#fig.savefig(&quot;plot.pdf&quot;)   # use this to save the figure in PDF format</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>                 <span class="c1"># output the combined four plots</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../../_images/9f6ef6e2512c0f87a2b112bf62b9ffd7c6c252e9d2072563d9d11dac4d9ee105.png" src="../../_images/9f6ef6e2512c0f87a2b112bf62b9ffd7c6c252e9d2072563d9d11dac4d9ee105.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="salt-inhibition">
+<h2>Salt Inhibition<a class="headerlink" href="#salt-inhibition" title="Permalink to this heading">#</a></h2>
+<p>Let us take the example above and imagine that it is the solvolysis of t-butyl chloride. This is a classic example of inhibition by the intermediate.</p>
+<div class="math notranslate nohighlight">
+\[ tBuCo\rightleftharpoons tBu^+ + Cl^- \xrightarrow{H_2O} P\]</div>
+<p>And could be epressed with the following reactions.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}A \xrightarrow{k_1} B + X \\ 
+B + X \xrightarrow{k_{-1}} A \\
+B \xrightarrow{k_2} P\end{split}\]</div>
+<p>Note that <span class="math notranslate nohighlight">\(\left[H_2O\right]\)</span> is not in the <span class="math notranslate nohighlight">\(k_2\)</span> rate term because it is the solvent and its concentration does not cahnge.</p>
+<p>Since the chloride leaving group can react with the carbocation to return the system to the starting material, more chloride will reduce the concentration of carbocation. Therefore, adding chloride salt to the solution will slow the appearance of product. We can get the integrated rate equations by adding this term, to the list of rates (the rate if appearance of X, which we will call rx) and then performing the integration as above.</p>
+<p>Change the concentration of X by changing the final value in the integration method call <code class="docutils literal notranslate"><span class="pre">sp.integrate.odeint(rates,</span> <span class="pre">[1,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0.2],</span> <span class="pre">t)</span></code>.  In the code below the last value on the list is the salt concentration, [X].</p>
+<p>The code below will plot the value of the product concentration vs. time in three cases of [X]</p>
+<section id="id2">
+<h3>Observations<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
+<p>The <span class="math notranslate nohighlight">\(k_obs\)</span> for the reaction is smaller as we add more of the salt of the leaving group (chloride ion in this case). If you derive the rate law you will see that…</p>
+<div class="math notranslate nohighlight">
+\[ \frac{-\partial}{\partial t}\left[A\right] = \frac{k_1 \cdot k_2}{k_{-1} \cdot \left[Cl\right] + k_2} \left[A\right]\]</div>
+<p>and therefore…</p>
+<div class="math notranslate nohighlight">
+\[ \frac{-\partial}{\partial t}\left[A\right] = k_{obs} \left[A\right]\]</div>
+<p>where…</p>
+<div class="math notranslate nohighlight">
+\[ k_{obs} = \frac{k_1 \cdot k_2}{k_{-1} \left[Cl\right] + k_2}\]</div>
+<p>The equation for <span class="math notranslate nohighlight">\(k_{obs}\)</span> shows that the value will decrease as the concentration of chloride increases.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#######################</span>
+<span class="c1">### import packages ###</span>
+<span class="c1">#######################</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">odeint</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1">#########################################</span>
+<span class="c1">### Create series of time points      ###</span>
+<span class="c1">#########################################</span>
+
+<span class="n">dt</span> <span class="o">=</span> <span class="mf">0.0001</span>                                <span class="c1"># time step, delta t</span>
+<span class="n">tmax</span> <span class="o">=</span> <span class="mi">25</span>                                  <span class="c1"># max time, s</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">tmax</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">tmax</span><span class="o">/</span><span class="n">dt</span><span class="p">))</span> <span class="c1"># time vector (list of time points)</span>
+<span class="n">nt</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>                                <span class="c1"># total number of time steps</span>
+
+
+<span class="c1">############################################</span>
+<span class="c1">### Create a function that describes the ###</span>
+<span class="c1">### rates of all reactions in the system ###</span>
+<span class="c1">############################################</span>
+
+<span class="k">def</span> <span class="nf">rates</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="n">K1</span> <span class="o">=</span> <span class="mi">2</span>        <span class="c1"># these are the rate constants. Change tham and have fun.</span>
+    <span class="n">K_1</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="n">K2</span> <span class="o">=</span> <span class="mi">20</span>
+    
+    <span class="n">A</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="n">B</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span> <span class="n">C</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span> <span class="n">X</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>  <span class="c1"># assign initial conc. from input list c</span>
+
+    <span class="n">ra</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">K1</span> <span class="o">*</span> <span class="n">A</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">K_1</span> <span class="o">*</span> <span class="n">B</span> <span class="o">*</span> <span class="n">X</span><span class="p">)</span>            <span class="c1"># rates of each reaction step with give concentration in list c</span>
+    <span class="n">rb</span> <span class="o">=</span> <span class="p">(</span><span class="n">K1</span> <span class="o">*</span> <span class="n">A</span><span class="p">)</span><span class="o">-</span><span class="p">(</span><span class="n">K2</span> <span class="o">*</span> <span class="n">B</span><span class="p">)</span><span class="o">-</span><span class="p">(</span><span class="n">K_1</span> <span class="o">*</span> <span class="n">B</span> <span class="o">*</span> <span class="n">X</span><span class="p">)</span>
+    <span class="n">rc</span> <span class="o">=</span> <span class="n">K2</span> <span class="o">*</span> <span class="n">B</span>
+    <span class="n">rx</span> <span class="o">=</span> <span class="p">(</span><span class="n">K1</span> <span class="o">*</span> <span class="n">A</span><span class="p">)</span><span class="o">-</span><span class="p">(</span><span class="n">K_1</span> <span class="o">*</span> <span class="n">B</span> <span class="o">*</span> <span class="n">X</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">ra</span><span class="p">,</span> <span class="n">rb</span><span class="p">,</span> <span class="n">rc</span><span class="p">,</span> <span class="n">rx</span><span class="p">]</span>
+
+
+<span class="c1">####################################################################</span>
+<span class="c1">### The function odeint() from scipy.integrate takes a function, ###</span>
+<span class="c1">### a list of initial conditions, and an array of time points.   ###</span>
+<span class="c1">### It returns a matrix with each column being the result for    ###</span>
+<span class="c1">### each variable at each time point.                            ###</span>
+<span class="c1">####################################################################</span>
+
+<span class="n">cc</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">rates</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span> <span class="n">t</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">cc</span><span class="p">[:,</span><span class="mi">2</span><span class="p">])</span>                    <span class="c1"># Plot only the values for C (column #2 of the array)</span>
+
+<span class="n">cc</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">rates</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">t</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">cc</span><span class="p">[:,</span><span class="mi">2</span><span class="p">])</span>                    <span class="c1"># Plot only the values for C (column #2 of the array)</span>
+
+<span class="n">cc</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">rates</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="n">t</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">cc</span><span class="p">[:,</span><span class="mi">2</span><span class="p">])</span>                    <span class="c1"># Plot only the values for C (column #2 of the array)</span>
+
+
+<span class="c1">#######################################</span>
+<span class="c1">### Output the three combined plots ###</span>
+<span class="c1">#######################################</span>
+
+<span class="c1">#fig.savefig(&quot;plot.pdf&quot;)   # use this to save the figure in PDF format</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>                 <span class="c1"># output the combined four plots</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../../_images/853318dc80b122b8fffa1d62d0d2a9fb100745d1544d8e0128f17d05f468e1d7.png" src="../../_images/853318dc80b122b8fffa1d62d0d2a9fb100745d1544d8e0128f17d05f468e1d7.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="integrated-michaelis-menten">
+<h2>Integrated Michaelis-Menten<a class="headerlink" href="#integrated-michaelis-menten" title="Permalink to this heading">#</a></h2>
+<p>What does the reaction progress of enzyme kinetics look like over a long stretch of time, far past the initial rate from which we have not yet dared stray? The math is similar to the case of the steady-state kinetic scheme above. However, in the MM system, one of the reactants, the enzyme, is present at limiting quanties (<span class="math notranslate nohighlight">\([E]_t \ll [S]_t\)</span>)) and this case gives rise to the famous Michaleis-Menten equation.</p>
+<p>First we state the model scheme for the reaction.</p>
+<div class="math notranslate nohighlight">
+\[ E + S\rightleftharpoons ES \rightarrow P\]</div>
+<p>And could be expressed with the following reactions.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}E + S \xrightarrow{k_1} ES \\ 
+ES \xrightarrow{k_{-1}}  E + S\\
+ES \xrightarrow{k_{cat}} P + E\end{split}\]</div>
+<p>If we ensure that <span class="math notranslate nohighlight">\([E]_t \ll [S]_t\)</span> then we can derive the famous Michaleis-Menten equation.</p>
+<div class="math notranslate nohighlight">
+\[\nu = k_{cat}[E]_t\frac{[S]_t}{K_M+[S]_t}\]</div>
+<p>This equation can be integrated analytically using advanced mathematical methods that you will likely never care to learn. I certainly have no clue how to integrate anything but the simplest equations. So, yes, you will never use calculus again in your life but only because others have done the calculus for you already. Understanding the basics of calculus is important if you are to properly stand on the shoulders of mathematicians.</p>
+<p>We will not use analytical methods but instead use the numerical algorithms encapsulated the Python tools. We turn again to ODEINT.</p>
+<section id="notes">
+<h3>Notes<a class="headerlink" href="#notes" title="Permalink to this heading">#</a></h3>
+<p>As in the cases above we do not</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#######################</span>
+<span class="c1">### import packages ###</span>
+<span class="c1">#######################</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">odeint</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1">#########################################</span>
+<span class="c1">### Create series of time points      ###</span>
+<span class="c1">#########################################</span>
+
+<span class="n">dt</span> <span class="o">=</span> <span class="mf">0.0001</span>                                <span class="c1"># time step, delta t</span>
+<span class="n">tmax</span> <span class="o">=</span> <span class="mi">25</span>                                  <span class="c1"># max time, s</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">tmax</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">tmax</span><span class="o">/</span><span class="n">dt</span><span class="p">))</span> <span class="c1"># time vector (list of time points)</span>
+<span class="n">nt</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>                                <span class="c1"># total number of time steps</span>
+
+
+<span class="c1">############################################</span>
+<span class="c1">### Create a function that describes the ###</span>
+<span class="c1">### rates of all reactions in the system ###</span>
+<span class="c1">############################################</span>
+
+<span class="k">def</span> <span class="nf">rates</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="n">K1</span> <span class="o">=</span> <span class="mi">100</span>        <span class="c1"># these are the rate constants. Change tham and have fun.</span>
+    <span class="n">K_1</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">Kcat</span> <span class="o">=</span> <span class="mi">20</span>
+    
+    <span class="n">S</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="n">E</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span> <span class="n">ES</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span> <span class="n">P</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>  <span class="c1"># assign initial conc. from input list c</span>
+
+    <span class="n">r_s</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">K1</span> <span class="o">*</span> <span class="n">S</span> <span class="o">*</span> <span class="n">E</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">K_1</span> <span class="o">*</span> <span class="n">ES</span><span class="p">)</span>            <span class="c1"># rates of each reaction step with give concentration in list c</span>
+    <span class="n">r_e</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">K1</span> <span class="o">*</span> <span class="n">S</span> <span class="o">*</span> <span class="n">E</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">K_1</span> <span class="o">*</span> <span class="n">ES</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">Kcat</span> <span class="o">*</span> <span class="n">ES</span><span class="p">)</span>
+    <span class="n">r_es</span> <span class="o">=</span> <span class="p">(</span><span class="n">K1</span> <span class="o">*</span> <span class="n">S</span> <span class="o">*</span> <span class="n">E</span><span class="p">)</span><span class="o">-</span><span class="p">(</span><span class="n">Kcat</span> <span class="o">*</span> <span class="n">ES</span><span class="p">)</span><span class="o">-</span><span class="p">(</span><span class="n">K_1</span> <span class="o">*</span> <span class="n">ES</span><span class="p">)</span>
+    <span class="n">r_p</span> <span class="o">=</span> <span class="n">Kcat</span> <span class="o">*</span> <span class="n">ES</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">r_s</span><span class="p">,</span> <span class="n">r_e</span><span class="p">,</span> <span class="n">r_es</span><span class="p">,</span> <span class="n">r_p</span><span class="p">]</span>
+
+
+<span class="c1">####################################################################</span>
+<span class="c1">### The function odeint() from scipy.integrate takes a function, ###</span>
+<span class="c1">### a list of initial conditions, and an array of time points.   ###</span>
+<span class="c1">### It returns a matrix with each column being the result for    ###</span>
+<span class="c1">### each variable at each time point.                            ###</span>
+<span class="c1">####################################################################</span>
+
+<span class="n">cc</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">rates</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span> <span class="n">t</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">cc</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>                    <span class="c1"># Plot only the values for S (column #0 of the array)</span>
+<span class="c1">#plt.plot(t,cc[:,1])                    # Plot only the values for S (column #0 of the array)</span>
+<span class="c1">#plt.plot(t,cc[:,2])                    # Plot only the values for S (column #0 of the array)</span>
+<span class="c1">#plt.plot(t,cc[:,3])                    # Plot only the values for S (column #0 of the array)</span>
+
+
+<span class="c1">#######################################</span>
+<span class="c1">### Output the three combined plots ###</span>
+<span class="c1">#######################################</span>
+
+<span class="c1">#fig.savefig(&quot;plot.pdf&quot;)   # use this to save the figure in PDF format</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>                 <span class="c1"># output the combined four plots</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/6492e1c89edae288ebdc8463086307316d955c2bb287ef8b76894accb3ba9245.png" src="../../_images/6492e1c89edae288ebdc8463086307316d955c2bb287ef8b76894accb3ba9245.png" />
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">curve_fit</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">odeint</span>
+
+<span class="c1"># given data we want to fit</span>
+<span class="n">tspan</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">Ca_data</span> <span class="o">=</span> <span class="p">[</span><span class="mf">2.0081</span><span class="p">,</span>  <span class="mf">1.5512</span><span class="p">,</span>  <span class="mf">1.1903</span><span class="p">,</span>  <span class="mf">0.7160</span><span class="p">,</span>  <span class="mf">0.2562</span><span class="p">,</span>  <span class="mf">0.1495</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">fitfunc</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="s1">&#39;Function that returns Ca computed from an ODE for a k&#39;</span>
+    <span class="k">def</span> <span class="nf">myode</span><span class="p">(</span><span class="n">Ca</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">k</span> <span class="o">*</span> <span class="n">Ca</span>
+
+    <span class="n">Ca0</span> <span class="o">=</span> <span class="n">Ca_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">Casol</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">myode</span><span class="p">,</span> <span class="n">Ca0</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Casol</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">k_fit</span><span class="p">,</span> <span class="n">kcov</span> <span class="o">=</span> <span class="n">curve_fit</span><span class="p">(</span><span class="n">fitfunc</span><span class="p">,</span> <span class="n">tspan</span><span class="p">,</span> <span class="n">Ca_data</span><span class="p">,</span> <span class="n">p0</span><span class="o">=</span><span class="mf">1.3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">kcov</span><span class="p">)</span>
+
+<span class="n">tfit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">fit</span> <span class="o">=</span> <span class="n">fitfunc</span><span class="p">(</span><span class="n">tfit</span><span class="p">,</span> <span class="n">k_fit</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tspan</span><span class="p">,</span> <span class="n">Ca_data</span><span class="p">,</span> <span class="s1">&#39;ro&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;data&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tfit</span><span class="p">,</span> <span class="n">fit</span><span class="p">,</span> <span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;fit&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[5.34900046e-05]]
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x11a576bd0&gt;
+</pre></div>
+</div>
+<img alt="../../_images/4a44937c124306f7c280b578a0476a4aed617057def5ed4d56757b5991a39843.png" src="../../_images/4a44937c124306f7c280b578a0476a4aed617057def5ed4d56757b5991a39843.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./ReactionKinetics/OLD"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-integrated-rate-laws">Simple Integrated Rate Laws</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#first-order">First Order</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#second-order">Second Order</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#second-order-again">Second Order Again</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-is-easy">Simple is Easy</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consecutive-reactions">Consecutive Reactions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#observations">Observations</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#steady-state-system">Steady State System</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Observations</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#salt-inhibition">Salt Inhibition</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Observations</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integrated-michaelis-menten">Integrated Michaelis-Menten</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#notes">Notes</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Barry Linkletter
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

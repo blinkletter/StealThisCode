@@ -180,7 +180,10 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
+
 <li class="toctree-l1"><a class="reference internal" href="ReactionKinetics/K05_NumericIntegration_SystemEq.html">Integrating a System</a></li>
+
+
 
 </ul>
 
@@ -426,6 +429,8 @@ document.write(`
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$1/\nu$&quot;</span><span class="p">)</span>                 <span class="c1">### label y-axis. Here we use the greek letter nu for rate.</span>
 
 <span class="c1">### Output the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>  <span class="c1"># otherwise the right y-label is slightly clipped</span>
+
 <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;plot.pdf&quot;</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>     <span class="c1">### export the plot. The bbox parameter prevents labels from being cut off</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>                                        <span class="c1">### display the plot in this notebook</span>
 </pre></div>
@@ -433,7 +438,7 @@ document.write(`
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/f69568d31857914c4f924b1fff206f480776fb93c81ed086d33b687c870cdbb8.png" src="_images/f69568d31857914c4f924b1fff206f480776fb93c81ed086d33b687c870cdbb8.png" />
+<img alt="_images/a38f52e568c95ea2c4f6702618b84755ac4d86a8227e88deed4245e5dd57b7db.png" src="_images/a38f52e568c95ea2c4f6702618b84755ac4d86a8227e88deed4245e5dd57b7db.png" />
 </div>
 </div>
 </section>
@@ -522,6 +527,8 @@ The y-intercept is 0.013 +/- 0.0007
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$1/\nu$&quot;</span><span class="p">)</span>          <span class="c1">### label y-axis. Here we use the greek letter nu for rate.</span>
 
 <span class="c1">### Output the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>  <span class="c1"># otherwise the right y-label is slightly clipped</span>
+
 <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;plot.pdf&quot;</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span> <span class="c1">### export the plot. The bbox parameter prevents labels from being cut off</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>                                   <span class="c1">### display the plot in this notebook</span>
 
@@ -535,7 +542,7 @@ The y-intercept is 0.013 +/- 0.0007
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/eb58ee3f271bec4df84eb3971f621200a19dee1df19a2c621b1bc601efb4e434.png" src="_images/eb58ee3f271bec4df84eb3971f621200a19dee1df19a2c621b1bc601efb4e434.png" />
+<img alt="_images/7ff2ef358fd5ef693b04cd43d36d86d0b0e8b415a36b100e74dd45e62ec7fdcd.png" src="_images/7ff2ef358fd5ef693b04cd43d36d86d0b0e8b415a36b100e74dd45e62ec7fdcd.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The slope is 0.045 +/- 0.0015
 The y-intercept is 0.013 +/- 0.0007
 The Vmax is 79.150
@@ -593,12 +600,10 @@ The KM is 3.598
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$1/[S]$&quot;</span><span class="p">)</span>          <span class="c1">### label the x-axis. r means &quot;raw&quot; text string. $-signs are commands for the Latex math language </span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$1/\nu$&quot;</span><span class="p">)</span>          <span class="c1">### label y-axis. Here we use the greek letter nu for rate.</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>   <span class="c1">### Make right spine invisible</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>     <span class="c1">### Make top spine invisible</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>    <span class="c1">### Make left spine invisible</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;bottom&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>  <span class="c1">### Make bottom spine invisible</span>
 
 <span class="c1">### Output the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>  <span class="c1"># otherwise the right y-label is slightly clipped</span>
+
 <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;plot.pdf&quot;</span><span class="p">)</span>     <span class="c1">### export the plot as this</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>                  <span class="c1">### display the plot in this notebook</span>
 
@@ -609,7 +614,7 @@ The KM is 3.598
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/601db639b69d9870adff5440b3891966462f1981f589b908c85ccf931d3c93c5.png" src="_images/601db639b69d9870adff5440b3891966462f1981f589b908c85ccf931d3c93c5.png" />
+<img alt="_images/e465184d95295dd3702082e29ccf8b5be8d14039a181a5e420cb98b29303c526.png" src="_images/e465184d95295dd3702082e29ccf8b5be8d14039a181a5e420cb98b29303c526.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The slope is 0.045 +/- 0.0015
 The y-intercept is 0.013 +/- 0.0007
 </pre></div>

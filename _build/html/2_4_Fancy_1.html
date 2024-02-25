@@ -180,7 +180,10 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
+
 <li class="toctree-l1"><a class="reference internal" href="ReactionKinetics/K05_NumericIntegration_SystemEq.html">Integrating a System</a></li>
+
+
 
 </ul>
 
@@ -434,6 +437,8 @@ document.write(`
 <span class="c1">#########################################</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">rcdefaults</span><span class="p">()</span>                    <span class="c1">### resets the plot defaults so we always start in the same place</span>
+<span class="c1">#plt.style.use(&quot;../styles/tufte.mplstyle&quot;)     ### Then add a fancy style sheet   </span>
+
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>           <span class="c1">### sets the size of the plot figure in inches</span>
 
 <span class="c1">#########################################</span>
@@ -468,14 +473,11 @@ document.write(`
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$[S]$&quot;</span><span class="p">)</span>                <span class="c1">### label the x-axis. r means &quot;raw&quot; text string. $-signs are commands for the Latex math language </span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\nu$&quot;</span><span class="p">)</span>                <span class="c1">### label y-axis. Here we use the greek letter nu for rate.</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>   <span class="c1">### Make right spine invisible</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>     <span class="c1">### Make top spine invisible</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>    <span class="c1">### Make left spine invisible</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;bottom&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>  <span class="c1">### Make bottom spine invisible</span>
 
 <span class="c1">#########################################</span>
 <span class="c1">### Output the plot</span>
 <span class="c1">#########################################</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>  <span class="c1"># otherwise the right y-label is slightly clipped</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;plot.pdf&quot;</span><span class="p">)</span>     <span class="c1">### export the plot as this</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>                  <span class="c1">### display the plot in this notebook</span>
@@ -487,7 +489,7 @@ document.write(`
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/4f6b143ea101713189b21019b6a7e1dcb2ce73d4d5b0143f7041b0cf3d62e445.png" src="_images/4f6b143ea101713189b21019b6a7e1dcb2ce73d4d5b0143f7041b0cf3d62e445.png" />
+<img alt="_images/ff6b8ad95488891edd3394257455b80dc4a67a83b22e7e8245c1e606a9ae9680.png" src="_images/ff6b8ad95488891edd3394257455b80dc4a67a83b22e7e8245c1e606a9ae9680.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The Vmax is 81.538 +/- 3.1087
 The KM is 3.809 +/- 0.3326
 </pre></div>
@@ -554,6 +556,8 @@ The KM is 3.809 +/- 0.3326
 <span class="c1">#########################################</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">rcdefaults</span><span class="p">()</span>                    <span class="c1">### resets the plot defaults so we always start in the same place</span>
+<span class="c1">#plt.style.use(&quot;../styles/tufte.mplstyle&quot;)     ### Then add a fancy style sheet   </span>
+
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>  
 
 <span class="c1">#########################################</span>
@@ -591,16 +595,12 @@ The KM is 3.809 +/- 0.3326
         <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">83</span><span class="p">]</span>      
       <span class="p">)</span>
 
-<span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>   <span class="c1">### Make right spine invisible</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>     <span class="c1">### Make top spine invisible</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>    <span class="c1">### Make left spine invisible</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;bottom&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>  <span class="c1">### Make bottom spine invisible</span>
-
 <span class="c1">#########################################</span>
 <span class="c1">### Output the plot</span>
 <span class="c1">#########################################</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>  <span class="c1"># otherwise the right y-label is slightly clipped</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;plot.pdf&quot;</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>     <span class="c1">### export the plot as this</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;plot.pdf&quot;</span><span class="p">)</span>     <span class="c1">### export the plot as this</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>                                       <span class="c1">### display the plot in this notebook</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The Vmax is </span><span class="si">{</span><span class="n">Vmax</span><span class="si">:</span><span class="s2">0.3f</span><span class="si">}</span><span class="s2"> +/- </span><span class="si">{</span><span class="n">Vmax_stdev</span><span class="si">:</span><span class="s2">0.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -610,7 +610,7 @@ The KM is 3.809 +/- 0.3326
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/1c52818b844e9f7bb77d1eb31acdc963f428cf1e6620047877524c4d6e79dc7a.png" src="_images/1c52818b844e9f7bb77d1eb31acdc963f428cf1e6620047877524c4d6e79dc7a.png" />
+<img alt="_images/d64c947fdefb7fc52c6e1efe8549220b2c1910b1bdba307d1a8c1afa38ce0e77.png" src="_images/d64c947fdefb7fc52c6e1efe8549220b2c1910b1bdba307d1a8c1afa38ce0e77.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The Vmax is 81.538 +/- 3.1087
 The KM is 3.809 +/- 0.3326
 </pre></div>
@@ -681,6 +681,7 @@ The KM is 3.809 +/- 0.3326
 <span class="c1">#########################################</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">rcdefaults</span><span class="p">()</span>                    <span class="c1">### resets the plot defaults so we always start in the same place</span>
+<span class="c1">#plt.style.use(&quot;../styles/tufte.mplstyle&quot;)     ### Then add a fancy style sheet   </span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>  <span class="c1">### Two plots in a wider figure</span>
 
@@ -720,10 +721,6 @@ The KM is 3.809 +/- 0.3326
         <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">83</span><span class="p">]</span>      
       <span class="p">)</span>
 
-<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>   <span class="c1">### Make right spine invisible</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>     <span class="c1">### Make top spine invisible</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>    <span class="c1">### Make left spine invisible</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;bottom&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>  <span class="c1">### Make bottom spine invisible</span>
 
 <span class="c1">###########################################################################</span>
 <span class="c1">####################### AND NOW, THE SECOND PLOT ##########################</span>
@@ -794,17 +791,12 @@ The KM is 3.809 +/- 0.3326
         <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.06</span><span class="p">]</span>      
       <span class="p">)</span>
 
-<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>   <span class="c1">### Make right spine invisible</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>     <span class="c1">### Make top spine invisible</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>    <span class="c1">### Make left spine invisible</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;bottom&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>  <span class="c1">### Make bottom spine invisible</span>
-
-
 <span class="c1">#########################################</span>
 <span class="c1">### Output the plot</span>
 <span class="c1">#########################################</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>  <span class="c1"># otherwise the right y-label is slightly clipped</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;plot.pdf&quot;</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>     <span class="c1">### export the plot as this</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;plot.pdf&quot;</span><span class="p">)</span>     <span class="c1">### export the plot as this</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>                                       <span class="c1">### display the plot in this notebook</span>
 </pre></div>
 </div>
@@ -817,7 +809,7 @@ The slope is 0.04545 +/- 0.00151
 The y-intercept is 0.01263 +/- 0.00065
 </pre></div>
 </div>
-<img alt="_images/ebabb2919980c6fc1d6b3b912f279b43ca2b4889b211302d32a0759a0b23b8c6.png" src="_images/ebabb2919980c6fc1d6b3b912f279b43ca2b4889b211302d32a0759a0b23b8c6.png" />
+<img alt="_images/c55724ab14479975eb45dad23cc4acb00ab26efcfa7db4c1dd32c9420b43abed.png" src="_images/c55724ab14479975eb45dad23cc4acb00ab26efcfa7db4c1dd32c9420b43abed.png" />
 </div>
 </div>
 </section>
@@ -883,6 +875,7 @@ The y-intercept is 0.01263 +/- 0.00065
 <span class="c1">#########################################</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">rcdefaults</span><span class="p">()</span>                    <span class="c1">### resets the plot defaults so we always start in the same place</span>
+<span class="c1">#plt.style.use(&quot;./styles/tufte.mplstyle&quot;)     ### Then add a fancy style sheet   </span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">),</span> <span class="n">layout</span> <span class="o">=</span> <span class="s1">&#39;tight&#39;</span><span class="p">)</span>  <span class="c1">### Four plots in a wider and longer figure</span>
 
@@ -922,10 +915,6 @@ The y-intercept is 0.01263 +/- 0.00065
         <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">83</span><span class="p">]</span>      
       <span class="p">)</span>
 
-<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>   <span class="c1">### Make right spine invisible</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>     <span class="c1">### Make top spine invisible</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>    <span class="c1">### Make left spine invisible</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;bottom&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>  <span class="c1">### Make bottom spine invisible</span>
 
 <span class="c1">###########################################################################</span>
 <span class="c1">####################### AND NOW, THE SECOND PLOT ##########################</span>
@@ -995,14 +984,6 @@ The y-intercept is 0.01263 +/- 0.00065
         <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>                  
         <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.06</span><span class="p">]</span>      
       <span class="p">)</span>
-
-<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>   <span class="c1">### Make right spine invisible</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>     <span class="c1">### Make top spine invisible</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>    <span class="c1">### Make left spine invisible</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;bottom&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>  <span class="c1">### Make bottom spine invisible</span>
-
-
-
 
 
 <span class="c1">###########################################################################</span>
@@ -1074,15 +1055,6 @@ The y-intercept is 0.01263 +/- 0.00065
              <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>      
            <span class="p">)</span>
 
-<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>   <span class="c1">### Make right spine invisible</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>     <span class="c1">### Make top spine invisible</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>    <span class="c1">### Make left spine invisible</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;bottom&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>  <span class="c1">### Make bottom spine invisible</span>
-
-
-
-
-
 <span class="c1">###########################################################################</span>
 <span class="c1">####################### AND NOW, THE FOURTH PLOT ##########################</span>
 <span class="c1">###########################################################################</span>
@@ -1152,16 +1124,11 @@ The y-intercept is 0.01263 +/- 0.00065
         <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.20</span><span class="p">]</span>      
       <span class="p">)</span>
 
-<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>   <span class="c1">### Make right spine invisible</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>     <span class="c1">### Make top spine invisible</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>    <span class="c1">### Make left spine invisible</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;bottom&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>  <span class="c1">### Make bottom spine invisible</span>
-
-
 
 <span class="c1">#########################################</span>
 <span class="c1">### Output the plot</span>
 <span class="c1">#########################################</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>  <span class="c1"># otherwise the right y-label is slightly clipped</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;plot.pdf&quot;</span><span class="p">)</span>     <span class="c1">### export the plot as this</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>                                       <span class="c1">### display the plot in this notebook</span>
@@ -1180,7 +1147,7 @@ The HW slope is 0.01228 +/- 0.00041
 The HW y-intercept is 0.04665 +/- 0.00221
 </pre></div>
 </div>
-<img alt="_images/da4c4d5250410011a4dacf55b7d0967fdc941b4ff564be1e570f15e36870bef8.png" src="_images/da4c4d5250410011a4dacf55b7d0967fdc941b4ff564be1e570f15e36870bef8.png" />
+<img alt="_images/ffc02fe22694574efc1ed2389cd8fcc78bdf963f5a596ded7fa46ca42db2db85.png" src="_images/ffc02fe22694574efc1ed2389cd8fcc78bdf963f5a596ded7fa46ca42db2db85.png" />
 </div>
 </div>
 </section>

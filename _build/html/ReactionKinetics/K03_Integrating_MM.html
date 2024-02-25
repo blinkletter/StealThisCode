@@ -180,7 +180,10 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
+
 <li class="toctree-l1"><a class="reference internal" href="K05_NumericIntegration_SystemEq.html">Integrating a System</a></li>
+
+
 
 </ul>
 
@@ -527,13 +530,13 @@ document.write(`
 <section id="plot-with-sympy">
 <h2>Plot with <em>SymPy</em><a class="headerlink" href="#plot-with-sympy" title="Permalink to this heading">#</a></h2>
 <p>We can plot the function, strange Lambert functiona and all, using <code class="docutils literal notranslate"><span class="pre">sympy.plotting.plot()</span></code>. Consider the code below. Try different substrate consentrations and not the shape of the curve. You may have to change the plot limits as you go.</p>
-<div class="cell tag_hide-input tag_hide-output docutils container">
+<div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
 <span class="collapsed">Show code cell source</span>
 <span class="expanded">Hide code cell source</span>
 </summary>
-<div class="cell_input above-output-prompt docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">E_conc</span> <span class="o">=</span> <span class="mf">1e-6</span>
 <span class="n">KM_value</span> <span class="o">=</span> <span class="mf">0.005</span>          <span class="c1">### set KM value</span>
 <span class="n">kcat_value</span> <span class="o">=</span> <span class="mf">1E2</span>     <span class="c1">### set Vmax value</span>
@@ -574,11 +577,6 @@ document.write(`
 </div>
 </div>
 </details>
-<details class="hide below-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell output</span>
-<span class="expanded">Hide code cell output</span>
-</summary>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The integrated rate law for the MM equation
 </pre></div>
@@ -590,21 +588,20 @@ document.write(`
 </div>
 <div class="output text_latex math notranslate nohighlight">
 \[\displaystyle S_{t} = 0.005 W\left(220264.657948067 e^{- 0.02 t}\right)\]</div>
-<img alt="../_images/b5fe3ac337db1d5352e3449c074bb9de969975e0d8cf7a55526c6a529d36de4a.png" src="../_images/b5fe3ac337db1d5352e3449c074bb9de969975e0d8cf7a55526c6a529d36de4a.png" />
+<img alt="../_images/ac83c4851da44d4665d6bb1669a6481c8b504e1ee579fce1cc82e754c18069fb.png" src="../_images/ac83c4851da44d4665d6bb1669a6481c8b504e1ee579fce1cc82e754c18069fb.png" />
 </div>
-</details>
 </div>
 </section>
 <section id="make-it-a-function">
 <h2>Make It a Function<a class="headerlink" href="#make-it-a-function" title="Permalink to this heading">#</a></h2>
 <p>Let us now take this analytical integration of the Michaelis-Menten equation and convert it to a function as we have done previously. Then we can create a set of <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> values and plot the value of the substrate concentration, <span class="math notranslate nohighlight">\([S]\)</span>, over time, <span class="math notranslate nohighlight">\(t\)</span>.</p>
-<div class="cell tag_hide-input tag_hide-output docutils container">
+<div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
 <span class="collapsed">Show code cell source</span>
 <span class="expanded">Hide code cell source</span>
 </summary>
-<div class="cell_input above-output-prompt docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
@@ -649,6 +646,8 @@ document.write(`
 <span class="c1">##########################</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">rcdefaults</span><span class="p">()</span>     <span class="c1">### resets the plot defaults so we always start in the same place</span>
+<span class="c1">#plt.style.use(&quot;../styles/tufte.mplstyle&quot;)     ### Then add a fancy style sheet   </span>
+
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>  
 
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span>
@@ -664,12 +663,11 @@ document.write(`
         <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">ymax</span><span class="p">]</span>      
        <span class="p">)</span>
 
-<span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span><span class="s1">&#39;right&#39;</span><span class="p">,</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span><span class="s1">&#39;left&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>   <span class="c1">### Make all spines invisible</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[[</span><span class="s1">&#39;left&#39;</span><span class="p">,</span><span class="s1">&#39;bottom&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">set_position</span><span class="p">((</span><span class="s1">&#39;axes&#39;</span><span class="p">,</span><span class="o">-</span><span class="mf">0.05</span><span class="p">))</span>   <span class="c1">### space spines a little away from &#39;axes&#39; (plot box)</span>
-
 <span class="c1">#########################################</span>
 <span class="c1">### Output the plot</span>
 <span class="c1">#########################################</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>  <span class="c1"># otherwise the right y-label is slightly clipped</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;plot.pdf&quot;</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>     <span class="c1">### export the plot as this</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span> 
@@ -677,20 +675,14 @@ document.write(`
 </div>
 </div>
 </details>
-<details class="hide below-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell output</span>
-<span class="expanded">Hide code cell output</span>
-</summary>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The integrated rate law for the MM equation
 </pre></div>
 </div>
 <div class="output text_latex math notranslate nohighlight">
 \[\displaystyle S_{t} = K_{M} W\left(\frac{S_{0} e^{\frac{S_{0} - V_{max} t}{K_{M}}}}{K_{M}}\right)\]</div>
-<img alt="../_images/9ca1f89937b97a8e3eed1bdfe0c0519e16e3108cf73c1f618819acdad7edd615.png" src="../_images/9ca1f89937b97a8e3eed1bdfe0c0519e16e3108cf73c1f618819acdad7edd615.png" />
+<img alt="../_images/46b04f2f27e6d6934a4eb091ab996390874e7925eca690156c5094f5dc79ca86.png" src="../_images/46b04f2f27e6d6934a4eb091ab996390874e7925eca690156c5094f5dc79ca86.png" />
 </div>
-</details>
 </div>
 </section>
 <section id="curve-fit-to-the-analytical-function">
@@ -814,13 +806,13 @@ document.write(`
 <section id="plot-the-fit-against-data">
 <h3>Plot the Fit Against Data<a class="headerlink" href="#plot-the-fit-against-data" title="Permalink to this heading">#</a></h3>
 <p>Below we will steal the code for plotting data against a curve fit and change it to use our function and data. Let’s go.</p>
-<div class="cell tag_hide-input tag_hide-output docutils container">
+<div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
 <span class="collapsed">Show code cell source</span>
 <span class="expanded">Hide code cell source</span>
 </summary>
-<div class="cell_input above-output-prompt docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>   <span class="c1">### load in the plotting tools from the MatPlotLib package</span>
 <span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">curve_fit</span>   <span class="c1">### load in the curve_fit function from the SciPy package</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -854,6 +846,8 @@ document.write(`
 <span class="c1">#########################################</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">rcdefaults</span><span class="p">()</span>                    <span class="c1">### resets the plot defaults so we always start in the same place</span>
+<span class="c1">#plt.style.use(&quot;../styles/tufte.mplstyle&quot;)     ### Then add a fancy style sheet   </span>
+
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>  
 
 <span class="c1">#########################################</span>
@@ -892,14 +886,13 @@ document.write(`
         <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>      
       <span class="p">)</span>
 
-<span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span><span class="s1">&#39;right&#39;</span><span class="p">,</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span><span class="s1">&#39;left&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>   <span class="c1">### Make all spines invisible</span>
-<span class="c1">#ax.spines[[&#39;left&#39;,&#39;bottom&#39;]].set_position((&#39;axes&#39;,-0.05))   ### space spines a little away from &#39;axes&#39; (plot box)</span>
 
 <span class="c1">#########################################</span>
 <span class="c1">### Output the plot</span>
 <span class="c1">#########################################</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>  <span class="c1"># otherwise the right y-label is slightly clipped</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;plot.pdf&quot;</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>     <span class="c1">### export the plot as this</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;plot.pdf&quot;</span><span class="p">)</span>     <span class="c1">### export the plot as this</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>                                       <span class="c1">### display the plot in this notebook</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The Vmax is </span><span class="si">{</span><span class="n">Vmax_fit</span><span class="si">:</span><span class="s2">0.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -909,20 +902,14 @@ document.write(`
 </div>
 </div>
 </details>
-<details class="hide below-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell output</span>
-<span class="expanded">Hide code cell output</span>
-</summary>
 <div class="cell_output docutils container">
-<img alt="../_images/8e162217e7e7355d65597e93d12a58fb1c95e1e158b2458db26947b375b45b97.png" src="../_images/8e162217e7e7355d65597e93d12a58fb1c95e1e158b2458db26947b375b45b97.png" />
+<img alt="../_images/3c2a2d2de4b7fdc36dfb3756d926004227015fd4a86583702d94dfad287a5fdd.png" src="../_images/3c2a2d2de4b7fdc36dfb3756d926004227015fd4a86583702d94dfad287a5fdd.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The Vmax is 5.122+/-0.457
 The KM is 1.463+/-0.237
 Initial conc is calculated to be 2.505+/-0.020
 </pre></div>
 </div>
 </div>
-</details>
 </div>
 </section>
 </section>
@@ -930,13 +917,13 @@ Initial conc is calculated to be 2.505+/-0.020
 <h2>Plotting Data with Fixed <span class="math notranslate nohighlight">\([S]_0\)</span><a class="headerlink" href="#plotting-data-with-fixed-s-0" title="Permalink to this heading">#</a></h2>
 <p>We prpobably know the initial concentration of substrate.  In the experiment above it was included in the data set at time zero but was still allowed to be calculated as a parameter in the curve fit. More parameters results in more degrees of freedom and can increase errors in the fitted parameters.</p>
 <p>The code below sets up the function with a set initial value for <span class="math notranslate nohighlight">\([S]_0\)</span> and only fits for the two parameters of <span class="math notranslate nohighlight">\(K_M\)</span> and <span class="math notranslate nohighlight">\(V_{max}\)</span>.</p>
-<div class="cell tag_hide-input tag_hide-output docutils container">
+<div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
 <span class="collapsed">Show code cell source</span>
 <span class="expanded">Hide code cell source</span>
 </summary>
-<div class="cell_input above-output-prompt docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!pip install lmfit  ### uncomment to install if needed</span>
 
 <span class="kn">import</span> <span class="nn">lmfit</span>         <span class="c1">### must be installed with !pip install lmfit</span>
@@ -1019,6 +1006,8 @@ Initial conc is calculated to be 2.505+/-0.020
 <span class="c1">#########################################</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">rcdefaults</span><span class="p">()</span>                    <span class="c1">### resets the plot defaults so we always start in the same place</span>
+<span class="c1">#plt.style.use(&quot;../styles/tufte.mplstyle&quot;)     ### Then add a fancy style sheet   </span>
+
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>  
 
 <span class="c1">#########################################</span>
@@ -1057,14 +1046,14 @@ Initial conc is calculated to be 2.505+/-0.020
         <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>      
       <span class="p">)</span>
 
-<span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span><span class="s1">&#39;right&#39;</span><span class="p">,</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span><span class="s1">&#39;left&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>   <span class="c1">### Make all spines invisible</span>
-<span class="c1">#ax.spines[[&#39;left&#39;,&#39;bottom&#39;]].set_position((&#39;axes&#39;,-0.05))   ### space spines a little away from &#39;axes&#39; (plot box)</span>
 
 <span class="c1">#########################################</span>
 <span class="c1">### Output the plot</span>
 <span class="c1">#########################################</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;plot.pdf&quot;</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>     <span class="c1">### export the plot as this</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>  <span class="c1"># otherwise the right y-label is slightly clipped</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;plot.pdf&quot;</span><span class="p">)</span>     <span class="c1">### export the plot as this</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>                                       <span class="c1">### display the plot in this notebook</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The Vmax is </span><span class="si">{</span><span class="n">Vmax_fit</span><span class="si">:</span><span class="s2">0.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -1073,11 +1062,6 @@ Initial conc is calculated to be 2.505+/-0.020
 </div>
 </div>
 </details>
-<details class="hide below-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell output</span>
-<span class="expanded">Hide code cell output</span>
-</summary>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[Model]]
     Model(_lambdifygenerated)
@@ -1098,13 +1082,12 @@ Initial conc is calculated to be 2.505+/-0.020
     C(K_M, V_max) = +0.9927
 </pre></div>
 </div>
-<img alt="../_images/c9ef60cf4bd788d3cdbfe15e438c77becd60bfefaf1da64a7075e40decbecd20.png" src="../_images/c9ef60cf4bd788d3cdbfe15e438c77becd60bfefaf1da64a7075e40decbecd20.png" />
+<img alt="../_images/282b6e903becb908bb3d921a4df390542065e7274ede3ef2e2b9802245832902.png" src="../_images/282b6e903becb908bb3d921a4df390542065e7274ede3ef2e2b9802245832902.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The Vmax is 5.088+/-0.443
 The KM is 1.450+/-0.237
 </pre></div>
 </div>
 </div>
-</details>
 </div>
 </section>
 <section id="extra">
@@ -1165,10 +1148,10 @@ The KM is 1.450+/-0.237
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.25 0.5  0.75 1.   1.25 1.5  1.75 2.  ] [1.72852951 1.09217686 0.61897403 0.31365042 0.14508538 0.06333811
  0.02682926 0.0112074 ]
-[0.25 0.5  0.75 1.   1.25 1.5  1.75 2.  ] [1.79008622 1.04732806 0.6616236  0.28325197 0.13075197 0.12048696
- 0.04551996 0.08201023]
-[ 0.06155671 -0.0448488   0.04264957 -0.03039846 -0.01433341  0.05714885
-  0.01869069  0.07080282]
+[0.25 0.5  0.75 1.   1.25 1.5  1.75 2.  ] [ 1.75015158  1.09136838  0.60149837  0.23743607  0.1053327   0.05938761
+  0.0280991  -0.03173779]
+[ 0.02162207 -0.00080848 -0.01747566 -0.07621435 -0.03975269 -0.0039505
+  0.00126983 -0.04294519]
 </pre></div>
 </div>
 </div>

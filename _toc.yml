@@ -8,7 +8,7 @@ parts:
       chapters:
         - file: 1_1_Calculator.ipynb
         - file: uncertainties.ipynb
-    - caption: Plots
+    - caption: MatPlotLib
       chapters:
         - file: 2_1_Plotting.ipynb
         - file: 2_2_Curve_Fits.ipynb
@@ -19,5 +19,7 @@ parts:
         - file: ReactionKinetics/K01_solving_with_sympy.ipynb
         - file: ReactionKinetics/K02_Integrating_Rate_Law_1.ipynb
         - file: ReactionKinetics/K03_Integrating_MM.ipynb
+    - caption: SciPy
+      chapters:
         - file: ReactionKinetics/K04_NumericIntegration.ipynb
         - file: ReactionKinetics/K05_NumericIntegration_SystemEq.ipynb

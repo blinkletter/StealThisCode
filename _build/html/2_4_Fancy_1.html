@@ -3,12 +3,11 @@
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Advanced Plotting Example &#8212; Steal this Code</title>
   
   
@@ -45,7 +44,6 @@
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
@@ -70,7 +68,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="next" title="Free Symbolic Math" href="ReactionKinetics/K01_solving_with_sympy.html" />
     <link rel="prev" title="Curve Fits" href="2_3_Curve_Fits.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:language" content="None"/>
   </head>
   
   
@@ -180,14 +178,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">SciPy</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="ReactionKinetics/K04_NumericIntegration.html">Numeric Integration</a></li>
-
-
-
-
 <li class="toctree-l1"><a class="reference internal" href="ReactionKinetics/K05_NumericIntegration_SystemEq.html">Integrating a System</a></li>
-
-
-
 </ul>
 
     </div>
@@ -380,11 +371,11 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="advanced-plotting-example">
-<h1>Advanced Plotting Example<a class="headerlink" href="#advanced-plotting-example" title="Permalink to this heading">#</a></h1>
+  <div class="tex2jax_ignore mathjax_ignore section" id="advanced-plotting-example">
+<h1>Advanced Plotting Example<a class="headerlink" href="#advanced-plotting-example" title="Permalink to this headline">#</a></h1>
 <p>So far we have been calling <em>PyPlot</em> commands to add to and alter a <strong>plot figure</strong>. This figure is, in fact, a <strong>data object</strong> with its own built-in functions that can be accessed directly rather than through <em>PyPlot</em> commands. A <strong>figure</strong> will contains one or more ‘axes’. Each <strong>axis</strong> is a plot and have their own buil-in functions for adding points, lines and text. In this example I will <strong>steal the code</strong> from the previous notebook and <strong>change it</strong> to use figures and axis objects to create the same plot as before. Contrast and compare.</p>
-<section id="the-old-way">
-<h2>The Old Way<a class="headerlink" href="#the-old-way" title="Permalink to this heading">#</a></h2>
+<div class="section" id="the-old-way">
+<h2>The Old Way<a class="headerlink" href="#the-old-way" title="Permalink to this headline">#</a></h2>
 <p>Below is the code stolen from the <strong>previous</strong> notebook. It will take a data set and produce a plot with a curve fit.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
@@ -499,9 +490,9 @@ The KM is 3.809 +/- 0.3326
 </div>
 </div>
 </div>
-</section>
-<section id="the-new-way">
-<h2>The New Way<a class="headerlink" href="#the-new-way" title="Permalink to this heading">#</a></h2>
+</div>
+<div class="section" id="the-new-way">
+<h2>The New Way<a class="headerlink" href="#the-new-way" title="Permalink to this headline">#</a></h2>
 <p>Below is the code above using the <strong>object-oriented</strong> style available in <em>MatPlotLib</em>. Rather than create a plot and send it <em>PyPlot</em> commands to add points and other elements we will create a <strong>figure object</strong> that contains and <strong>axis object</strong>.</p>
 <p><strong>NOTE:</strong> all this code is almost identical to the previous notebook.  <strong>I stole it all</strong>. Compare the linear fit notebook with this one and <strong>observe where I made changes</strong>. The major change is the function being defined for the curve fit. I also changed variable names to better describe what we are doing. That is all.</p>
 <div class="cell tag_hide-input docutils container">
@@ -620,9 +611,9 @@ The KM is 3.809 +/- 0.3326
 </div>
 </div>
 </div>
-</section>
-<section id="multiple-plots">
-<h2>Multiple Plots<a class="headerlink" href="#multiple-plots" title="Permalink to this heading">#</a></h2>
+</div>
+<div class="section" id="multiple-plots">
+<h2>Multiple Plots<a class="headerlink" href="#multiple-plots" title="Permalink to this headline">#</a></h2>
 <p>I will steal the code above and repeat the Michaelis-Menten plot. I will also steal the code for the Lineweaver-Burke linear fit and plot <strong>a second plot</strong> for that in the same figure. We will have <strong>two plots in one figure</strong>.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">plt.subfigures()</span></code> is used again and this time we will set a <span class="math notranslate nohighlight">\(2 \times 1\)</span> grid of axes rather than the single <span class="math notranslate nohighlight">\(1 \times 1\)</span> arrangement used above.</p>
 <p>Examine the code below. Observe how I address each axes object. the <code class="docutils literal notranslate"><span class="pre">plt.subfigures()</span></code> function returned a figure object and a <strong>list of two axes objects</strong>. I will address each axes object by its position in the list. Otherwise I will plot exactly as above and make one plot in one axes object and then another in the other axes object.</p>
@@ -815,9 +806,9 @@ The y-intercept is 0.01263 +/- 0.00065
 <img alt="_images/c55724ab14479975eb45dad23cc4acb00ab26efcfa7db4c1dd32c9420b43abed.png" src="_images/c55724ab14479975eb45dad23cc4acb00ab26efcfa7db4c1dd32c9420b43abed.png" />
 </div>
 </div>
-</section>
-<section id="more-multiple-plots">
-<h2>More Multiple Plots<a class="headerlink" href="#more-multiple-plots" title="Permalink to this heading">#</a></h2>
+</div>
+<div class="section" id="more-multiple-plots">
+<h2>More Multiple Plots<a class="headerlink" href="#more-multiple-plots" title="Permalink to this headline">#</a></h2>
 <p>I will <strong>steal</strong> the code above and <strong>repeat</strong> the two plots. Then I will add two more plots for a total of four. Observe how this is set up in the <code class="docutils literal notranslate"><span class="pre">plt.subplots()</span></code> function at the beginning when we create a <span class="math notranslate nohighlight">\(2 \times 2\)</span> grid of axes.</p>
 <p>After that I just add two <strong>copies</strong> of the code linear plots done different ways and address the new axes accordingly. Examine the code below.</p>
 <div class="cell tag_hide-input docutils container">
@@ -1153,8 +1144,8 @@ The HW y-intercept is 0.04665 +/- 0.00221
 <img alt="_images/ffc02fe22694574efc1ed2389cd8fcc78bdf963f5a596ded7fa46ca42db2db85.png" src="_images/ffc02fe22694574efc1ed2389cd8fcc78bdf963f5a596ded7fa46ca42db2db85.png" />
 </div>
 </div>
-</section>
-</section>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {

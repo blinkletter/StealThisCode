@@ -25,7 +25,7 @@ We will use *Python* only as a **tool**. All code will be written for you in the
 >**Tools**: *Uncertainties*, *NumPy*  <br>
 >**Skills**: Math operations with uncertain values, using the tools of *NumPy* and their versions provided by the *Uncertainties* package.   
 
-### Plotting Data
+### Plotting with MatPlotLib
 
 >**Title**: [Plotting Data](2_1_Plotting.ipynb) <br>
 >**Tools**: *MatPlotLib*, *NumPy*  <br>
@@ -42,6 +42,31 @@ We will use *Python* only as a **tool**. All code will be written for you in the
 >**Title**: [Advanced Plotting Example](2_4_Fancy_1.ipynb) <br>
 >**Tools**: *MatPlotLib*, *NumPy*, *SciPy*  <br>
 >**Skills**: All of the above plus advanced plotting using axes objects. Two plots in one figure.   
+
+### Calculus with SymPy
+
+>**Title**: [Symbolic Math](ReactionKinetics/K01_solving_with_sympy.ipynb) <br>
+>**Tools**: *SymPy*, *NumPy* <br>
+>**Skills**: Symbolic algebra, solving for unknowns automatically.  
+
+>**Title**: [Integrating Rate Laws](ReactionKinetics/K02_Integrating_Rate_Law_1.ipynb) <br>
+>**Tools**: *SymPy*, *NumPy*, *MatPlotLib* <br>
+>**Skills**: Calculus with *SymPy*. Integrating 1<sup>st</sup> and 2<sup>nd</sup> order rate laws. Plotting algebra expressions with *SymPy*. Creating and plotting functions made from *SymPy* expressions.
+
+>**Title**: [Integrating the Michaelis-Menten Rate Law](ReactionKinetics/K03_Integrating_MM.ipynb) <br>
+>**Tools**: *SymPy*, *NumPy*, *SciPy*, *LMFit*, *MatPlotLib* <br>
+>**Skills**: Advanced calculus without having a clue about calculus with *SymPy*. Curve fitting data against functions made from *SymPy* expressions using `sympy.curve_fit` and `lmfit.Model`.  
+
+### Numerical Methods with *SciPy*
+
+>**Title**: [Numeric Integration](ReactionKinetics/K01_solving_with_sympy.ipynb) <br>
+>**Tools**: *SymPy*, *NumPy*, *SciPy*, *MatPlotLib* <br>
+>**Skills**: Integrating a differential equation using numerical methods. Comparing the results to the analytical symbolic integration from the previosu notebook. Curve fitting the data against a function that performs numerical integration.  
+
+>**Title**: [Integrating Systems of Equations](ReactionKinetics/K05_NumericIntegration_SystemEq.ipynb) <br>
+>**Tools**: *SymPy*, *NumPy*, *SciPy*, *MatPlotLib* <br>
+>**Skills**: Going beyond the MM equation and its simplifications and assumptions to integrate the system of rate laws that fully describes the mechanism of Michaelis-Menten model for enzyme catalysis.  Comparing the results to those from integrating the Michaelis-Menten equation.
+
 
 ---
 These is a **Juptyter-book** that was built from a set of **interactive *Python* Jupyter notebooks**. The original notebook for any given chapter can be obtained using the **download link** at the top of the page.

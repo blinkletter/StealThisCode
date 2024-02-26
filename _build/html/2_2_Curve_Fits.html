@@ -3,12 +3,11 @@
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Linear Fits &#8212; Steal this Code</title>
   
   
@@ -45,7 +44,6 @@
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
@@ -70,7 +68,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="next" title="Curve Fits" href="2_3_Curve_Fits.html" />
     <link rel="prev" title="Plotting Data" href="2_1_Plotting.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:language" content="None"/>
   </head>
   
   
@@ -180,14 +178,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">SciPy</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="ReactionKinetics/K04_NumericIntegration.html">Numeric Integration</a></li>
-
-
-
-
 <li class="toctree-l1"><a class="reference internal" href="ReactionKinetics/K05_NumericIntegration_SystemEq.html">Integrating a System</a></li>
-
-
-
 </ul>
 
     </div>
@@ -380,12 +371,12 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="linear-fits">
-<h1>Linear Fits<a class="headerlink" href="#linear-fits" title="Permalink to this heading">#</a></h1>
+  <div class="tex2jax_ignore mathjax_ignore section" id="linear-fits">
+<h1>Linear Fits<a class="headerlink" href="#linear-fits" title="Permalink to this headline">#</a></h1>
 <p>Steal the code below to <strong>fit your data to a curve</strong>. You can fit data to any function – linear, exponential, logarithmic, or arbitrary curves such as the Michaelis-Menten equation.</p>
 <p>First we must create a function that takes an x value and returns a y value. There will be parameters included, e.g. slope and intercept. The <strong>curve fit function</strong> will optimize the parameters to best fit a pair of x and y data sets to your function.</p>
-<section id="linear-curve-fits">
-<h2>Linear Curve Fits<a class="headerlink" href="#linear-curve-fits" title="Permalink to this heading">#</a></h2>
+<div class="section" id="linear-curve-fits">
+<h2>Linear Curve Fits<a class="headerlink" href="#linear-curve-fits" title="Permalink to this headline">#</a></h2>
 <p><strong>Linear regression</strong> is the most common curve fit. We have seen ways to plot enzyme kinetics as a linear plot using the infamous <strong>Lineweaver-Burke</strong> equation.</p>
 <div class="math notranslate nohighlight">
 \[ \frac{1}{\nu} = \frac{K_M}{V_{max}}\frac{1}{[S]}+\frac{1}{V_{max}}\]</div>
@@ -444,9 +435,9 @@ document.write(`
 <img alt="_images/a38f52e568c95ea2c4f6702618b84755ac4d86a8227e88deed4245e5dd57b7db.png" src="_images/a38f52e568c95ea2c4f6702618b84755ac4d86a8227e88deed4245e5dd57b7db.png" />
 </div>
 </div>
-</section>
-<section id="the-line-fit">
-<h2>The Line Fit<a class="headerlink" href="#the-line-fit" title="Permalink to this heading">#</a></h2>
+</div>
+<div class="section" id="the-line-fit">
+<h2>The Line Fit<a class="headerlink" href="#the-line-fit" title="Permalink to this headline">#</a></h2>
 <p>The plot above clearly is a line. What <strong>slope and intercept</strong> would fit this data best? Let us perform a curve fit in the example below. Note the function definition. We must <strong>define a function and then optimize the parameters</strong> to fit the data.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
@@ -479,9 +470,9 @@ The y-intercept is 0.013 +/- 0.0007
 </div>
 </div>
 </div>
-</section>
-<section id="add-the-line">
-<h2>Add the Line<a class="headerlink" href="#add-the-line" title="Permalink to this heading">#</a></h2>
+</div>
+<div class="section" id="add-the-line">
+<h2>Add the Line<a class="headerlink" href="#add-the-line" title="Permalink to this headline">#</a></h2>
 <p>We now have values for slope and intercept. We will <strong>visualize</strong> this proposed line fit with the data. First we make a series of numbers from zero to the end of the x-axis data and then we use the slope and intercept to calculate the y-axis values according to our line fit. Then we steal the code for plotting the points and add an extra command to <strong>plot the line</strong>. Examine the code below.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
@@ -539,7 +530,7 @@ The y-intercept is 0.013 +/- 0.0007
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The y-intercept is </span><span class="si">{</span><span class="n">intercept</span><span class="si">:</span><span class="s2">0.3f</span><span class="si">}</span><span class="s2"> +/- </span><span class="si">{</span><span class="n">int_stdev</span><span class="si">:</span><span class="s2">0.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The Vmax is </span><span class="si">{</span><span class="mi">1</span><span class="o">/</span><span class="n">intercept</span><span class="si">:</span><span class="s2">0.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The KM is </span><span class="si">{</span><span class="mi">1</span><span class="o">/</span><span class="n">intercept</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">slope</span><span class="si">:</span><span class="s2">0.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The KM is </span><span class="si">{</span><span class="mi">1</span><span class="o">/</span><span class="n">intercept</span> <span class="o">*</span> <span class="n">slope</span><span class="si">:</span><span class="s2">0.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -554,9 +545,9 @@ The KM is 3.598
 </div>
 </div>
 </div>
-</section>
-<section id="the-fancy-version">
-<h2>The Fancy Version<a class="headerlink" href="#the-fancy-version" title="Permalink to this heading">#</a></h2>
+</div>
+<div class="section" id="the-fancy-version">
+<h2>The Fancy Version<a class="headerlink" href="#the-fancy-version" title="Permalink to this headline">#</a></h2>
 <p>I will <strong>steal the code</strong> for the more styled plot in the previous notebook and present the plot of data with the line fit again but with <strong>more style</strong>.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
@@ -624,8 +615,8 @@ The y-intercept is 0.013 +/- 0.0007
 </div>
 </div>
 </div>
-</section>
-</section>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {

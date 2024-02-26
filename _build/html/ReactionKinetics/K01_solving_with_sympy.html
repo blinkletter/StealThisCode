@@ -3,12 +3,11 @@
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Free Symbolic Math &#8212; Steal this Code</title>
   
   
@@ -45,7 +44,6 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
@@ -70,7 +68,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="next" title="Integrating Rate Laws" href="K02_Integrating_Rate_Law_1.html" />
     <link rel="prev" title="Advanced Plotting Example" href="../2_4_Fancy_1.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:language" content="None"/>
   </head>
   
   
@@ -180,14 +178,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">SciPy</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="K04_NumericIntegration.html">Numeric Integration</a></li>
-
-
-
-
 <li class="toctree-l1"><a class="reference internal" href="K05_NumericIntegration_SystemEq.html">Integrating a System</a></li>
-
-
-
 </ul>
 
     </div>
@@ -383,15 +374,15 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="free-symbolic-math">
-<h1>Free Symbolic Math<a class="headerlink" href="#free-symbolic-math" title="Permalink to this heading">#</a></h1>
+  <div class="tex2jax_ignore mathjax_ignore section" id="free-symbolic-math">
+<h1>Free Symbolic Math<a class="headerlink" href="#free-symbolic-math" title="Permalink to this headline">#</a></h1>
 <p>In the integration document that I wrote a long time ago I used Maple to perform the integrations of various rate laws. When the going gets tough I turn to expensive software to get me through. Maple is free to students at UPEI but it costs thousands of dollars to rent after you graduate. Fortunately activists from around the world are building free tools that can accomplish much of the functions of symbolic math packages like Maple and Mathematica.</p>
-<section id="sympy">
-<h2><em>SymPy</em><a class="headerlink" href="#sympy" title="Permalink to this heading">#</a></h2>
+<div class="section" id="sympy">
+<h2><em>SymPy</em><a class="headerlink" href="#sympy" title="Permalink to this headline">#</a></h2>
 <p>The <em>Python</em> package <em>SymPy</em> provides tools for performing symbolic math. It can solve for <span class="math notranslate nohighlight">\(x\)</span>. It can integrate and it can derive. It can do much more than that, but I will stick with what we need.</p>
-</section>
-<section id="symbolic-math">
-<h2>Symbolic Math<a class="headerlink" href="#symbolic-math" title="Permalink to this heading">#</a></h2>
+</div>
+<div class="section" id="symbolic-math">
+<h2>Symbolic Math<a class="headerlink" href="#symbolic-math" title="Permalink to this headline">#</a></h2>
 <p><em>SymPy</em> can perform algebraic manipulations of expressions. Consider the code below and steal it if you find it useful.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
@@ -516,9 +507,9 @@ document.write(`
 \[\displaystyle x + 1\]</div>
 </div>
 </div>
-</section>
-<section id="solve-for-x">
-<h2>Solve for <span class="math notranslate nohighlight">\(x\)</span><a class="headerlink" href="#solve-for-x" title="Permalink to this heading">#</a></h2>
+</div>
+<div class="section" id="solve-for-x">
+<h2>Solve for <span class="math notranslate nohighlight">\(x\)</span><a class="headerlink" href="#solve-for-x" title="Permalink to this headline">#</a></h2>
 <p>One simple use of <em>SymPy</em> is to solve for an unknown. Who needs the quadratic equation when you can solve for the roots of a polynomial directly using a symbolic math tool. Consider the classic ICE table problem for the dissociation of a weak acid like acetic acid.</p>
 <div class="math notranslate nohighlight">
 \[ \rm AH \stackrel{K_a}{\rightleftharpoons} A + H \]</div>
@@ -527,12 +518,12 @@ document.write(`
 \[ K_a = \rm \frac{[A][H]}{[AH]} \]</div>
 <p>…and the value of <span class="math notranslate nohighlight">\(K_a\)</span> for acetic acid is known to be <span class="math notranslate nohighlight">\(10^{-4.75}\)</span></p>
 <p>We set up the ICE table as so…</p>
-<table class="table">
+<table class="colwidths-auto table">
 <thead>
-<tr class="row-odd"><th class="head text-left"><p>Time</p></th>
-<th class="head text-center"><p><span class="math notranslate nohighlight">\(\rm [AH]\)</span></p></th>
-<th class="head text-center"><p><span class="math notranslate nohighlight">\(\rm [A]\)</span></p></th>
-<th class="head text-center"><p><span class="math notranslate nohighlight">\(\rm [H]\)</span></p></th>
+<tr class="row-odd"><th class="text-left head"><p>Time</p></th>
+<th class="text-center head"><p><span class="math notranslate nohighlight">\(\rm [AH]\)</span></p></th>
+<th class="text-center head"><p><span class="math notranslate nohighlight">\(\rm [A]\)</span></p></th>
+<th class="text-center head"><p><span class="math notranslate nohighlight">\(\rm [H]\)</span></p></th>
 </tr>
 </thead>
 <tbody>
@@ -629,8 +620,8 @@ The final pH is : -3.90
 </div>
 </div>
 </div>
-<section id="creating-sympy-equations">
-<h3>Creating <em>SymPy</em> Equations<a class="headerlink" href="#creating-sympy-equations" title="Permalink to this heading">#</a></h3>
+<div class="section" id="creating-sympy-equations">
+<h3>Creating <em>SymPy</em> Equations<a class="headerlink" href="#creating-sympy-equations" title="Permalink to this headline">#</a></h3>
 <p>We don’t necessarily need to rearrange the equation to obtain an expression that is zero. We could define an equation within <em>SymPy</em> and then ask it to solve that equation for <span class="math notranslate nohighlight">\(x\)</span>.  Consider the code below.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
@@ -675,13 +666,13 @@ The final pH is : -3.90
 </div>
 </div>
 </div>
-</section>
-</section>
-<section id="summary">
-<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this heading">#</a></h2>
+</div>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">#</a></h2>
 <p>We have used the symbolic tools of <em>SymPy</em> to make and to solve equations. We will never have to use the quadratic equation again. In addition, all our operations and calculations are documented in this notebook so that errors can be found and code can be taken and reused later.</p>
-</section>
-</section>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {

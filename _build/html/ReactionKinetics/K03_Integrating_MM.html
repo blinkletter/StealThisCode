@@ -3,12 +3,11 @@
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Integrating the Michaelis-Menten Rate Law &#8212; Steal this Code</title>
   
   
@@ -45,7 +44,6 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
@@ -70,7 +68,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="next" title="Numeric Integration" href="K04_NumericIntegration.html" />
     <link rel="prev" title="Integrating Rate Laws" href="K02_Integrating_Rate_Law_1.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:language" content="None"/>
   </head>
   
   
@@ -180,14 +178,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">SciPy</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="K04_NumericIntegration.html">Numeric Integration</a></li>
-
-
-
-
 <li class="toctree-l1"><a class="reference internal" href="K05_NumericIntegration_SystemEq.html">Integrating a System</a></li>
-
-
-
 </ul>
 
     </div>
@@ -389,8 +380,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="integrating-the-michaelis-menten-rate-law">
-<h1>Integrating the Michaelis-Menten Rate Law<a class="headerlink" href="#integrating-the-michaelis-menten-rate-law" title="Permalink to this heading">#</a></h1>
+  <div class="tex2jax_ignore mathjax_ignore section" id="integrating-the-michaelis-menten-rate-law">
+<h1>Integrating the Michaelis-Menten Rate Law<a class="headerlink" href="#integrating-the-michaelis-menten-rate-law" title="Permalink to this headline">#</a></h1>
 <p>Some rate laws are not easily integrated without very advanced mathematics. For example, below is the rate law for an enzyme catalyzed reaction (the famous Michaelis-Menten equation) and its analytical intergrated form…</p>
 <div class="math notranslate nohighlight">
 \[-\frac{d[S]}{dt} = V_{max}\frac{[S]}{K_M + [S]} \]</div>
@@ -399,8 +390,8 @@ document.write(`
 <div class="math notranslate nohighlight">
 \[ [S]_t = K_M \cdot {W}(\frac{[S]_0}{K_M} e^{\frac{[S]_0-V_{max}t}{K_M}}) \]</div>
 <p>…where ‘<span class="math notranslate nohighlight">\(W\)</span>’ is the Lambert function. The Lambert function is defined as a function satisfying <span class="math notranslate nohighlight">\(W(z)e^{W(z)} = z\)</span></p>
-<section id="symbolic-integration">
-<h2>Symbolic Integration<a class="headerlink" href="#symbolic-integration" title="Permalink to this heading">#</a></h2>
+<div class="section" id="symbolic-integration">
+<h2>Symbolic Integration<a class="headerlink" href="#symbolic-integration" title="Permalink to this headline">#</a></h2>
 <p>Let us attempt to solve the differential equation for the Michaelis-Menten equation. As before we will define the reaction progress as the amount of substrate consumed, <span class="math notranslate nohighlight">\(x\)</span>. We can then say that…</p>
 <div class="math notranslate nohighlight">
 \[ [S] = [S]_0 - x \]</div>
@@ -470,8 +461,8 @@ document.write(`
 \[\displaystyle x_{t}{\left(t \right)} = - K_{M} W\left(- \frac{e^{\frac{K_{M} \log{\left(- S_{0} \right)} + S_{0} - V_{max} t}{K_{M}}}}{K_{M}}\right) + S_{0}\]</div>
 </div>
 </div>
-<section id="wow">
-<h3>Wow!<a class="headerlink" href="#wow" title="Permalink to this heading">#</a></h3>
+<div class="section" id="wow">
+<h3>Wow!<a class="headerlink" href="#wow" title="Permalink to this headline">#</a></h3>
 <p>Wow! It worked! We now have an equation for the value of <span class="math notranslate nohighlight">\(x\)</span> as a function of <span class="math notranslate nohighlight">\(t\)</span>. As before, we can replace the rhs of the equation with the expression for <span class="math notranslate nohighlight">\(x_t\)</span>. In the code above we had stated that…</p>
 <div class="math notranslate nohighlight">
 \[ [S]_t = [S]_0 - x_t(t) \]</div>
@@ -528,10 +519,10 @@ document.write(`
 \[\displaystyle S_{t} = K_{M} W\left(\frac{S_{0} e^{\frac{S_{0} - V_{max} t}{K_{M}}}}{K_{M}}\right)\]</div>
 </div>
 </div>
-</section>
-</section>
-<section id="plot-with-sympy">
-<h2>Plot with <em>SymPy</em><a class="headerlink" href="#plot-with-sympy" title="Permalink to this heading">#</a></h2>
+</div>
+</div>
+<div class="section" id="plot-with-sympy">
+<h2>Plot with <em>SymPy</em><a class="headerlink" href="#plot-with-sympy" title="Permalink to this headline">#</a></h2>
 <p>We can plot the function, strange Lambert functiona and all, using <code class="docutils literal notranslate"><span class="pre">sympy.plotting.plot()</span></code>. Consider the code below. Try different substrate consentrations and not the shape of the curve. You may have to change the plot limits as you go.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
@@ -594,9 +585,9 @@ document.write(`
 <img alt="../_images/ac83c4851da44d4665d6bb1669a6481c8b504e1ee579fce1cc82e754c18069fb.png" src="../_images/ac83c4851da44d4665d6bb1669a6481c8b504e1ee579fce1cc82e754c18069fb.png" />
 </div>
 </div>
-</section>
-<section id="make-it-a-function">
-<h2>Make It a Function<a class="headerlink" href="#make-it-a-function" title="Permalink to this heading">#</a></h2>
+</div>
+<div class="section" id="make-it-a-function">
+<h2>Make It a Function<a class="headerlink" href="#make-it-a-function" title="Permalink to this headline">#</a></h2>
 <p>Let us now take this analytical integration of the Michaelis-Menten equation and convert it to a function as we have done previously. Then we can create a set of <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> values and plot the value of the substrate concentration, <span class="math notranslate nohighlight">\([S]\)</span>, over time, <span class="math notranslate nohighlight">\(t\)</span>.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
@@ -687,9 +678,9 @@ document.write(`
 <img alt="../_images/46b04f2f27e6d6934a4eb091ab996390874e7925eca690156c5094f5dc79ca86.png" src="../_images/46b04f2f27e6d6934a4eb091ab996390874e7925eca690156c5094f5dc79ca86.png" />
 </div>
 </div>
-</section>
-<section id="curve-fit-to-the-analytical-function">
-<h2>Curve Fit to the Analytical Function<a class="headerlink" href="#curve-fit-to-the-analytical-function" title="Permalink to this heading">#</a></h2>
+</div>
+<div class="section" id="curve-fit-to-the-analytical-function">
+<h2>Curve Fit to the Analytical Function<a class="headerlink" href="#curve-fit-to-the-analytical-function" title="Permalink to this headline">#</a></h2>
 <p>We now have a function that was created from the <em>SymPy</em> analytical integration of our rate law for Michaelis-Menten kinetics. We can curve fit this function against experimental data and get the parameters for <span class="math notranslate nohighlight">\(K_M\)</span> and <span class="math notranslate nohighlight">\(V_{max}\)</span> from a single experiment where we measure the concentration of product over time.</p>
 <p>However the Lambert function that is built in to our integration will return complex numbers (<span class="math notranslate nohighlight">\(n+ij\)</span>) and the <code class="docutils literal notranslate"><span class="pre">scipy.optimize.curve_fit()</span></code> function cannot accept complex numbers. There may be ways around this within <em>SciPy</em> but my hasty web search directed me to a project called <em>LMFit</em> (More information can be <a class="reference external" href="https://lmfit.github.io/lmfit-py/">found here</a>)</p>
 <div class="cell tag_hide-input docutils container">
@@ -707,8 +698,8 @@ document.write(`
 </div>
 </details>
 </div>
-<section id="using-lmfit">
-<h3>Using <em>LMFit</em><a class="headerlink" href="#using-lmfit" title="Permalink to this heading">#</a></h3>
+<div class="section" id="using-lmfit">
+<h3>Using <em>LMFit</em><a class="headerlink" href="#using-lmfit" title="Permalink to this headline">#</a></h3>
 <p>The <em>LMFit</em> library is built on top of <em>SciPy</em>. It has a number of improvements to the methods that <em>SciPy</em> uses to perform least-squares fits to curves. It is not part of the standard library and will have to be installed in Google Colab.</p>
 <p>Examine the code below where we fit the reaction data to the function that represents the integrated equation.</p>
 <div class="cell tag_hide-input docutils container">
@@ -805,9 +796,9 @@ document.write(`
 </div>
 </div>
 </div>
-</section>
-<section id="plot-the-fit-against-data">
-<h3>Plot the Fit Against Data<a class="headerlink" href="#plot-the-fit-against-data" title="Permalink to this heading">#</a></h3>
+</div>
+<div class="section" id="plot-the-fit-against-data">
+<h3>Plot the Fit Against Data<a class="headerlink" href="#plot-the-fit-against-data" title="Permalink to this headline">#</a></h3>
 <p>Below we will steal the code for plotting data against a curve fit and change it to use our function and data. Let’s go.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
@@ -841,14 +832,14 @@ document.write(`
 <span class="n">x_fit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_x</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>  <span class="c1">### Make an array of 100 points between zero and the max x value</span>
 
 <span class="n">y_fit</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x_fit</span><span class="p">,</span> <span class="n">S0_value</span><span class="p">,</span> <span class="n">KM_value</span><span class="p">,</span> <span class="n">Vmax_value</span><span class="p">)</span>     <span class="c1">### calculate the y values using the function that we curve fit</span>
-<span class="n">y_fit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">y_fit</span><span class="p">)</span>                                <span class="c1">### keep only the real numbers</span>
+<span class="n">y_fit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">y_fit</span><span class="p">)</span>                               <span class="c1">### keep only the real numbers</span>
 
 <span class="c1">#########################################</span>
 <span class="c1">### Make a figure onject that contains a single axis object</span>
 <span class="c1">### the pyplot.subplots command will ctraete these two objects</span>
 <span class="c1">#########################################</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">rcdefaults</span><span class="p">()</span>                    <span class="c1">### resets the plot defaults so we always start in the same place</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcdefaults</span><span class="p">()</span>                               <span class="c1">### resets the plot defaults so we always start in the same place</span>
 <span class="c1">#plt.style.use(&quot;../styles/tufte.mplstyle&quot;)     ### Then add a fancy style sheet   </span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>  
@@ -914,11 +905,11 @@ Initial conc is calculated to be 2.505+/-0.020
 </div>
 </div>
 </div>
-</section>
-</section>
-<section id="plotting-data-with-fixed-s-0">
-<h2>Plotting Data with Fixed <span class="math notranslate nohighlight">\([S]_0\)</span><a class="headerlink" href="#plotting-data-with-fixed-s-0" title="Permalink to this heading">#</a></h2>
-<p>We prpobably know the initial concentration of substrate.  In the experiment above it was included in the data set at time zero but was still allowed to be calculated as a parameter in the curve fit. More parameters results in more degrees of freedom and can increase errors in the fitted parameters.</p>
+</div>
+</div>
+<div class="section" id="plotting-data-with-fixed-s-0">
+<h2>Plotting Data with Fixed <span class="math notranslate nohighlight">\([S]_0\)</span><a class="headerlink" href="#plotting-data-with-fixed-s-0" title="Permalink to this headline">#</a></h2>
+<p>We probably know the initial concentration of substrate.  In the experiment above it was included in the data set at time zero but was still allowed to be calculated as a parameter in the curve fit. More parameters results in more degrees of freedom and can increase errors in the fitted parameters.</p>
 <p>The code below sets up the function with a set initial value for <span class="math notranslate nohighlight">\([S]_0\)</span> and only fits for the two parameters of <span class="math notranslate nohighlight">\(K_M\)</span> and <span class="math notranslate nohighlight">\(V_{max}\)</span>.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
@@ -1092,9 +1083,9 @@ The KM is 1.450+/-0.237
 </div>
 </div>
 </div>
-</section>
-<section id="extra">
-<h2>Extra<a class="headerlink" href="#extra" title="Permalink to this heading">#</a></h2>
+</div>
+<div class="section" id="extra">
+<h2>Extra<a class="headerlink" href="#extra" title="Permalink to this headline">#</a></h2>
 <p>The code below was used to generate the data for the curve fit above. It is presented here for archival purposes.</p>
 <div class="cell tag_hide-input tag_hide-output docutils container">
 <details class="hide above-input">
@@ -1160,8 +1151,8 @@ The KM is 1.450+/-0.237
 </div>
 </details>
 </div>
-</section>
-</section>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {

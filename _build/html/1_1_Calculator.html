@@ -3,12 +3,11 @@
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Basic Math with Python &#8212; Steal this Code</title>
   
   
@@ -45,7 +44,6 @@
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
@@ -70,7 +68,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="next" title="Using Uncertainty" href="uncertainties.html" />
     <link rel="prev" title="Steal This Code" href="start.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:language" content="None"/>
   </head>
   
   
@@ -180,14 +178,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">SciPy</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="ReactionKinetics/K04_NumericIntegration.html">Numeric Integration</a></li>
-
-
-
-
 <li class="toctree-l1"><a class="reference internal" href="ReactionKinetics/K05_NumericIntegration_SystemEq.html">Integrating a System</a></li>
-
-
-
 </ul>
 
     </div>
@@ -387,12 +378,12 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="basic-math-with-python">
-<h1>Basic Math with <em>Python</em><a class="headerlink" href="#basic-math-with-python" title="Permalink to this heading">#</a></h1>
+  <div class="tex2jax_ignore mathjax_ignore section" id="basic-math-with-python">
+<h1>Basic Math with <em>Python</em><a class="headerlink" href="#basic-math-with-python" title="Permalink to this headline">#</a></h1>
 <p>We will be using <em><strong>Python</strong></em> in this course. The goal is to learn to use and modify this tool for <strong>interpreting experimental results</strong> and solving all sorts of problems. This is <strong>not programming</strong>. Will will not be writing programs. We will be issuing <strong>commands</strong> to our loyal computer and making it do all the hard work for us.</p>
 <p>All of the chapters in this book are <strong>interactive <em>Python</em> notebooks</strong> that have been <strong>converted</strong> to web pages. Please <strong>download</strong> the original notebooks using the link at the top if this page and follow along.</p>
-<section id="a-calculator">
-<h2>A calculator<a class="headerlink" href="#a-calculator" title="Permalink to this heading">#</a></h2>
+<div class="section" id="a-calculator">
+<h2>A calculator<a class="headerlink" href="#a-calculator" title="Permalink to this headline">#</a></h2>
 <p>We can use this interactive <em>Python</em> notebook as a <strong>calculator</strong>. The output of the last command in any code block, such as the one below, will be displayed. We can display the contects of a variable simply by stating it as the last command. We can also use a <code class="docutils literal notranslate"><span class="pre">print()</span></code> function to output information. <strong>Explore</strong> the three code blocks below.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -478,14 +469,14 @@ Now we fight over the few cents caused by rounding errors
 </div>
 </details>
 </div>
-</section>
-<section id="reduce-reuse-and-recycle">
-<h2>Reduce, Reuse and Recycle<a class="headerlink" href="#reduce-reuse-and-recycle" title="Permalink to this heading">#</a></h2>
+</div>
+<div class="section" id="reduce-reuse-and-recycle">
+<h2>Reduce, Reuse and Recycle<a class="headerlink" href="#reduce-reuse-and-recycle" title="Permalink to this headline">#</a></h2>
 <p>Examine the code blocks above. You could easily <strong>change the values</strong>, the tax rate or the number of people and <strong>repeat</strong> the calculation quickly. Each of these code blocks is a calculator designed for a purpose. Changing an input will change the result.  You don’t need to start from scratch if you want to tip 15% instead of 20%, you just <strong>change</strong> the one value and <strong>execute</strong> the code.</p>
 <p>Try changing some values and seeing what happense. Use <strong>[shift][return]</strong> to execute the code block.</p>
-</section>
-<section id="more-math-with-numpy">
-<h2>More Math with <em>NumPy</em><a class="headerlink" href="#more-math-with-numpy" title="Permalink to this heading">#</a></h2>
+</div>
+<div class="section" id="more-math-with-numpy">
+<h2>More Math with <em>NumPy</em><a class="headerlink" href="#more-math-with-numpy" title="Permalink to this headline">#</a></h2>
 <p><em>Python</em> is a <strong>simple</strong> language. It has built-in functions for the basics, but needs help with functions like sine and <em>e</em><sup>x</sup>. The <em><strong>NumPy</strong></em> library has many mathematical functions. It is a mainstay of scientific computation. First we will <strong>import</strong> the library as shown below. Then we will use some of the available tools to demonstrate <strong>trigonometry</strong> and to calculate <strong>exponential growth</strong> of my investment profolio. Examine the code blocks below and see how we use the tools contained inside the <em>NumPy</em> library.</p>
 <p>Observe that we have named the <em>NumPy</em> library that we imported as <code class="docutils literal notranslate"><span class="pre">np</span></code>. This is for convenience (less typing). <code class="docutils literal notranslate"><span class="pre">np</span></code> is now an <strong>object</strong> that contains all the tools of <em>NumPy</em>. To use a function within the library we call it as an extension to the library object. e.g. <code class="docutils literal notranslate"><span class="pre">np.exp(7)</span></code> is a function from <em>NumPy</em> that will give us the exponent of seven or <em>e</em><sup>7</sup>.</p>
 <div class="cell tag_hide-input tag_hide-output docutils container">
@@ -558,8 +549,8 @@ will result in 16470.09 dollars
 </div>
 </details>
 </div>
-<section id="notes-on-the-math">
-<h3>Notes on the Math<a class="headerlink" href="#notes-on-the-math" title="Permalink to this heading">#</a></h3>
+<div class="section" id="notes-on-the-math">
+<h3>Notes on the Math<a class="headerlink" href="#notes-on-the-math" title="Permalink to this headline">#</a></h3>
 <p>From <strong>trigonometry</strong> we know that, in a right triangle, the ratio of the <strong>opposite</strong> side (height of the tree) to the <strong>adjacent</strong> side (distance from tree) is the tangent of the angle between the adjacent side and the <strong>hyponenuse</strong>. Below is that classic formula from high school trigonometry. If we know any two values, we can calculate the third.</p>
 <div class="math notranslate nohighlight">
 \[\tan(\theta) = \frac{opposite}{adjacent}\]</div>
@@ -571,14 +562,14 @@ will result in 16470.09 dollars
 <span class="math notranslate nohighlight">\(r =\)</span> interest rate per time period <br>
 <span class="math notranslate nohighlight">\(N =\)</span> number or payments per time period <br>
 <span class="math notranslate nohighlight">\(t =\)</span> number of time periods</p>
-</section>
-<section id="have-fun">
-<h3>Have Fun<a class="headerlink" href="#have-fun" title="Permalink to this heading">#</a></h3>
+</div>
+<div class="section" id="have-fun">
+<h3>Have Fun<a class="headerlink" href="#have-fun" title="Permalink to this headline">#</a></h3>
 <p>Change the values in the code block above and <strong>see what happens</strong>. Imagine different angles and distances in your tree measurement. Try comparing compound interest paid monthly with compound interest paid annually over 10 years. How much difference is there? Talk to your banker.</p>
-</section>
-</section>
-<section id="more-numpy-tools">
-<h2>More <em>NumPy</em> Tools<a class="headerlink" href="#more-numpy-tools" title="Permalink to this heading">#</a></h2>
+</div>
+</div>
+<div class="section" id="more-numpy-tools">
+<h2>More <em>NumPy</em> Tools<a class="headerlink" href="#more-numpy-tools" title="Permalink to this headline">#</a></h2>
 <p>There is much more to the NumPy library than we will ever use. Below are just a few examples of <em>NumPy</em> that we will use in this course.</p>
 <div class="cell tag_hide-input tag_hide-output docutils container">
 <details class="hide above-input">
@@ -627,9 +618,9 @@ That would be 45.00865166283799 degrees.
 </div>
 </details>
 </div>
-</section>
-<section id="printing-numbers">
-<h2>Printing Numbers<a class="headerlink" href="#printing-numbers" title="Permalink to this heading">#</a></h2>
+</div>
+<div class="section" id="printing-numbers">
+<h2>Printing Numbers<a class="headerlink" href="#printing-numbers" title="Permalink to this headline">#</a></h2>
 <p>Observe the output above. Do we want all those decimal places. Do we want to use scienific notation? W can do this in output text by using a “formatted string” of “f-string”. Observe the same code again below with the f-string approach applied.</p>
 <div class="cell tag_hide-input tag_hide-output docutils container">
 <details class="hide above-input">
@@ -678,16 +669,16 @@ That would be XXXXXXX45.01XXXXXXXX degrees.
 </div>
 </details>
 </div>
-</section>
-<section id="tale-of-the-tape">
-<h2>Tale of the Tape<a class="headerlink" href="#tale-of-the-tape" title="Permalink to this heading">#</a></h2>
+</div>
+<div class="section" id="tale-of-the-tape">
+<h2>Tale of the Tape<a class="headerlink" href="#tale-of-the-tape" title="Permalink to this headline">#</a></h2>
 <p>One benefit of using an interactive <em>Python</em> notebook is that all your work remains there for you to examine. You will easily be able to <strong>find and correct your error</strong>. Just make the change in the existing code block and execute. Much like the old-fashioned paper tape machines, this calculator keeps a record of your work so you can check later.</p>
-</section>
-<section id="summary">
-<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this heading">#</a></h2>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">#</a></h2>
 <p>We have learned how to perform <strong>math operations</strong> and used a math function from the <em><strong>NumPy</strong></em> library. We will see more examples of <em>NumPy</em> tools as we move forward. Don’t worry, we won’t need very many of them to handle chemistry.</p>
-</section>
-</section>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {

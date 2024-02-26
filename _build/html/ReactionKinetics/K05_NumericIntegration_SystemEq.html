@@ -3,12 +3,11 @@
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Integrating a System &#8212; Steal this Code</title>
   
   
@@ -45,7 +44,6 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
@@ -69,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="search" title="Search" href="../search.html" />
     <link rel="prev" title="Numeric Integration" href="K04_NumericIntegration.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:language" content="None"/>
   </head>
   
   
@@ -179,15 +177,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">SciPy</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="K04_NumericIntegration.html">Numeric Integration</a></li>
-
-
-
-
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Integrating a System</a></li>
-
-
-
-
 </ul>
 
     </div>
@@ -365,16 +355,14 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Integrating a System</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#using-solve-ivp">Using <em>solve_ivp</em></a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-results">Comparing Results</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-first-moments">Comparing First Moments</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#observations">Observations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-solve-ivp">Using <em>solve_ivp</em></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-results">Comparing Results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-first-moments">Comparing First Moments</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#observations">Observations</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -385,8 +373,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="integrating-a-system">
-<h1>Integrating a System<a class="headerlink" href="#integrating-a-system" title="Permalink to this heading">#</a></h1>
+  <div class="tex2jax_ignore mathjax_ignore section" id="integrating-a-system">
+<h1>Integrating a System<a class="headerlink" href="#integrating-a-system" title="Permalink to this headline">#</a></h1>
 <p>The famous Michaleis-Menten equation makes some big assumptions. And it is easy to design an experiment so that the equation works very well. One important idea is that the concentration of enzyme must be small compared to the concentrationn of the substrate. Then the free substrate concentration will be very close to the total substrate concentration at all times.</p>
 <p>But what if we want to model the equation more fully? Let us include the effects of the enzyme on substrate concentration. We will still assume the reaction is ireversible and we state the following model scheme for the reaction.</p>
 <div class="math notranslate nohighlight">
@@ -398,9 +386,8 @@ ES \xrightarrow{k_{-1}}  E + S\\
 ES \xrightarrow{k_{cat}} P + E \end{split}\]</div>
 <p>Now let us integrate all three of these reaction together as a system that describes MM kinetics.</p>
 <p>In this notebook will not use analytical methods but instead use the numerical algorithms encapsulated the Python tools. We will use <code class="docutils literal notranslate"><span class="pre">scipy.integration.solve_ivp()</span></code>.</p>
-</section>
-<section id="using-solve-ivp">
-<h1>Using <em>solve_ivp</em><a class="headerlink" href="#using-solve-ivp" title="Permalink to this heading">#</a></h1>
+<div class="section" id="using-solve-ivp">
+<h2>Using <em>solve_ivp</em><a class="headerlink" href="#using-solve-ivp" title="Permalink to this headline">#</a></h2>
 <p>The code below calculates the instantaneous rate of change for each reactant, intermediate and product in the Michaelis-Menten system and then integrates the whole system using numerical methods. Using the reaction scheme outlined above we can define the following rates at a given moment in time.</p>
 <div class="math notranslate nohighlight">
 \[\frac{d}{dt}[S] = -(k_1 [S][E])+(k_{-1}[ES])\]</div>
@@ -487,6 +474,7 @@ ES \xrightarrow{k_{cat}} P + E \end{split}\]</div>
                 <span class="n">initial</span><span class="p">,</span>              <span class="c1">### initial values</span>
                 <span class="n">method</span> <span class="o">=</span> <span class="s2">&quot;Radau&quot;</span><span class="p">,</span>     <span class="c1">### &#39;RK45&#39;, &#39;RK23&#39;, &#39;LSODA&#39;, &#39;DOP853&#39;, &#39;Radau&#39;, &#39;BDF&#39;</span>
                 <span class="n">t_eval</span> <span class="o">=</span> <span class="n">t_line</span><span class="p">,</span>      <span class="c1">### time points at which to calculate values</span>
+<span class="c1">#                first_step = 1e-5,    ### take a very small first step. the initial rate is much faster than the average slope.</span>
                 <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">k1</span><span class="p">,</span><span class="n">k_1</span><span class="p">,</span><span class="n">kcat</span><span class="p">]</span>  <span class="c1">### values to send to function after t and c</span>
                 <span class="p">)</span>
 
@@ -494,7 +482,7 @@ ES \xrightarrow{k_{cat}} P + E \end{split}\]</div>
 <span class="c1">### Extract the results from the returned data object      </span>
 <span class="c1">#########################################</span>
 
-<span class="n">time</span> <span class="o">=</span> <span class="nb">int</span><span class="o">.</span><span class="n">t</span>        <span class="c1">### solve_inp() returns and array for time indexed as &#39;t&#39;</span>
+<span class="n">time</span> <span class="o">=</span> <span class="nb">int</span><span class="o">.</span><span class="n">t</span>        <span class="c1">### solve_inp() returns an array for time indexed as &#39;t&#39;</span>
 <span class="n">yarray</span> <span class="o">=</span> <span class="nb">int</span><span class="o">.</span><span class="n">y</span>      <span class="c1">### Also retruns and array of calculated y values.</span>
                     <span class="c1">###  if more than one value returned from function we will</span>
                     <span class="c1">###  get a array of arrays for each value</span>
@@ -552,9 +540,9 @@ kcat/Km: 1.98e+04
 <img alt="../_images/6a6fdecbaffb9c9b0a27fd495d3288fafb3743969acff46faec924d84726a9e8.png" src="../_images/6a6fdecbaffb9c9b0a27fd495d3288fafb3743969acff46faec924d84726a9e8.png" />
 </div>
 </div>
-</section>
-<section id="comparing-results">
-<h1>Comparing Results<a class="headerlink" href="#comparing-results" title="Permalink to this heading">#</a></h1>
+</div>
+<div class="section" id="comparing-results">
+<h2>Comparing Results<a class="headerlink" href="#comparing-results" title="Permalink to this headline">#</a></h2>
 <p>In the previous notebook we integtrated the Michaelis-Menten equation both analytically and numerically. Here we are integrating the whole system of differential equations that describes the enzyme kinetics of a Michaelis-Menten enzyme kinetics scheme. There will be differences Here. The enzyme will alter the concentration of free substrate in solution when some of the substrate is sequestered in the ES complex.</p>
 <p>If enzyme concentration is much less that substrate the difference will be small. The code below will plot both the result from the numerically integrated system of differential equations and the result from the analytical integtration of the Michaelis-Menten equation. Both sets of data will be plotted on top of each other with one in red andthen the other in black on top. Do you see any red? The two data sets are accurate within the width of the plot line.</p>
 <p>Then I will plot the % difference between the two data sets and also the absolute difference. We see the sudden drop in the concentration of substrate revealed in the difference plot. Because the concentration of enzyme is so small, the difference is unimportant.</p>
@@ -642,12 +630,15 @@ kcat/Km: 1.98e+04
 <span class="n">c</span> <span class="o">=</span>  <span class="n">yarray</span>                                     <span class="c1">### numerical result from the top code block</span>
 <span class="n">c</span> <span class="o">=</span> <span class="n">c</span> <span class="o">*</span><span class="mi">1000</span>                                     <span class="c1">### convert M to mM</span>
 
+<span class="n">x</span> <span class="o">=</span> <span class="n">time</span><span class="o">/</span><span class="mi">60</span>         <span class="c1">### convert time from seconds to minutes</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">c</span><span class="o">-</span><span class="n">s</span><span class="p">)</span><span class="o">/</span><span class="n">s</span> <span class="o">*</span><span class="mi">100</span>
+
 <span class="c1">######################################################################################</span>
 <span class="c1">### Make a plot of the difference bewteen the two sets of results</span>
 <span class="c1">######################################################################################</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">rcdefaults</span><span class="p">()</span>                    <span class="c1">### resets the plot defaults so we always start in the same place</span>
-<span class="c1">#plt.style.use(&quot;../styles/tufte.mplstyle&quot;)     ### Then add a fancy style sheet   </span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;../styles/tufte.mplstyle&quot;</span><span class="p">)</span>     <span class="c1">### Then add a fancy style sheet   </span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>  
 
@@ -658,132 +649,132 @@ kcat/Km: 1.98e+04
 <span class="c1">### Left plot with %diff vs t (ax0) and s vs t (ax) stacked on top of each other</span>
 <span class="c1">######################################################################################</span>
 
-<span class="c1">##########################</span>
-<span class="c1">### %diff vs t (ax0)</span>
-<span class="c1">##########################</span>
-
-<span class="n">x</span> <span class="o">=</span> <span class="n">time</span> <span class="o">/</span> <span class="mi">60</span>          <span class="c1">###</span>
-<span class="n">y</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="p">(</span><span class="n">c</span><span class="o">-</span><span class="n">s</span><span class="p">)</span><span class="o">/</span><span class="n">c</span>   <span class="c1">### Percent error</span>
-
-<span class="n">ax0</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> 
-        <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span>            <span class="c1">### use a line between points</span>
-        <span class="n">linewidth</span><span class="o">=</span><span class="s1">&#39;0.5&#39;</span><span class="p">,</span>            <span class="c1">### make the line thin</span>
-        <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span>            <span class="c1">### the line is black</span>
-        <span class="n">zorder</span> <span class="o">=</span> <span class="mi">0</span>                  <span class="c1">### everything is in layer 0 (the bottom layer in this case)</span>
-        <span class="p">)</span>
-        
-<span class="n">ax0</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">ylabel</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\% \; \Delta [S]\; $&quot;</span><span class="p">,</span> 
-        <span class="n">xlabel</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$time\; /\; min$&quot;</span><span class="p">,</span>
-        <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;% Difference Plot&quot;</span><span class="p">,</span>
-        <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>      
-        <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">11</span><span class="p">,</span> <span class="mi">11</span><span class="p">])</span>
-
-<span class="n">ax0</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">500</span><span class="o">/</span><span class="mi">60</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="s2">&quot;$\%\, \Delta \,[S]$&quot;</span><span class="p">)</span>   <span class="c1">### label the line in the plot</span>
-
-<span class="c1">##########################</span>
-<span class="c1">### s vs t (ax0)</span>
-<span class="c1">##########################</span>
-
-<span class="n">ax2</span> <span class="o">=</span> <span class="n">ax0</span><span class="o">.</span><span class="n">twinx</span><span class="p">()</span>
-
-<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span>                      <span class="c1">### Plot a thick white line under the data line</span>
-        <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span>            <span class="c1">### use a line between points</span>
-        <span class="n">linewidth</span><span class="o">=</span><span class="s1">&#39;5&#39;</span><span class="p">,</span>              <span class="c1">### make the line thin</span>
-        <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span>            <span class="c1">### the line is black</span>
-        <span class="n">zorder</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">)</span>                <span class="c1">### everything is in layer 0 (the bottom layer in this case)</span>
-
-<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span>                      <span class="c1">### plot a thin black line as the data of the plot</span>
-        <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span>            <span class="c1">### use a line between points</span>
-        <span class="n">linewidth</span><span class="o">=</span><span class="s1">&#39;0.5&#39;</span><span class="p">,</span>            <span class="c1">### make the line thin</span>
-        <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span>              <span class="c1">### the line is black</span>
-        <span class="n">zorder</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">)</span>                <span class="c1">### everything is in layer 0 (the bottom layer in this case)</span>
-
-<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span>                      <span class="c1">### plot a thin black line as the data of the plot</span>
-        <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span>            <span class="c1">### use a line between points</span>
-        <span class="n">linewidth</span><span class="o">=</span><span class="s1">&#39;0.5&#39;</span><span class="p">,</span>            <span class="c1">### make the line thin</span>
-        <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span>            <span class="c1">### the line is black</span>
-        <span class="n">zorder</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">)</span>                <span class="c1">### everything is in layer 0 (the bottom layer in this case)</span>
-
- 
-<span class="n">ax2</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">800</span><span class="o">/</span><span class="mi">60</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="s2">&quot;$[S]$&quot;</span><span class="p">)</span>         <span class="c1">### label the line in the plot</span>
-
-<span class="n">ax2</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">ylabel</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$[S]\; / \;M$&quot;</span><span class="p">,</span> 
-        <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>      
-        <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="kc">None</span><span class="p">])</span>
-
-
-<span class="c1">######################################################################################</span>
-<span class="c1">### Right plot with diff vs t (ax1) and s vs t (ax3) stacked on top of each other</span>
-<span class="c1">######################################################################################</span>
-
-<span class="c1">##########################</span>
-<span class="c1">### %diff vs t (ax1)</span>
-<span class="c1">##########################</span>
-
-<span class="n">x</span> <span class="o">=</span> <span class="n">time</span> <span class="o">/</span> <span class="mi">60</span>
-<span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">c</span><span class="o">-</span><span class="n">s</span><span class="p">)</span>
-
 <span class="c1">#########################################</span>
 <span class="c1">### Plot the line using the x_fit, y_fit points</span>
 <span class="c1">#########################################</span>
 
-<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> 
+<span class="n">ax0</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span>
+        <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span>            <span class="c1">### use a line between points</span>
+        <span class="n">linewidth</span><span class="o">=</span><span class="s1">&#39;0.5&#39;</span><span class="p">,</span>            <span class="c1">### make the line thin</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span>              <span class="c1">### the line is red</span>
+        <span class="n">zorder</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">)</span>                <span class="c1">### everything is in layer 0 (the bottom layer in this case)</span>
+<span class="n">ax0</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span>
         <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span>            <span class="c1">### use a line between points</span>
         <span class="n">linewidth</span><span class="o">=</span><span class="s1">&#39;0.5&#39;</span><span class="p">,</span>            <span class="c1">### make the line thin</span>
         <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span>            <span class="c1">### the line is black</span>
-        <span class="n">zorder</span> <span class="o">=</span> <span class="mi">1</span>                  <span class="c1">### everything is in layer 0 (the bottom layer in this case)</span>
-        <span class="p">)</span>
-
-<span class="n">ax1</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">900</span><span class="o">/</span><span class="mi">60</span><span class="p">,</span><span class="mf">0.005</span><span class="p">,</span><span class="s2">&quot;$\Delta \,[S]$&quot;</span><span class="p">)</span>
+        <span class="n">zorder</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">)</span>                <span class="c1">### everything is in layer 0 (the bottom layer in this case)</span>
 
 <span class="c1">#########################################</span>
 <span class="c1">### Add more style</span>
 <span class="c1">#########################################</span>
         
 
-<span class="n">ax1</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">ylabel</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\Delta \,[S]\; / \; mM$&quot;</span><span class="p">,</span> 
+<span class="n">ax0</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">ylabel</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$[S\,]\; / \;mM$&quot;</span><span class="p">,</span> 
+        <span class="n">xlabel</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$time\; /\; min$&quot;</span><span class="p">,</span>
+        <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;% Difference Plot&quot;</span><span class="p">,</span>
+        <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>      
+        <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="kc">None</span><span class="p">])</span>
+
+
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">ax0</span><span class="o">.</span><span class="n">twinx</span><span class="p">()</span>
+
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> 
+        <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span>            <span class="c1">### use a line between points</span>
+        <span class="n">linewidth</span><span class="o">=</span><span class="s1">&#39;5&#39;</span><span class="p">,</span>            <span class="c1">### make the line thin</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span>            <span class="c1">### the line is black</span>
+        <span class="n">zorder</span> <span class="o">=</span> <span class="mi">0</span>                  <span class="c1">### everything is in layer 0 (the bottom layer in this case)</span>
+        <span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> 
+        <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span>            <span class="c1">### use a line between points</span>
+        <span class="n">linewidth</span><span class="o">=</span><span class="s1">&#39;0.5&#39;</span><span class="p">,</span>            <span class="c1">### make the line thin</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span>            <span class="c1">### the line is black</span>
+        <span class="n">zorder</span> <span class="o">=</span> <span class="mi">0</span>                  <span class="c1">### everything is in layer 0 (the bottom layer in this case)</span>
+        <span class="p">)</span>
+
+ 
+<span class="n">ax0</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">800</span><span class="o">/</span><span class="mi">60</span><span class="p">,</span><span class="mf">0.005</span><span class="o">*</span><span class="mi">1000</span><span class="p">,</span><span class="s2">&quot;$[S\, ]$&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">500</span><span class="o">/</span><span class="mi">60</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="s2">&quot;$\%\, \Delta \,[S\, ]$&quot;</span><span class="p">)</span>
+
+
+<span class="n">ax2</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">ylabel</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\% \; \Delta [S\, ]\; $&quot;</span><span class="p">,</span> 
+        <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>      
+        <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+
+<span class="n">ax0</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">tick_right</span><span class="p">()</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">tick_left</span><span class="p">()</span>
+<span class="n">ax0</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_label_position</span><span class="p">(</span><span class="s2">&quot;right&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_label_position</span><span class="p">(</span><span class="s2">&quot;left&quot;</span><span class="p">)</span>
+
+
+<span class="c1">######################################################################################</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">time</span><span class="o">/</span><span class="mi">60</span>         <span class="c1">### convert time from seconds to minutes</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">c</span><span class="o">-</span><span class="n">s</span><span class="p">)</span> 
+
+<span class="c1">#########################################</span>
+<span class="c1">### Plot the line using the x_fit, y_fit points</span>
+<span class="c1">#########################################</span>
+
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span>
+        <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span>    <span class="c1">### use a line between points</span>
+        <span class="n">linewidth</span><span class="o">=</span><span class="s1">&#39;0.5&#39;</span><span class="p">,</span>    <span class="c1">### make the line thin</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span>      <span class="c1">### the line is black</span>
+        <span class="n">zorder</span> <span class="o">=</span> <span class="mi">3</span> <span class="p">)</span>        <span class="c1">### everything is in layer 0 (the bottom layer in this case)</span>
+
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span>
+        <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span>    <span class="c1">### use a line between points</span>
+        <span class="n">linewidth</span><span class="o">=</span><span class="s1">&#39;0.5&#39;</span><span class="p">,</span>    <span class="c1">### make the line thin</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span>    <span class="c1">### the line is black</span>
+        <span class="n">zorder</span> <span class="o">=</span> <span class="mi">3</span> <span class="p">)</span>        <span class="c1">### everything is in layer 0 (the bottom layer in this case)</span>
+
+<span class="n">ax1</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">900</span><span class="o">/</span><span class="mi">60</span><span class="p">,</span> <span class="mf">0.005</span><span class="o">*</span><span class="mi">1000</span><span class="p">,</span><span class="s2">&quot;$[S\,]$&quot;</span><span class="p">)</span>
+
+<span class="c1">#########################################</span>
+<span class="c1">### Add more style</span>
+<span class="c1">#########################################</span>
+        
+<span class="n">ax1</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">ylabel</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$[S\, ]\; / \;mM$&quot;</span><span class="p">,</span> 
         <span class="n">xlabel</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$time\; /\; min$&quot;</span><span class="p">,</span>
         <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Difference Plot&quot;</span><span class="p">,</span>
         <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>      
-        <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">0.025</span><span class="p">,</span> <span class="mf">0.025</span><span class="p">])</span>
+        <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="kc">None</span><span class="p">])</span>
 
 
 <span class="n">ax3</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">twinx</span><span class="p">()</span>
 
-<span class="n">ax3</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span>
-        <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span>    <span class="c1">### use a line between points</span>
-        <span class="n">linewidth</span><span class="o">=</span><span class="s1">&#39;5&#39;</span><span class="p">,</span>      <span class="c1">### make the line thick</span>
-        <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span>    <span class="c1">### the line is black</span>
-        <span class="n">zorder</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">)</span>        <span class="c1">### everything is in layer 0 (the bottom layer in this case)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> 
+        <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span>            <span class="c1">### use a line between points</span>
+        <span class="n">linewidth</span><span class="o">=</span><span class="s1">&#39;5&#39;</span><span class="p">,</span>              <span class="c1">### make the line thin</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span>            <span class="c1">### the line is black</span>
+        <span class="n">zorder</span> <span class="o">=</span> <span class="mi">1</span>                  <span class="c1">### everything is in layer 0 (the bottom layer in this case)</span>
+        <span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> 
+        <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span>            <span class="c1">### use a line between points</span>
+        <span class="n">linewidth</span><span class="o">=</span><span class="s1">&#39;0.5&#39;</span><span class="p">,</span>            <span class="c1">### make the line thin</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span>            <span class="c1">### the line is black</span>
+        <span class="n">zorder</span> <span class="o">=</span> <span class="mi">1</span>                  <span class="c1">### everything is in layer 0 (the bottom layer in this case)</span>
+        <span class="p">)</span>
 
-<span class="n">ax3</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span>
-        <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span>    <span class="c1">### use a line between points</span>
-        <span class="n">linewidth</span><span class="o">=</span><span class="s1">&#39;0.5&#39;</span><span class="p">,</span>    <span class="c1">### make the line thin</span>
-        <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span>      <span class="c1">### the line is red</span>
-        <span class="n">zorder</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">)</span>        <span class="c1">### everything is in layer 0 (the bottom layer in this case)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">900</span><span class="o">/</span><span class="mi">60</span><span class="p">,</span><span class="mf">0.0045</span><span class="p">,</span><span class="s2">&quot;$\Delta \, [S\, ]$&quot;</span><span class="p">)</span>
 
-<span class="n">ax3</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span>
-        <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span>    <span class="c1">### use a line between points</span>
-        <span class="n">linewidth</span><span class="o">=</span><span class="s1">&#39;0.5&#39;</span><span class="p">,</span>    <span class="c1">### make the line thin</span>
-        <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span>    <span class="c1">### the line is black</span>
-        <span class="n">zorder</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">)</span>        <span class="c1">### everything is in layer 0 (the bottom layer in this case)</span>
-
-<span class="n">ax3</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">900</span><span class="o">/</span><span class="mi">60</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="s2">&quot;$[S]$&quot;</span><span class="p">)</span>
-
-<span class="n">ax3</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">ylabel</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$[S]\; / \;M$&quot;</span><span class="p">,</span> 
+<span class="n">ax3</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">ylabel</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\Delta \, [S\, ]\; /\; mM$&quot;</span><span class="p">,</span> 
         <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>      
-        <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="kc">None</span><span class="p">])</span>
+        <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">.025</span><span class="p">,</span> <span class="mf">.025</span><span class="p">])</span>
 
+<span class="n">ax1</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">tick_right</span><span class="p">()</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">tick_left</span><span class="p">()</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_label_position</span><span class="p">(</span><span class="s2">&quot;right&quot;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_label_position</span><span class="p">(</span><span class="s2">&quot;left&quot;</span><span class="p">)</span>
+<span class="c1">##################################################################################</span>
 
-
-
-<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>  <span class="c1"># otherwise the right y-label is slightly clipped</span>
 <span class="c1">#########################################</span>
 <span class="c1">### Output the plot</span>
 <span class="c1">#########################################</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;plot.pdf&quot;</span><span class="p">)</span>          <span class="c1">### export the plot as this</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>                       <span class="c1">### display the plot in this notebook</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>  <span class="c1">### otherwise the right y-label is slightly clipped</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;plot.pdf&quot;</span><span class="p">)</span>     <span class="c1">### export the plot as this</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>                  <span class="c1">### display the plot in this notebook</span>
 </pre></div>
 </div>
 </div>
@@ -794,16 +785,16 @@ kcat/Km: 1.98e+04
 </div>
 <div class="output text_latex math notranslate nohighlight">
 \[\displaystyle S_{t} = K_{M} W\left(\frac{S_{0} e^{\frac{S_{0} - V_{max} t}{K_{M}}}}{K_{M}}\right)\]</div>
-<img alt="../_images/dfa5990eb3d40cb11d9a75be198b3b763815a3351c5123ec70b3efc4d7548bb8.png" src="../_images/dfa5990eb3d40cb11d9a75be198b3b763815a3351c5123ec70b3efc4d7548bb8.png" />
+<img alt="../_images/de19c746c419f486386fed669e8fe8e80353615ea965a3b179eddad6604ddd35.png" src="../_images/de19c746c419f486386fed669e8fe8e80353615ea965a3b179eddad6604ddd35.png" />
 </div>
 </div>
-</section>
-<section id="comparing-first-moments">
-<h1>Comparing First Moments<a class="headerlink" href="#comparing-first-moments" title="Permalink to this heading">#</a></h1>
+</div>
+<div class="section" id="comparing-first-moments">
+<h2>Comparing First Moments<a class="headerlink" href="#comparing-first-moments" title="Permalink to this headline">#</a></h2>
 <p>The main difference between the Michaelis-Menten equation and the true kinetic behaviour is the initial association of enzyme with substrate. The enzyme will quickly form the ES complex in equilibrium and that will result in a small decrease in subtrate concentration.</p>
 <p>In the previous notebook we paired the analytical and numerical integrations of the MM equation. In that case we were comparing different methods of integbrating the same equation. In this notebook we are comparing two different systems: the simplified MM equation and the system of rate laws from which it was derived.</p>
 <p>In the plots above we plotted the analytically integrated MM equation and the numerically integrated system of differential equations. We can barely see the small difference that including the effect of ES complex formation has on the calculated concentration of substrate near time zeroin the difference plot (look for that tiney sharp drop at the start.)</p>
-<p>In the code below I will plot the very beginning of the reaction for both the numerical solution to the system of differential equations and the exact analytical solution for the Michaelis-Menten equation. The MM equation assumes that the formation of the ES comples will not affect substrate concentration whereas the integration of the rate law system will show that effect. This code is almost a complete duplicate of the code above. I changed time ranges and numbers of points to acheive the high resolution needed to caputer this fast initial change.</p>
+<p>In the code below I will plot the very beginning of the reaction for both the numerical solution to the system of differential equations and the exact analytical solution for the Michaelis-Menten equation. The MM equation assumes that the formation of the ES comples will not affect substrate concentration whereas the integration of the rate law system will show that effect. This code is almost a complete duplicate of the code above. I changed time ranges and numbers of points to acheive the high resolution needed to capture this fast initial change.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -1043,21 +1034,22 @@ The integrated rate law for the MM equation
 </div>
 <div class="output text_latex math notranslate nohighlight">
 \[\displaystyle S_{t} = K_{M} W\left(\frac{S_{0} e^{\frac{S_{0} - V_{max} t}{K_{M}}}}{K_{M}}\right)\]</div>
-<img alt="../_images/e805f8b6ef6fc60b1fcce699cd777dc7f174e09ee14ed81a15547518365dd691.png" src="../_images/e805f8b6ef6fc60b1fcce699cd777dc7f174e09ee14ed81a15547518365dd691.png" />
+<img alt="../_images/79dd727c2edf985576492d5d71906fe2de7adacc57c27801bc55dc7cb5a7afb9.png" src="../_images/79dd727c2edf985576492d5d71906fe2de7adacc57c27801bc55dc7cb5a7afb9.png" />
 </div>
 </div>
-<section id="observations">
-<h2>Observations<a class="headerlink" href="#observations" title="Permalink to this heading">#</a></h2>
+<div class="section" id="observations">
+<h3>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">#</a></h3>
 <p>We see in the plots that the MM equation begins as if the ES complex formation was instantaneous and also has no effect of substrate oncenbtration (recall that we assumed that <span class="math notranslate nohighlight">\([E] \ll [S]\)</span> when we derived it.)</p>
 <p>The numerically integrated system of rate laws does reveal the initial fast association of enzyme and substrate. At high substrate concentrations we will have near saturation of the enzyme and so see an amount of substrate almost equal to enzyme amount absorbed in a raid drop before we reach a steady state (recall that we used the steady-state assumpotion in deriving the MM equation - but we ignored the time needed to reach that steady state.)</p>
 <p>The difference between the two lines is about 1 <span class="math notranslate nohighlight">\(\mu \!M\)</span> (the concentration of the enzyme) out of 50 <span class="math notranslate nohighlight">\(mM\)</span> (the initial substrate conc.) That is an error of <span class="math notranslate nohighlight">\(0.002 \; \%\)</span>.  Typical enzyme concentrations in MM experiments are in the micromolar to nanomolar range. So if our substrate in in the millimolar range we will never be able to detect a difference between the MM equation and the true behaviour of the system.</p>
-</section>
-</section>
-<section id="conclusion">
-<h1>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h1>
+</div>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">#</a></h2>
 <p>The power of numerical integration is demonstrated here. We were able to plot the concentration of substrate vs. time by integrating a system of differential rate equations (rate laws). We had to do no math. We avoided real calculus and the required skill to reach the analytical solution.</p>
 <p>We also showed that the integration of the MM equation itself is completely satisfactory when enzyme concentration is very small.</p>
-</section>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -1117,16 +1109,14 @@ The integrated rate law for the MM equation
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Integrating a System</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#using-solve-ivp">Using <em>solve_ivp</em></a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-results">Comparing Results</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-first-moments">Comparing First Moments</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#observations">Observations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-solve-ivp">Using <em>solve_ivp</em></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-results">Comparing Results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-first-moments">Comparing First Moments</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#observations">Observations</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
 </ul>
-
   </nav></div>
 
 </div></div>

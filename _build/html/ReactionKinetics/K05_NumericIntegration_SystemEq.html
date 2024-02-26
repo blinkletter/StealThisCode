@@ -187,6 +187,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
+
 </ul>
 
     </div>
@@ -367,6 +368,10 @@ document.write(`
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Integrating a System</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#using-solve-ivp">Using <em>solve_ivp</em></a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-results">Comparing Results</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-first-moments">Comparing First Moments</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#observations">Observations</a></li>
+</ul>
+</li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
 </ul>
 
@@ -650,7 +655,7 @@ kcat/Km: 1.98e+04
 <span class="n">ax1</span> <span class="o">=</span> <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
 <span class="c1">######################################################################################</span>
-<span class="c1">### Left plot with %diff vs t (ax0) and s vs t (ax2) stacked on top of each other</span>
+<span class="c1">### Left plot with %diff vs t (ax0) and s vs t (ax) stacked on top of each other</span>
 <span class="c1">######################################################################################</span>
 
 <span class="c1">##########################</span>
@@ -793,6 +798,261 @@ kcat/Km: 1.98e+04
 </div>
 </div>
 </section>
+<section id="comparing-first-moments">
+<h1>Comparing First Moments<a class="headerlink" href="#comparing-first-moments" title="Permalink to this heading">#</a></h1>
+<p>The main difference between the Michaelis-Menten equation and the true kinetic behaviour is the initial association of enzyme with substrate. The enzyme will quickly form the ES complex in equilibrium and that will result in a small decrease in subtrate concentration.</p>
+<p>In the previous notebook we paired the analytical and numerical integrations of the MM equation. In that case we were comparing different methods of integbrating the same equation. In this notebook we are comparing two different systems: the simplified MM equation and the system of rate laws from which it was derived.</p>
+<p>In the plots above we plotted the analytically integrated MM equation and the numerically integrated system of differential equations. We can barely see the small difference that including the effect of ES complex formation has on the calculated concentration of substrate near time zeroin the difference plot (look for that tiney sharp drop at the start.)</p>
+<p>In the code below I will plot the very beginning of the reaction for both the numerical solution to the system of differential equations and the exact analytical solution for the Michaelis-Menten equation. The MM equation assumes that the formation of the ES comples will not affect substrate concentration whereas the integration of the rate law system will show that effect. This code is almost a complete duplicate of the code above. I changed time ranges and numbers of points to acheive the high resolution needed to caputer this fast initial change.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#########################################</span>
+<span class="c1">### Stolen code to created analytically integrated function for S vs, t</span>
+<span class="c1">#########################################</span>
+
+<span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sym</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">solve_ivp</span>
+
+
+
+<span class="c1">############################################</span>
+<span class="c1">### Create a function that describes the </span>
+<span class="c1">### system of differential equations. </span>
+<span class="c1">############################################</span>
+
+<span class="k">def</span> <span class="nf">rates</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">K1</span><span class="p">,</span> <span class="n">K_1</span><span class="p">,</span> <span class="n">Kcat</span><span class="p">):</span>  
+
+    <span class="n">S</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="n">E</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span> <span class="n">ES</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>           <span class="c1">### assign initial conc. from input list c</span>
+
+    <span class="n">ds_dt</span> <span class="o">=</span> <span class="o">-</span><span class="n">K1</span> <span class="o">*</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">K_1</span> <span class="o">*</span> <span class="n">c</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>    <span class="c1">### rates of each reaction step with give concentration in list c</span>
+    <span class="n">de_dt</span> <span class="o">=</span> <span class="o">-</span><span class="n">K1</span> <span class="o">*</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">K_1</span> <span class="o">*</span> <span class="n">c</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">Kcat</span> <span class="o">*</span> <span class="n">c</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">des_dt</span> <span class="o">=</span> <span class="n">K1</span> <span class="o">*</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">K_1</span> <span class="o">*</span> <span class="n">c</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">Kcat</span> <span class="o">*</span> <span class="n">c</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">dp_dt</span> <span class="o">=</span>  <span class="n">Kcat</span> <span class="o">*</span> <span class="n">c</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="n">ds_dt</span><span class="p">,</span> <span class="n">de_dt</span><span class="p">,</span> <span class="n">des_dt</span><span class="p">,</span> <span class="n">dp_dt</span><span class="p">]</span>
+
+
+<span class="c1">############################################</span>
+<span class="c1">### Parameters and experimental conditions</span>
+<span class="c1">############################################</span>
+
+<span class="n">k1</span> <span class="o">=</span> <span class="mf">2E6</span>          <span class="c1">### Values for kinetic parameters</span>
+<span class="n">k_1</span> <span class="o">=</span> <span class="mf">1E4</span>
+<span class="n">kcat</span> <span class="o">=</span> <span class="mf">1E2</span>
+
+<span class="n">E_conc</span> <span class="o">=</span> <span class="mf">1E-6</span>     <span class="c1">### Experimenatal condition</span>
+<span class="n">S_conc</span> <span class="o">=</span> <span class="mf">0.05</span>
+
+<span class="c1">#########################################</span>
+<span class="c1">### HERE! I CHANGED THE TIME RANGE.      </span>
+<span class="c1">#########################################</span>
+
+<span class="n">time_end</span> <span class="o">=</span> <span class="mf">0.02</span>   <span class="c1">### The end time</span>
+<span class="n">n_points</span> <span class="o">=</span> <span class="mi">1000</span>   <span class="c1">### number of points - increase if needed</span>
+
+<span class="c1">#########################################</span>
+<span class="c1">### Create series of time points      </span>
+<span class="c1">#########################################</span>
+
+<span class="n">dt</span> <span class="o">=</span> <span class="n">time_end</span> <span class="o">/</span> <span class="n">n_points</span>           <span class="c1">### time step, delta t</span>
+<span class="n">t_line</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">time_end</span><span class="o">+</span><span class="n">dt</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span> <span class="c1">### time vector (list of time points)</span>
+<span class="n">num</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">t_line</span><span class="p">)</span>
+
+<span class="c1">#########################################</span>
+<span class="c1">### Report the Michaelis-Menten parameters      </span>
+<span class="c1">#########################################</span>
+
+<span class="n">KM_model</span> <span class="o">=</span> <span class="p">(</span><span class="n">k_1</span> <span class="o">+</span> <span class="n">kcat</span><span class="p">)</span><span class="o">/</span><span class="n">k1</span>         <span class="c1">### Calculate Briggs-Haldane Km value</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Km: </span><span class="si">{</span><span class="n">KM_model</span><span class="si">:</span><span class="s2">0.5f</span><span class="si">}</span><span class="s2"> M&quot;</span><span class="p">)</span>    <span class="c1">### Print out calculated MM parameters</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Vmax: </span><span class="si">{</span><span class="n">kcat</span><span class="o">*</span><span class="n">E_conc</span><span class="o">*</span><span class="mf">1E6</span><span class="o">*</span><span class="mi">60</span><span class="si">:</span><span class="s2">0.2f</span><span class="si">}</span><span class="s2"> uM min&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;kcat/Km: </span><span class="si">{</span><span class="n">kcat</span><span class="o">/</span><span class="n">KM_model</span><span class="si">:</span><span class="s2">0.2e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1">#########################################</span>
+<span class="c1">### Integrate the system of differential equations      </span>
+<span class="c1">#########################################</span>
+
+<span class="n">initial</span> <span class="o">=</span> <span class="p">[</span><span class="n">S_conc</span><span class="p">,</span> <span class="n">E_conc</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>      <span class="c1">### Set list of initial values (S, E, ES, P)</span>
+
+<span class="nb">int</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">rates</span><span class="p">,</span>                <span class="c1">### the function being integrated. </span>
+                <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">time_end</span><span class="p">],</span>        <span class="c1">### start and endpoint of integration</span>
+                <span class="n">initial</span><span class="p">,</span>              <span class="c1">### initial values</span>
+                <span class="n">method</span> <span class="o">=</span> <span class="s2">&quot;Radau&quot;</span><span class="p">,</span>     <span class="c1">### &#39;RK45&#39;, &#39;RK23&#39;, &#39;LSODA&#39;, &#39;DOP853&#39;, &#39;Radau&#39;, &#39;BDF&#39;</span>
+                <span class="n">t_eval</span> <span class="o">=</span> <span class="n">t_line</span><span class="p">,</span>      <span class="c1">### time points at which to calculate values</span>
+                <span class="n">first_step</span> <span class="o">=</span> <span class="mf">1e-5</span><span class="p">,</span>    <span class="c1">### take a very small first step. the initial rate is much faster than the average slope.</span>
+                <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">k1</span><span class="p">,</span><span class="n">k_1</span><span class="p">,</span><span class="n">kcat</span><span class="p">]</span>  <span class="c1">### values to send to function after t and c</span>
+                <span class="p">)</span>
+
+<span class="c1">#########################################</span>
+<span class="c1">### Extract the results from the returned data object      </span>
+<span class="c1">#########################################</span>
+
+<span class="n">time</span> <span class="o">=</span> <span class="nb">int</span><span class="o">.</span><span class="n">t</span>        <span class="c1">### solve_inp() returns and array for time indexed as &#39;t&#39;</span>
+<span class="n">yarray</span> <span class="o">=</span> <span class="nb">int</span><span class="o">.</span><span class="n">y</span>      <span class="c1">### Also retruns and array of calculated y values.</span>
+                    <span class="c1">###  if more than one value returned from function we will</span>
+                    <span class="c1">###  get a array of arrays for each value</span>
+<span class="n">yarray</span> <span class="o">=</span> <span class="n">yarray</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1">### The first array in the y-array is for S: substrate</span>
+
+
+<span class="c1">##########################</span>
+<span class="c1">### Set up equation </span>
+<span class="c1">##########################</span>
+
+<span class="n">t</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>           <span class="c1">### create x as a &#39;symbol&#39;, not a variable</span>
+<span class="n">Vmax</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;V_</span><span class="si">{max}</span><span class="s1">&#39;</span><span class="p">)</span>  <span class="c1">### create k as a &#39;symbol&#39;</span>
+<span class="n">St</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;S_t&#39;</span><span class="p">)</span>        <span class="c1">### create At as a &#39;symbol&#39;</span>
+<span class="n">S0</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;S_0&#39;</span><span class="p">)</span>        <span class="c1">### create A0 as a &#39;symbol&#39;</span>
+<span class="n">KM</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;K_M&#39;</span><span class="p">)</span>
+
+<span class="n">xt</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="s1">&#39;x_t&#39;</span><span class="p">)</span>       <span class="c1">### create x as a &#39;function&#39;, not a variable</span>
+
+<span class="n">lhs</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">Derivative</span><span class="p">(</span><span class="o">-</span><span class="n">St</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>   <span class="c1">### Using Derivative function to get differential of A(t) w.r.t. t</span>
+<span class="n">rhs</span> <span class="o">=</span> <span class="n">Vmax</span><span class="o">*</span><span class="p">(</span><span class="n">St</span><span class="o">/</span><span class="p">(</span><span class="n">KM</span><span class="o">+</span><span class="n">St</span><span class="p">))</span>
+
+<span class="n">diffeq</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">)</span>                   <span class="c1">### create a sympy equation</span>
+<span class="n">diffeq</span> <span class="o">=</span> <span class="n">diffeq</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">St</span><span class="p">:</span> <span class="p">(</span><span class="n">S0</span> <span class="o">-</span> <span class="n">xt</span><span class="p">(</span><span class="n">t</span><span class="p">))})</span>    <span class="c1">### Substitute the term with S0-x</span>
+
+<span class="c1">##########################</span>
+<span class="c1">### Solve the differential equation </span>
+<span class="c1">##########################</span>
+
+<span class="n">res</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">dsolve</span><span class="p">(</span><span class="n">diffeq</span><span class="p">,</span> <span class="n">ics</span><span class="o">=</span><span class="p">{</span><span class="n">xt</span><span class="p">(</span><span class="mi">0</span><span class="p">):</span> <span class="mi">0</span><span class="p">})</span>    <span class="c1">### Solve the differential equation. Initial condition is x(t) = 0 when t = 0</span>
+
+<span class="c1">##########################</span>
+<span class="c1">### Clean up algebra </span>
+<span class="c1">##########################</span>
+
+<span class="n">eq</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">xt</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">S0</span><span class="o">-</span><span class="n">St</span><span class="p">)</span>            <span class="c1">### substitute x for So - St</span>
+<span class="n">eq</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">simplify</span><span class="p">(</span><span class="n">eq</span><span class="p">)</span>                  <span class="c1">### Simplify the result</span>
+<span class="n">eq</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">eq</span><span class="o">.</span><span class="n">lhs</span> <span class="o">-</span> <span class="n">S0</span><span class="p">,</span> <span class="n">eq</span><span class="o">.</span><span class="n">rhs</span> <span class="o">-</span> <span class="n">S0</span><span class="p">)</span>  <span class="c1">### Subtract S0 from both sides of the equation</span>
+<span class="n">eq</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="o">-</span><span class="n">eq</span><span class="o">.</span><span class="n">lhs</span><span class="p">,</span> <span class="o">-</span><span class="n">eq</span><span class="o">.</span><span class="n">rhs</span><span class="p">)</span>          <span class="c1">### take the negative of both sides of the equation </span>
+
+<span class="c1">##########################</span>
+<span class="c1">### Display the final form of equation </span>
+<span class="c1">##########################</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The integrated rate law for the MM equation&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">eq</span><span class="p">)</span>                            <span class="c1">### display the equation used to create the S vs. t data              </span>
+
+<span class="c1">##############################################################################</span>
+
+<span class="c1">##########################</span>
+<span class="c1">### create function from equation</span>
+<span class="c1">##########################</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">lambdify</span><span class="p">([</span><span class="n">t</span><span class="p">,</span> <span class="n">S0</span><span class="p">,</span> <span class="n">KM</span><span class="p">,</span> <span class="n">Vmax</span><span class="p">],</span> <span class="n">eq</span><span class="o">.</span><span class="n">rhs</span><span class="p">)</span>   <span class="c1">### create function in terms of t, S0, KM and Vmax</span>
+
+<span class="c1">##########################</span>
+<span class="c1">### Set up parameters</span>
+<span class="c1">##########################</span>
+
+<span class="c1">#E_conc = 1e-6               ### commented out. using E_conc set in the first code block above</span>
+<span class="n">KM_value</span> <span class="o">=</span> <span class="n">KM_model</span>          <span class="c1">### set KM value to KM calculated using parameters in first code block above</span>
+<span class="n">kcat_value</span> <span class="o">=</span> <span class="n">kcat</span>            <span class="c1">### set Vmax value to Vmax calculated using parameters in first code block above</span>
+<span class="n">S0_value</span> <span class="o">=</span> <span class="n">S_conc</span>            <span class="c1">### set initial substrate concentration value to value from first code block</span>
+<span class="n">Vmax_value</span> <span class="o">=</span> <span class="n">E_conc</span> <span class="o">*</span> <span class="n">kcat_value</span>
+
+<span class="c1">##########################</span>
+<span class="c1">### calculate x and y data</span>
+<span class="c1">##########################</span>
+                                                <span class="c1">### time comes from the first code block above</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">S0_value</span><span class="p">,</span> <span class="n">KM_value</span><span class="p">,</span> <span class="n">Vmax_value</span><span class="p">)</span>     <span class="c1">### Calculate substrate conc according to the function</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>                                  <span class="c1">### the Lambert function produces imaginary numbers. Use on the real component</span>
+<span class="n">s</span> <span class="o">=</span> <span class="p">(</span><span class="n">s</span> <span class="o">-</span> <span class="mf">0.05</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1e6</span>                                 <span class="c1">### convert M to mM</span>
+
+<span class="n">c</span> <span class="o">=</span>  <span class="n">yarray</span>                                     <span class="c1">### numerical result from the top code block</span>
+<span class="n">c</span> <span class="o">=</span> <span class="p">(</span><span class="n">c</span>  <span class="o">-</span> <span class="mf">0.05</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1e6</span>                                   <span class="c1">### convert M to mM</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">time</span> <span class="o">*</span> <span class="mf">1e3</span>
+
+<span class="c1">######################################################################################</span>
+<span class="c1">### Make a plot of the difference bewteen the two sets of results</span>
+<span class="c1">######################################################################################</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">rcdefaults</span><span class="p">()</span>                    <span class="c1">### resets the plot defaults so we always start in the same place</span>
+<span class="c1">#plt.style.use(&quot;../styles/tufte.mplstyle&quot;)     ### Then add a fancy style sheet   </span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>  
+
+<span class="c1">##########################</span>
+<span class="c1">### s vs t (ax0)</span>
+<span class="c1">##########################</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span>                      <span class="c1">### Plot a thick white line under the data line</span>
+        <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span>            <span class="c1">### use a line between points</span>
+        <span class="n">linewidth</span><span class="o">=</span><span class="s1">&#39;5&#39;</span><span class="p">,</span>              <span class="c1">### make the line thin</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span>            <span class="c1">### the line is black</span>
+        <span class="n">zorder</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">)</span>                <span class="c1">### everything is in layer 0 (the bottom layer in this case)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span>                      <span class="c1">### plot a thin black line as the data of the plot</span>
+        <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span>            <span class="c1">### use a line between points</span>
+        <span class="n">linewidth</span><span class="o">=</span><span class="s1">&#39;0.5&#39;</span><span class="p">,</span>            <span class="c1">### make the line thin</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span>              <span class="c1">### the line is black</span>
+        <span class="n">zorder</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">)</span>                <span class="c1">### everything is in layer 0 (the bottom layer in this case)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span>                      <span class="c1">### plot a thin black line as the data of the plot</span>
+        <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span>            <span class="c1">### use a line between points</span>
+        <span class="n">linewidth</span><span class="o">=</span><span class="s1">&#39;0.5&#39;</span><span class="p">,</span>            <span class="c1">### make the line thin</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span>            <span class="c1">### the line is black</span>
+        <span class="n">zorder</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">)</span>                <span class="c1">### everything is in layer 0 (the bottom layer in this case)</span>
+
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">ylabel</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\Delta \;[S\,]\; / \;10^{-3}\; mM$&quot;</span><span class="p">,</span> 
+        <span class="n">xlabel</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$time\; /\;10^{-3}\; min$&quot;</span><span class="p">,</span>
+<span class="c1">#        title = &quot;Plot at Time = 0&quot;,</span>
+        <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>      
+        <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">])</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mf">2.3</span><span class="p">,</span><span class="s2">&quot;System of rate laws&quot;</span><span class="p">,</span> 
+         <span class="n">rotation</span> <span class="o">=</span> <span class="o">-</span><span class="mi">27</span><span class="p">,</span>
+         <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span>
+         <span class="n">fontweight</span> <span class="o">=</span> <span class="s1">&#39;light&#39;</span><span class="p">)</span>         <span class="c1">### label the line in the plot</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mf">1.1</span><span class="p">,</span><span class="s2">&quot;MM equation&quot;</span><span class="p">,</span> 
+         <span class="n">rotation</span> <span class="o">=</span> <span class="o">-</span><span class="mi">27</span><span class="p">,</span>
+         <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span>
+         <span class="n">fontweight</span> <span class="o">=</span> <span class="s1">&#39;light&#39;</span><span class="p">)</span>         <span class="c1">### label the line in the plot</span>
+
+
+
+
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>  <span class="c1"># otherwise the right y-label is slightly clipped</span>
+<span class="c1">#########################################</span>
+<span class="c1">### Output the plot</span>
+<span class="c1">#########################################</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;plot.pdf&quot;</span><span class="p">)</span>          <span class="c1">### export the plot as this</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>                       <span class="c1">### display the plot in this notebook</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Km: 0.00505 M
+Vmax: 6000.00 uM min
+kcat/Km: 1.98e+04
+The integrated rate law for the MM equation
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle S_{t} = K_{M} W\left(\frac{S_{0} e^{\frac{S_{0} - V_{max} t}{K_{M}}}}{K_{M}}\right)\]</div>
+<img alt="../_images/e805f8b6ef6fc60b1fcce699cd777dc7f174e09ee14ed81a15547518365dd691.png" src="../_images/e805f8b6ef6fc60b1fcce699cd777dc7f174e09ee14ed81a15547518365dd691.png" />
+</div>
+</div>
+<section id="observations">
+<h2>Observations<a class="headerlink" href="#observations" title="Permalink to this heading">#</a></h2>
+<p>We see in the plots that the MM equation begins as if the ES complex formation was instantaneous and also has no effect of substrate oncenbtration (recall that we assumed that <span class="math notranslate nohighlight">\([E] \ll [S]\)</span> when we derived it.)</p>
+<p>The numerically integrated system of rate laws does reveal the initial fast association of enzyme and substrate. At high substrate concentrations we will have near saturation of the enzyme and so see an amount of substrate almost equal to enzyme amount absorbed in a raid drop before we reach a steady state (recall that we used the steady-state assumpotion in deriving the MM equation - but we ignored the time needed to reach that steady state.)</p>
+<p>The difference between the two lines is about 1 <span class="math notranslate nohighlight">\(\mu \!M\)</span> (the concentration of the enzyme) out of 50 <span class="math notranslate nohighlight">\(mM\)</span> (the initial substrate conc.) That is an error of <span class="math notranslate nohighlight">\(0.002 \; \%\)</span>.  Typical enzyme concentrations in MM experiments are in the micromolar to nanomolar range. So if our substrate in in the millimolar range we will never be able to detect a difference between the MM equation and the true behaviour of the system.</p>
+</section>
+</section>
 <section id="conclusion">
 <h1>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h1>
 <p>The power of numerical integration is demonstrated here. We were able to plot the concentration of substrate vs. time by integrating a system of differential rate equations (rate laws). We had to do no math. We avoided real calculus and the required skill to reach the analytical solution.</p>
@@ -860,6 +1120,10 @@ kcat/Km: 1.98e+04
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Integrating a System</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#using-solve-ivp">Using <em>solve_ivp</em></a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-results">Comparing Results</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-first-moments">Comparing First Moments</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#observations">Observations</a></li>
+</ul>
+</li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
 </ul>
 

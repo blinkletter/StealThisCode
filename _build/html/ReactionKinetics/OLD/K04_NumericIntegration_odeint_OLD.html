@@ -3,12 +3,11 @@
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Numeric Integration &#8212; Steal this Code</title>
   
   
@@ -45,7 +44,6 @@
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
@@ -68,7 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:language" content="None"/>
   </head>
   
   
@@ -178,14 +176,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">SciPy</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../K04_NumericIntegration.html">Numeric Integration</a></li>
-
-
-
-
 <li class="toctree-l1"><a class="reference internal" href="../K05_NumericIntegration_SystemEq.html">Integrating a System</a></li>
-
-
-
 </ul>
 
     </div>
@@ -363,12 +354,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Numeric Integration</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#using-odient">Using <em>odient</em></a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-with-anaytical-integration">Comparing with Anaytical Integration</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-difference">Plot the Difference</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-odient">Using <em>odient</em></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-with-anaytical-integration">Comparing with Anaytical Integration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-difference">Plot the Difference</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -379,16 +368,15 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="numeric-integration">
-<h1>Numeric Integration<a class="headerlink" href="#numeric-integration" title="Permalink to this heading">#</a></h1>
+  <div class="tex2jax_ignore mathjax_ignore section" id="numeric-integration">
+<h1>Numeric Integration<a class="headerlink" href="#numeric-integration" title="Permalink to this headline">#</a></h1>
 <p>What does the reaction progress of enzyme kinetics look like over a long stretch of time, far past the initial rate from which we have not yet dared stray? The math is similar to the case of the steady-state kinetic scheme above. However, in the Michaleis-Menten (MM) system, one of the reactants, the enzyme, is present at limiting quanties (<span class="math notranslate nohighlight">\([E]_t \ll [S]_t\)</span>) and this case gives rise to the famous MM equation.</p>
 <div class="math notranslate nohighlight">
 \[-\frac{d}{dt}[S] = k_{cat}[E]_t\frac{[S]_t}{K_M+[S]_t}\]</div>
 <p>This equation can be integrated analytically using advanced mathematical methods that you will likely never care to learn. I certainly have no clue how to integrate anything but the simplest equations. So, yes, you will never use calculus again in your life but only because others have done the calculus for you already. Understanding the basics of calculus is important if you are to properly stand on the shoulders of mathematicians. The analytical integration was demonstrated in the previous notebook.</p>
 <p>In this notebook will not use analytical methods but instead use the numerical algorithms encapsulated the Python tools. We will use <code class="docutils literal notranslate"><span class="pre">scipy.integration.odeint()</span></code>.</p>
-</section>
-<section id="using-odient">
-<h1>Using <em>odient</em><a class="headerlink" href="#using-odient" title="Permalink to this heading">#</a></h1>
+<div class="section" id="using-odient">
+<h2>Using <em>odient</em><a class="headerlink" href="#using-odient" title="Permalink to this headline">#</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">scipy.integration.odeint()</span></code> function will perform a numeric integration of ordinary differential equations. It is simpler to set up than the analytical integration and, in well behaved cases, is very acurate. Let us perform a numerical integration of the MM system. We can then compare the results with the analytical method.</p>
 <p>If we know the value of [S] at a given moment in time then we can easily calculate the rate of change using the above equation. There is only one place where we know the substrate concentration for sure and that is at time zero. So we start there, calculate the rate of change, calculate the change after an infinitesimal amount of time and then start again with the new concentration and repeat endlessly. Obviously there are mathematical approaches to this and they all use various methods to minimize the error caused when the time step used is anything greater than <span class="math notranslate nohighlight">\(\frac{1}{\infty}\)</span>.</p>
 <p>So we know that the numerical approach should be close to the true answer but can never be exact. The analytical method is exact but, as we saw, is very difficult with some kinds of equations. The code below defines a function for the rate of change in copncentration of substrate according to the MM equation. Then we use <code class="docutils literal notranslate"><span class="pre">scipy.integration.odeint()</span></code> to calculate the concentration of substrate over time using numerical integration methods.</p>
@@ -486,9 +474,9 @@ document.write(`
 <img alt="../../_images/0666fe68e6f271473b2d7e26156da4c50001eef35123cd82deb2803f319384cc.png" src="../../_images/0666fe68e6f271473b2d7e26156da4c50001eef35123cd82deb2803f319384cc.png" />
 </div>
 </div>
-</section>
-<section id="comparing-with-anaytical-integration">
-<h1>Comparing with Anaytical Integration<a class="headerlink" href="#comparing-with-anaytical-integration" title="Permalink to this heading">#</a></h1>
+</div>
+<div class="section" id="comparing-with-anaytical-integration">
+<h2>Comparing with Anaytical Integration<a class="headerlink" href="#comparing-with-anaytical-integration" title="Permalink to this headline">#</a></h2>
 <p>Below I have stolen the code from the previous notebook to calculate a set of x and y values using the analytical integration. When we are done below we will have a set of numerically integrated substrate concentrations with time (<code class="docutils literal notranslate"><span class="pre">cc</span></code> vs <code class="docutils literal notranslate"><span class="pre">t</span></code> from the code block above) and a set of anaytically calculated concentrations (<code class="docutils literal notranslate"><span class="pre">c</span></code> vs <code class="docutils literal notranslate"><span class="pre">t</span></code>) as calculated in the code block below.  The <code class="docutils literal notranslate"><span class="pre">t</span></code> series will be the same in both data sets.</p>
 <p>Then I will plot the difference between the two sets of data. How closely does numerical integration match the truth of analytical integration in this case?</p>
 <div class="cell tag_hide-input docutils container">
@@ -578,9 +566,9 @@ document.write(`
 \[\displaystyle S_{t} = K_{M} W\left(\frac{S_{0} e^{\frac{S_{0} - V_{max} t}{K_{M}}}}{K_{M}}\right)\]</div>
 </div>
 </div>
-</section>
-<section id="plot-the-difference">
-<h1>Plot the Difference<a class="headerlink" href="#plot-the-difference" title="Permalink to this heading">#</a></h1>
+</div>
+<div class="section" id="plot-the-difference">
+<h2>Plot the Difference<a class="headerlink" href="#plot-the-difference" title="Permalink to this headline">#</a></h2>
 <p>Below we will take the <code class="docutils literal notranslate"><span class="pre">cc</span></code> series from the numerical method and the <code class="docutils literal notranslate"><span class="pre">c</span></code> series from the analytical method caluclated at the same time points and plot the difference. As we can see there is no difference. Inspecting the result of the difference calculation reveals a very tiny difference.</p>
 <p>We only see errors of any detectable importance when the value of [S] is near zero. very small errors can be large compared to very small numbers. Even in that region, error was less that 3%.</p>
 <p>The numerical integration produced the same result as the analytical in this case. And the numerical method was far simpler to set up.</p>
@@ -722,7 +710,8 @@ document.write(`
 <img alt="../../_images/06d02cb60380a905239f81ddaa730ca1c501b08411e4e92993e40ace47c38bde.png" src="../../_images/06d02cb60380a905239f81ddaa730ca1c501b08411e4e92993e40ace47c38bde.png" />
 </div>
 </div>
-</section>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -773,12 +762,10 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Numeric Integration</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#using-odient">Using <em>odient</em></a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-with-anaytical-integration">Comparing with Anaytical Integration</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-difference">Plot the Difference</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-odient">Using <em>odient</em></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-with-anaytical-integration">Comparing with Anaytical Integration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-difference">Plot the Difference</a></li>
 </ul>
-
   </nav></div>
 
 </div></div>

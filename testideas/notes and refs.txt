@@ -1,0 +1,27 @@
+pKa of p-nitrophenylacetate is 7.15 at 25 degrees C
+
+Serjeant, E.P., Dempsey B.; Ionisation Constants of Organic Acids in Aqueous Solution. International Union of Pure and Applied Chemistry (IUPAC). IUPAC Chemical Data Series No. 23, 1979. New York, New York: Pergamon Press, Inc.
+Available via interlibrary loan.
+
+Also
+
+Lange's Handbook of Chemistry, 15th edition, McGraw-Hill, New York, 1999, J.A. Dean, ed., ISBN 978-0070163843
+Page 8.62
+https://tech.chemistrydocs.com/Books/General%20Chemistry/LANGE%27S-HANDBOOK-OF-CHEMISTR-by-John-A.-Dean-15th-Edition.pdf
+
+Molar extinction of phenolate ion is 18380+/-90 at 401 nm.
+
+Bowers, G. N., McComb, R. B., Christensen, R. G., & Schaffer, R. (1980). High-purity 4-nitrophenol: purification, characterization, and specifications for use as a spectrophotometric reference material. Clinical Chemistry, 26(6), 724–729. doi:10.1093/clinchem/26.6.724
+bowers1980.pdf
+
+G N Bowers, R B McComb, R G Christensen, R Schaffer, High-purity 4-nitrophenol: purification, characterization, and specifications for use as a spectrophotometric reference material., Clinical Chemistry, Volume 26, Issue 6, 1 May 1980, Pages 724–729, https://doi.org/10.1093/clinchem/26.6.724
+
+4-nitrophenyl beta-D-galactopyranoside
+
+kcat = 5 to 600 s^-1
+KM = 0.04 to 8 mM
+
+4-nitrophenyl beta-D-glucopyranoside
+
+kcat = 10 to 300 s^-1
+KM = 0.49 to 2 mM

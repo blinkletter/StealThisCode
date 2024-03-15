@@ -25,3 +25,11 @@ KM = 0.04 to 8 mM
 
 kcat = 10 to 300 s^-1
 KM = 0.49 to 2 mM
+
+
+First-order rate constant for PNPA hydrolysis in water at pH 7, 25 degrees C
+
+K = 1 x 10^-3 min^-1
+
+Goren, H.J. and Fridkin, M. (1974), The Hydrolysis of p-Nitrophenylacetate in Water. European Journal of Biochemistry, 41: 263-272. https://doi.org/10.1111/j.1432-1033.1974.tb03267.x
+

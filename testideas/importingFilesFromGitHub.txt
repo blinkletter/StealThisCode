@@ -1,0 +1,20 @@
+!wget https://raw.githubusercontent.com/blinkletter/3530Biochem/main/T03/IMPORTCODE.py
+!pip install uncertainties  # to install 'Uncertainties' package in Colab. 
+from IMPORTCODE import MM_Plot
+
+or...
+
+!git clone https://github.com/blinkletter/3530Biochem.git
+$run content/3530Biochem/T03/IMPORTCODE.py
+
+or
+
+!git clone https://github.com/blinkletter/3530Biochem.git
+import sys
+sys.path.append('/3530Biochem/T03')
+from IMPORTCODE import MM_Plot
+
+BASH KERNAL
+
+!pip install bash_kernel
+!python -m bash_kernel.install

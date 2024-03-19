@@ -1,0 +1,48 @@
+PlateTools - Tools for reading, manipulating, and analyzing microplate data
+https://github.com/briandconnelly/PlateTools
+
+wellcompare 2.3.4
+A package for doing a well to well analysis of 96 well plates run in an Epoch2 microplate reader
+https://pypi.org/project/wellcompare/
+https://github.com/jacob-evarts/well_compare_96
+
+"Wellmap: a file format for microplate layouts.", Kale Kundert, BMC Res Notes, 2021, 14, 164. https://doi.org/10.1186/s13104-021-05573-0
+s13104-021-05573-0.pdf
+
+microanalyst
+A set of Python scripts for the analysis and visualization of data acquired with Tecan® i-control™ microplate reader.
+https://readthedocs.org/projects/microanalyst/
+https://github.com/bzaczynski/microanalyst
+
+"An Open-Source Plate Reader." Karol Szymula, Michael S. Magaraci, Michael Patterson, Andrew Clark, Sevile G. Mannickarottu, Brian Y. Chow, Biochemistry, 2019, 58, 468–473. https://doi.org/10.1021/acs.biochem.8b00952
+nihms-1580607.pdf
+szymula-et-al-2018-an-open-source-plate-reader.pdf
+Plus supplementary material - plans and CAD files
+
+"Building a DIY plate reader﻿ - Undergraduates design a low-cost instrument for taking spectrophotometric measurements."  Alla Katsnelson, Jan. 11, 2019, C&E News, https://cen.acs.org/analytical-chemistry/diagnostics/Building-DIY-plate-reader/97/web/2019/01
+
+plateo 0.2.7
+Plateo (pronounced Plato, like the planet) is a Python library to assist in the planning, running and checking of laboratory experiments involving microplates.
+https://pypi.org/project/plateo/
+https://github.com/Edinburgh-Genome-Foundry/Plateo
+
+AssayTools
+AssayTools is a python library that allows users to model automated assays and analyze assay data using powerful Bayesian techniques that allow complete characterization of the uncertainty in fit models. 
+https://assaytools.readthedocs.io/en/latest/index.html
+https://github.com/choderalab/assaytools
+
+Blog post on using python with plate reader data
+https://xpsportsanalysis.wordpress.com/2017/07/15/reading-and-reshape-xlsx-file-into-a-data-frame-using-pandas-and-numpy/
+
+"Precise and versatile microplate reader-based analyses of biosensor signals from arrayed microbial colonies." Fabian S. F. Hartmann, Tamara Wei, Louise L. B. Kastberg, Christopher T. Workman, Gerd M. Seibold, Front. Microbiol., 2023, 14, https://doi.org/10.3389/fmicb.2023.1187228
+fmicb_14_1187228.pdf
+fmicb-14-1187228.pdf
+
+Blog post on data structures for microplanes
+https://stackoverflow.com/questions/23712009/dealing-with-data-labels-in-96-well-plate-with-python
+
+
+
+
+
+

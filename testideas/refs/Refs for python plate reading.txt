@@ -42,6 +42,12 @@ Blog post on data structures for microplanes
 https://stackoverflow.com/questions/23712009/dealing-with-data-labels-in-96-well-plate-with-python
 
 
+plateplot
+https://github.com/FrancisCrickInstitute/plateplot?tab=readme-ov-file
+
+platemap
+https://github.com/LondonBiofoundry/platemap
+
 
 
 

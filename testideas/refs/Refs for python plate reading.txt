@@ -49,6 +49,45 @@ platemap
 https://github.com/LondonBiofoundry/platemap
 
 
+GALACTOSIDASE
 
+
+Piesecki, S., Teng, W.-Y., & Hochuli, E. (1993). Immobilization of ?-galactosidase for application in organic chemistry using a chelating peptide. Biotechnology and Bioengineering, 42(2), 178–184. doi:10.1002/bit.260420205 
+piesecki1993.pdf
+
+Vera C, Guerrero C, Aburto C, Cordova A, Illanes A. Conventional and non-conventional applications of β-galactosidases. Biochim Biophys Acta Proteins Proteom. 2020 Jan;1868(1):140271. doi: 10.1016/j.bbapap.2019.140271. Epub 2019 Sep 5. PMID: 31494342.
+1-s2.0-S1570963919301578-main.pdf
+
+ Lu L, Xu L, Guo Y, Zhang D, Qi T, Jin L, et al. (2015) Glycosylation of Phenolic Compounds by the Site-Mutated β-Galactosidase from Lactobacillus bulgaricus L3. PLoS ONE 10(3): e0121445. https://doi.org/10.1371/journal.pone.0121445
+PLOS1A.pdf
+
+
+3295.pdf
+TY  - JOUR
+T1  - Novel β-galactosidase nanobiocatalyst systems for application in the synthesis of bioactive galactosides
+A1  - Banjanac, Katarina
+A1  - Carević, Milica
+A1  - Ćorović, Marija
+A1  - Milivojević, Ana
+A1  - Prlainović, Nevena
+A1  - Marinković, Aleksandar
+A1  - Bezbradica, Dejan
+Y1  - 2016
+SP  - 97216
+EP  - 97225
+JF  - RSC Advances
+JO  - RSC Adv.
+VL  - 6
+IS  - 99
+PB  - The Royal Society of Chemistry
+SN  - 
+DO  - 10.1039/C6RA20409K
+M3  - 10.1039/C6RA20409K
+UR  - http://dx.doi.org/10.1039/C6RA20409K
+
+
+
+Brian W. Matthews. The structure of E. coli β-galactosidase. Comptes Rendus. Biologies, Volume 328 (2005) no. 6, pp. 549-556. doi : 10.1016/j.crvi.2005.03.006. https://comptes-rendus.academie-sciences.fr/biologies/articles/10.1016/j.crvi.2005.03.006/
+CRBIOL_2005__328_6_549_0
 
 

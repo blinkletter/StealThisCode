@@ -91,3 +91,13 @@ Brian W. Matthews. The structure of E. coli β-galactosidase. Comptes Rendus. Bi
 CRBIOL_2005__328_6_549_0
 
 
+Flavones
+
+Keung, W.-M., & Vallee, B. L. (1993). Daidzin: A Potent, Selective Inhibitor of Human Mitochondrial Aldehyde Dehydrogenase. Proceedings of the National Academy of Sciences of the United States of America, 90(4), 1247–1251. http://www.jstor.org/stable/2361166
+Keung-DaidzinPotentSelective-1993
+
+Structure of Daidzin, a Naturally Occurring Anti-Alcohol-Addiction Agent, in Complex with Human Mitochondrial Aldehyde Dehydrogenase§
+Edward D. Lowe, Guang-Yao Gao, Louise N. Johnson, and Wing Ming Keung
+Journal of Medicinal Chemistry 2008 51 (15), 4482-4487
+DOI: 10.1021/jm800488j
+

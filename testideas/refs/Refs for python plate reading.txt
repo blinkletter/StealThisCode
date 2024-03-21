@@ -90,6 +90,13 @@ UR  - http://dx.doi.org/10.1039/C6RA20409K
 Brian W. Matthews. The structure of E. coli β-galactosidase. Comptes Rendus. Biologies, Volume 328 (2005) no. 6, pp. 549-556. doi : 10.1016/j.crvi.2005.03.006. https://comptes-rendus.academie-sciences.fr/biologies/articles/10.1016/j.crvi.2005.03.006/
 CRBIOL_2005__328_6_549_0
 
+LacZ β-galactosidase: Structure and function of an enzyme of historical and molecular biological importance
+Douglas H Juers, Brian W Matthews, and Reuben E Huber
+Protein Sci. 2012 Dec; 21(12): 1792–1807.
+https://doi.org/10.1002%2Fpro.2165
+pro0021-1792.pdf
+
+
 
 Flavones
 
@@ -101,3 +108,55 @@ Edward D. Lowe, Guang-Yao Gao, Louise N. Johnson, and Wing Ming Keung
 Journal of Medicinal Chemistry 2008 51 (15), 4482-4487
 DOI: 10.1021/jm800488j
 
+
+Avijeet S. Chopra, Ronan Lordan, Olaf K. Horbańczuk, Atanas G. Atanasov, Ishveen Chopra, Jarosław O. Horbańczuk, Artur Jóźwik, Linfang Huang, Vasil Pirgozliev, Maciej Banach, Maurizio Battino, Nicolas Arkells,
+The current use and evolving landscape of nutraceuticals,
+Pharmacological Research,
+Volume 175,
+2022,
+106001,
+ISSN 1043-6618,
+https://doi.org/10.1016/j.phrs.2021.106001.
+1-s2.0-S1043661821005855-main.pdf
+
+
+Amal A.M. Elgharbawy, Muhammad Moniruzzaman, Masahiro Goto,
+Facilitating enzymatic reactions by using ionic liquids: A mini review,
+Current Opinion in Green and Sustainable Chemistry,
+Volume 27,
+2021,
+100406,
+ISSN 2452-2236,
+https://doi.org/10.1016/j.cogsc.2020.100406.
+1-s2.0-S2452223620301036-main.pdf
+
+
+ASSAYS
+
+Recent advances in enzyme assays
+Jean-Philippe Goddard
+Jean-Louis Reymond
+Trends in Biotechnology
+2004, 22, 363-370
+https://doi.org/10.1016/j.tibtech.2004.04.005
+PIIS0167779904001106.pdf
+
+Jean-Philippe Goddard, Jean-Louis Reymond,
+Enzyme assays for high-throughput screening,
+Current Opinion in Biotechnology,
+Volume 15, Issue 4,
+2004,
+Pages 314-322,
+ISSN 0958-1669,
+https://doi.org/10.1016/j.copbio.2004.06.008.
+1-s2.0-S0958166904000874-main.pdf
+
+Hans Bisswanger,
+Enzyme assays,
+Perspectives in Science,
+Volume 1, Issues 1–6,
+2014,
+Pages 41-55,
+ISSN 2213-0209,
+https://doi.org/10.1016/j.pisc.2014.02.005.
+1-s2.0-S2213020914000068-main.pdf

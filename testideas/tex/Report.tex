@@ -110,16 +110,67 @@ We will evaluate three different concentrations of enzyme. The plate will be set
 
 
 
-\begin{marginfigure}[5mm]
+\begin{figure}[h!]
 
-  \caption[0mm]{The natural products daidzin and daidzein compared to our synthetic target, 7-(\textbeta -D-Galactopyranosyloxy)-4'-hydroxyisoflavone} 
+  \caption[0mm]{Plate plan for determining optimal enzyme concentration for enzyme assays of \emph{\textbeta -galactosidase} with PNP-\textbeta-D-Gal} 
   \vspace{2mm}
     \centering
-  \includegraphics[scale=0.6]{Daidzin2.pdf}
+  \includegraphics[scale=0.7]{Microtitreplateplan.pdf}
   \vspace{5mm}
   \label{fig:fig1}
-\end{marginfigure}
+\end{figure}
 
+Two 96-well plates were set up. One contained the enzyme in phosphate buffer and the other PNP-\textbeta-D-Gal in a \qty{8}{\percent} mixture of isopropanol and phosphate buffer. The phosphate buffer had a concentration of \qty{0.100}{M} and was at pH 7.0. Volumes in each plate were equal. At time zero the contents of substrate plate was transferred to the enzyme plate by a multipipettor. The series of samples were prepared so that the final concentrations in the plate as described in the plate plan were realized.\sidenote[][-10mm]{Question: After the plates are mixed, what is the amount of isopropanol present in each samle. Do you think it will affect the results? Why did I choose to have a isopropanol as a small fraction of the solution?} The plate was placed in a plate reader and readings began 30~seconds after the addition of substrate. Absorbance was measured at \qty{405}{nm}.\sidenote[][0mm]{Question: What do we know about PNP-\textbeta-D-Gal that informed the choice of this wavelength.}
+
+\section{Data Collection}
+
+Data was exported from the plate reader as separate time/absorbance files names according to column and row. A python script to plot the initial results for each well in a column of the plate was used to produce the contact sheet of data below.
+
+\begin{figure}[h!]
+
+  \caption[0mm]{Plots of $A_{405}$ vs time for each well in the plate. Each column represents an experiment at eight different substrate concentrations. 
+    
+  \vspace{2mm}
+  \noindent The \emph{Python} code for generating this plot is available via Google Colab.} 
+ 
+  \vspace{-5mm}
+    \centering
+  \includegraphics[scale=0.6]{contactsheetplotA.pdf}
+  \vspace{2mm}
+  \label{fig:fig2}
+\end{figure}
+
+
+\section{Observations}
+
+Substantial experimental error was observed in the data and the measurements became unreliable when absorbances exceed the value of 2.\sidenote[][-0mm]{Question: The manufacturer of the plate reader advertised that precise readings could be obtained up to 3 absorbance units. Given what we know about how absorbance is calculated, please explain why the error is much greater at higher absorbance values.} 
+
+The time frame of the experiment was such that most of the reactions reached completion. For initial rate analysis we must use the absorbance change in the few percent change in substrate concentration as the reaction proceeds. We want the slope to be as close as possible to the initial slope. I wrote a \emph{Python} script that plots data from a single well over a selected time frame, performing a linear fit of the data and calculating the residuals to confirm that we are using a time frame in which the data is mostly linear.  We want as much data as possible so would like a longer time frame, but we want to have little or no observable curve in the line as so want a small a time frame as possible after the start of the reaction. 
+
+After examining many cells and trying several time frames, I chose a time frame from zero to 3 minutes. This captures about 15 of the 358 data points collected over the hour duration of the experiment. 
+
+\begin{figure}[h!]
+
+  \caption[0mm]{Plots of $A_{405}$ vs time for well 7-B. [Enzyme] = \qty{0.5}{nM}, [PNP-\textbeta-D-Gal] = \qty{0.02}{mM}. Three time frames are show: the full \qty{60}{\minute}, \qty{12}{\minute}, and \qty{4}{\minute}. The residuals for the line fit of the \qty{4}{\minute} time frame are shown in the lower left plot. No curvature was detectable within the range of the experimental error.
+  
+  \vspace{2mm}
+ \noindent The \emph{Python} code for generating this plot is available via Google Colab.} 
+  \vspace{-0mm}
+    \centering
+  \includegraphics[scale=0.6]{Cell_w_residuals_7_B.pdf}
+  \vspace{2mm}
+  \label{fig:fig2}
+\end{figure}
+
+
+
+The short time frame was required because the highest enzyme con\-en\-tration resulted in reactions so rapid that substantial change in substrate concentration occurred in the first few moments. For wells where the sub\-strate concentration was at or below the \Km\ value, we saw significant curv\-a\-ture at longer time frames. The diluted enzyme samples were linear over longer time frames and so more data could have been used. I will use the short time frame discussed above to be consistent but future experiments with less enzyme may be able to use more data points before curvature is observed. Hopefully my unfortunate successor will find this information useful. The cake is a lie!
+
+There is significant hydrolysis of the PNP-\textbeta-D-Gal in the absence of enzyme catalyst.  It is a very reactive molecule and at pH 7.0 the rate of hydrolysis is significant. It will be necessary to subtract the background rate from catalyzed rates to ensure accuracy.
+
+\section{Data Analysis}
+
+Based on the observations above I will create a \emph{Python} script to calculate the initial slope of absorbance change over time in each cell. We can calculate the rate of appearance of product using the molar extinction coefficient for phenolate anion and the $pK_a$ value for the phenol. The curve fit function will also report a standard deviation for the slope based on the random error in the data and the number of points. We will use this value as a measure of the precision of our data. The script will output the rate of reaction and the standard error for all 96 cells and save that data in a csv file. The python code is available as an interactive \emph{Python} notebook via Google Colab. 
 
 
 \nobibliography{}

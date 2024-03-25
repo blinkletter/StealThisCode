@@ -8,9 +8,13 @@ help(BT) will also display the documentation for all the functions in
 this library.
 """
 
+from scipy.stats import pearsonr
 from scipy.optimize import curve_fit      ## import tools
 import numpy as np                       
 from matplotlib import pyplot as plt     
+import pandas as pd
+
+
 
 import uncertainties as un               ## import Uncertainties tool
 from uncertainties import unumpy as unp
@@ -384,5 +388,158 @@ def get_integrated_MM_function():
     f = sym.lambdify([t, S0, KM, Vmax], eq.rhs)   
     return(eq,f)
 
+def read_plate_setup(file_name, pH = 7.0):
+    """Reads a file name for a plate plan and returns lists of the data
 
+    Arguments:
+    ----------
+    file_name: string
+    pH: float
 
+    Returns:
+    ----------
+    pandas dataframe
+        The dataframe read in from the file. Some columns are different 
+        lengths so it will be separated into lists (Pandas series) and 
+        those are returned in the dictionary below.
+    dictionary 
+        {"row_name_list",
+         "S_conc_list",
+         "lane_name_list",
+         "E_conc_list",
+         "E_Name_list"}
+    float
+        The extinction coefficent of nitrophenolate at the given pH
+
+    Example
+    -------
+    df, plate, e405 = read_plate_setup{"platesetup.csv", pH = 7.0}
+    """
+    
+    df = pd.read_csv(file_name,
+                     comment = "#",
+                     skipinitialspace=True)
+
+    row_name_list = df["Row"].dropna()
+    S_conc_list = df["S_Conc"].dropna() * 1E-3  ### convert millimolar to molar
+
+    lane_name_list = df["Column"]
+    E_conc_list = df["E_Conc"] * 1E-9  ### convert nanomolar to molar
+    E_Name_list = df["Enzyme"]
+
+    ### parameters to get extinction coeff for NPA at give pH value
+    pH = 7.0
+    e_NPAA = 18300  ### extinction coeff for NPA anion
+    pKa_NPA = 7.15 ### pKa for p-nitrophenol
+
+    ### Calculated Values from the above lists
+    Ka = 10 ** -pKa_NPA   ### extinction coeff for NPA at given pH
+    H = 10 ** -pH
+    e_NPA = e_NPAA * (Ka / (H + Ka))
+
+    return df, {"row_name_list": row_name_list,
+            "S_conc_list": S_conc_list,
+            "lane_name_list": lane_name_list,
+            "E_conc_list": E_conc_list,
+            "E_Name_list": E_Name_list,}, e_NPA
+
+    #display(df)
+
+def plot_lanes(ax, data_file_name, Column_list, Row_list, 
+               Fraction_time_span = 1, Line_Fit = True):
+    """Loads and plots data files. Can return line fit.
+    
+    Arguments
+    ---------
+    ax: pyplot axes object
+        axes created and sent to this function for adding the points
+    data_file_name: string
+        The data file name. Filenames will be this plus column and row
+        e.g. "name_10_C.csv"
+    Column_list, Row_list: Array like
+        list of names for column, row to be plotted.
+        Will usually be one column and some rows but can be as many as wanted
+    Fraction_time_span: float
+        The fraction of the time span to plt. Default is 1 for 100%
+    Line_Fit: boolean
+        If True then line fits will be performed for each well and data
+        written to lists and put into the result dataframe
+    
+    Returns
+    -------
+    ax: pyplot axes object
+        The plot axes will new elements added
+    result: pandas dataframe
+        The results of line fits. Will be empty if Line_Fit = False
+    """
+    def linear_function(x, slope, intercept):
+        return slope * x + intercept
+    
+    print(Column_list)
+
+    slope_list = []; slope_stderr_list = []
+    int_list = []; int_stderr_list = []; rsq_list = [];
+    well_lane_list = []; well_row_list=[]
+
+    for lane_name in Column_list:
+        print(lane_name)
+
+        for row_name in Row_list:
+            in_file_name = data_file_name \
+                            + "_" + str(lane_name) \
+                            + "_" + row_name + ".csv"
+            df = pd.read_csv(in_file_name)
+            points_used = int(Fraction_time_span * len(df["time"]))
+    
+            x = df["time"][0:points_used] 
+            y = df["abs"][0:points_used]
+    
+            
+            if Line_Fit:
+                param,cov = curve_fit(linear_function, x,y)
+                slope, intercept = param
+
+                perr = np.sqrt(np.diag(cov))
+                slope_stderr, int_stderr = perr
+                r, p = pearsonr(x, y)
+                rsq = r ** 2
+
+                slope_list.append(slope)
+                slope_stderr_list.append(slope_stderr)
+                int_list.append(intercept)
+                int_stderr_list.append(int_stderr)
+                rsq_list.append(rsq)
+                well_lane_list.append(lane_name)
+                well_row_list.append(row_name)
+
+                x_fit = np.linspace(0,np.max(x),10)
+                ax.plot(x_fit, linear_function(x_fit, slope, intercept), 
+                        linestyle = '-', 
+                        linewidth='0.5', 
+                        color = 'black', 
+                        zorder = 0)
+            ax.scatter(x, y, 
+                    marker='o', 
+                    color='white', 
+                    edgecolors = 'black',
+                    linewidths = 0.5, 
+                    s=32, 
+                    zorder = 2)
+            ax.scatter(x, y, 
+                    marker='o', 
+                    color='white', 
+                    edgecolors = None,
+                    linewidths = 0.5, 
+                    s=64, 
+                    zorder = 1)
+    
+    results = {"Column":well_lane_list,
+               "Row":well_row_list,
+               "slope":slope_list,
+               "slope stderr":slope_stderr_list,
+               "int": int_list,
+               "int stderr":int_stderr_list,
+               "RSQ": rsq_list}
+    results = pd.DataFrame(results) 
+     
+    return(ax, results)

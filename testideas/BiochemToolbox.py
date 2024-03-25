@@ -475,14 +475,14 @@ def plot_lanes(ax, data_file_name, Column_list, Row_list,
     def linear_function(x, slope, intercept):
         return slope * x + intercept
     
-    print(Column_list)
+    #print(Column_list)
 
     slope_list = []; slope_stderr_list = []
     int_list = []; int_stderr_list = []; rsq_list = [];
     well_lane_list = []; well_row_list=[]
 
     for lane_name in Column_list:
-        print(lane_name)
+        #print(lane_name)
 
         for row_name in Row_list:
             in_file_name = data_file_name \

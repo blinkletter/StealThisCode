@@ -445,14 +445,19 @@ def read_plate_setup(file_name, pH = 7.0):
 
     #display(df)
 
-def plot_lanes(ax, data_file_name, Column_list, Row_list, 
-               Fraction_time_span = 1, Line_Fit = True):
+def plot_lanes(data_file_name, Column_list, Row_list, 
+               Fraction_time_span = 1, Line_Fit = True, 
+               Display_Plot = True, Display_Data = True):
+
     """Loads and plots data files. Can return line fit.
+
+    Will make a plot of all the wells designated by columns and rows
+    Will fit data to linear curve fit and collect slopes and intercept data
+    Will save the plot as a pdf
+    Will save the data as a csv file with same filename as pdf
     
     Arguments
     ---------
-    ax: pyplot axes object
-        axes created and sent to this function for adding the points
     data_file_name: string
         The data file name. Filenames will be this plus column and row
         e.g. "name_10_C.csv"
@@ -464,11 +469,12 @@ def plot_lanes(ax, data_file_name, Column_list, Row_list,
     Line_Fit: boolean
         If True then line fits will be performed for each well and data
         written to lists and put into the result dataframe
+    Display_Plot, Display_Data: booleans
+        If True then the plot will be created and displayed and the
+        dataframe displayed, respectively.
     
     Returns
     -------
-    ax: pyplot axes object
-        The plot axes will new elements added
     result: pandas dataframe
         The results of line fits. Will be empty if Line_Fit = False
     """
@@ -476,6 +482,12 @@ def plot_lanes(ax, data_file_name, Column_list, Row_list,
         return slope * x + intercept
     
     #print(Column_list)
+
+    plt.ioff()           ### switch off interactive display of plots. plt.show() needed to display a plot now
+    plt.rcdefaults()     ### resets the plot defaults so we always start in the same place
+    #plt.style.use("../styles/tufte.mplstyle")     ### Then add a fancy style sheet   
+    
+    fig, ax = plt.subplots(nrows=1, ncols=1, figsize=(5,4))  
 
     slope_list = []; slope_stderr_list = []
     int_list = []; int_stderr_list = []; rsq_list = [];
@@ -518,6 +530,8 @@ def plot_lanes(ax, data_file_name, Column_list, Row_list,
                         linewidth='0.5', 
                         color = 'black', 
                         zorder = 0)
+            ### end of if:
+
             ax.scatter(x, y, 
                     marker='o', 
                     color='white', 
@@ -532,7 +546,17 @@ def plot_lanes(ax, data_file_name, Column_list, Row_list,
                     linewidths = 0.5, 
                     s=64, 
                     zorder = 1)
-    
+        ### end of for row_name:
+    ###end of for column_name:
+            
+    ax.set(xlabel= r"Time $/min$",  
+           ylabel=r"$A_{405}$",
+           #title = "Lane # "+lane_name,
+           xlim=[None, None],                  
+           ylim=[None, None]      
+            )
+
+
     results = {"Column":well_lane_list,
                "Row":well_row_list,
                "slope":slope_list,
@@ -541,5 +565,354 @@ def plot_lanes(ax, data_file_name, Column_list, Row_list,
                "int stderr":int_stderr_list,
                "RSQ": rsq_list}
     results = pd.DataFrame(results) 
-     
-    return(ax, results)
+
+    display(results)  
+
+    fig.tight_layout()  # otherwise the right y-label is slightly clipped
+    plt.savefig(data_file_name + ".pdf")     ### export the plot as this
+    plt.show()
+
+    results.to_csv(data_file_name + ".csv")
+
+    return(results)
+
+
+def dual_plot_w_residuals(filename, lane_name, row_name, 
+                          Fraction_time_span = 1,
+                          plot_file = "plot1/Cell_w_residuals"):
+    
+    """Plot abs vs time data for a well with linear fit and residuals
+    
+    Arguments
+    ---------
+    
+    filename: string
+        The file root name. the well column and row will be added to 
+        this name to get the file name needed.
+    lane_name, row_name: strings
+        The column and row label. Will be used to access the file
+    Fraction_time_span: float
+        The fraction of the time span to plt. Default is 1 for 100%
+    plot_file: string
+        The file name of the plot to be written as pdf. Will append the
+        column and row label to give "file_12_A.pdf" for example
+
+    Returns:
+    --------
+    
+    Nul
+
+    Does not return any objects but will output a figure with Two plots 
+        Plot 1: Plot with time span chose by Fraction_time_span
+        Plot 2: residuals for plot 
+    """
+    
+    def linear_function(x, slope, int):
+        return slope*x + int
+    
+    def linear_function_int0(x, slope):
+        return slope*x
+    
+    plt.ioff()           ### switch off interactive display of plots. plt.show() needed to display a plot now
+    plt.rcdefaults()     ### resets the plot defaults so we always start in the same place
+    #plt.style.use("../styles/tufte.mplstyle")     ### Then add a fancy style sheet   
+    
+    fig, ax = plt.subplots(nrows=1, ncols=2, figsize=(7,3))  
+    
+    in_file_name = filename + "_" + lane_name + "_" + row_name + ".csv"
+    df = pd.read_csv(in_file_name)
+    
+    points_used = int(Fraction_time_span * len(df["time"]))
+    
+    x = df["time"][0:points_used]
+    y = df["abs"][0:points_used]
+    
+    param,cov = curve_fit(linear_function, x,y)
+    slope, intercept = param
+    
+    ##param,cov = curve_fit(linear_function_int0, x,y)
+    ##[slope] = param
+    
+    
+    perr = np.sqrt(np.diag(cov))
+    slope_stderr, int_stderr = perr
+    print(f"slope = {slope:0.3g} +/- {slope_stderr:0.3g}")
+    ##print(f"slope = {slope:0.3g}")
+    x_fit = np.linspace(0,np.max(x),10)
+    
+    ax[0].plot(x_fit, linear_function(x_fit, slope, intercept), 
+               linestyle = '-', 
+               linewidth='0.5', 
+               color = 'black', 
+               zorder = 0)
+    ax[0].scatter(x, y, 
+                  marker='o', 
+                  color='lightgray', 
+                  edgecolors = 'black',
+                  linewidths = 0.5, 
+                  s=8, 
+                  zorder = 2)
+    ax[0].scatter(x, y, 
+                  marker='o', 
+                  color='white', 
+                  edgecolors = None,
+                  linewidths = 0.5, 
+                  s=32, 
+                  zorder = 1)
+    ax[0].set(xlabel= r"Time $/min$",  
+              ylabel=r"$A_{405}$",
+     #              title = "Lane # "+lane_name,
+              xlim=[-0.05*np.max(x), None],                  
+              ylim=[-0.05*np.max(y), None]      
+             )
+    
+    residuals = y - linear_function(x, slope, intercept)
+    y = residuals
+    ax[1].hlines(0, xmin = 0, xmax = np.max(x), 
+                 colors='black', linestyles='solid', 
+                 linewidths = 0.5, zorder = 0)
+    ax[1].plot(x, y, 
+               linestyle = '-', 
+               linewidth='3', 
+               color = 'white', 
+               zorder = 1)
+    ax[1].plot(x, y, 
+               linestyle = '-', 
+               linewidth='0.5', 
+               color = 'black', 
+               zorder = 1)
+    ax[1].scatter(x, y, 
+                  marker='o', 
+                  color='lightgray', 
+                  edgecolors = 'black',
+                  linewidths = 0.5, 
+                  s=8, 
+                  zorder = 3)
+    ax[1].scatter(x, y, 
+                  marker='o', 
+                  color='white', 
+                  edgecolors = None,
+                  linewidths = 0.5, 
+                  s=32, 
+                  zorder = 2)
+    ax[1].set(xlabel= r"Time  $/min$", 
+              ylabel="Residuals",
+     #         title = "Lane # "+lane_name,
+     #         xlim=[None, None],                  
+              ylim=[-.02, +0.02])
+    
+    fig.tight_layout()  # otherwise the right y-label is slightly clipped
+    plt.savefig(plot_file+"_"+lane_name+"_"+row_name+".pdf")     ### export the plot as this
+    plt.show()
+
+    return()
+
+
+
+def plot_four_w_residuals(filename, lane_name, row_name, 
+                          Fraction_time_span_medium = 0.2,
+                          Fraction_time_span_short = 0.05,
+                          plot_file = "plot1/Cell_w_residuals"):
+
+    """Plot 2x2 plot grid. abs vs time data for a well with different time spans
+    
+    Arguments
+    ---------
+    
+    filename: string
+        The file root name. the well column and row will be added to 
+        this name to get the file name needed.
+    lane_name, row_name: strings
+        The column and row label. Will be used to access the file
+    Fraction_time_span_medium: float
+        The fraction of the time span to plot is second plot. Default is 0.2 for 20%
+    Fraction_time_span_short: float
+        The fraction of the time span to plot is third plot. Default is 0.05 for 5%
+    plot_file: string
+        The file name of the plot to be written as pdf. Will append the
+        column and row label to give "file_12_A.pdf" for example
+
+    Returns:
+    -------
+
+    Nul
+
+    Does not return any objects but will output a figure with four plots 
+        Plot 1: full plot
+        Plot 2: plot with time fraction medium
+        Plot 3: Plot with time fraction short
+        Plot 4: residuals fopr plot with short time span
+
+    Will print slope and stderr for slope for each of plot 2 and plot 3.
+    """
+
+    def linear_function(x, slope, int):
+        return slope*x + int
+    
+    def linear_function_int0(x, slope):
+        return slope*x
+    
+    plt.ioff()           ### switch off interactive display of plots. plt.show() needed to display a plot now
+    
+    plt.rcdefaults()     ### resets the plot defaults so we always start in the same place
+    plt.style.use("../styles/tufte.mplstyle")     ### Then add a fancy style sheet   
+    
+    fig, ax = plt.subplots(nrows=2, ncols=2, figsize=(7,6))  
+    
+    in_file_name = filename + "_" + lane_name + "_" + row_name + ".csv"
+    df = pd.read_csv(in_file_name)
+    
+    points_used = int(Fraction_time_span_short * len(df["time"]))
+    points_used2 = int(Fraction_time_span_medium * len(df["time"]))
+    
+    x_all = df["time"]
+    y_all = df["abs"]
+    
+    x = x_all[0:points_used]
+    y = y_all[0:points_used]
+    
+    x2 = x_all[0:points_used2]
+    y2 = y_all[0:points_used2]
+    
+    #########################################################################
+    
+    ax[0][0].scatter(x_all, y_all, 
+            marker='o', 
+            color='lightgray', 
+            edgecolors = 'black',
+            linewidths = 0.5, 
+            s=8, 
+            zorder = 2)
+    ax[0][0].scatter(x_all, y_all, 
+            marker='o', 
+            color='white', 
+            edgecolors = None,
+            linewidths = 0.5, 
+            s=32, 
+            zorder = 1)
+    ax[0][0].set(xlabel= r"Time $/min$",  
+              ylabel=r"$A_{405}$",
+     #         title = "Lane # "+lane_name,
+              xlim=[-0.05*np.max(x), None],                  
+              ylim=[-0.05*np.max(y), None]      
+             )
+    
+    #########################################################################
+    
+    param, cov = curve_fit(linear_function, x2, y2)
+    slope2, intercept2 = param
+    
+    perr = np.sqrt(np.diag(cov))
+    slope_stderr2, int_stderr2 = perr
+    print(f"slope = {slope2:0.3g} +/- {slope_stderr2:0.3g}")
+    
+    x_fit = np.linspace(0,np.max(x2),10)
+    
+    ax[0][1].plot(x_fit, linear_function(x_fit, slope2, intercept2), 
+            linestyle = '-', 
+            linewidth='0.5', 
+            color = 'black', 
+            zorder = 0)
+    ax[0][1].scatter(x2, y2, 
+            marker='o', 
+            color='lightgray', 
+            edgecolors = 'black',
+            linewidths = 0.5, 
+            s=8, 
+            zorder = 2)
+    ax[0][1].scatter(x2, y2, 
+            marker='o', 
+            color='white', 
+            edgecolors = None,
+            linewidths = 0.5, 
+            s=16, 
+            zorder = 1)
+    ax[0][1].set(xlabel= r"Time $/min$",  
+              ylabel=r"$A_{405}$",
+     #         title = "Lane # "+lane_name,
+              xlim=[-0.05*np.max(x), None],                  
+              ylim=[-0.05*np.max(y), None]      
+             )
+    
+    #########################################################################
+    
+    param,cov = curve_fit(linear_function, x,y)
+    slope, intercept = param
+    
+    perr = np.sqrt(np.diag(cov))
+    slope_stderr, int_stderr = perr
+    print(f"slope = {slope:0.3g} +/- {slope_stderr:0.3g}")
+    
+    x_fit = np.linspace(0,np.max(x),10)
+    
+    ax[1][0].plot(x_fit, linear_function(x_fit, slope, intercept), 
+            linestyle = '-', 
+            linewidth='0.5', 
+            color = 'black', 
+            zorder = 0)
+    ax[1][0].scatter(x, y, 
+            marker='o', 
+            color='lightgray', 
+            edgecolors = 'black',
+            linewidths = 0.5, 
+            s=8, 
+            zorder = 2)
+    ax[1][0].scatter(x, y, 
+            marker='o', 
+            color='white', 
+            edgecolors = None,
+            linewidths = 0.5, 
+            s=32, 
+            zorder = 1)
+    ax[1][0].set(xlabel= r"Time $/min$",  
+              ylabel=r"$A_{405}$",
+     #         title = "Lane # "+lane_name,
+              xlim=[-0.05*np.max(x), None],                  
+              ylim=[-0.05*np.max(y), None]      
+             )
+    
+    #########################################################################
+    
+    #x=x2; y=y2; slope=slope2; intercept=intercept2
+    
+    residuals = y - linear_function(x, slope, intercept)
+    y = residuals
+    ax[1][1].hlines(0, xmin = 0, xmax = np.max(x), 
+                 colors='black', linestyles='solid', 
+                 linewidths = 0.5, zorder = 0)
+    ax[1][1].plot(x, y, 
+            linestyle = '-', 
+            linewidth='3', 
+            color = 'white', 
+            zorder = 1)
+    ax[1][1].plot(x, y, 
+            linestyle = '-', 
+            linewidth='0.5', 
+            color = 'black', 
+            zorder = 1)
+    ax[1][1].scatter(x, y, 
+            marker='o', 
+            color='lightgray', 
+            edgecolors = 'black',
+            linewidths = 0.5, 
+            s=8, 
+            zorder = 3)
+    ax[1][1].scatter(x, y, 
+            marker='o', 
+            color='white', 
+            edgecolors = None,
+            linewidths = 0.5, 
+            s=32, 
+            zorder = 2)
+    ax[1][1].set(xlabel= r"Time  $/min$", 
+              ylabel="Residuals",
+     #         title = "Lane # "+lane_name,
+     #         xlim=[None, None],                  
+              ylim=[-.02, +0.02]
+               )
+    
+    fig.tight_layout()  # otherwise the right y-label is slightly clipped
+    plt.savefig(plot_file+"_"+lane_name+"_"+row_name+".pdf")     ### export the plot as this
+    plt.show()
+
+    return()

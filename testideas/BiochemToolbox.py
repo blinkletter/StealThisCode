@@ -220,8 +220,7 @@ def line_curve_fit(x,y):
     
     return(slope_u, intercept_u)
 
-def Linear_Plot(x, y, x_lim = (None,None), y_lim = (None,None),
-                
+def Linear_Plot(x, y, x_lim = (None,None), y_lim = (None,None),           
             title = "", x_label = "", y_label = "", file_name = "Plot.pdf" ):
     r"""A function to make a linear plot and return the fit parameters
 
@@ -397,7 +396,7 @@ def read_plate_setup(file_name, pH = 7.0):
     pH: float
 
     Returns:
-    ----------
+    --------
     pandas dataframe
         The dataframe read in from the file. Some columns are different 
         lengths so it will be separated into lists (Pandas series) and 
@@ -443,11 +442,11 @@ def read_plate_setup(file_name, pH = 7.0):
             "E_conc_list": E_conc_list,
             "E_Name_list": E_Name_list,}, e_NPA
 
-    #display(df)
 
 def plot_lanes(data_file_name, Column_list, Row_list, 
                Fraction_time_span = 1, Line_Fit = True, 
-               Display_Plot = True, Display_Data = True):
+               Display_Plot = True, Display_Data = True,
+               fancy = False, tiny_points = False, tiny_line = False):
 
     """Loads and plots data files. Can return line fit.
 
@@ -485,7 +484,8 @@ def plot_lanes(data_file_name, Column_list, Row_list,
 
     plt.ioff()           ### switch off interactive display of plots. plt.show() needed to display a plot now
     plt.rcdefaults()     ### resets the plot defaults so we always start in the same place
-    #plt.style.use("../styles/tufte.mplstyle")     ### Then add a fancy style sheet   
+    if fancy:
+        plt.style.use("../styles/tufte.mplstyle")     ### Then add a fancy style sheet   
     
     fig, ax = plt.subplots(nrows=1, ncols=1, figsize=(5,4))  
 
@@ -532,20 +532,37 @@ def plot_lanes(data_file_name, Column_list, Row_list,
                         zorder = 0)
             ### end of if:
 
-            ax.scatter(x, y, 
+            if tiny_line:
+                ax.plot(x, y, 
+                    #marker=None, 
+                    color='black', 
+                    linewidth = 0.5, 
+                    ms=8, 
+                    zorder = 1)
+            if tiny_points:
+                ax.scatter(x, y, 
+                    marker='o', 
+                    color='black', 
+                    edgecolors = 'none',
+                    linewidths = 0.5, 
+                    s=2, 
+                    zorder = 2)
+            else:
+                ax.scatter(x, y, 
                     marker='o', 
                     color='white', 
                     edgecolors = 'black',
                     linewidths = 0.5, 
                     s=32, 
                     zorder = 2)
-            ax.scatter(x, y, 
+                ax.scatter(x, y, 
                     marker='o', 
                     color='white', 
                     edgecolors = None,
                     linewidths = 0.5, 
                     s=64, 
                     zorder = 1)
+            ### end of if tiny_points:
         ### end of for row_name:
     ###end of for column_name:
             
@@ -573,13 +590,15 @@ def plot_lanes(data_file_name, Column_list, Row_list,
     plt.show()
 
     results.to_csv(data_file_name + ".csv")
-
+    print("Plot saved as "+data_file_name + ".pdf")
+    print("Data saved as "+data_file_name + ".csv")
     return(results)
 
 
 def dual_plot_w_residuals(filename, lane_name, row_name, 
                           Fraction_time_span = 1,
-                          plot_file = "plot1/Cell_w_residuals"):
+                          plot_file = "plot1/Cell_w_residuals",
+                          fancy = False):
     
     """Plot abs vs time data for a well with linear fit and residuals
     
@@ -615,7 +634,8 @@ def dual_plot_w_residuals(filename, lane_name, row_name,
     
     plt.ioff()           ### switch off interactive display of plots. plt.show() needed to display a plot now
     plt.rcdefaults()     ### resets the plot defaults so we always start in the same place
-    #plt.style.use("../styles/tufte.mplstyle")     ### Then add a fancy style sheet   
+    if fancy:
+        plt.style.use("../styles/tufte.mplstyle")     ### Then add a fancy style sheet   
     
     fig, ax = plt.subplots(nrows=1, ncols=2, figsize=(7,3))  
     
@@ -705,6 +725,7 @@ def dual_plot_w_residuals(filename, lane_name, row_name,
     plt.savefig(plot_file+"_"+lane_name+"_"+row_name+".pdf")     ### export the plot as this
     plt.show()
 
+    print("Plot saved as "+plot_file+"_"+lane_name+"_"+row_name+".pdf")
     return()
 
 
@@ -712,7 +733,8 @@ def dual_plot_w_residuals(filename, lane_name, row_name,
 def plot_four_w_residuals(filename, lane_name, row_name, 
                           Fraction_time_span_medium = 0.2,
                           Fraction_time_span_short = 0.05,
-                          plot_file = "plot1/Cell_w_residuals"):
+                          plot_file = "plot1/Cell_w_residuals",
+                          fancy = False):
 
     """Plot 2x2 plot grid. abs vs time data for a well with different time spans
     
@@ -755,7 +777,8 @@ def plot_four_w_residuals(filename, lane_name, row_name,
     plt.ioff()           ### switch off interactive display of plots. plt.show() needed to display a plot now
     
     plt.rcdefaults()     ### resets the plot defaults so we always start in the same place
-    plt.style.use("../styles/tufte.mplstyle")     ### Then add a fancy style sheet   
+    if fancy:
+        plt.style.use("../styles/tufte.mplstyle")     ### Then add a fancy style sheet   
     
     fig, ax = plt.subplots(nrows=2, ncols=2, figsize=(7,6))  
     
@@ -914,5 +937,120 @@ def plot_four_w_residuals(filename, lane_name, row_name,
     fig.tight_layout()  # otherwise the right y-label is slightly clipped
     plt.savefig(plot_file+"_"+lane_name+"_"+row_name+".pdf")     ### export the plot as this
     plt.show()
+
+    print("Plot saved as "+plot_file+"_"+lane_name+"_"+row_name+".pdf")
+    return()
+
+
+
+def contact_sheet(data_root_name,
+                  columns = ["1","2","3","4","5","6",
+                             "7","8","9","10","11","12"],
+                  enzymes = ["","","","","","","","","","","",""],
+                  rows = ["A","B","C","D","E","F","G","H"], 
+                  fancy = False):
+    """Plots 12 plots, one for each column of plate
+    
+    Will produce a 'contact sheet' of plots, one for each plat column
+    
+    Arguments:
+    ---------
+    data_root_name: string
+        The file root name. Column and row labels will be added.
+    columns, row: lists
+        These are the lists of names for the columns and rows. Will be appended
+        to data_root_name to access the individual data files.
+    enzymes: list
+        The names of the enzymes (or other note) in each column.
+        Will be printed on each plot for corresponding column
+    Returns: 
+    -------
+
+    Nul
+
+    Will output the 3 column X 4 row plot of all data sets in the plate
+    and save the plot as a pdf file.
+    """
+    plt.ioff()      ### switch off interactive display of plots. plt.show() needed to display a plot now
+    plt.rcdefaults()     ### resets the plot defaults so we always start in the same place
+    if fancy:
+        plt.style.use("../styles/tufte.mplstyle")     ### Then add a fancy style sheet   
+    
+    fig, ax = plt.subplots(nrows=4, 
+                           ncols=3, 
+                           figsize=(7,10), 
+                        #   sharex=True, 
+                        #   sharey=True
+                           )  
+    n = 0  ### set counter
+    coldata = zip(columns, enzymes)
+    for lane_name, enzyme in coldata:
+        
+        plot_row = n // 3   ### use counter to get column and row
+        plot_col = n % 3
+    
+        ax[plot_row][plot_col].set(
+                    xlabel = None, 
+                    ylabel = None,
+            #        title = "Lane # "+lane_name,
+            #        xlim = [None, None],                  
+                    ylim = [-.1, 4.1])
+        
+
+        ### Column 0 gets y-axis label and ticks.
+        ax[plot_row][0].set(ylabel= r"$A_{405}$")
+        ax[plot_row][0].set_yticks([0,1,2,3])
+        ### Columns 1 & 2 get no y-axis ticks.
+        ax[plot_row][1].set_yticks([])
+        ax[plot_row][2].set_yticks([])
+    
+        ### Row 3 (bottom) gets x-axis label and ticks.
+        ax[3][plot_col].set(xlabel= r"$t\;/\;min$")
+        ax[0][plot_col].set_xticks([])
+        ### Other rows get no x-axis ticks.
+        ax[1][plot_col].set_xticks([])
+        ax[2][plot_col].set_xticks([])
+    
+        ax[plot_row][plot_col].text(0, 3.4, "Column: "+str(lane_name)) 
+        ax[plot_row][plot_col].text(0, 3.0, enzyme) 
+
+    
+        for row_name in rows:
+            in_file_name = data_root_name + "_" \
+                + str(lane_name) + "_" \
+                + row_name + ".csv"
+            df = pd.read_csv(in_file_name)
+    
+            x = df["time"] 
+            y = df["abs"] 
+            
+            ax[plot_row][plot_col].plot(x, y, 
+                                        linestyle = '-', 
+                                        linewidth='0.3', 
+                                        color = 'black', 
+                                        zorder = 0)
+            #ax[plot_row][plot_col].scatter(x, y, 
+            #                               marker='o', 
+            #                               color='black', 
+            #                               edgecolors = None,
+            #                               linewidths = 0.5, 
+            #                               s=1, 
+            #                               zorder = 2)
+            #ax[plot_row][plot_col].scatter(x, y, 
+            #                               marker='o', 
+            #                               color='white', 
+            #                               edgecolors = None,
+            #                               linewidths = 0.5, 
+            #                               s=4, 
+            #                               zorder = 1)
+        ### end of for row_name in row_name_list:
+
+        n += 1    ### increment counter
+    ### end of for lane_name in lane_name_list:
+
+    fig.tight_layout()  # otherwise the right y-label is slightly clipped
+    plt.savefig("plot_contact_sheet.pdf")     ### export the plot as this
+    plt.show()                 ### display the plot in this notebook
+    print("Plot saved as plot_contact_sheet.pdf")
 
     return()

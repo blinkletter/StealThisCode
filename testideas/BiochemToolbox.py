@@ -597,7 +597,7 @@ def plot_lanes(data_file_name, Column_list, Row_list,
 
 def dual_plot_w_residuals(filename, lane_name, row_name, 
                           Fraction_time_span = 1,
-                          plot_file = "plot1/Cell_w_residuals",
+                          plot_file = "plots/Cell_w_residuals_2_plot",
                           fancy = False):
     
     """Plot abs vs time data for a well with linear fit and residuals
@@ -733,7 +733,7 @@ def dual_plot_w_residuals(filename, lane_name, row_name,
 def plot_four_w_residuals(filename, lane_name, row_name, 
                           Fraction_time_span_medium = 0.2,
                           Fraction_time_span_short = 0.05,
-                          plot_file = "plot1/Cell_w_residuals",
+                          plot_file = "plots/Cell_w_residuals_4_plot",
                           fancy = False):
 
     """Plot 2x2 plot grid. abs vs time data for a well with different time spans
@@ -1049,8 +1049,8 @@ def contact_sheet(data_root_name,
     ### end of for lane_name in lane_name_list:
 
     fig.tight_layout()  # otherwise the right y-label is slightly clipped
-    plt.savefig("plot_contact_sheet.pdf")     ### export the plot as this
+    plt.savefig("plots/plot_contact_sheet.pdf")     ### export the plot as this
     plt.show()                 ### display the plot in this notebook
-    print("Plot saved as plot_contact_sheet.pdf")
+    print("Plot saved as plots/plot_contact_sheet.pdf")
 
     return()

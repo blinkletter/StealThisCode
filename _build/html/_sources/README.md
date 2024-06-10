@@ -1,2 +1,2 @@
 # StealThisCode
-Python code snippets for my biochemistry students to use, repurpose and explore
+Python code snippets for students to use, repurpose and explore. Steal it all.

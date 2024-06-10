@@ -1,0 +1,937 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>&lt;no title&gt; &#8212; Steal this Code</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../_static/tufte.css?v=189edcc0" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'testideas/DataAnalyzer2';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../start.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/Ouroboros-benzene.svg.png" class="logo__image only-light" alt="Steal this Code - Home"/>
+    <script>document.write(`<img src="../_static/Ouroboros-benzene.svg.png" class="logo__image only-dark" alt="Steal this Code - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../start.html">
+                    Steal This Code
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Math</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../1_Math/1_1_Calculator.html">Basic Math with <em>Python</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1_Math/1_2_uncertainties.html">Using Uncertainty</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">MatPlotLib</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../2_MatPlotLib/2_1_Plotting.html">Plotting Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2_MatPlotLib/2_2_Curve_Fits.html">Linear Fits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2_MatPlotLib/2_3_Curve_Fits.html">Curve Fits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2_MatPlotLib/2_4_Fancy_1.html">Advanced Plotting Example</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">SymPy</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../3_SymPy/K01_solving_with_sympy.html">Free Symbolic Math</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3_SymPy/K02_Integrating_Rate_Law_1.html">Integrating Rate Laws</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3_SymPy/K03_Integrating_MM.html">Integrating the Michaelis-Menten Rate Law</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">SciPy</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../4_SciPy/K04_NumericIntegration.html">Numeric Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../4_SciPy/K05_NumericIntegration_SystemEq.html">Integrating a System</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PhysOrg\ Examples</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../6_PhysOrgExamples/6_1_start.html">Integrating Rate Equations with Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../6_PhysOrgExamples/6_2_kinetics.html">Investigating Reaction Kinetics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../6_PhysOrgExamples/6_3_Problem_ch7_p5.html">Problem 5, Ch. 7</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../6_PhysOrgExamples/6_4_Problem_ch_7_p_9.html">Problem 9, Chapter 7</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../6_PhysOrgExamples/6_5_Problem_ch7_p11.html">Problem 11, Chapter 7</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/blinkletter/StealThisCode/blob/main/./testideas/DataAnalyzer2.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/testideas/DataAnalyzer2.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1><no title></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### Read in experimental parameters from plate plan file</span>
+<span class="c1">### Create lists of column &amp; row names, enzyme names, enzyme &amp; substrate conc </span>
+<span class="c1">### Convert units to standard units (molar and min^-1)</span>
+<span class="c1">### Calculate e_405 for nitrophenol at given pH</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="c1">#!wget https://raw.githubusercontent.com/blinkletter/StealThisCode/main/BiochemToolbox.py</span>
+<span class="c1">#!pip install uncertainties  # to install &#39;Uncertainties&#39; package in Colab. </span>
+<span class="kn">import</span> <span class="nn">BiochemToolbox</span> <span class="k">as</span> <span class="nn">BT</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">file_location</span> <span class="o">=</span> <span class="s2">&quot;data1/plateplans/&quot;</span>
+<span class="n">file_name</span> <span class="o">=</span> <span class="s2">&quot;Plate1.csv&quot;</span>
+<span class="n">pH</span> <span class="o">=</span> <span class="mf">7.0</span>
+
+<span class="n">df</span><span class="p">,</span> <span class="n">plate</span><span class="p">,</span> <span class="n">e_NPA</span> <span class="o">=</span> <span class="n">BT</span><span class="o">.</span><span class="n">read_plate_setup</span><span class="p">(</span><span class="n">file_location</span><span class="o">+</span><span class="n">file_name</span><span class="p">,</span> <span class="n">pH</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">plate</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dict_keys([&#39;row_name_list&#39;, &#39;S_conc_list&#39;, &#39;lane_name_list&#39;, &#39;E_conc_list&#39;, &#39;E_Name_list&#39;])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### Contact sheet. Ticks deleted on plots inside the set.</span>
+<span class="c1">#!wget https://raw.githubusercontent.com/blinkletter/StealThisCode/main/BiochemToolbox.py</span>
+<span class="c1">#!pip install uncertainties  # to install &#39;Uncertainties&#39; package in Colab. </span>
+<span class="kn">import</span> <span class="nn">BiochemToolbox</span> <span class="k">as</span> <span class="nn">BT</span>
+
+<span class="n">BT</span><span class="o">.</span><span class="n">contact_sheet</span><span class="p">(</span><span class="s2">&quot;data1/Plate1&quot;</span><span class="p">,</span> 
+                 <span class="n">columns</span> <span class="o">=</span> <span class="n">plate</span><span class="p">[</span><span class="s2">&quot;lane_name_list&quot;</span><span class="p">],</span>
+                 <span class="n">rows</span> <span class="o">=</span> <span class="n">plate</span><span class="p">[</span><span class="s2">&quot;row_name_list&quot;</span><span class="p">],</span>
+                 <span class="n">enzymes</span> <span class="o">=</span> <span class="n">plate</span><span class="p">[</span><span class="s2">&quot;E_Name_list&quot;</span><span class="p">],</span>
+                 <span class="n">fancy</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/3b7ae3c8ee39132d9f583d395f16e8408f093f06b49d06ab75d9b73115ab4a66.png" src="../_images/3b7ae3c8ee39132d9f583d395f16e8408f093f06b49d06ab75d9b73115ab4a66.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Plot saved as plots/plot_contact_sheet.pdf
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>()
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### Plot initial rates for a well or a set of wells</span>
+
+<span class="c1">#!wget https://raw.githubusercontent.com/blinkletter/StealThisCode/main/BiochemToolbox.py</span>
+<span class="c1">#!pip install uncertainties  # to install &#39;Uncertainties&#39; package in Colab. </span>
+<span class="kn">import</span> <span class="nn">BiochemToolbox</span> <span class="k">as</span> <span class="nn">BT</span>
+
+<span class="c1">### get plate info from plate plan file</span>
+<span class="n">df</span><span class="p">,</span> <span class="n">plate</span><span class="p">,</span> <span class="n">e_NPA</span> <span class="o">=</span> <span class="n">BT</span><span class="o">.</span><span class="n">read_plate_setup</span><span class="p">(</span><span class="s2">&quot;PlatePlan0_setup.csv&quot;</span><span class="p">,</span> <span class="n">pH</span> <span class="o">=</span> <span class="mf">7.0</span><span class="p">)</span>
+
+<span class="c1">### Chose columns to plot</span>
+<span class="n">Column_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;2&quot;</span><span class="p">,</span><span class="s2">&quot;3&quot;</span><span class="p">]</span>
+<span class="c1">#Column_list = [&quot;4&quot;, &quot;5&quot;, &quot;6&quot;]</span>
+<span class="c1">#Column_list = plate[&quot;lane_name_list&quot;]</span>
+
+<span class="c1">### Chose rows within the columns</span>
+<span class="c1">#Row_list = [&quot;A&quot;,&quot;B&quot;,&quot;C&quot;]</span>
+<span class="n">Row_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;B&quot;</span><span class="p">]</span>
+<span class="n">Row_list</span> <span class="o">=</span> <span class="n">plate</span><span class="p">[</span><span class="s2">&quot;row_name_list&quot;</span><span class="p">]</span>
+
+<span class="n">plate_name_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;plate1&quot;</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">plate_name</span> <span class="ow">in</span> <span class="n">plate_name_list</span><span class="p">:</span>
+    <span class="n">data_file_root_name</span> <span class="o">=</span> <span class="s2">&quot;data1/&quot;</span> <span class="o">+</span> <span class="n">plate_name</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">BT</span><span class="o">.</span><span class="n">plot_lanes</span><span class="p">(</span><span class="n">data_file_root_name</span><span class="p">,</span> 
+                           <span class="n">Column_list</span><span class="p">,</span> <span class="n">Row_list</span><span class="p">,</span> 
+                           <span class="n">Fraction_time_span</span> <span class="o">=</span> <span class="mf">.5</span><span class="p">,</span> 
+                           <span class="n">Line_Fit</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                           <span class="n">Display_Plot</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                           <span class="n">Display_Data</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                           <span class="n">fancy</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                           <span class="n">tiny_points</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                           <span class="n">tiny_line</span> <span class="o">=</span> <span class="kc">False</span>
+                           <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Column</th>
+      <th>Row</th>
+      <th>slope</th>
+      <th>slope stderr</th>
+      <th>int</th>
+      <th>int stderr</th>
+      <th>RSQ</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>A</td>
+      <td>0.000024</td>
+      <td>0.000010</td>
+      <td>0.000157</td>
+      <td>0.000177</td>
+      <td>0.030433</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>B</td>
+      <td>0.000086</td>
+      <td>0.000009</td>
+      <td>-0.000228</td>
+      <td>0.000159</td>
+      <td>0.338264</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>C</td>
+      <td>0.000138</td>
+      <td>0.000009</td>
+      <td>0.000062</td>
+      <td>0.000160</td>
+      <td>0.567253</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1</td>
+      <td>D</td>
+      <td>0.000217</td>
+      <td>0.000009</td>
+      <td>0.000103</td>
+      <td>0.000162</td>
+      <td>0.757405</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1</td>
+      <td>E</td>
+      <td>0.000445</td>
+      <td>0.000009</td>
+      <td>0.000149</td>
+      <td>0.000162</td>
+      <td>0.929754</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>1</td>
+      <td>F</td>
+      <td>0.000759</td>
+      <td>0.000009</td>
+      <td>-0.000119</td>
+      <td>0.000158</td>
+      <td>0.975709</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>1</td>
+      <td>G</td>
+      <td>0.001496</td>
+      <td>0.000010</td>
+      <td>0.000015</td>
+      <td>0.000171</td>
+      <td>0.992614</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>1</td>
+      <td>H</td>
+      <td>0.003723</td>
+      <td>0.000010</td>
+      <td>0.000435</td>
+      <td>0.000168</td>
+      <td>0.998833</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2</td>
+      <td>A</td>
+      <td>0.000024</td>
+      <td>0.000010</td>
+      <td>0.000197</td>
+      <td>0.000171</td>
+      <td>0.031879</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2</td>
+      <td>B</td>
+      <td>0.000073</td>
+      <td>0.000010</td>
+      <td>0.000056</td>
+      <td>0.000177</td>
+      <td>0.226395</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>2</td>
+      <td>C</td>
+      <td>0.000143</td>
+      <td>0.000010</td>
+      <td>0.000092</td>
+      <td>0.000184</td>
+      <td>0.514766</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>2</td>
+      <td>D</td>
+      <td>0.000212</td>
+      <td>0.000010</td>
+      <td>0.000209</td>
+      <td>0.000170</td>
+      <td>0.731857</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>2</td>
+      <td>E</td>
+      <td>0.000438</td>
+      <td>0.000009</td>
+      <td>0.000226</td>
+      <td>0.000166</td>
+      <td>0.923946</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>2</td>
+      <td>F</td>
+      <td>0.000753</td>
+      <td>0.000008</td>
+      <td>-0.000099</td>
+      <td>0.000141</td>
+      <td>0.980400</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>2</td>
+      <td>G</td>
+      <td>0.001492</td>
+      <td>0.000009</td>
+      <td>0.000155</td>
+      <td>0.000163</td>
+      <td>0.993234</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>2</td>
+      <td>H</td>
+      <td>0.003735</td>
+      <td>0.000010</td>
+      <td>0.000189</td>
+      <td>0.000174</td>
+      <td>0.998756</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>3</td>
+      <td>A</td>
+      <td>0.000030</td>
+      <td>0.000010</td>
+      <td>0.000235</td>
+      <td>0.000167</td>
+      <td>0.052955</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>3</td>
+      <td>B</td>
+      <td>0.000061</td>
+      <td>0.000010</td>
+      <td>0.000156</td>
+      <td>0.000171</td>
+      <td>0.184166</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>3</td>
+      <td>C</td>
+      <td>0.000133</td>
+      <td>0.000009</td>
+      <td>0.000394</td>
+      <td>0.000163</td>
+      <td>0.535582</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>3</td>
+      <td>D</td>
+      <td>0.000219</td>
+      <td>0.000009</td>
+      <td>0.000154</td>
+      <td>0.000164</td>
+      <td>0.758150</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>3</td>
+      <td>E</td>
+      <td>0.000471</td>
+      <td>0.000010</td>
+      <td>-0.000276</td>
+      <td>0.000169</td>
+      <td>0.931569</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>3</td>
+      <td>F</td>
+      <td>0.000739</td>
+      <td>0.000009</td>
+      <td>0.000226</td>
+      <td>0.000156</td>
+      <td>0.975104</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>3</td>
+      <td>G</td>
+      <td>0.001492</td>
+      <td>0.000009</td>
+      <td>0.000148</td>
+      <td>0.000162</td>
+      <td>0.993331</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>3</td>
+      <td>H</td>
+      <td>0.003735</td>
+      <td>0.000010</td>
+      <td>0.000345</td>
+      <td>0.000177</td>
+      <td>0.998712</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><img alt="../_images/208ef27fa26072b857425f9b372cc83d3744c1b4aa550b2b848a471f39636c4d.png" src="../_images/208ef27fa26072b857425f9b372cc83d3744c1b4aa550b2b848a471f39636c4d.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Plot saved as data1/data.pdf
+Data saved as data1/data.csv
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### Analysis of a single cell with slope and differentials</span>
+
+<span class="c1">#!wget https://raw.githubusercontent.com/blinkletter/StealThisCode/main/BiochemToolbox.py</span>
+<span class="c1">#!pip install uncertainties  # to install &#39;Uncertainties&#39; package in Colab. </span>
+<span class="kn">import</span> <span class="nn">BiochemToolbox</span> <span class="k">as</span> <span class="nn">BT</span>
+
+<span class="n">data_name</span> <span class="o">=</span> <span class="s2">&quot;data1/plate0&quot;</span>
+<span class="n">BT</span><span class="o">.</span><span class="n">dual_plot_w_residuals</span><span class="p">(</span><span class="n">data_name</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">,</span> 
+                      <span class="n">Fraction_time_span</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
+                      <span class="n">plot_file</span> <span class="o">=</span> <span class="s2">&quot;plots/Cell_w_residuals&quot;</span><span class="p">,</span>
+                      <span class="n">fancy</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope = 0.00373 +/- 9.92e-06
+</pre></div>
+</div>
+<img alt="../_images/c8b532bdb78685a40ac55246c31c07e569f677c4433359a834f63d007622b1d6.png" src="../_images/c8b532bdb78685a40ac55246c31c07e569f677c4433359a834f63d007622b1d6.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Plot saved as plots/Cell_w_residuals_2_H.pdf
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>()
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### Analysis of a single cell with slope and differentials</span>
+
+<span class="c1">#!wget https://raw.githubusercontent.com/blinkletter/StealThisCode/main/BiochemToolbox.py</span>
+<span class="c1">#!pip install uncertainties  # to install &#39;Uncertainties&#39; package in Colab. </span>
+<span class="kn">import</span> <span class="nn">BiochemToolbox</span> <span class="k">as</span> <span class="nn">BT</span>
+
+<span class="n">lane_name</span> <span class="o">=</span> <span class="s2">&quot;7&quot;</span>
+<span class="n">row_name</span> <span class="o">=</span> <span class="s2">&quot;C&quot;</span>
+<span class="n">data_name</span> <span class="o">=</span> <span class="s2">&quot;data1/data&quot;</span>
+
+<span class="n">BT</span><span class="o">.</span><span class="n">plot_four_w_residuals</span><span class="p">(</span><span class="n">data_name</span><span class="p">,</span> <span class="n">lane_name</span><span class="p">,</span> <span class="n">row_name</span><span class="p">,</span> 
+                         <span class="n">Fraction_time_span_medium</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span>
+                         <span class="n">Fraction_time_span_short</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">,</span>
+                         <span class="n">plot_file</span> <span class="o">=</span> <span class="s2">&quot;plot1/Cell_w_residuals&quot;</span><span class="p">,</span>
+                         <span class="n">fancy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope = 0.00541 +/- 5.07e-05
+slope = 0.00642 +/- 0.000357
+</pre></div>
+</div>
+<img alt="../_images/53dd2a3f99085d6d6b20b488ebc538ced798def661f04c6a02eb18e51273b64d.png" src="../_images/53dd2a3f99085d6d6b20b488ebc538ced798def661f04c6a02eb18e51273b64d.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Plot saved as plot1/Cell_w_residuals_7_C.pdf
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>()
+</pre></div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./testideas"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Barry Linkletter
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

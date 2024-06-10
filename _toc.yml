@@ -6,20 +6,28 @@ root: start
 parts:
     - caption: Math
       chapters:
-        - file: 1_1_Calculator.ipynb
-        - file: uncertainties.ipynb
+        - file: 1_Math/1_1_Calculator.ipynb
+        - file: 1_Math/1_2_uncertainties.ipynb
     - caption: MatPlotLib
       chapters:
-        - file: 2_1_Plotting.ipynb
-        - file: 2_2_Curve_Fits.ipynb
-        - file: 2_3_Curve_Fits.ipynb
-        - file: 2_4_Fancy_1.ipynb
+        - file: 2_MatPlotLib/2_1_Plotting.ipynb
+        - file: 2_MatPlotLib/2_2_Curve_Fits.ipynb
+        - file: 2_MatPlotLib/2_3_Curve_Fits.ipynb
+        - file: 2_MatPlotLib/2_4_Fancy_1.ipynb
     - caption: SymPy
       chapters:
-        - file: ReactionKinetics/K01_solving_with_sympy.ipynb
-        - file: ReactionKinetics/K02_Integrating_Rate_Law_1.ipynb
-        - file: ReactionKinetics/K03_Integrating_MM.ipynb
+        - file: 3_SymPy/K01_solving_with_sympy.ipynb
+        - file: 3_SymPy/K02_Integrating_Rate_Law_1.ipynb
+        - file: 3_SymPy/K03_Integrating_MM.ipynb
     - caption: SciPy
       chapters:
-        - file: ReactionKinetics/K04_NumericIntegration.ipynb
-        - file: ReactionKinetics/K05_NumericIntegration_SystemEq.ipynb
+        - file: 4_SciPy/K04_NumericIntegration.ipynb
+        - file: 4_SciPy/K05_NumericIntegration_SystemEq.ipynb
+    - caption: "PhysOrg Examples"
+      chapters:
+        - file: 6_PhysOrgExamples/6_0_Introduction.ipynb
+        - file: 6_PhysOrgExamples/6_1_start.ipynb
+        - file: 6_PhysOrgExamples/6_2_kinetics.ipynb
+        - file: 6_PhysOrgExamples/6_3_Problem_ch7_p5.ipynb
+        - file: 6_PhysOrgExamples/6_4_Problem_ch_7_p_9.ipynb
+        - file: 6_PhysOrgExamples/6_5_Problem_ch7_p11.ipynb

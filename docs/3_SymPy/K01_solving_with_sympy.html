@@ -1,0 +1,1059 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Free Symbolic Math &#8212; Steal this Code</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../_static/tufte.css?v=189edcc0" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '3_SymPy/K01_solving_with_sympy';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Integrating Rate Laws" href="K02_Integrating_Rate_Law_1.html" />
+    <link rel="prev" title="Plotting Reaction Kinetics" href="../2_MatPlotLib/2_6_Plotting_Reaction_Kinetics_to_Determine_Order.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../start.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/Ouroboros-benzene.svg.png" class="logo__image only-light" alt="Steal this Code - Home"/>
+    <script>document.write(`<img src="../_static/Ouroboros-benzene.svg.png" class="logo__image only-dark" alt="Steal this Code - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../start.html">
+                    Steal This Code
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Math</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../1_Math/1_1_Calculator.html">Basic Math with <em>Python</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1_Math/1_2_uncertainties.html">Using Uncertainty</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">MatPlotLib</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../2_MatPlotLib/2_1_Plotting.html">Plotting Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2_MatPlotLib/2_2_Curve_Fits.html">Linear Fits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2_MatPlotLib/2_3_Curve_Fits.html">Curve Fits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2_MatPlotLib/2_4_Fancy_1.html">Advanced Plotting Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2_MatPlotLib/2_5_Notes.html">Notes on Fitting Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2_MatPlotLib/2_6_Plotting_Reaction_Kinetics_to_Determine_Order.html">Plotting Reaction Kinetics</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">SymPy</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Free Symbolic Math</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="K02_Integrating_Rate_Law_1.html">Integrating Rate Laws</a></li>
+<li class="toctree-l1"><a class="reference internal" href="K03_Integrating_MM.html">Integrating the Michaelis-Menten Rate Law</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">SciPy</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../4_SciPy/K04_NumericIntegration.html">Numeric Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../4_SciPy/K05_NumericIntegration_SystemEq.html">Integrating a System</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PhysOrg Examples</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../6_PhysOrgExamples/6_0_Introduction.html">Intro to PhysOrg Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../6_PhysOrgExamples/6_1_start.html">Integrating Rate Equations with Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../6_PhysOrgExamples/6_2_kinetics.html">Investigating Reaction Kinetics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../6_PhysOrgExamples/6_3_Problem_ch7_p5.html">Problem 5, Ch. 7</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../6_PhysOrgExamples/6_4_Problem_ch_7_p_9.html">Problem 9, Chapter 7</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../6_PhysOrgExamples/6_5_Problem_ch7_p11.html">Problem 11, Chapter 7</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/blinkletter/StealThisCode/blob/main/./3_SymPy/K01_solving_with_sympy.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/3_SymPy/K01_solving_with_sympy.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Free Symbolic Math</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Free Symbolic Math</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sympy"><em>SymPy</em></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#symbolic-math">Symbolic Math</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-ice-table-solve-for-x">An ICE table: Solve for <span class="math notranslate nohighlight">\(x\)</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-sympy-equations">Creating <em>SymPy</em> Equations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#acid-equilibrium-another-ice-table-in-python">Acid equilibrium: Another ICE Table in <em>Python</em></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#weak-acid-equilibrium">Weak Acid Equilibrium</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#start-with-the-facts">Start With the Facts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#set-up-the-equation">Set Up the Equation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-sympy">Using SymPy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pick-a-number">Pick a Number</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#produce-the-result">Produce the Result</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#styling-printouts-of-numbers">Styling Printouts of Numbers</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="free-symbolic-math">
+<h1>Free Symbolic Math<a class="headerlink" href="#free-symbolic-math" title="Link to this heading">#</a></h1>
+<p>In the integration document that I wrote a long time ago I used Maple to perform the integrations of various rate laws. When the going gets tough I turn to expensive software to get me through. Maple is free to students at UPEI but it costs thousands of dollars to rent after you graduate. Fortunately activists from around the world are building free tools that can accomplish much of the functions of symbolic math packages like Maple and Mathematica.</p>
+<section id="sympy">
+<h2><em>SymPy</em><a class="headerlink" href="#sympy" title="Link to this heading">#</a></h2>
+<p>The <em>Python</em> package <em>SymPy</em> provides tools for performing symbolic math. It can solve for <span class="math notranslate nohighlight">\(x\)</span>. It can integrate and it can derive. It can do much more than that, but I will stick with what we need.</p>
+</section>
+<section id="symbolic-math">
+<h2>Symbolic Math<a class="headerlink" href="#symbolic-math" title="Link to this heading">#</a></h2>
+<p><em>SymPy</em> can perform algebraic manipulations of expressions. Consider the code below and steal it if you find it useful.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sym</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>    <span class="c1">### create x as a &#39;symbol&#39;, not a variable</span>
+
+<span class="n">expr1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;eq. 1&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">expr1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>eq. 1
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle 1 - x^{2}\]</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">expr2</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">x</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;eq. 2&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">expr2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>eq. 2
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle 1 - x\]</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;factoring eq. 1&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">sym</span><span class="o">.</span><span class="n">factor</span><span class="p">(</span><span class="n">expr1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>factoring eq. 1
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle - \left(x - 1\right) \left(x + 1\right)\]</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;multiply eq. 1 by eq. 2&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">expr1</span><span class="o">*</span><span class="n">expr2</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">sym</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">expr1</span><span class="o">*</span><span class="n">expr2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>multiply eq. 1 by eq. 2
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \left(1 - x\right) \left(1 - x^{2}\right)\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle x^{3} - x^{2} - x + 1\]</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;divide eq. 1 by eq. 2&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">expr1</span><span class="o">/</span><span class="n">expr2</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">sym</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">expr1</span><span class="o">/</span><span class="n">expr2</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">sym</span><span class="o">.</span><span class="n">simplify</span><span class="p">(</span><span class="n">sym</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">expr1</span><span class="o">/</span><span class="n">expr2</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>divide eq. 1 by eq. 2
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \frac{1 - x^{2}}{1 - x}\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle - \frac{x^{2}}{1 - x} + \frac{1}{1 - x}\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle x + 1\]</div>
+</div>
+</div>
+</section>
+<section id="an-ice-table-solve-for-x">
+<h2>An ICE table: Solve for <span class="math notranslate nohighlight">\(x\)</span><a class="headerlink" href="#an-ice-table-solve-for-x" title="Link to this heading">#</a></h2>
+<p>One simple use of <em>SymPy</em> is to solve for an unknown. Who needs the quadratic equation when you can solve for the roots of a polynomial directly using a symbolic math tool. Consider the classic ICE table problem for the dissociation of a weak acid like acetic acid.</p>
+<div class="math notranslate nohighlight">
+\[ \rm AH \stackrel{K_a}{\rightleftharpoons} A + H \]</div>
+<p>The equilibrium constant, <span class="math notranslate nohighlight">\(K_a\)</span>, can be expressed as…</p>
+<div class="math notranslate nohighlight">
+\[ K_a = \rm \frac{[A][H]}{[AH]} \]</div>
+<p>…and the value of <span class="math notranslate nohighlight">\(K_a\)</span> for acetic acid is known to be <span class="math notranslate nohighlight">\(10^{-4.75}\)</span></p>
+<p>We set up the ICE table as so…</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Time</p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(\rm [AH]\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(\rm [A]\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(\rm [H]\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>Initial</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(0.1\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(0\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(0\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Change</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(-x\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(x\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(x\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>End</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(0.1 - x\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(x\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(x\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Now we can substitute all the values that define the equilibrium endpoint (the “E” in “ICE”).</p>
+<div class="math notranslate nohighlight">
+\[ 10^{-4.75} = \frac{x\cdot x}{0.1 - x} \]</div>
+<p>This can be rearranged to make a polynomial and then the roots solved using the infamous quadratic equation. Or… we could just solve it directly usin g the <em>SymPy</em> tools. Write the equation above to equate to zero and then solve.</p>
+<div class="math notranslate nohighlight">
+\[ 0 = \frac{x^2}{0.1 - x} - 10^{-4.75} \]</div>
+<p>Steal the code below whenever you need to calculate an ICE table. You likely will need only to change the values at the beginning.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sym</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+
+<span class="n">conc</span> <span class="o">=</span> <span class="mf">0.001</span>    <span class="c1">### The initial concentration of acid. Conc is too small to use the x&lt;&lt;conc assumption</span>
+<span class="n">pKa</span> <span class="o">=</span> <span class="mf">4.75</span>      <span class="c1">### pKa value of then acid</span>
+
+
+<span class="c1">####################</span>
+<span class="c1">### Below is all the code for solving for x.  Everything else is setup or printing answers</span>
+<span class="c1">####################</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>                    <span class="c1">### create x as a &#39;symbol&#39;, not a variable</span>
+<span class="n">expr</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="n">conc</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="n">pKa</span><span class="p">)</span>   <span class="c1">### The equation to solve (an expression that equals zero)</span>
+<span class="n">answer</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>              <span class="c1">### solve for x (the expression must equal zero)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The roots are: </span><span class="si">{</span><span class="n">answer</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>       <span class="c1">### The roots. the correct answer is usually the lowest positive value</span>
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="c1">####################</span>
+<span class="c1">### We are done. The roots have been calculated. Everything below is just to</span>
+<span class="c1">### print out the calculated values for the answers</span>
+<span class="c1">####################</span>
+
+<span class="n">i</span> <span class="o">=</span> <span class="n">answer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="nb">min</span><span class="p">([</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">answer</span> <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]))</span>   <span class="c1">### find location (index) of lowest positive value</span>
+<span class="n">change</span> <span class="o">=</span> <span class="n">answer</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>                                    <span class="c1">### The smallest positive root (hopefully the correct answer)</span>
+<span class="n">change</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">change</span><span class="p">)</span>                                <span class="c1">### Convert to regular floats, not weird SymPy floats</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The initial concentration of AH is: </span><span class="si">{</span><span class="n">conc</span><span class="si">:</span><span class="s2">0.2e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The change in concentration (x) is: </span><span class="si">{</span><span class="n">change</span><span class="si">:</span><span class="s2">0.2e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="c1">####################</span>
+<span class="c1">### calculate and print the final values for AH, A and H </span>
+<span class="c1">####################</span>
+
+<span class="n">conc_AH_eq</span><span class="p">,</span> <span class="n">conc_A_eq</span><span class="p">,</span> <span class="n">conc_H_eq</span> <span class="o">=</span> <span class="p">[</span><span class="n">conc</span> <span class="o">-</span> <span class="n">change</span><span class="p">,</span> <span class="n">change</span><span class="p">,</span> <span class="n">change</span><span class="p">]</span>      
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The conc of AH at equilibrium is : </span><span class="si">{</span><span class="n">conc_AH_eq</span><span class="si">:</span><span class="s2">0.2e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The conc of A at equilibrium is : </span><span class="si">{</span><span class="n">conc_A_eq</span><span class="si">:</span><span class="s2">0.2e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The conc of H at equilibrium is : </span><span class="si">{</span><span class="n">conc_H_eq</span><span class="si">:</span><span class="s2">0.2e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">pH</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">conc_H_eq</span><span class="p">)</span>   
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The final pH is : </span><span class="si">{</span><span class="n">pH</span><span class="si">:</span><span class="s2">0.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The roots are: [-0.000142539633259631, 0.000124756839159242]
+
+The initial concentration of AH is: 1.00e-03
+The change in concentration (x) is: 1.25e-04
+
+The conc of AH at equilibrium is : 8.75e-04
+The conc of A at equilibrium is : 1.25e-04
+The conc of H at equilibrium is : 1.25e-04
+The final pH is : -3.90
+</pre></div>
+</div>
+</div>
+</div>
+<section id="creating-sympy-equations">
+<h3>Creating <em>SymPy</em> Equations<a class="headerlink" href="#creating-sympy-equations" title="Link to this heading">#</a></h3>
+<p>We don’t necessarily need to rearrange the equation to obtain an expression that is zero. We could define an equation within <em>SymPy</em> and then ask it to solve that equation for <span class="math notranslate nohighlight">\(x\)</span>.  Consider the code below.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sym</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+
+<span class="n">conc</span> <span class="o">=</span> <span class="mf">0.001</span>             <span class="c1">### The initial concentration of acid. Conc is too small to use the x&lt;&lt;conc assumption</span>
+<span class="n">pKa</span> <span class="o">=</span> <span class="mf">4.75</span>                <span class="c1">### pKa value of then acid</span>
+
+
+<span class="c1">####################</span>
+<span class="c1">### Below is all the code for solving for x.  Everything else is setup or printing answers</span>
+<span class="c1">####################</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>    <span class="c1">### create x as a &#39;symbol&#39;, not a variable</span>
+
+<span class="n">lhs</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="n">pKa</span><span class="p">)</span>          <span class="c1">### The two sides of the equation</span>
+<span class="n">rhs</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="n">conc</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span>   
+
+<span class="n">eq</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">)</span>       <span class="c1">### The equation to solve </span>
+<span class="n">display</span><span class="p">(</span><span class="n">eq</span><span class="p">)</span>               <span class="c1">### Display the equation</span>
+
+<span class="n">answer</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>  <span class="c1">### solve for x</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The roots are: </span><span class="si">{</span><span class="n">answer</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1">### The roots </span>
+<span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle 1.77827941003892 \cdot 10^{-5} = \frac{x^{2}}{0.001 - x}\]</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The roots are: [-0.000142539633259631, 0.000124756839159242]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="acid-equilibrium-another-ice-table-in-python">
+<h1>Acid equilibrium: Another ICE Table in <em>Python</em><a class="headerlink" href="#acid-equilibrium-another-ice-table-in-python" title="Link to this heading">#</a></h1>
+<p>We often can determine the <strong>final concentrations</strong> of a system using the initial concentrations and the equilibrium constant, <em>K<sub>eq</sub></em>. You will be familiar with the <strong>ICE table</strong> method, which helps us to set up the equations. Let us use the example of a weak acid.</p>
+<section id="weak-acid-equilibrium">
+<h2>Weak Acid Equilibrium<a class="headerlink" href="#weak-acid-equilibrium" title="Link to this heading">#</a></h2>
+<p>When we <strong>add</strong> 0.1 <em>g</em> of acetic acid to 100 <em>mL</em> of pure water, what is the resulting <em>pH</em>? We can <strong>solve</strong> this problem with a pad of paper and a calculator or we can build a notebook that can be reused again and again. Consider the code below.</p>
+<section id="start-with-the-facts">
+<h3>Start With the Facts<a class="headerlink" href="#start-with-the-facts" title="Link to this heading">#</a></h3>
+<p>First we define some <strong>variables</strong> and constants. If we want to reuse this notebook for another monoprotic <strong>weak acid</strong>, we could do so by changing only this section.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">molar_mass_of_acid</span> <span class="o">=</span> <span class="mf">60.05</span> <span class="c1"># in g/mol</span>
+<span class="n">pKa</span> <span class="o">=</span> <span class="mf">4.75</span>                 
+
+<span class="n">acid_mass</span> <span class="o">=</span> <span class="mf">1.1</span>            <span class="c1"># in g</span>
+<span class="n">water_volume</span> <span class="o">=</span> <span class="mi">100</span>         <span class="c1"># in mL</span>
+
+<span class="n">Ka</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="n">pKa</span><span class="p">)</span>
+
+<span class="n">moles</span> <span class="o">=</span> <span class="n">acid_mass</span> <span class="o">/</span> <span class="n">molar_mass_of_acid</span>    <span class="c1"># moles of acid</span>
+<span class="n">volume</span> <span class="o">=</span> <span class="n">water_volume</span> <span class="o">/</span> <span class="mi">1000</span>              <span class="c1"># litres of water</span>
+
+<span class="n">initial_conc</span> <span class="o">=</span> <span class="n">moles</span> <span class="o">/</span> <span class="n">volume</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Initial concentration of acid:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">initial_conc</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span> <span class="s2">&quot;moles/L&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The Ka of the acid:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">Ka</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Initial concentration of acid:
+0.18318 moles/L
+The Ka of the acid:
+1.78e-05
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="set-up-the-equation">
+<h3>Set Up the Equation<a class="headerlink" href="#set-up-the-equation" title="Link to this heading">#</a></h3>
+<p>We know the <strong>equilibrium</strong> expression for the acid dissociation…</p>
+<div class="math notranslate nohighlight">
+\[AcOH \rightleftharpoons AcO^- + H^+\]</div>
+<div class="math notranslate nohighlight">
+\[K_a = \frac{[AcO^-][H^+]}{[AcOH]}\]</div>
+<p>The <strong>initial</strong> concentrations of acetic acid and the products could be described as…</p>
+<div class="math notranslate nohighlight">
+\[[AcOH]_0 = some value\]</div>
+<div class="math notranslate nohighlight">
+\[[AcO^-]\:and\:[H^+] = 0\]</div>
+<p>The <strong>change</strong> in the concentrations as the reaction moves forward is represented by the symbol <em>x</em>. We can say that the new concentrations will be…</p>
+<div class="math notranslate nohighlight">
+\[[AcOH]_{eq} = some value-x\]</div>
+<div class="math notranslate nohighlight">
+\[[AcO^-]_{eq}\:and\:[H^+]_{eq} = x\]</div>
+<p>Therefore the <strong>equilibrium</strong> will occure when the concentrations amount to the value of the equilibrium constant.</p>
+<div class="math notranslate nohighlight">
+\[K_a = \frac{[AcO^-]_{eq}[H^+]_{eq}}{[AcOH]_{eq}}\]</div>
+<p>and so…</p>
+<div class="math notranslate nohighlight">
+\[K_a = \frac{x \cdot x}{some value-x}\]</div>
+</section>
+<section id="using-sympy">
+<h3>Using SymPy<a class="headerlink" href="#using-sympy" title="Link to this heading">#</a></h3>
+<p>We need to solve for <em>x</em>. <em>SymPy</em> will do all the hard work.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sympy</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+
+<span class="n">expr</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="o">/</span><span class="p">(</span><span class="n">initial_conc</span><span class="o">-</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">Ka</span>
+<span class="n">display</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \frac{x^{2}}{0.183180682764363 - x} - 1.77827941003892 \cdot 10^{-5}\]</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">solution_list</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">solvers</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>  
+<span class="nb">print</span><span class="p">(</span><span class="n">solution_list</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[-0.00181375799093155, 0.00179597519683116]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="pick-a-number">
+<h3>Pick a Number<a class="headerlink" href="#pick-a-number" title="Link to this heading">#</a></h3>
+<p><strong>Inspect</strong> the solution. There are <strong>two possibilities</strong>. However it is impossible for the concentration of product to be negative in value. So we will choose the only possible answer.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">change</span> <span class="o">=</span> <span class="n">solution_list</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">change</span><span class="p">)</span>    
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.00179597519683116
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="produce-the-result">
+<h3>Produce the Result<a class="headerlink" href="#produce-the-result" title="Link to this heading">#</a></h3>
+<p>We can now <strong>report</strong> the results.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The initial concentration of acid is&quot;</span><span class="p">,</span> <span class="n">initial_conc</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="o">*</span><span class="mi">20</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;At equilibrium we will have the following concentrations&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[Acid] =&quot;</span><span class="p">,</span> <span class="n">initial_conc</span> <span class="o">-</span> <span class="n">change</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[hydronium] =&quot;</span><span class="p">,</span> <span class="n">change</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[Conj. base] =&quot;</span><span class="p">,</span> <span class="n">change</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="o">*</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="n">pH</span> <span class="o">=</span> <span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">change</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pH =&quot;</span><span class="p">,</span> <span class="n">pH</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The initial concentration of acid is 0.18318068276436303
+--------------------
+At equilibrium we will have the following concentrations
+[Acid] = 0.181384707567532
+[hydronium] = 0.00179597519683116
+[Conj. base] = 0.00179597519683116
+--------------------
+pH = 2.745699665415787
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="styling-printouts-of-numbers">
+<h3>Styling Printouts of Numbers<a class="headerlink" href="#styling-printouts-of-numbers" title="Link to this heading">#</a></h3>
+<p>You can decide how many <strong>significant figures</strong> to use when you write down the result above. But you can build it right into your print commands using the fstring method for <em>Python</em> text strings. Consider the following code. The {variable_name:.3} is the placeholder in the string where the fstring method will place a <strong>formatted</strong> value in the variable, the “:” indicates that the number should not be padded with zeros and the “.3” means 3 decimal places. The “f” after the decimal number means format as floating point; “g” means general format, “e” means exponentila format.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The initial concentration of acid is </span><span class="si">{</span><span class="n">initial_conc</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> M&quot;</span><span class="p">)</span>    <span class="c1"># 4 sig figs</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="o">*</span><span class="mi">20</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;At equilibrium we will have the following concentrations&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[Acid] = </span><span class="si">{</span><span class="n">initial_conc</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">change</span><span class="si">:</span><span class="s2">.3g</span><span class="si">}</span><span class="s2"> M&quot;</span><span class="p">)</span>   <span class="c1"># floating point with 3 decimal places</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[hydronium] = </span><span class="si">{</span><span class="n">change</span><span class="si">:</span><span class="s2">.3e</span><span class="si">}</span><span class="s2"> M&quot;</span><span class="p">)</span>             <span class="c1"># exponential format with 3 decimal places</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[Conj. base] = </span><span class="si">{</span><span class="n">change</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> M&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="o">*</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="n">pH</span> <span class="o">=</span> <span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">change</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;pH = </span><span class="si">{</span><span class="n">pH</span><span class="si">:</span><span class="s2">.3</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The initial concentration of acid is 0.1832 M
+--------------------
+At equilibrium we will have the following concentrations
+[Acid] = 0.181 M
+[hydronium] = 1.796e-3 M
+[Conj. base] = 0.002 M
+--------------------
+pH = 2.75
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<p>We have used the symbolic tools of <em>SymPy</em> to make and to solve equations. We will never have to use the quadratic equation again. In addition, all our operations and calculations are documented in this notebook so that errors can be found and code can be taken and reused later.</p>
+<p>We can now <strong>calculate</strong> the <em>pH</em> of a solution of a weak acid given an amount of acid, the volume and the <em>pK<sub>a</sub></em> value for the weak acid. We can <strong>change</strong> the values in the first block and then execute the notebook code to get to the final answer. We will never need to do math again (except on the test and final exam, so don’t get too lazy).</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./3_SymPy"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../2_MatPlotLib/2_6_Plotting_Reaction_Kinetics_to_Determine_Order.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Plotting Reaction Kinetics</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="K02_Integrating_Rate_Law_1.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Integrating Rate Laws</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Free Symbolic Math</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sympy"><em>SymPy</em></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#symbolic-math">Symbolic Math</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-ice-table-solve-for-x">An ICE table: Solve for <span class="math notranslate nohighlight">\(x\)</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-sympy-equations">Creating <em>SymPy</em> Equations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#acid-equilibrium-another-ice-table-in-python">Acid equilibrium: Another ICE Table in <em>Python</em></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#weak-acid-equilibrium">Weak Acid Equilibrium</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#start-with-the-facts">Start With the Facts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#set-up-the-equation">Set Up the Equation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-sympy">Using SymPy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pick-a-number">Pick a Number</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#produce-the-result">Produce the Result</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#styling-printouts-of-numbers">Styling Printouts of Numbers</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Barry Linkletter
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
     <link rel="stylesheet" type="text/css" href="../_static/tufte.css?v=189edcc0" />
@@ -64,7 +64,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Integrating Rate Laws" href="K02_Integrating_Rate_Law_1.html" />
-    <link rel="prev" title="Advanced Plotting Example" href="../2_MatPlotLib/2_4_Fancy_1.html" />
+    <link rel="prev" title="Plotting Reaction Kinetics" href="../2_MatPlotLib/2_6_Plotting_Reaction_Kinetics_to_Determine_Order.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -191,10 +191,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../2_MatPlotLib/2_2_Curve_Fits.html">Linear Fits</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../2_MatPlotLib/2_3_Curve_Fits.html">Curve Fits</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../2_MatPlotLib/2_4_Fancy_1.html">Advanced Plotting Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2_MatPlotLib/2_5_Notes.html">Notes on Fitting Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2_MatPlotLib/2_6_Plotting_Reaction_Kinetics_to_Determine_Order.html">Plotting Reaction Kinetics</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">SymPy</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Free Symbolic Math</a></li>
+
 <li class="toctree-l1"><a class="reference internal" href="K02_Integrating_Rate_Law_1.html">Integrating Rate Laws</a></li>
 <li class="toctree-l1"><a class="reference internal" href="K03_Integrating_MM.html">Integrating the Michaelis-Menten Rate Law</a></li>
 </ul>
@@ -203,8 +206,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../4_SciPy/K04_NumericIntegration.html">Numeric Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../4_SciPy/K05_NumericIntegration_SystemEq.html">Integrating a System</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">PhysOrg\ Examples</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PhysOrg Examples</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../6_PhysOrgExamples/6_0_Introduction.html">Intro to PhysOrg Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../6_PhysOrgExamples/6_1_start.html">Integrating Rate Equations with Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../6_PhysOrgExamples/6_2_kinetics.html">Investigating Reaction Kinetics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../6_PhysOrgExamples/6_3_Problem_ch7_p5.html">Problem 5, Ch. 7</a></li>
@@ -389,14 +393,30 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Free Symbolic Math</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sympy"><em>SymPy</em></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#symbolic-math">Symbolic Math</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solve-for-x">Solve for <span class="math notranslate nohighlight">\(x\)</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-ice-table-solve-for-x">An ICE table: Solve for <span class="math notranslate nohighlight">\(x\)</span></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-sympy-equations">Creating <em>SymPy</em> Equations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#acid-equilibrium-another-ice-table-in-python">Acid equilibrium: Another ICE Table in <em>Python</em></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#weak-acid-equilibrium">Weak Acid Equilibrium</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#start-with-the-facts">Start With the Facts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#set-up-the-equation">Set Up the Equation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-sympy">Using SymPy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pick-a-number">Pick a Number</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#produce-the-result">Produce the Result</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#styling-printouts-of-numbers">Styling Printouts of Numbers</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
+</li>
+</ul>
+
             </nav>
         </div>
     </div>
@@ -541,8 +561,8 @@ document.write(`
 </div>
 </div>
 </section>
-<section id="solve-for-x">
-<h2>Solve for <span class="math notranslate nohighlight">\(x\)</span><a class="headerlink" href="#solve-for-x" title="Link to this heading">#</a></h2>
+<section id="an-ice-table-solve-for-x">
+<h2>An ICE table: Solve for <span class="math notranslate nohighlight">\(x\)</span><a class="headerlink" href="#an-ice-table-solve-for-x" title="Link to this heading">#</a></h2>
 <p>One simple use of <em>SymPy</em> is to solve for an unknown. Who needs the quadratic equation when you can solve for the roots of a polynomial directly using a symbolic math tool. Consider the classic ICE table problem for the dissociation of a weak acid like acetic acid.</p>
 <div class="math notranslate nohighlight">
 \[ \rm AH \stackrel{K_a}{\rightleftharpoons} A + H \]</div>
@@ -702,9 +722,196 @@ The final pH is : -3.90
 </div>
 </section>
 </section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="acid-equilibrium-another-ice-table-in-python">
+<h1>Acid equilibrium: Another ICE Table in <em>Python</em><a class="headerlink" href="#acid-equilibrium-another-ice-table-in-python" title="Link to this heading">#</a></h1>
+<p>We often can determine the <strong>final concentrations</strong> of a system using the initial concentrations and the equilibrium constant, <em>K<sub>eq</sub></em>. You will be familiar with the <strong>ICE table</strong> method, which helps us to set up the equations. Let us use the example of a weak acid.</p>
+<section id="weak-acid-equilibrium">
+<h2>Weak Acid Equilibrium<a class="headerlink" href="#weak-acid-equilibrium" title="Link to this heading">#</a></h2>
+<p>When we <strong>add</strong> 0.1 <em>g</em> of acetic acid to 100 <em>mL</em> of pure water, what is the resulting <em>pH</em>? We can <strong>solve</strong> this problem with a pad of paper and a calculator or we can build a notebook that can be reused again and again. Consider the code below.</p>
+<section id="start-with-the-facts">
+<h3>Start With the Facts<a class="headerlink" href="#start-with-the-facts" title="Link to this heading">#</a></h3>
+<p>First we define some <strong>variables</strong> and constants. If we want to reuse this notebook for another monoprotic <strong>weak acid</strong>, we could do so by changing only this section.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">molar_mass_of_acid</span> <span class="o">=</span> <span class="mf">60.05</span> <span class="c1"># in g/mol</span>
+<span class="n">pKa</span> <span class="o">=</span> <span class="mf">4.75</span>                 
+
+<span class="n">acid_mass</span> <span class="o">=</span> <span class="mf">1.1</span>            <span class="c1"># in g</span>
+<span class="n">water_volume</span> <span class="o">=</span> <span class="mi">100</span>         <span class="c1"># in mL</span>
+
+<span class="n">Ka</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="n">pKa</span><span class="p">)</span>
+
+<span class="n">moles</span> <span class="o">=</span> <span class="n">acid_mass</span> <span class="o">/</span> <span class="n">molar_mass_of_acid</span>    <span class="c1"># moles of acid</span>
+<span class="n">volume</span> <span class="o">=</span> <span class="n">water_volume</span> <span class="o">/</span> <span class="mi">1000</span>              <span class="c1"># litres of water</span>
+
+<span class="n">initial_conc</span> <span class="o">=</span> <span class="n">moles</span> <span class="o">/</span> <span class="n">volume</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Initial concentration of acid:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">initial_conc</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span> <span class="s2">&quot;moles/L&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The Ka of the acid:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">Ka</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Initial concentration of acid:
+0.18318 moles/L
+The Ka of the acid:
+1.78e-05
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="set-up-the-equation">
+<h3>Set Up the Equation<a class="headerlink" href="#set-up-the-equation" title="Link to this heading">#</a></h3>
+<p>We know the <strong>equilibrium</strong> expression for the acid dissociation…</p>
+<div class="math notranslate nohighlight">
+\[AcOH \rightleftharpoons AcO^- + H^+\]</div>
+<div class="math notranslate nohighlight">
+\[K_a = \frac{[AcO^-][H^+]}{[AcOH]}\]</div>
+<p>The <strong>initial</strong> concentrations of acetic acid and the products could be described as…</p>
+<div class="math notranslate nohighlight">
+\[[AcOH]_0 = some value\]</div>
+<div class="math notranslate nohighlight">
+\[[AcO^-]\:and\:[H^+] = 0\]</div>
+<p>The <strong>change</strong> in the concentrations as the reaction moves forward is represented by the symbol <em>x</em>. We can say that the new concentrations will be…</p>
+<div class="math notranslate nohighlight">
+\[[AcOH]_{eq} = some value-x\]</div>
+<div class="math notranslate nohighlight">
+\[[AcO^-]_{eq}\:and\:[H^+]_{eq} = x\]</div>
+<p>Therefore the <strong>equilibrium</strong> will occure when the concentrations amount to the value of the equilibrium constant.</p>
+<div class="math notranslate nohighlight">
+\[K_a = \frac{[AcO^-]_{eq}[H^+]_{eq}}{[AcOH]_{eq}}\]</div>
+<p>and so…</p>
+<div class="math notranslate nohighlight">
+\[K_a = \frac{x \cdot x}{some value-x}\]</div>
+</section>
+<section id="using-sympy">
+<h3>Using SymPy<a class="headerlink" href="#using-sympy" title="Link to this heading">#</a></h3>
+<p>We need to solve for <em>x</em>. <em>SymPy</em> will do all the hard work.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sympy</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+
+<span class="n">expr</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="o">/</span><span class="p">(</span><span class="n">initial_conc</span><span class="o">-</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">Ka</span>
+<span class="n">display</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \frac{x^{2}}{0.183180682764363 - x} - 1.77827941003892 \cdot 10^{-5}\]</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">solution_list</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">solvers</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>  
+<span class="nb">print</span><span class="p">(</span><span class="n">solution_list</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[-0.00181375799093155, 0.00179597519683116]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="pick-a-number">
+<h3>Pick a Number<a class="headerlink" href="#pick-a-number" title="Link to this heading">#</a></h3>
+<p><strong>Inspect</strong> the solution. There are <strong>two possibilities</strong>. However it is impossible for the concentration of product to be negative in value. So we will choose the only possible answer.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">change</span> <span class="o">=</span> <span class="n">solution_list</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">change</span><span class="p">)</span>    
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.00179597519683116
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="produce-the-result">
+<h3>Produce the Result<a class="headerlink" href="#produce-the-result" title="Link to this heading">#</a></h3>
+<p>We can now <strong>report</strong> the results.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The initial concentration of acid is&quot;</span><span class="p">,</span> <span class="n">initial_conc</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="o">*</span><span class="mi">20</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;At equilibrium we will have the following concentrations&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[Acid] =&quot;</span><span class="p">,</span> <span class="n">initial_conc</span> <span class="o">-</span> <span class="n">change</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[hydronium] =&quot;</span><span class="p">,</span> <span class="n">change</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[Conj. base] =&quot;</span><span class="p">,</span> <span class="n">change</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="o">*</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="n">pH</span> <span class="o">=</span> <span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">change</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pH =&quot;</span><span class="p">,</span> <span class="n">pH</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The initial concentration of acid is 0.18318068276436303
+--------------------
+At equilibrium we will have the following concentrations
+[Acid] = 0.181384707567532
+[hydronium] = 0.00179597519683116
+[Conj. base] = 0.00179597519683116
+--------------------
+pH = 2.745699665415787
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="styling-printouts-of-numbers">
+<h3>Styling Printouts of Numbers<a class="headerlink" href="#styling-printouts-of-numbers" title="Link to this heading">#</a></h3>
+<p>You can decide how many <strong>significant figures</strong> to use when you write down the result above. But you can build it right into your print commands using the fstring method for <em>Python</em> text strings. Consider the following code. The {variable_name:.3} is the placeholder in the string where the fstring method will place a <strong>formatted</strong> value in the variable, the “:” indicates that the number should not be padded with zeros and the “.3” means 3 decimal places. The “f” after the decimal number means format as floating point; “g” means general format, “e” means exponentila format.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The initial concentration of acid is </span><span class="si">{</span><span class="n">initial_conc</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> M&quot;</span><span class="p">)</span>    <span class="c1"># 4 sig figs</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="o">*</span><span class="mi">20</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;At equilibrium we will have the following concentrations&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[Acid] = </span><span class="si">{</span><span class="n">initial_conc</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">change</span><span class="si">:</span><span class="s2">.3g</span><span class="si">}</span><span class="s2"> M&quot;</span><span class="p">)</span>   <span class="c1"># floating point with 3 decimal places</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[hydronium] = </span><span class="si">{</span><span class="n">change</span><span class="si">:</span><span class="s2">.3e</span><span class="si">}</span><span class="s2"> M&quot;</span><span class="p">)</span>             <span class="c1"># exponential format with 3 decimal places</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[Conj. base] = </span><span class="si">{</span><span class="n">change</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> M&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="o">*</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="n">pH</span> <span class="o">=</span> <span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">change</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;pH = </span><span class="si">{</span><span class="n">pH</span><span class="si">:</span><span class="s2">.3</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The initial concentration of acid is 0.1832 M
+--------------------
+At equilibrium we will have the following concentrations
+[Acid] = 0.181 M
+[hydronium] = 1.796e-3 M
+[Conj. base] = 0.002 M
+--------------------
+pH = 2.75
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
 <section id="summary">
 <h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
 <p>We have used the symbolic tools of <em>SymPy</em> to make and to solve equations. We will never have to use the quadratic equation again. In addition, all our operations and calculations are documented in this notebook so that errors can be found and code can be taken and reused later.</p>
+<p>We can now <strong>calculate</strong> the <em>pH</em> of a solution of a weak acid given an amount of acid, the volume and the <em>pK<sub>a</sub></em> value for the weak acid. We can <strong>change</strong> the values in the first block and then execute the notebook code to get to the final answer. We will never need to do math again (except on the test and final exam, so don’t get too lazy).</p>
 </section>
 </section>
 
@@ -739,12 +946,12 @@ The final pH is : -3.90
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../2_MatPlotLib/2_4_Fancy_1.html"
+       href="../2_MatPlotLib/2_6_Plotting_Reaction_Kinetics_to_Determine_Order.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Advanced Plotting Example</p>
+        <p class="prev-next-title">Plotting Reaction Kinetics</p>
       </div>
     </a>
     <a class="right-next"
@@ -772,14 +979,30 @@ The final pH is : -3.90
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Free Symbolic Math</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sympy"><em>SymPy</em></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#symbolic-math">Symbolic Math</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solve-for-x">Solve for <span class="math notranslate nohighlight">\(x\)</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-ice-table-solve-for-x">An ICE table: Solve for <span class="math notranslate nohighlight">\(x\)</span></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-sympy-equations">Creating <em>SymPy</em> Equations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#acid-equilibrium-another-ice-table-in-python">Acid equilibrium: Another ICE Table in <em>Python</em></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#weak-acid-equilibrium">Weak Acid Equilibrium</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#start-with-the-facts">Start With the Facts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#set-up-the-equation">Set Up the Equation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-sympy">Using SymPy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pick-a-number">Pick a Number</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#produce-the-result">Produce the Result</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#styling-printouts-of-numbers">Styling Printouts of Numbers</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
+</li>
+</ul>
+
   </nav></div>
 
 </div></div>

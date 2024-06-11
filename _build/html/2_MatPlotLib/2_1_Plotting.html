@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
     <link rel="stylesheet" type="text/css" href="../_static/tufte.css?v=189edcc0" />
@@ -58,6 +58,8 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '2_MatPlotLib/2_1_Plotting';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -189,10 +191,13 @@
 <li class="toctree-l1"><a class="reference internal" href="2_2_Curve_Fits.html">Linear Fits</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2_3_Curve_Fits.html">Curve Fits</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2_4_Fancy_1.html">Advanced Plotting Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_5_Notes.html">Notes on Fitting Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_6_Plotting_Reaction_Kinetics_to_Determine_Order.html">Plotting Reaction Kinetics</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">SymPy</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../3_SymPy/K01_solving_with_sympy.html">Free Symbolic Math</a></li>
+
 <li class="toctree-l1"><a class="reference internal" href="../3_SymPy/K02_Integrating_Rate_Law_1.html">Integrating Rate Laws</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../3_SymPy/K03_Integrating_MM.html">Integrating the Michaelis-Menten Rate Law</a></li>
 </ul>
@@ -201,8 +206,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../4_SciPy/K04_NumericIntegration.html">Numeric Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../4_SciPy/K05_NumericIntegration_SystemEq.html">Integrating a System</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">PhysOrg\ Examples</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PhysOrg Examples</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../6_PhysOrgExamples/6_0_Introduction.html">Intro to PhysOrg Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../6_PhysOrgExamples/6_1_start.html">Integrating Rate Equations with Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../6_PhysOrgExamples/6_2_kinetics.html">Investigating Reaction Kinetics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../6_PhysOrgExamples/6_3_Problem_ch7_p5.html">Problem 5, Ch. 7</a></li>
@@ -389,6 +395,11 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#settings-and-features">Settings and Features</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-examples-of-formatting">More Examples of Formatting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-functions">Plotting Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-same-thing-only-better">The Same Thing, Only Better</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-plots-in-a-figure">Two Plots in a Figure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#have-fun">Have Fun</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
             </nav>
         </div>
@@ -435,10 +446,10 @@ document.write(`
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x11438b710&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x11a23c6d0&gt;]
 </pre></div>
 </div>
-<img alt="../_images/8ae379e85c13a416eea81e733481de7441ab536bfebda388b6c29bcb83305a25.png" src="../_images/8ae379e85c13a416eea81e733481de7441ab536bfebda388b6c29bcb83305a25.png" />
+<img alt="../_images/7a2244b5337d9c018a8b7547bd7b017e19ceb44c6d508d0641a7dae48e6f7ec0.png" src="../_images/7a2244b5337d9c018a8b7547bd7b017e19ceb44c6d508d0641a7dae48e6f7ec0.png" />
 </div>
 </div>
 <section id="settings-and-features">
@@ -476,7 +487,7 @@ document.write(`
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/731c3f7ac49249302e211c091db09e402b1b3eb7a4ec95e388ff41065d14e174.png" src="../_images/731c3f7ac49249302e211c091db09e402b1b3eb7a4ec95e388ff41065d14e174.png" />
+<img alt="../_images/d67cd65687f8ffde646bb88e9391c64b2ba0b0368a2ec9ea42b11f55fa06aeef.png" src="../_images/d67cd65687f8ffde646bb88e9391c64b2ba0b0368a2ec9ea42b11f55fa06aeef.png" />
 </div>
 </div>
 </section>
@@ -526,9 +537,101 @@ document.write(`
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/3a274b670bf18ba84e0190fb2c8399c8dad9e5e18507b101f16835c2ed145c08.png" src="../_images/3a274b670bf18ba84e0190fb2c8399c8dad9e5e18507b101f16835c2ed145c08.png" />
+<img alt="../_images/9f711bc7f8ab5ea8a08d4c7abac431f994393630e60acec12dab43a18a06da1c.png" src="../_images/9f711bc7f8ab5ea8a08d4c7abac431f994393630e60acec12dab43a18a06da1c.png" />
 </div>
 </div>
+</section>
+<section id="plotting-functions">
+<h2>Plotting Functions<a class="headerlink" href="#plotting-functions" title="Link to this heading">#</a></h2>
+<p>We will <strong>plot</strong> an exponential decay curve. We will plot <em>y = e<sup>–x</sup></em>. First we need a <strong><em>x</em>-axis</strong>. As you see below, we will use the <code class="docutils literal notranslate"><span class="pre">linspace</span></code> tool from <em>NumPy</em> to create an evenly spaced array of values between two points. We will then calculate a new array for the <strong><em>y</em>-axis</strong> by applying the exponential decay function.  We now have a set of x,y values to plot.</p>
+<p>We will then <strong>plot the <em>x,y</em> data</strong> using tools from the <code class="docutils literal notranslate"><span class="pre">plt</span></code> object (which is actually the <code class="docutils literal notranslate"><span class="pre">matplotlib.pyplot</span></code> library.) Now we will have our plot.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>  <span class="c1"># make an array of 100 evenly paced values beltween 0 and 5.</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">)</span>            <span class="c1"># make an array of calculated values</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>             <span class="c1"># plot y vs. x</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>                <span class="c1"># show the plot</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/91599e753d5d8573fbaf619db234af14d4d66531e996e2ad4be049981dae17ca.png" src="../_images/91599e753d5d8573fbaf619db234af14d4d66531e996e2ad4be049981dae17ca.png" />
+</div>
+</div>
+</section>
+<section id="the-same-thing-only-better">
+<h2>The Same Thing, Only Better<a class="headerlink" href="#the-same-thing-only-better" title="Link to this heading">#</a></h2>
+<p>We can add elements to the plot such as <strong>titles and labels</strong>. We can set limits on the <em>x</em>- and <em>y</em>-axis. We can <strong>change the color</strong> of the line. Examine the code below and see how we did all that.</p>
+<p>The <strong>commands</strong> executed below are called “methods”.  They are functions built into the <code class="docutils literal notranslate"><span class="pre">plt</span></code> <strong>object</strong>. They modify the object according to the input for the method. When you enter <code class="docutils literal notranslate"><span class="pre">plt.ylabel(&quot;Amount&quot;)</span></code>, the <code class="docutils literal notranslate"><span class="pre">plt</span></code> object has a <strong>label</strong> added to its <em>y</em>-axis. In the last line, the <code class="docutils literal notranslate"><span class="pre">plt.show()</span></code> method <strong>displays and clears</strong> the <code class="docutils literal notranslate"><span class="pre">plt</span></code> object.  Entering <code class="docutils literal notranslate"><span class="pre">plt.show()</span></code> a second time will display nothing unless you build a new plot.</p>
+<p>There are much <strong>more sophisticated</strong> ways to present plots and we will explore some aspects of this later. However, this is all the <strong>style</strong> that we need to know for now.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>                 <span class="c1"># A library of math functions and data structure</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>    <span class="c1"># A library of plotting functions</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>           <span class="c1"># make an array of 100 evenly paced values beltween 0 and 5.</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">)</span>                     <span class="c1"># make an array of calculated values</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="s2">&quot;k--&quot;</span><span class="p">)</span>               <span class="c1"># plot y vs. x: the &quot;k&quot; means black, &quot;--&quot; means dashed line</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Exponential Decay&quot;</span><span class="p">)</span>     <span class="c1"># Title of the plot         </span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time&quot;</span><span class="p">)</span>                 <span class="c1"># x-axis label   </span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Amount&quot;</span><span class="p">)</span>               <span class="c1"># y-axis label  </span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">])</span>                   <span class="c1"># set x-axis range</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mf">1.2</span><span class="p">])</span>                  <span class="c1"># set y-axis range</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>                         <span class="c1"># show the plot</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/cb767e2dac9497d65a49c1b25705ebde7bc29b592cf265e120214032d47831b2.png" src="../_images/cb767e2dac9497d65a49c1b25705ebde7bc29b592cf265e120214032d47831b2.png" />
+</div>
+</div>
+</section>
+<section id="two-plots-in-a-figure">
+<h2>Two Plots in a Figure<a class="headerlink" href="#two-plots-in-a-figure" title="Link to this heading">#</a></h2>
+<p>Let us <strong>demonstrate</strong> first order <strong>reaction kinetics</strong>. We will plot the concentration of reactant and product for the reaction <em>A → B</em>. We know that the instantaneous rate at any given time point is…</p>
+<div class="math notranslate nohighlight">
+\[-\frac{\partial [A]}{\partial t}=\frac{\partial [B]}{\partial t}=k[A] \]</div>
+<p>…and the integrated rate equation that describes the concentrations of <em>A</em> and <em>B</em> as they change over time are</p>
+<div class="math notranslate nohighlight">
+\[ [A]_t=[A]_0 e^{-k t}  \text{ and }  [B]_t=[A]_0 \left( 1-e^{-k t} \right)\]</div>
+<p>Below we will create an array of values for the <em>x</em>-axis and then make two calculated arrays for the <em>y</em>-axis. One set is for [<em>A</em>] and the other is for [<em>B</em>]. We will then plot them.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A0</span> <span class="o">=</span> <span class="mf">1.5</span>                  <span class="c1"># create a variable that represents the initial concentration</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mf">0.34</span>                  <span class="c1"># a variable that represents the rate constant</span>
+
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>  <span class="c1"># make an array of 100 evenly paced values beltween 0 and 5 for time</span>
+<span class="n">yA</span> <span class="o">=</span> <span class="n">A0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>      <span class="c1"># make an array of calculated values for [A]</span>
+<span class="n">yB</span> <span class="o">=</span> <span class="n">A0</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k</span><span class="o">*</span><span class="n">t</span><span class="p">))</span>  <span class="c1"># make an array of calculated values for [B]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">yA</span><span class="p">)</span>            <span class="c1"># plot y vs. x</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">yB</span><span class="p">)</span>            <span class="c1"># plot y vs. x</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>                <span class="c1"># show the plot</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/713f3c4b8ac813ab47aaa2c9ef688644112bf35af90ec191bf8e9a1ea0db75c5.png" src="../_images/713f3c4b8ac813ab47aaa2c9ef688644112bf35af90ec191bf8e9a1ea0db75c5.png" />
+</div>
+</div>
+</section>
+<section id="have-fun">
+<h2>Have Fun<a class="headerlink" href="#have-fun" title="Link to this heading">#</a></h2>
+<p><strong>Change</strong> the value for <em>k</em> (rate constant) in the code block above and see what happens. Plot a different function (e.g. n<sup>x</sup> - 3.) <strong>Fool around</strong> with other values and explore. Undo is your friend. Idleness is your enemy.</p>
+<p><strong>Change</strong> some settings above and see what happens. Try plotting a different functions: plot a sine wave; plot a straight line with a slope of <span class="math notranslate nohighlight">\(\pi\)</span>. <strong>Fool around</strong> with other values and explore. <strong>How</strong> do you get a sine function? <strong>Search</strong> the web for “<em>NumPy</em> and sine”. How do you get a built-in value for π? Search for <em>NumPy</em> and “pi”. Are you noticing a pattern here?</p>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<p>We have learned how to <strong>make a set of values</strong> for an <em>x</em>-axis, <strong>calculate a corresponding set of values</strong> for the <em>y</em>-axis and <strong>plot</strong> the data. We have seen that repeated plot commands will add to the plot until a <code class="docutils literal notranslate"><span class="pre">plt.show()</span></code> function is called to display the results.</p>
+<p>There are many, many <strong>options and features</strong> to the <em>MatPlotLib</em> plotting system. We have learned <strong>how to add titles and labels</strong> and to <strong>set the color and style</strong> of the line. We can have multiple plots in a single figure, we can save the plots in a variety of formats and so much more. The <em>NumPy</em> tools and other toolsets that we import will provide many useful functions for math and interpreting data. Keep an eye out for new <strong>opportunities to learn</strong> more about styling plots. We will learn as we go.</p>
 </section>
 </section>
 
@@ -598,6 +701,11 @@ document.write(`
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#settings-and-features">Settings and Features</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-examples-of-formatting">More Examples of Formatting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-functions">Plotting Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-same-thing-only-better">The Same Thing, Only Better</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-plots-in-a-figure">Two Plots in a Figure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#have-fun">Have Fun</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
   </nav></div>
 

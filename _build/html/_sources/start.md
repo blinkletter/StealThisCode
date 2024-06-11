@@ -43,6 +43,19 @@ We will use *Python* only as a **tool**. All code will be written for you in the
 >**Tools**: *MatPlotLib*, *NumPy*, *SciPy*  <br>
 >**Skills**: All of the above plus advanced plotting using axes objects. Two plots in one figure.   
 
+>**Title**: [Notes on Plotting](2_MatPlotLib/2_5_Notes.ipynb) <br>
+>**Tools**: *MatPlotLib*, *NumPy*, *SciPy*, *Pandas*  <br>
+>**Skills**: More examples of plots and curve fits. A residual plot is demonstrated. An example of a curve fit with the function plotted over the data is presented. 
+
+>**Title**: [Notes on Plotting](2_MatPlotLib/2_6_Plotting_Reaction_Kinetics_to_Determine_Order.ipynb) <br>
+>**Tools**: *MatPlotLib*, *NumPy*, *SciPy*, *Pandas*  <br>
+>**Skills**: More examples of plots and curve fits. Using plots and line fits to determine the order of a reaction. 
+
+
+
+
+
+
 ### Calculus with SymPy
 
 >**Title**: [Symbolic Math](3_SymPy/K01_solving_with_sympy.ipynb) <br>

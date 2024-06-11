@@ -1,0 +1,881 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Plotting Reaction Kinetics &#8212; Steal this Code</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../_static/tufte.css?v=189edcc0" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '2_MatPlotLib/2_6_Plotting_Reaction_Kinetics_to_Determine_Order';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Free Symbolic Math" href="../3_SymPy/K01_solving_with_sympy.html" />
+    <link rel="prev" title="Notes on Fitting Data" href="2_5_Notes.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../start.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/Ouroboros-benzene.svg.png" class="logo__image only-light" alt="Steal this Code - Home"/>
+    <script>document.write(`<img src="../_static/Ouroboros-benzene.svg.png" class="logo__image only-dark" alt="Steal this Code - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../start.html">
+                    Steal This Code
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Math</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../1_Math/1_1_Calculator.html">Basic Math with <em>Python</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1_Math/1_2_uncertainties.html">Using Uncertainty</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">MatPlotLib</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2_1_Plotting.html">Plotting Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_2_Curve_Fits.html">Linear Fits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_3_Curve_Fits.html">Curve Fits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_4_Fancy_1.html">Advanced Plotting Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_5_Notes.html">Notes on Fitting Data</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Plotting Reaction Kinetics</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">SymPy</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../3_SymPy/K01_solving_with_sympy.html">Free Symbolic Math</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../3_SymPy/K02_Integrating_Rate_Law_1.html">Integrating Rate Laws</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3_SymPy/K03_Integrating_MM.html">Integrating the Michaelis-Menten Rate Law</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">SciPy</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../4_SciPy/K04_NumericIntegration.html">Numeric Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../4_SciPy/K05_NumericIntegration_SystemEq.html">Integrating a System</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PhysOrg Examples</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../6_PhysOrgExamples/6_0_Introduction.html">Intro to PhysOrg Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../6_PhysOrgExamples/6_1_start.html">Integrating Rate Equations with Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../6_PhysOrgExamples/6_2_kinetics.html">Investigating Reaction Kinetics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../6_PhysOrgExamples/6_3_Problem_ch7_p5.html">Problem 5, Ch. 7</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../6_PhysOrgExamples/6_4_Problem_ch_7_p_9.html">Problem 9, Chapter 7</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../6_PhysOrgExamples/6_5_Problem_ch7_p11.html">Problem 11, Chapter 7</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/blinkletter/StealThisCode/blob/main/./2_MatPlotLib/2_6_Plotting_Reaction_Kinetics_to_Determine_Order.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/2_MatPlotLib/2_6_Plotting_Reaction_Kinetics_to_Determine_Order.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Plotting Reaction Kinetics</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#read-the-data">Read the Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#make-a-quick-plot">Make a Quick Plot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-fancier-plot">A Fancier Plot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decisions-decisions">Decisions, Decisions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#now-we-plot">Now, We Plot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#another-method-for-the-order-of-reaction">Another Method for the Order of Reaction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resources">Resources</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="plotting-reaction-kinetics">
+<h1>Plotting Reaction Kinetics<a class="headerlink" href="#plotting-reaction-kinetics" title="Link to this heading">#</a></h1>
+<p><strong>Reading</strong> in data from a file and <strong>plotting</strong> the data is a useful way to quickly <strong>evaluate an experiment</strong>. We will imagine that our data is in a <strong>file</strong> called “E2_DataA.csv” that is located in the same directory as this notebook. In this example, we will examine concentration vs. time data for a reaction and quickly determine if the reaction is <strong>first or second order</strong>. No plotting <strong>paper</strong> for us, we are <strong>digital</strong>!</p>
+<p>First we <strong>load</strong> up the <strong>tools</strong>. We will need tools from the <em>MatPlotLib</em>, <em>NumPy</em> and <em>Pandas</em> packages.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+
+<span class="n">data_loc</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/blinkletter/MathWithPython/main/data/&quot;</span>  <span class="c1"># Data is on github</span>
+<span class="c1"># data_loc = &quot;data/&quot;   # Data is in same folder as notebook</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="read-the-data">
+<h2>Read the Data<a class="headerlink" href="#read-the-data" title="Link to this heading">#</a></h2>
+<p>We will read the file using the tools provided in the <strong><em>Pandas</em> library</strong>. The data file includes column <strong>headers</strong> in its first line. We will use the <code class="docutils literal notranslate"><span class="pre">read_csv()</span></code> function in <em>Pandas</em> to create a <strong>dataframe</strong> object from the data file</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_loc</span> <span class="o">+</span> <span class="s2">&quot;E2_dataA.csv&quot;</span><span class="p">,</span> <span class="n">delimiter</span> <span class="o">=</span> <span class="s2">&quot;,&quot;</span><span class="p">)</span> <span class="c1"># The fields are separated by commas.</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   time (min)  conc (mM)
+0        0.50   2.741794
+1        0.75   2.621148
+2        1.00   2.505811
+3        2.00   2.093029
+4        4.00   1.460257
+5        6.00   1.018787
+6        9.00   0.593696
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="make-a-quick-plot">
+<h2>Make a Quick Plot<a class="headerlink" href="#make-a-quick-plot" title="Link to this heading">#</a></h2>
+<p>Let us plot the raw data and <strong>check</strong> it for any insanity. As you can see, it looks good. But is it a first order reaction or a second order reaction?</p>
+<p>We can address the columns using their <strong>names</strong>. We can plot any two columns as <em>x</em> and <em>y</em> values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;time (min)&quot;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;conc (mM)&quot;</span><span class="p">]</span>     <span class="c1"># give the names to address the columns for the x and y data.</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="s2">&quot;ko-&quot;</span><span class="p">)</span>                        <span class="c1"># Make a quick plot.</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ec8a74e08419ece8abf24da4c700d1c570d9f9219f6eed9eeddd434d8c6b6717.png" src="../_images/ec8a74e08419ece8abf24da4c700d1c570d9f9219f6eed9eeddd434d8c6b6717.png" />
+</div>
+</div>
+</section>
+<section id="a-fancier-plot">
+<h2>A Fancier Plot<a class="headerlink" href="#a-fancier-plot" title="Link to this heading">#</a></h2>
+<p>We can also capture the list of column names from the <code class="docutils literal notranslate"><span class="pre">.columns.values</span></code> parameter within the <strong>dataframe</strong> object and then use those to address each column of data. This also gives us the <strong>names</strong> to use in the axis of the plot diagram. There are many ways to approach a problem.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_col_name</span><span class="p">,</span> <span class="n">y_col_name</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>  <span class="c1"># get column names (two columns starting with position zero)</span>
+
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">x_col_name</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="n">y_col_name</span><span class="p">]</span>            <span class="c1"># use the names to address the columns for the x and y data.</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s2">&quot;bo--&quot;</span><span class="p">)</span>                           <span class="c1"># &#39;b&#39;=blue color, &#39;o&#39;=circle markers, &#39;--&#39;=dashed line</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">max</span><span class="p">())])</span>                  <span class="c1"># np.ceil() rounds up to the next integer (ceiling function)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">x_col_name</span><span class="p">)</span>               
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">y_col_name</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Conc. vs. time&quot;</span><span class="p">)</span>          
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>  
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/56bdd92d964e5b546ea8ce672dd9789ab7f49130e4653f8b802f1271801067b5.png" src="../_images/56bdd92d964e5b546ea8ce672dd9789ab7f49130e4653f8b802f1271801067b5.png" />
+</div>
+</div>
+</section>
+<section id="decisions-decisions">
+<h2>Decisions, Decisions<a class="headerlink" href="#decisions-decisions" title="Link to this heading">#</a></h2>
+<p>We know how to plot first and second-order reactions as <strong>linear plots</strong>. So let us set that up and plot each case. If the line is linear for one of the plots then we have a match. Let us see if we can make a <strong>decision</strong>.</p>
+<p>For a <strong>first order</strong> reaction we have <span class="math notranslate nohighlight">\(\ln [A] = \ln [A]_0 - k \cdot t\)</span> and plotting <span class="math notranslate nohighlight">\(\ln [A]_t\)</span> vs. <span class="math notranslate nohighlight">\(time\)</span> we will have a linear plot. However if the reaction is not first order then the line will curve. As we have seen, the integrated rate equation for <strong>second order</strong> is <span class="math notranslate nohighlight">\(\frac{1}{[A]}=\frac{1}{[A]_0} + k \cdot t\)</span>. So plotting <span class="math notranslate nohighlight">\(\frac{1}{[A]}\)</span> vs. <span class="math notranslate nohighlight">\(t\)</span> will give a linear plot.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;1/conc&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">df</span><span class="p">[</span><span class="n">y_col_name</span><span class="p">]</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;ln conc&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">y_col_name</span><span class="p">])</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>                             <span class="c1"># a prettyprint command that makes Jupyter display the object.</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>time (min)</th>
+      <th>conc (mM)</th>
+      <th>1/conc</th>
+      <th>ln conc</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.50</td>
+      <td>2.741794</td>
+      <td>0.364725</td>
+      <td>1.008612</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.75</td>
+      <td>2.621148</td>
+      <td>0.381512</td>
+      <td>0.963612</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1.00</td>
+      <td>2.505811</td>
+      <td>0.399072</td>
+      <td>0.918612</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2.00</td>
+      <td>2.093029</td>
+      <td>0.477776</td>
+      <td>0.738612</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4.00</td>
+      <td>1.460257</td>
+      <td>0.684811</td>
+      <td>0.378612</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6.00</td>
+      <td>1.018787</td>
+      <td>0.981560</td>
+      <td>0.018612</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>9.00</td>
+      <td>0.593696</td>
+      <td>1.684363</td>
+      <td>-0.521388</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="now-we-plot">
+<h2>Now, We Plot<a class="headerlink" href="#now-we-plot" title="Link to this heading">#</a></h2>
+<p>We have all the information we need now.  Let us plot the <strong>two cases</strong> and see if either of them fit the linear equations for 1<sup>st</sup> and 2<sup>nd</sup> order reactions. Which <strong>model</strong> fits the data? Use the code below to plot each case and decide for yourself.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">x_col_name</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;ln conc&quot;</span><span class="p">]</span>
+
+<span class="n">fit</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">linregress</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>       <span class="c1"># linear fit of data</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">fit</span><span class="o">.</span><span class="n">slope</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">fit</span><span class="o">.</span><span class="n">intercept</span>
+<span class="n">y_calc</span> <span class="o">=</span> <span class="n">m</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">b</span>                <span class="c1"># y-axis calculated from fit parameters</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s2">&quot;bo&quot;</span><span class="p">)</span>              <span class="c1"># plot data</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_calc</span><span class="p">,</span> <span class="s2">&quot;b--&quot;</span><span class="p">)</span>        <span class="c1"># &#39;b&#39;=blue color, &#39;o&#39;=circle markers, &#39;--&#39;=dashed line</span>
+ 
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">x_col_name</span><span class="p">)</span>               
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;ln conc&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Plotted as First Order&quot;</span><span class="p">)</span>          
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>  
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/0c1ac38b24b7d97b35ae700d49f2b11edd549bc1e7b1872c119eadf9ca82890f.png" src="../_images/0c1ac38b24b7d97b35ae700d49f2b11edd549bc1e7b1872c119eadf9ca82890f.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">x_col_name</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;1/conc&quot;</span><span class="p">]</span>        
+ 
+<span class="n">fit</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">linregress</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>       <span class="c1"># linear fit of data</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">fit</span><span class="o">.</span><span class="n">slope</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">fit</span><span class="o">.</span><span class="n">intercept</span>
+<span class="n">y_calc</span> <span class="o">=</span> <span class="n">m</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">b</span>                <span class="c1"># y-axis calculated from fit parameters</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s2">&quot;b^&quot;</span><span class="p">)</span>              <span class="c1"># plot data</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_calc</span><span class="p">,</span> <span class="s2">&quot;b-.&quot;</span><span class="p">)</span>        <span class="c1"># &#39;b&#39;=blue color, &#39;^&#39;=triangle markers, &#39;-.&#39;=dot-dashed line</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">x_col_name</span><span class="p">)</span>               
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;1/conc&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Plotted as Second Order&quot;</span><span class="p">)</span>          
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>  
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/bcf1bbdfc3780f93a9ab1be8af43365036b97677e16b52086041ebd87f52b60d.png" src="../_images/bcf1bbdfc3780f93a9ab1be8af43365036b97677e16b52086041ebd87f52b60d.png" />
+</div>
+</div>
+</section>
+<section id="another-method-for-the-order-of-reaction">
+<h2>Another Method for the Order of Reaction<a class="headerlink" href="#another-method-for-the-order-of-reaction" title="Link to this heading">#</a></h2>
+<p>We know that the <strong>rate law</strong> for a reaction can be extressed as…</p>
+<div class="math notranslate nohighlight">
+\[\nu = k\cdot [A]^m[B]^n\]</div>
+<p>and the exponents are the <strong>order</strong> of reaction for each reactant. We can change the concentrations and observe the instantaneous rate (the rate at that moment when we know the concentration, i.e. the start) of the reaction. We will take our table of <strong>initial concentrations and initial rates</strong> and make a <strong>log/log plot</strong> to determine the <strong>order of reaction</strong> for each reactant.</p>
+<p>We will conduct a <strong>series</strong> of experiments where we <strong>change</strong> the concentration of one of the reactants and measure the initial rate. In this case we are examining the results as we change the concentration of reactant A. If we use a high concentration of B, then its concentration will remain almost constant (pseudo first-order conditions). We will use the following <strong>linear relationship</strong>…</p>
+<div class="math notranslate nohighlight">
+\[\log\nu = m\cdot\log[A] + log(k\cdot[B]^n)\]</div>
+<p>where the <span class="math notranslate nohighlight">\(k\cdot[B]^n\)</span> term is constant because we made it so. Let us now analyze the data</p>
+<p>Take note of the code below. Alter it accordingly to work with your own data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>                <span class="c1"># Load up all the tools we need</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+
+<span class="n">data</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">[</span><span class="mf">0.010</span><span class="p">,</span> <span class="mf">0.045</span><span class="p">],</span>                                  <span class="c1"># Enter your own data in this list of lists </span>
+        <span class="p">[</span><span class="mf">0.018</span><span class="p">,</span> <span class="mf">0.146</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.025</span><span class="p">,</span> <span class="mf">0.281</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.032</span><span class="p">,</span> <span class="mf">0.461</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.051</span><span class="p">,</span> <span class="mf">1.17</span><span class="p">]</span>
+       <span class="p">]</span>                                                   
+<span class="n">results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;[A]&quot;</span><span class="p">,</span><span class="s2">&quot;rate&quot;</span><span class="p">])</span>   <span class="c1"># make the dataframe object</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>                                           <span class="c1"># display the dataframe</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     [A]   rate
+0  0.010  0.045
+1  0.018  0.146
+2  0.025  0.281
+3  0.032  0.461
+4  0.051  1.170
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span><span class="p">[</span><span class="s2">&quot;log[A]&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s2">&quot;[A]&quot;</span><span class="p">])</span>              <span class="c1"># perform the calculations</span>
+<span class="n">results</span><span class="p">[</span><span class="s2">&quot;log(rate)&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s2">&quot;rate&quot;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     [A]   rate    log[A]  log(rate)
+0  0.010  0.045 -2.000000  -1.346787
+1  0.018  0.146 -1.744727  -0.835647
+2  0.025  0.281 -1.602060  -0.551294
+3  0.032  0.461 -1.494850  -0.336299
+4  0.051  1.170 -1.292430   0.068186
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;log(rate)&quot;</span><span class="p">],</span><span class="n">results</span><span class="p">[</span><span class="s2">&quot;log[A]&quot;</span><span class="p">]</span>
+
+<span class="n">fit</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">linregress</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>      <span class="c1"># linear regression data fit</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">fit</span><span class="o">.</span><span class="n">slope</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">fit</span><span class="o">.</span><span class="n">intercept</span>
+<span class="n">y_calc</span> <span class="o">=</span> <span class="n">m</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">b</span>                <span class="c1"># y-axis calculated from fit parameters</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s2">&quot;ko&quot;</span><span class="p">)</span>              <span class="c1"># plot data</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_calc</span><span class="p">,</span> <span class="s2">&quot;k-&quot;</span><span class="p">)</span>         <span class="c1"># plot line fit</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;log [A]&quot;</span><span class="p">)</span>               
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;log (rate)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Log/log plot&quot;</span><span class="p">)</span>          
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>  
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Slope = </span><span class="si">{:.2f}</span><span class="s2"> +/- </span><span class="si">{:.4f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">fit</span><span class="o">.</span><span class="n">stderr</span><span class="p">))</span>          
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Intercept = </span><span class="si">{:.2f}</span><span class="s2"> +/- </span><span class="si">{:.4f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">fit</span><span class="o">.</span><span class="n">intercept_stderr</span><span class="p">))</span>   
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;R = </span><span class="si">{:.3f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fit</span><span class="o">.</span><span class="n">rvalue</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/597b70466e8e743b1cfbd93c4edcf59579ac6e46a903e0e94297a417f34a32a5.png" src="../_images/597b70466e8e743b1cfbd93c4edcf59579ac6e46a903e0e94297a417f34a32a5.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Slope = 2.00 +/- 0.0016
+Intercept = 2.65 +/- 0.0026
+R = 1.000
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<p>We have seen how to <strong>import</strong> data from a data file and use the tools of a <em>Pandas</em> <strong>dataframe</strong> to manipulate it. We have seen how to plot this data and also have been introduced to a handful of options for changing the appearance of the plots. There are many ways to change the <strong>style</strong> in plots.</p>
+<p>We have also demonstrated determining the order of a reaction by plotting the data using the integrated rate equations for first and second-order reactions and also in an experiment where we plot the rate vs. reactant concentration.</p>
+</section>
+<section id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Link to this heading">#</a></h2>
+<p>The <strong>data file</strong> can be obtained from the resources section of the course <strong>moodle</strong> site. The contents of the file are displayed below so that you can make it yourself if you are unable to access moodle.</p>
+<p><strong>E2_DataA.csv</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">time</span> <span class="p">(</span><span class="nb">min</span><span class="p">),</span><span class="n">conc</span> <span class="p">(</span><span class="n">mM</span><span class="p">)</span>
+<span class="mf">0.5</span><span class="p">,</span><span class="mf">2.741793556</span>
+<span class="mf">0.75</span><span class="p">,</span><span class="mf">2.621147735</span>
+<span class="mi">1</span><span class="p">,</span><span class="mf">2.505810634</span>
+<span class="mi">2</span><span class="p">,</span><span class="mf">2.093028978</span>
+<span class="mi">4</span><span class="p">,</span><span class="mf">1.460256768</span>
+<span class="mi">6</span><span class="p">,</span><span class="mf">1.018786577</span>
+<span class="mi">9</span><span class="p">,</span><span class="mf">0.593696097</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./2_MatPlotLib"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="2_5_Notes.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Notes on Fitting Data</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../3_SymPy/K01_solving_with_sympy.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Free Symbolic Math</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#read-the-data">Read the Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#make-a-quick-plot">Make a Quick Plot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-fancier-plot">A Fancier Plot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decisions-decisions">Decisions, Decisions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#now-we-plot">Now, We Plot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#another-method-for-the-order-of-reaction">Another Method for the Order of Reaction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resources">Resources</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Barry Linkletter
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

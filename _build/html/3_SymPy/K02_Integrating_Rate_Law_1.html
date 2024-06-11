@@ -1,63 +1,65 @@
 
+
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../" >
+<html >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Integrating Rate Laws &#8212; Steal this Code</title>
   
   
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
-    <link rel="stylesheet" type="text/css" href="../_static/tufte.css?v=189edcc0" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tufte.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
-  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
-    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="../_static/doctools.js?v=9a2dae69"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="../_static/copybutton.js?v=f281be69"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=36754332"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '3_SymPy/K02_Integrating_Rate_Law_1';</script>
@@ -66,7 +68,7 @@
     <link rel="next" title="Integrating the Michaelis-Menten Rate Law" href="K03_Integrating_MM.html" />
     <link rel="prev" title="Free Symbolic Math" href="K01_solving_with_sympy.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:language" content="None"/>
   </head>
   
   
@@ -74,23 +76,19 @@
 
   
   
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -112,20 +110,12 @@
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
-</div>
-
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
-    </header>
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
   
-
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
-      
-      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -140,11 +130,9 @@
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
-
   
 
 <a class="navbar-brand logo" href="../start.html">
-  
   
   
   
@@ -154,23 +142,12 @@
       
     
     
-    <img src="../_static/Ouroboros-benzene.svg.png" class="logo__image only-light" alt="Steal this Code - Home"/>
-    <script>document.write(`<img src="../_static/Ouroboros-benzene.svg.png" class="logo__image only-dark" alt="Steal this Code - Home"/>`);</script>
+    <img src="../_static/Ouroboros-benzene.svg.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/Ouroboros-benzene.svg.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item">
-
- <script>
- document.write(`
-   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
-        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -191,10 +168,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../2_MatPlotLib/2_2_Curve_Fits.html">Linear Fits</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../2_MatPlotLib/2_3_Curve_Fits.html">Curve Fits</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../2_MatPlotLib/2_4_Fancy_1.html">Advanced Plotting Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2_MatPlotLib/2_5_Notes.html">Notes on Fitting Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2_MatPlotLib/2_6_Plotting_Reaction_Kinetics_to_Determine_Order.html">Plotting Reaction Kinetics</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">SymPy</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="K01_solving_with_sympy.html">Free Symbolic Math</a></li>
+
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Integrating Rate Laws</a></li>
 <li class="toctree-l1"><a class="reference internal" href="K03_Integrating_MM.html">Integrating the Michaelis-Menten Rate Law</a></li>
 </ul>
@@ -203,8 +183,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../4_SciPy/K04_NumericIntegration.html">Numeric Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../4_SciPy/K05_NumericIntegration_SystemEq.html">Integrating a System</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">PhysOrg\ Examples</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PhysOrg Examples</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../6_PhysOrgExamples/6_0_Introduction.html">Intro to PhysOrg Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../6_PhysOrgExamples/6_1_start.html">Integrating Rate Equations with Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../6_PhysOrgExamples/6_2_kinetics.html">Investigating Reaction Kinetics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../6_PhysOrgExamples/6_3_Problem_ch7_p5.html">Problem 5, Ch. 7</a></li>
@@ -225,7 +206,7 @@
 
       </div>
       
-      <main id="main-content" class="bd-main" role="main">
+      <main id="main-content" class="bd-main">
         
         
 
@@ -234,7 +215,7 @@
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article d-print-none">
+              <div class="bd-header-article">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
@@ -347,22 +328,20 @@
 </button>
 
 
-
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
   </button>
 `);
 </script>
 
-
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+    <i class="fa-solid fa-magnifying-glass"></i>
   </button>
 `);
 </script>
@@ -413,13 +392,13 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article">
+                <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="integrating-rate-laws">
-<h1>Integrating Rate Laws<a class="headerlink" href="#integrating-rate-laws" title="Link to this heading">#</a></h1>
+  <div class="tex2jax_ignore mathjax_ignore section" id="integrating-rate-laws">
+<h1>Integrating Rate Laws<a class="headerlink" href="#integrating-rate-laws" title="Permalink to this headline">#</a></h1>
 <p><em>SymPy</em> can perform integration and differentiation operations on many expressions. Let us explore integrating the simple rate equations that you are familiar with.</p>
-<section id="integrating-first-order-reactions">
-<h2>Integrating First Order Reactions<a class="headerlink" href="#integrating-first-order-reactions" title="Link to this heading">#</a></h2>
+<div class="section" id="integrating-first-order-reactions">
+<h2>Integrating First Order Reactions<a class="headerlink" href="#integrating-first-order-reactions" title="Permalink to this headline">#</a></h2>
 <p>A basic first order reaction might be described as such…</p>
 <div class="math notranslate nohighlight">
 \[ A \xrightarrow{k} B \]</div>
@@ -440,8 +419,8 @@ document.write(`
 \[ \frac{d x}{[A]_0 - x} = k\,dt \]</div>
 <div class="math notranslate nohighlight">
 \[ \int_0^x \frac{d x}{[A]_0 - x} = \int_0^t k\,dt \]</div>
-<section id="using-substitution">
-<h3>Using Substitution<a class="headerlink" href="#using-substitution" title="Link to this heading">#</a></h3>
+<div class="section" id="using-substitution">
+<h3>Using Substitution<a class="headerlink" href="#using-substitution" title="Permalink to this headline">#</a></h3>
 <p>We have <em>SymPy</em> to perform the integration for us. This is accomplished by using the <code class="docutils literal notranslate"><span class="pre">sympy.dsolve()</span></code> function. We will be asking <span class="math notranslate nohighlight">\(SymPy\)</span> to solve the differential equation stated above like so…</p>
 <div class="math notranslate nohighlight">
 \[ \text{sym.dsolve}\left( \frac{d x}{d t} = k([A]_0 - x) \right) \]</div>
@@ -489,9 +468,9 @@ document.write(`
 \[\displaystyle x_{t}{\left(t \right)} = A_{0} - A_{0} e^{- k t}\]</div>
 </div>
 </div>
-</section>
-<section id="using-sympy-substitutions">
-<h3>Using <em>SymPy</em> Substitutions<a class="headerlink" href="#using-sympy-substitutions" title="Link to this heading">#</a></h3>
+</div>
+<div class="section" id="using-sympy-substitutions">
+<h3>Using <em>SymPy</em> Substitutions<a class="headerlink" href="#using-sympy-substitutions" title="Permalink to this headline">#</a></h3>
 <p>Below is the same operationa as above but here I will demonstrate the symbolic math features of <em>SymPy</em>. Here we start with the rate law and use <em>SymPy</em> to make the substitutions discussed above. We will start with…</p>
 <div class="math notranslate nohighlight">
 \[ -\frac{d}{dt}[A]_t = k[A]_t \]</div>
@@ -556,10 +535,10 @@ document.write(`
 \[\displaystyle x_{t}{\left(t \right)} = A_{0} - A_{0} e^{- k t}\]</div>
 </div>
 </div>
-</section>
-</section>
-<section id="the-final-answer">
-<h2>The Final Answer<a class="headerlink" href="#the-final-answer" title="Link to this heading">#</a></h2>
+</div>
+</div>
+<div class="section" id="the-final-answer">
+<h2>The Final Answer<a class="headerlink" href="#the-final-answer" title="Permalink to this headline">#</a></h2>
 <p>We now have an expression for <span class="math notranslate nohighlight">\(x(t)\)</span>…</p>
 <div class="math notranslate nohighlight">
 \[ x_t = [A]_0 - [A]_0 e^{-k t}\]</div>
@@ -614,12 +593,12 @@ document.write(`
 \[\displaystyle A_{t} = A_{0} e^{- k t}\]</div>
 </div>
 </div>
-</section>
-<section id="plotting-sympy-expressions">
-<h2>Plotting <em>SymPy</em> Expressions<a class="headerlink" href="#plotting-sympy-expressions" title="Link to this heading">#</a></h2>
+</div>
+<div class="section" id="plotting-sympy-expressions">
+<h2>Plotting <em>SymPy</em> Expressions<a class="headerlink" href="#plotting-sympy-expressions" title="Permalink to this headline">#</a></h2>
 <p>It is useful to plot the result of our integration to see if it is as expected.</p>
-<section id="using-sympy-plotting-tools">
-<h3>Using <em>SymPy</em> Plotting Tools<a class="headerlink" href="#using-sympy-plotting-tools" title="Link to this heading">#</a></h3>
+<div class="section" id="using-sympy-plotting-tools">
+<h3>Using <em>SymPy</em> Plotting Tools<a class="headerlink" href="#using-sympy-plotting-tools" title="Permalink to this headline">#</a></h3>
 <p><em>SymPy</em> contains plotting tools that can plot an expression without needing to calculate <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> values. The <code class="docutils literal notranslate"><span class="pre">sympy.plotting.plot()</span></code> dunction will plot the expression. This is different than the <em>MatPlotLib</em> set of plotting tools although there are similarities.</p>
 <p>We will need to substitutre in values for the constants, <span class="math notranslate nohighlight">\(A_0\)</span> and <span class="math notranslate nohighlight">\(k\)</span>, and then extract the right-hand-side of the equation to get the expression that defines <span class="math notranslate nohighlight">\(x_t\)</span>. We then use that expression in the <code class="docutils literal notranslate"><span class="pre">sympy.plotting.plot()</span></code> function. Consider the example of the code below.</p>
 <div class="cell tag_hide-input docutils container">
@@ -667,12 +646,12 @@ document.write(`
 </div>
 <div class="output text_latex math notranslate nohighlight">
 \[\displaystyle 0.1 e^{- 1.2 t}\]</div>
-<img alt="../_images/b78dabc18d902b94f45a07ed17319ac2ae8244f5adf243b96d28fa4610ed8ba9.png" src="../_images/b78dabc18d902b94f45a07ed17319ac2ae8244f5adf243b96d28fa4610ed8ba9.png" />
+<img alt="../_images/aa67ab9b837adfda5c7634674174c2d3ef97d3765207617b9aa81992b677a5e2.png" src="../_images/aa67ab9b837adfda5c7634674174c2d3ef97d3765207617b9aa81992b677a5e2.png" />
 </div>
 </div>
-</section>
-<section id="using-matplotlib-plotting-tools">
-<h3>Using <em>MatPlotLib</em> Plotting Tools<a class="headerlink" href="#using-matplotlib-plotting-tools" title="Link to this heading">#</a></h3>
+</div>
+<div class="section" id="using-matplotlib-plotting-tools">
+<h3>Using <em>MatPlotLib</em> Plotting Tools<a class="headerlink" href="#using-matplotlib-plotting-tools" title="Permalink to this headline">#</a></h3>
 <p><em>SymPy</em> plotting tools are powerful and useful but I am much more familiar with the plotting features of the <em>MatPlotLib</em> library. To use this plotting method I must plot actual values of <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>.</p>
 <p>First I will convert the expresion for concentration to a function. Then I will feed in a set of <span class="math notranslate nohighlight">\(x\)</span>-values and the function will return a set of <span class="math notranslate nohighlight">\(y\)</span>-values. In the code below, I take the expression from the code block above for <span class="math notranslate nohighlight">\([A]\)</span> at time <span class="math notranslate nohighlight">\(t\)</span> and I use the <code class="docutils literal notranslate"><span class="pre">sympy.lambdify()</span></code> tool to make a corresponding function object.</p>
 <div class="cell tag_hide-input docutils container">
@@ -725,21 +704,21 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output text_latex math notranslate nohighlight">
 \[\displaystyle 0.1 e^{- 1.2 t}\]</div>
-<img alt="../_images/d3b2bd51afe920ce3264beada5d3290610dd24d9b67253a69eba925144d9d1d4.png" src="../_images/d3b2bd51afe920ce3264beada5d3290610dd24d9b67253a69eba925144d9d1d4.png" />
+<img alt="../_images/19b9c0f7cc8acf54a689f933ab5e2de20ca06cf48da6337b277c90a04bc2a2a5.png" src="../_images/19b9c0f7cc8acf54a689f933ab5e2de20ca06cf48da6337b277c90a04bc2a2a5.png" />
 </div>
 </div>
-</section>
-</section>
-<section id="summary">
-<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+</div>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">#</a></h2>
 <p>We have also solved the rate law for a first-order reaction by defining the rate law as a differential equation and using the <code class="docutils literal notranslate"><span class="pre">dsolve</span></code> function of <em>SymPy</em>. This gives us an analytical solution that we can use to calculate the concentration of the reactant at any time point.</p>
 <p>We have also plotted the integrated rate law using the tools of <em>SymPy</em> and also by converting the result into a function and plotting the calculate <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> values using the tools of <em>MatPlotLib</em>.</p>
-<section id="why-do-this">
-<h3>Why Do This?<a class="headerlink" href="#why-do-this" title="Link to this heading">#</a></h3>
+<div class="section" id="why-do-this">
+<h3>Why Do This?<a class="headerlink" href="#why-do-this" title="Permalink to this headline">#</a></h3>
 <p>Finding an analytical solution to a differential equation will give an intergrated rate law that provides the concentration of a reactant at any time point. This could be used to fit experimental data and obtain reaction parameters. Integrated rate laws for first order reactions can be linearized easily but some rate laws cannot. Being able to construct an function to which data can be fit is a useful skill.</p>
-</section>
-</section>
-</section>
+</div>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -766,10 +745,11 @@ document.write(`
 
               
               
-              
-              
-                <footer class="prev-next-footer d-print-none">
+                <footer class="bd-footer-article">
                   
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="K01_solving_with_sympy.html"
@@ -789,7 +769,10 @@ document.write(`
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
+</div></div>
+  
 </div>
+
                 </footer>
               
             </div>
@@ -797,7 +780,6 @@ document.write(`
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -841,7 +823,6 @@ By Barry Linkletter
   
   <div class="footer-item">
     
-
   <p class="copyright">
     
       © Copyright 2024.
@@ -868,8 +849,8 @@ By Barry Linkletter
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
 
   <footer class="bd-footer">
   </footer>

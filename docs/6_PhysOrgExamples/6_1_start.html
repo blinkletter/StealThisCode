@@ -1,72 +1,74 @@
 
+
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../" >
+<html >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Integrating Rate Equations with Python &#8212; Steal this Code</title>
   
   
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
-    <link rel="stylesheet" type="text/css" href="../_static/tufte.css?v=189edcc0" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tufte.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
-  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
-    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="../_static/doctools.js?v=9a2dae69"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="../_static/copybutton.js?v=f281be69"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=36754332"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '6_PhysOrgExamples/6_1_start';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Investigating Reaction Kinetics" href="6_2_kinetics.html" />
-    <link rel="prev" title="Integrating a System" href="../4_SciPy/K05_NumericIntegration_SystemEq.html" />
+    <link rel="prev" title="Intro to PhysOrg Examples" href="6_0_Introduction.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:language" content="None"/>
   </head>
   
   
@@ -74,23 +76,19 @@
 
   
   
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -112,20 +110,12 @@
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
-</div>
-
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
-    </header>
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
   
-
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
-      
-      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -140,11 +130,9 @@
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
-
   
 
 <a class="navbar-brand logo" href="../start.html">
-  
   
   
   
@@ -154,23 +142,12 @@
       
     
     
-    <img src="../_static/Ouroboros-benzene.svg.png" class="logo__image only-light" alt="Steal this Code - Home"/>
-    <script>document.write(`<img src="../_static/Ouroboros-benzene.svg.png" class="logo__image only-dark" alt="Steal this Code - Home"/>`);</script>
+    <img src="../_static/Ouroboros-benzene.svg.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/Ouroboros-benzene.svg.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item">
-
- <script>
- document.write(`
-   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
-        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -191,10 +168,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../2_MatPlotLib/2_2_Curve_Fits.html">Linear Fits</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../2_MatPlotLib/2_3_Curve_Fits.html">Curve Fits</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../2_MatPlotLib/2_4_Fancy_1.html">Advanced Plotting Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2_MatPlotLib/2_5_Notes.html">Notes on Fitting Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2_MatPlotLib/2_6_Plotting_Reaction_Kinetics_to_Determine_Order.html">Plotting Reaction Kinetics</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">SymPy</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../3_SymPy/K01_solving_with_sympy.html">Free Symbolic Math</a></li>
+
 <li class="toctree-l1"><a class="reference internal" href="../3_SymPy/K02_Integrating_Rate_Law_1.html">Integrating Rate Laws</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../3_SymPy/K03_Integrating_MM.html">Integrating the Michaelis-Menten Rate Law</a></li>
 </ul>
@@ -203,8 +183,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../4_SciPy/K04_NumericIntegration.html">Numeric Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../4_SciPy/K05_NumericIntegration_SystemEq.html">Integrating a System</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">PhysOrg\ Examples</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PhysOrg Examples</span></p>
 <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="6_0_Introduction.html">Intro to PhysOrg Examples</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Integrating Rate Equations with Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="6_2_kinetics.html">Investigating Reaction Kinetics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="6_3_Problem_ch7_p5.html">Problem 5, Ch. 7</a></li>
@@ -225,7 +206,7 @@
 
       </div>
       
-      <main id="main-content" class="bd-main" role="main">
+      <main id="main-content" class="bd-main">
         
         
 
@@ -234,7 +215,7 @@
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article d-print-none">
+              <div class="bd-header-article">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
@@ -347,22 +328,20 @@
 </button>
 
 
-
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
   </button>
 `);
 </script>
 
-
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+    <i class="fa-solid fa-magnifying-glass"></i>
   </button>
 `);
 </script>
@@ -417,17 +396,17 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article">
+                <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="integrating-rate-equations-with-python">
-<h1>Integrating Rate Equations with Python<a class="headerlink" href="#integrating-rate-equations-with-python" title="Link to this heading">#</a></h1>
+  <div class="tex2jax_ignore mathjax_ignore section" id="integrating-rate-equations-with-python">
+<h1>Integrating Rate Equations with Python<a class="headerlink" href="#integrating-rate-equations-with-python" title="Permalink to this headline">#</a></h1>
 <p>You have integrated the classic first order and second order rate equations. The question I would ask is why? These equations were integrated 100 years ago and the answers have been available since then. Of course, this is an example so that you know that it can be used in more complicated systems. As we will soon see, that was a lie.</p>
 <p>Once we get to even slightly more complicated systems we quickly end up with integrations that are complex and often better solved with numerical methods.</p>
-<section id="simple-integrated-rate-laws">
-<h2>Simple Integrated Rate Laws<a class="headerlink" href="#simple-integrated-rate-laws" title="Link to this heading">#</a></h2>
+<div class="section" id="simple-integrated-rate-laws">
+<h2>Simple Integrated Rate Laws<a class="headerlink" href="#simple-integrated-rate-laws" title="Permalink to this headline">#</a></h2>
 <p>Here are the equations that we have solved already in you chemistry career.</p>
-<section id="first-order">
-<h3>First Order<a class="headerlink" href="#first-order" title="Link to this heading">#</a></h3>
+<div class="section" id="first-order">
+<h3>First Order<a class="headerlink" href="#first-order" title="Permalink to this headline">#</a></h3>
 <div class="math notranslate nohighlight">
 \[{A}\xrightarrow{k_{obs}}{P}\]</div>
 <div class="math notranslate nohighlight">
@@ -438,9 +417,9 @@ document.write(`
 \[P_t = P_\infty - \cdot P_\infty e^{-k_{obs}t}\]</div>
 <div class="math notranslate nohighlight">
 \[ t_{1/2} = \frac{\ln{2}}{k_{obs}}\]</div>
-</section>
-<section id="second-order">
-<h3>Second Order<a class="headerlink" href="#second-order" title="Link to this heading">#</a></h3>
+</div>
+<div class="section" id="second-order">
+<h3>Second Order<a class="headerlink" href="#second-order" title="Permalink to this headline">#</a></h3>
 <div class="math notranslate nohighlight">
 \[{2A}\xrightarrow{k_{obs}}{P}\]</div>
 <div class="math notranslate nohighlight">
@@ -449,9 +428,9 @@ document.write(`
 \[ \frac{1}{A_t} = \frac{1}{A_0} + k_{obs}\cdot t\]</div>
 <div class="math notranslate nohighlight">
 \[ t_{1/2} = \frac{1}{k_{obs}\cdot A_0}\]</div>
-</section>
-<section id="second-order-again">
-<h3>Second Order Again<a class="headerlink" href="#second-order-again" title="Link to this heading">#</a></h3>
+</div>
+<div class="section" id="second-order-again">
+<h3>Second Order Again<a class="headerlink" href="#second-order-again" title="Permalink to this headline">#</a></h3>
 <div class="math notranslate nohighlight">
 \[{A + B}\xrightarrow{k_{obs}}{P}\]</div>
 <div class="math notranslate nohighlight">
@@ -459,14 +438,14 @@ document.write(`
 <div class="math notranslate nohighlight">
 \[ \frac{A_0-x}{B_0-x} = \frac{A_0}{B_0} \cdot e^{\left( A_0-B_0 \right) \cdot k_{obs}\cdot t}\]</div>
 <p><em>where x is the progress of the reaction. e.g. <span class="math notranslate nohighlight">\(A_0-x=A_t\)</span>.</em></p>
-</section>
-<section id="simple-is-easy">
-<h3>Simple is Easy<a class="headerlink" href="#simple-is-easy" title="Link to this heading">#</a></h3>
+</div>
+<div class="section" id="simple-is-easy">
+<h3>Simple is Easy<a class="headerlink" href="#simple-is-easy" title="Permalink to this headline">#</a></h3>
 <p>Everything works well when reactions are simple. But what about reactions with multiple steps and reactions with multiple pathways?</p>
-</section>
-</section>
-<section id="consecutive-reactions">
-<h2>Consecutive Reactions<a class="headerlink" href="#consecutive-reactions" title="Link to this heading">#</a></h2>
+</div>
+</div>
+<div class="section" id="consecutive-reactions">
+<h2>Consecutive Reactions<a class="headerlink" href="#consecutive-reactions" title="Permalink to this headline">#</a></h2>
 <p>More complex rate laws are not easily integrated (don’t let me discourage you - mathematicians are waiting to help you and the details are described in the <a class="reference external" href="https://moodle31.upei.ca/mod/resource/view.php?id=623407">Integrating Rate Equations</a> tutorial document). I have hit the limits of my calculus powers, though. So now I will turn to the tools available in <em>Python</em></p>
 <p>Let us start with a straightforward consecutive reaction.</p>
 <div class="math notranslate nohighlight">
@@ -475,8 +454,8 @@ document.write(`
 <p>Let’s use numerical methods to get the concentrations over time. This will let us model a reaction and see how concentrations change over time.  It will not give us a function that we can use to curve fit data.  We would have to actually integrate the rate law using analytical methods to do that. Keep those mathematicians on speed-dial. (I have no doubt that there are methods available in the <em>Python</em> ecosystem that will optimize parameters in a numerical integration to fit a set of data. Let me know if you ever come across them and please write a detailed instruction manual for me.)</p>
 <p>In the code below we will state the rate law for each reaction and then use the tools of the <em>SciPy</em> package to integrate the system numerically.  This will give us the concentrations of reactants over time for various values of <span class="math notranslate nohighlight">\(k_1\)</span>, <span class="math notranslate nohighlight">\(k_2\)</span> and <span class="math notranslate nohighlight">\(A_0\)</span>.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">scipy.integrate.odeint()</span></code> function will perform a numerical integration of a system of ordinary differential equations. The rate laws for each step make up this set of equations.</p>
-<section id="observations">
-<h3>Observations<a class="headerlink" href="#observations" title="Link to this heading">#</a></h3>
+<div class="section" id="observations">
+<h3>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">#</a></h3>
 <p>We can see that the concentration of A will dissappear according to first order reaction kinetics. This is because the consumption of A is a first order irreversible reaction. The concentrations of the intermediate, B, and the product, P, do not follow the simple math of first or second order kinetics. The numerical integration will calculate their concentrations according to the rates of appearance and dissappearance.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
@@ -510,7 +489,7 @@ document.write(`
 <span class="c1">############################################</span>
 
 <span class="k">def</span> <span class="nf">rates</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A function that finds the instantaneous rate of each reaction when given</span>
 <span class="sd">    the concentration of each reactant</span>
 <span class="sd">    </span>
@@ -561,29 +540,13 @@ document.write(`
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.00000000e+00, 1.00040016e-02, 2.00080032e-02, ...,
-       2.49799920e+01, 2.49899960e+01, 2.50000000e+01])
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1.00000000e+00, 0.00000000e+00, 0.00000000e+00],
-       [9.92028737e-01, 7.96727242e-03, 3.99087937e-06],
-       [9.84121013e-01, 1.58630709e-02, 1.59161997e-05],
-       ...,
-       [1.60187834e-09, 9.39993057e-02, 9.06000693e-01],
-       [1.57455453e-09, 9.39053159e-02, 9.06094683e-01],
-       [1.54736994e-09, 9.38114200e-02, 9.06188578e-01]])
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1., 0., 0.])
-</pre></div>
-</div>
-<img alt="../_images/56250eb18152c1b0c9e96c6272ca6e1a54f54d3504ad859510c82973c556d150.png" src="../_images/56250eb18152c1b0c9e96c6272ca6e1a54f54d3504ad859510c82973c556d150.png" />
+<img alt="../_images/5f1cedeb9adc4e67e70df657384fff04d863b3914539231a30ff8725403ff6c3.png" src="../_images/5f1cedeb9adc4e67e70df657384fff04d863b3914539231a30ff8725403ff6c3.png" />
 </div>
 </div>
-</section>
-</section>
-<section id="steady-state-system">
-<h2>Steady State System<a class="headerlink" href="#steady-state-system" title="Link to this heading">#</a></h2>
+</div>
+</div>
+<div class="section" id="steady-state-system">
+<h2>Steady State System<a class="headerlink" href="#steady-state-system" title="Permalink to this headline">#</a></h2>
 <p>You will recall the example of complex reactions that you explored in physical chemistry. Here is an example where the initial reaction is reversible, followed by an irreversible reaction that produces the product.</p>
 <div class="math notranslate nohighlight">
 \[ A\rightleftharpoons B \rightarrow P\]</div>
@@ -593,8 +556,8 @@ document.write(`
 B \xrightarrow{k_{-1}} A \\
 B \xrightarrow{k_2} P\end{split}\]</div>
 <p>This may be interpreted as an equilibrium followed by a final step or as a steady-state system where the reverse reaction and the final step are fast so that the intermediate never reaches an equilibrium concentration. If <span class="math notranslate nohighlight">\(k_2 &lt;&lt; k_{-1}\)</span> then it would be a pre-equilibrium case. If <span class="math notranslate nohighlight">\(k_2 &gt;&gt; k_{-1}\)</span> then it is a steady state case. Of course, it could be in-between as well…</p>
-<section id="id1">
-<h3>Observations<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<div class="section" id="id1">
+<h3>Observations<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
 <p>The concentration of intermediate never builds up in a steady state system. It is present at a small concentration, which doesn’t change much over time in comparison to the larger changes in concentration of reactant and product. Change the values for <span class="math notranslate nohighlight">\(k_2\)</span> and <span class="math notranslate nohighlight">\(k_{-1}\)</span> and observe the results. Explore the extremes to make clear cases of a pre-equilibrium system and a steady-state system. Have fun.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
@@ -659,13 +622,13 @@ B \xrightarrow{k_2} P\end{split}\]</div>
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/86f57c4c8c9238364663c788f62a0849d4d01e3b3179d7d1884bb4ccd3bc96c5.png" src="../_images/86f57c4c8c9238364663c788f62a0849d4d01e3b3179d7d1884bb4ccd3bc96c5.png" />
+<img alt="../_images/2e954bbf7bbe5ac6dc17d671d97af996060854c78a83992e5e620c7d27aac7c5.png" src="../_images/2e954bbf7bbe5ac6dc17d671d97af996060854c78a83992e5e620c7d27aac7c5.png" />
 </div>
 </div>
-</section>
-</section>
-<section id="salt-inhibition">
-<h2>Salt Inhibition<a class="headerlink" href="#salt-inhibition" title="Link to this heading">#</a></h2>
+</div>
+</div>
+<div class="section" id="salt-inhibition">
+<h2>Salt Inhibition<a class="headerlink" href="#salt-inhibition" title="Permalink to this headline">#</a></h2>
 <p>Let us take the example above and imagine that it is the solvolysis of t-butyl chloride. This is a classic example of inhibition by the intermediate.</p>
 <div class="math notranslate nohighlight">
 \[ tBuCo\rightleftharpoons tBu^+ + Cl^- \xrightarrow{H_2O} P\]</div>
@@ -678,8 +641,8 @@ B \xrightarrow{k_2} P\end{split}\]</div>
 <p>Since the chloride leaving group can react with the carbocation to return the system to the starting material, more chloride will reduce the concentration of carbocation. Therefore, adding chloride salt to the solution will slow the appearance of product. We can get the integrated rate equations by adding this term, to the list of rates (the rate if appearance of X, which we will call rx) and then performing the integration as above.</p>
 <p>Change the concentration of X by changing the final value in the integration method call <code class="docutils literal notranslate"><span class="pre">sp.integrate.odeint(rates,</span> <span class="pre">[1,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0.2],</span> <span class="pre">t)</span></code>.  In the code below the last value on the list is the salt concentration, [X].</p>
 <p>The code below will plot the value of the product concentration vs. time in three cases of [X]</p>
-<section id="id2">
-<h3>Observations<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<div class="section" id="id2">
+<h3>Observations<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
 <p>The <span class="math notranslate nohighlight">\(k_obs\)</span> for the reaction is smaller as we add more of the salt of the leaving group (chloride ion in this case). If you derive the rate law you will see that…</p>
 <div class="math notranslate nohighlight">
 \[ \frac{-\partial}{\partial t}\left[A\right] = \frac{k_1 \cdot k_2}{k_{-1} \cdot \left[Cl\right] + k_2} \left[A\right]\]</div>
@@ -762,12 +725,12 @@ B \xrightarrow{k_2} P\end{split}\]</div>
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/b9bc48a4059e32679318dcfc91799ea220da86d330a9dfc85a2ac702580ce0e0.png" src="../_images/b9bc48a4059e32679318dcfc91799ea220da86d330a9dfc85a2ac702580ce0e0.png" />
+<img alt="../_images/1457ff1907315902fd0efafbb8b5934c001b291986b0ae3f0bc32cfb54a18ee0.png" src="../_images/1457ff1907315902fd0efafbb8b5934c001b291986b0ae3f0bc32cfb54a18ee0.png" />
 </div>
 </div>
-</section>
-</section>
-</section>
+</div>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -794,18 +757,19 @@ B \xrightarrow{k_2} P\end{split}\]</div>
 
               
               
-              
-              
-                <footer class="prev-next-footer d-print-none">
+                <footer class="bd-footer-article">
                   
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../4_SciPy/K05_NumericIntegration_SystemEq.html"
+       href="6_0_Introduction.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Integrating a System</p>
+        <p class="prev-next-title">Intro to PhysOrg Examples</p>
       </div>
     </a>
     <a class="right-next"
@@ -817,7 +781,10 @@ B \xrightarrow{k_2} P\end{split}\]</div>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
+</div></div>
+  
 </div>
+
                 </footer>
               
             </div>
@@ -825,7 +792,6 @@ B \xrightarrow{k_2} P\end{split}\]</div>
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -873,7 +839,6 @@ By Barry Linkletter
   
   <div class="footer-item">
     
-
   <p class="copyright">
     
       © Copyright 2024.
@@ -900,8 +865,8 @@ By Barry Linkletter
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
 
   <footer class="bd-footer">
   </footer>

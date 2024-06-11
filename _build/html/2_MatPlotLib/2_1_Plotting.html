@@ -1,63 +1,65 @@
 
+
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../" >
+<html >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Plotting Data &#8212; Steal this Code</title>
   
   
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
-    <link rel="stylesheet" type="text/css" href="../_static/tufte.css?v=189edcc0" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tufte.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
-  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
-    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="../_static/doctools.js?v=9a2dae69"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="../_static/copybutton.js?v=f281be69"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=36754332"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '2_MatPlotLib/2_1_Plotting';</script>
@@ -66,7 +68,7 @@
     <link rel="next" title="Linear Fits" href="2_2_Curve_Fits.html" />
     <link rel="prev" title="Using Uncertainty" href="../1_Math/1_2_uncertainties.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:language" content="None"/>
   </head>
   
   
@@ -74,23 +76,19 @@
 
   
   
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -112,20 +110,12 @@
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
-</div>
-
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
-    </header>
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
   
-
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
-      
-      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -140,11 +130,9 @@
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
-
   
 
 <a class="navbar-brand logo" href="../start.html">
-  
   
   
   
@@ -154,23 +142,12 @@
       
     
     
-    <img src="../_static/Ouroboros-benzene.svg.png" class="logo__image only-light" alt="Steal this Code - Home"/>
-    <script>document.write(`<img src="../_static/Ouroboros-benzene.svg.png" class="logo__image only-dark" alt="Steal this Code - Home"/>`);</script>
+    <img src="../_static/Ouroboros-benzene.svg.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/Ouroboros-benzene.svg.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item">
-
- <script>
- document.write(`
-   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
-        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -229,7 +206,7 @@
 
       </div>
       
-      <main id="main-content" class="bd-main" role="main">
+      <main id="main-content" class="bd-main">
         
         
 
@@ -238,7 +215,7 @@
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article d-print-none">
+              <div class="bd-header-article">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
@@ -351,22 +328,20 @@
 </button>
 
 
-
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
   </button>
 `);
 </script>
 
-
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+    <i class="fa-solid fa-magnifying-glass"></i>
   </button>
 `);
 </script>
@@ -409,10 +384,10 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article">
+                <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="plotting-data">
-<h1>Plotting Data<a class="headerlink" href="#plotting-data" title="Link to this heading">#</a></h1>
+  <div class="tex2jax_ignore mathjax_ignore section" id="plotting-data">
+<h1>Plotting Data<a class="headerlink" href="#plotting-data" title="Permalink to this headline">#</a></h1>
 <p>Steal the code below to <strong>plot data</strong> in a <strong>simple x,y plot</strong>. Note that we set x and y to be two different lists of values. You can set the x and y to any two sets of data that have the same number of entries. One list might be rates and another might be concentrations of reactants, for example. Consider the code below.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -446,14 +421,14 @@ document.write(`
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x11a23c6d0&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x113fde810&gt;]
 </pre></div>
 </div>
 <img alt="../_images/7a2244b5337d9c018a8b7547bd7b017e19ceb44c6d508d0641a7dae48e6f7ec0.png" src="../_images/7a2244b5337d9c018a8b7547bd7b017e19ceb44c6d508d0641a7dae48e6f7ec0.png" />
 </div>
 </div>
-<section id="settings-and-features">
-<h2>Settings and Features<a class="headerlink" href="#settings-and-features" title="Link to this heading">#</a></h2>
+<div class="section" id="settings-and-features">
+<h2>Settings and Features<a class="headerlink" href="#settings-and-features" title="Permalink to this headline">#</a></h2>
 <p>the <em>PyPlot</em> sublibrary of the <em>MatPlotLib</em> package has many commands that will enable us to <strong>control the style and feature</strong>s of our plot. Consider the code below.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
@@ -490,9 +465,9 @@ document.write(`
 <img alt="../_images/d67cd65687f8ffde646bb88e9391c64b2ba0b0368a2ec9ea42b11f55fa06aeef.png" src="../_images/d67cd65687f8ffde646bb88e9391c64b2ba0b0368a2ec9ea42b11f55fa06aeef.png" />
 </div>
 </div>
-</section>
-<section id="more-examples-of-formatting">
-<h2>More Examples of Formatting<a class="headerlink" href="#more-examples-of-formatting" title="Link to this heading">#</a></h2>
+</div>
+<div class="section" id="more-examples-of-formatting">
+<h2>More Examples of Formatting<a class="headerlink" href="#more-examples-of-formatting" title="Permalink to this headline">#</a></h2>
 <p>The <em>PyPlot</em> sublibrary has access to many many <strong>features and controls</strong> for plotting. Consider the example below.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
@@ -540,9 +515,9 @@ document.write(`
 <img alt="../_images/9f711bc7f8ab5ea8a08d4c7abac431f994393630e60acec12dab43a18a06da1c.png" src="../_images/9f711bc7f8ab5ea8a08d4c7abac431f994393630e60acec12dab43a18a06da1c.png" />
 </div>
 </div>
-</section>
-<section id="plotting-functions">
-<h2>Plotting Functions<a class="headerlink" href="#plotting-functions" title="Link to this heading">#</a></h2>
+</div>
+<div class="section" id="plotting-functions">
+<h2>Plotting Functions<a class="headerlink" href="#plotting-functions" title="Permalink to this headline">#</a></h2>
 <p>We will <strong>plot</strong> an exponential decay curve. We will plot <em>y = e<sup>–x</sup></em>. First we need a <strong><em>x</em>-axis</strong>. As you see below, we will use the <code class="docutils literal notranslate"><span class="pre">linspace</span></code> tool from <em>NumPy</em> to create an evenly spaced array of values between two points. We will then calculate a new array for the <strong><em>y</em>-axis</strong> by applying the exponential decay function.  We now have a set of x,y values to plot.</p>
 <p>We will then <strong>plot the <em>x,y</em> data</strong> using tools from the <code class="docutils literal notranslate"><span class="pre">plt</span></code> object (which is actually the <code class="docutils literal notranslate"><span class="pre">matplotlib.pyplot</span></code> library.) Now we will have our plot.</p>
 <div class="cell docutils container">
@@ -561,9 +536,9 @@ document.write(`
 <img alt="../_images/91599e753d5d8573fbaf619db234af14d4d66531e996e2ad4be049981dae17ca.png" src="../_images/91599e753d5d8573fbaf619db234af14d4d66531e996e2ad4be049981dae17ca.png" />
 </div>
 </div>
-</section>
-<section id="the-same-thing-only-better">
-<h2>The Same Thing, Only Better<a class="headerlink" href="#the-same-thing-only-better" title="Link to this heading">#</a></h2>
+</div>
+<div class="section" id="the-same-thing-only-better">
+<h2>The Same Thing, Only Better<a class="headerlink" href="#the-same-thing-only-better" title="Permalink to this headline">#</a></h2>
 <p>We can add elements to the plot such as <strong>titles and labels</strong>. We can set limits on the <em>x</em>- and <em>y</em>-axis. We can <strong>change the color</strong> of the line. Examine the code below and see how we did all that.</p>
 <p>The <strong>commands</strong> executed below are called “methods”.  They are functions built into the <code class="docutils literal notranslate"><span class="pre">plt</span></code> <strong>object</strong>. They modify the object according to the input for the method. When you enter <code class="docutils literal notranslate"><span class="pre">plt.ylabel(&quot;Amount&quot;)</span></code>, the <code class="docutils literal notranslate"><span class="pre">plt</span></code> object has a <strong>label</strong> added to its <em>y</em>-axis. In the last line, the <code class="docutils literal notranslate"><span class="pre">plt.show()</span></code> method <strong>displays and clears</strong> the <code class="docutils literal notranslate"><span class="pre">plt</span></code> object.  Entering <code class="docutils literal notranslate"><span class="pre">plt.show()</span></code> a second time will display nothing unless you build a new plot.</p>
 <p>There are much <strong>more sophisticated</strong> ways to present plots and we will explore some aspects of this later. However, this is all the <strong>style</strong> that we need to know for now.</p>
@@ -592,9 +567,9 @@ document.write(`
 <img alt="../_images/cb767e2dac9497d65a49c1b25705ebde7bc29b592cf265e120214032d47831b2.png" src="../_images/cb767e2dac9497d65a49c1b25705ebde7bc29b592cf265e120214032d47831b2.png" />
 </div>
 </div>
-</section>
-<section id="two-plots-in-a-figure">
-<h2>Two Plots in a Figure<a class="headerlink" href="#two-plots-in-a-figure" title="Link to this heading">#</a></h2>
+</div>
+<div class="section" id="two-plots-in-a-figure">
+<h2>Two Plots in a Figure<a class="headerlink" href="#two-plots-in-a-figure" title="Permalink to this headline">#</a></h2>
 <p>Let us <strong>demonstrate</strong> first order <strong>reaction kinetics</strong>. We will plot the concentration of reactant and product for the reaction <em>A → B</em>. We know that the instantaneous rate at any given time point is…</p>
 <div class="math notranslate nohighlight">
 \[-\frac{\partial [A]}{\partial t}=\frac{\partial [B]}{\partial t}=k[A] \]</div>
@@ -622,18 +597,18 @@ document.write(`
 <img alt="../_images/713f3c4b8ac813ab47aaa2c9ef688644112bf35af90ec191bf8e9a1ea0db75c5.png" src="../_images/713f3c4b8ac813ab47aaa2c9ef688644112bf35af90ec191bf8e9a1ea0db75c5.png" />
 </div>
 </div>
-</section>
-<section id="have-fun">
-<h2>Have Fun<a class="headerlink" href="#have-fun" title="Link to this heading">#</a></h2>
+</div>
+<div class="section" id="have-fun">
+<h2>Have Fun<a class="headerlink" href="#have-fun" title="Permalink to this headline">#</a></h2>
 <p><strong>Change</strong> the value for <em>k</em> (rate constant) in the code block above and see what happens. Plot a different function (e.g. n<sup>x</sup> - 3.) <strong>Fool around</strong> with other values and explore. Undo is your friend. Idleness is your enemy.</p>
 <p><strong>Change</strong> some settings above and see what happens. Try plotting a different functions: plot a sine wave; plot a straight line with a slope of <span class="math notranslate nohighlight">\(\pi\)</span>. <strong>Fool around</strong> with other values and explore. <strong>How</strong> do you get a sine function? <strong>Search</strong> the web for “<em>NumPy</em> and sine”. How do you get a built-in value for π? Search for <em>NumPy</em> and “pi”. Are you noticing a pattern here?</p>
-</section>
-<section id="summary">
-<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">#</a></h2>
 <p>We have learned how to <strong>make a set of values</strong> for an <em>x</em>-axis, <strong>calculate a corresponding set of values</strong> for the <em>y</em>-axis and <strong>plot</strong> the data. We have seen that repeated plot commands will add to the plot until a <code class="docutils literal notranslate"><span class="pre">plt.show()</span></code> function is called to display the results.</p>
 <p>There are many, many <strong>options and features</strong> to the <em>MatPlotLib</em> plotting system. We have learned <strong>how to add titles and labels</strong> and to <strong>set the color and style</strong> of the line. We can have multiple plots in a single figure, we can save the plots in a variety of formats and so much more. The <em>NumPy</em> tools and other toolsets that we import will provide many useful functions for math and interpreting data. Keep an eye out for new <strong>opportunities to learn</strong> more about styling plots. We will learn as we go.</p>
-</section>
-</section>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -660,10 +635,11 @@ document.write(`
 
               
               
-              
-              
-                <footer class="prev-next-footer d-print-none">
+                <footer class="bd-footer-article">
                   
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="../1_Math/1_2_uncertainties.html"
@@ -683,7 +659,10 @@ document.write(`
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
+</div></div>
+  
 </div>
+
                 </footer>
               
             </div>
@@ -691,7 +670,6 @@ document.write(`
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -727,7 +705,6 @@ By Barry Linkletter
   
   <div class="footer-item">
     
-
   <p class="copyright">
     
       © Copyright 2024.
@@ -754,8 +731,8 @@ By Barry Linkletter
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
 
   <footer class="bd-footer">
   </footer>

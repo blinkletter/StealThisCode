@@ -1,70 +1,72 @@
 
+
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../../" >
+<html >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Integrating a System &#8212; Steal this Code</title>
   
   
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
-<link href="../../_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
   
-  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
-    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
-    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
-    <link rel="stylesheet" type="text/css" href="../../_static/tufte.css?v=189edcc0" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tufte.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
-  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
-    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="../../_static/doctools.js?v=9a2dae69"></script>
-    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="../../_static/copybutton.js?v=f281be69"></script>
-    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../../_static/design-tabs.js?v=36754332"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '3_SymPy/OLD/K05_NumericIntegration_SystemEq';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:language" content="None"/>
   </head>
   
   
@@ -72,23 +74,19 @@
 
   
   
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -110,22 +108,12 @@
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
-</div>
-
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
-    </header>
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
   
-
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
-      
-      
-      
-        
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -140,11 +128,9 @@
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
-
   
 
 <a class="navbar-brand logo" href="../../start.html">
-  
   
   
   
@@ -154,23 +140,12 @@
       
     
     
-    <img src="../../_static/Ouroboros-benzene.svg.png" class="logo__image only-light" alt="Steal this Code - Home"/>
-    <script>document.write(`<img src="../../_static/Ouroboros-benzene.svg.png" class="logo__image only-dark" alt="Steal this Code - Home"/>`);</script>
+    <img src="../../_static/Ouroboros-benzene.svg.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/Ouroboros-benzene.svg.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item">
-
- <script>
- document.write(`
-   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
-        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -191,10 +166,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../../2_MatPlotLib/2_2_Curve_Fits.html">Linear Fits</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../2_MatPlotLib/2_3_Curve_Fits.html">Curve Fits</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../2_MatPlotLib/2_4_Fancy_1.html">Advanced Plotting Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../2_MatPlotLib/2_5_Notes.html">Notes on Fitting Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../2_MatPlotLib/2_6_Plotting_Reaction_Kinetics_to_Determine_Order.html">Plotting Reaction Kinetics</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">SymPy</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../K01_solving_with_sympy.html">Free Symbolic Math</a></li>
+
 <li class="toctree-l1"><a class="reference internal" href="../K02_Integrating_Rate_Law_1.html">Integrating Rate Laws</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../K03_Integrating_MM.html">Integrating the Michaelis-Menten Rate Law</a></li>
 </ul>
@@ -203,8 +181,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../../4_SciPy/K04_NumericIntegration.html">Numeric Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../4_SciPy/K05_NumericIntegration_SystemEq.html">Integrating a System</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">PhysOrg\ Examples</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PhysOrg Examples</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../6_PhysOrgExamples/6_0_Introduction.html">Intro to PhysOrg Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../6_PhysOrgExamples/6_1_start.html">Integrating Rate Equations with Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../6_PhysOrgExamples/6_2_kinetics.html">Investigating Reaction Kinetics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../6_PhysOrgExamples/6_3_Problem_ch7_p5.html">Problem 5, Ch. 7</a></li>
@@ -225,7 +204,7 @@
 
       </div>
       
-      <main id="main-content" class="bd-main" role="main">
+      <main id="main-content" class="bd-main">
         
         
 
@@ -234,7 +213,7 @@
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article d-print-none">
+              <div class="bd-header-article">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
@@ -347,22 +326,20 @@
 </button>
 
 
-
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
   </button>
 `);
 </script>
 
-
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+    <i class="fa-solid fa-magnifying-glass"></i>
   </button>
 `);
 </script>
@@ -405,10 +382,10 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article">
+                <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="integrating-a-system">
-<h1>Integrating a System<a class="headerlink" href="#integrating-a-system" title="Link to this heading">#</a></h1>
+  <div class="tex2jax_ignore mathjax_ignore section" id="integrating-a-system">
+<h1>Integrating a System<a class="headerlink" href="#integrating-a-system" title="Permalink to this headline">#</a></h1>
 <p>The famous Michaleis-Menten equation makes some big assumptions. And it is easy to design an experiment so that the equation works very well. One important idea is that the concentration of enzyme must be small compared to the concentrationn of the substrate. Then the free substrate concentration will be very close to the total substrate concentration at all times.</p>
 <p>But what if we want to model the equation more fully? Let us include the effects of the enzyme on substrate concentration. We will still assume the reaction is ireversible and we state the following model scheme for the reaction.</p>
 <div class="math notranslate nohighlight">
@@ -420,8 +397,8 @@ ES \xrightarrow{k_{-1}}  E + S\\
 ES \xrightarrow{k_{cat}} P + E \end{split}\]</div>
 <p>Now let us integrate all three of these reaction together as a system that describes MM kinetics.</p>
 <p>In this notebook will not use analytical methods but instead use the numerical algorithms encapsulated the Python tools. We will use <code class="docutils literal notranslate"><span class="pre">scipy.integration.solve_ivp()</span></code>.</p>
-<section id="using-solve-ivp">
-<h2>Using <em>solve_ivp</em><a class="headerlink" href="#using-solve-ivp" title="Link to this heading">#</a></h2>
+<div class="section" id="using-solve-ivp">
+<h2>Using <em>solve_ivp</em><a class="headerlink" href="#using-solve-ivp" title="Permalink to this headline">#</a></h2>
 <p>The code below calculates the instantaneous rate of change for each reactant, intermediate and product in the Michaelis-Menten system and then integrates the whole system using numerical methods. Using the reaction scheme outlined above we can define the following rates at a given moment in time.</p>
 <div class="math notranslate nohighlight">
 \[\frac{d}{dt}[S] = -(k_1 [S][E])+(k_{-1}[ES])\]</div>
@@ -574,9 +551,9 @@ kcat/Km: 1.98e+04
 <img alt="../../_images/24a468cbacc389041a02e9c272aff018489aa7289cc5b5d6064f020a1dc1c605.png" src="../../_images/24a468cbacc389041a02e9c272aff018489aa7289cc5b5d6064f020a1dc1c605.png" />
 </div>
 </div>
-</section>
-<section id="comparing-results">
-<h2>Comparing Results<a class="headerlink" href="#comparing-results" title="Link to this heading">#</a></h2>
+</div>
+<div class="section" id="comparing-results">
+<h2>Comparing Results<a class="headerlink" href="#comparing-results" title="Permalink to this headline">#</a></h2>
 <p>In the previous notebook we integtrated the Michaelis-Menten equation both analytically and numerically. Here we are integrating the whole system of differential equations that describes the enzyme kinetics of a Michaelis-Menten enzyme kinetics scheme. There will be differences Here. The enzyme will alter the concentration of free substrate in solution when some of the substrate is sequestered in the ES complex.</p>
 <p>If enzyme concentration is much less that substrate the difference will be small. The code below will plot both the result from the numerically integrated system of differential equations and the result from the analytical integtration of the Michaelis-Menten equation. Both sets of data will be plotted on top of each other with one in red andthen the other in black on top. Do you see any red? The two data sets are accurate within the width of the plot line.</p>
 <p>Then I will plot the % difference between the two data sets and also the absolute difference. We see the sudden drop in the concentration of substrate revealed in the difference plot. Because the concentration of enzyme is so small, the difference is unimportant.</p>
@@ -819,9 +796,9 @@ kcat/Km: 1.98e+04
 <img alt="../../_images/bb6c3c6cc4d8cd41a1c146fdef300457965e75930d7c285f7c7c89732b4c56e2.png" src="../../_images/bb6c3c6cc4d8cd41a1c146fdef300457965e75930d7c285f7c7c89732b4c56e2.png" />
 </div>
 </div>
-</section>
-<section id="comparing-first-moments">
-<h2>Comparing First Moments<a class="headerlink" href="#comparing-first-moments" title="Link to this heading">#</a></h2>
+</div>
+<div class="section" id="comparing-first-moments">
+<h2>Comparing First Moments<a class="headerlink" href="#comparing-first-moments" title="Permalink to this headline">#</a></h2>
 <p>The main difference between the Michaelis-Menten equation and the true kinetic behaviour is the initial association of enzyme with substrate. The enzyme will quickly form the ES complex in equilibrium and that will result in a small decrease in subtrate concentration.</p>
 <p>In the previous notebook we paired the analytical and numerical integrations of the MM equation. In that case we were comparing different methods of integbrating the same equation. In this notebook we are comparing two different systems: the simplified MM equation and the system of rate laws from which it was derived.</p>
 <p>In the plots above we plotted the analytically integrated MM equation and the numerically integrated system of differential equations. We can barely see the small difference that including the effect of ES complex formation has on the calculated concentration of substrate near time zeroin the difference plot (look for that tiney sharp drop at the start.)</p>
@@ -1068,19 +1045,19 @@ The integrated rate law for the MM equation
 <img alt="../../_images/79dd727c2edf985576492d5d71906fe2de7adacc57c27801bc55dc7cb5a7afb9.png" src="../../_images/79dd727c2edf985576492d5d71906fe2de7adacc57c27801bc55dc7cb5a7afb9.png" />
 </div>
 </div>
-<section id="observations">
-<h3>Observations<a class="headerlink" href="#observations" title="Link to this heading">#</a></h3>
+<div class="section" id="observations">
+<h3>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">#</a></h3>
 <p>We see in the plots that the MM equation begins as if the ES complex formation was instantaneous and also has no effect of substrate oncenbtration (recall that we assumed that <span class="math notranslate nohighlight">\([E] \ll [S]\)</span> when we derived it.)</p>
 <p>The numerically integrated system of rate laws does reveal the initial fast association of enzyme and substrate. At high substrate concentrations we will have near saturation of the enzyme and so see an amount of substrate almost equal to enzyme amount absorbed in a raid drop before we reach a steady state (recall that we used the steady-state assumpotion in deriving the MM equation - but we ignored the time needed to reach that steady state.)</p>
 <p>The difference between the two lines is about 1 <span class="math notranslate nohighlight">\(\mu \!M\)</span> (the concentration of the enzyme) out of 50 <span class="math notranslate nohighlight">\(mM\)</span> (the initial substrate conc.) That is an error of <span class="math notranslate nohighlight">\(0.002 \; \%\)</span>.  Typical enzyme concentrations in MM experiments are in the micromolar to nanomolar range. So if our substrate in in the millimolar range we will never be able to detect a difference between the MM equation and the true behaviour of the system.</p>
-</section>
-</section>
-<section id="conclusion">
-<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
+</div>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">#</a></h2>
 <p>The power of numerical integration is demonstrated here. We were able to plot the concentration of substrate vs. time by integrating a system of differential rate equations (rate laws). We had to do no math. We avoided real calculus and the required skill to reach the analytical solution.</p>
 <p>We also showed that the integration of the MM equation itself is completely satisfactory when enzyme concentration is very small.</p>
-</section>
-</section>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -1107,12 +1084,16 @@ The integrated rate law for the MM equation
 
               
               
-              
-              
-                <footer class="prev-next-footer d-print-none">
+                <footer class="bd-footer-article">
                   
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
+</div></div>
+  
 </div>
+
                 </footer>
               
             </div>
@@ -1120,7 +1101,6 @@ The integrated rate law for the MM equation
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -1156,7 +1136,6 @@ By Barry Linkletter
   
   <div class="footer-item">
     
-
   <p class="copyright">
     
       © Copyright 2024.
@@ -1183,8 +1162,8 @@ By Barry Linkletter
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
-<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
 
   <footer class="bd-footer">
   </footer>

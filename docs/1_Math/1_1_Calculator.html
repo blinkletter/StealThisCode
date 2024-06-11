@@ -1,63 +1,65 @@
 
+
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../" >
+<html >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Basic Math with Python &#8212; Steal this Code</title>
   
   
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
-    <link rel="stylesheet" type="text/css" href="../_static/tufte.css?v=189edcc0" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tufte.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
-  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
-    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="../_static/doctools.js?v=9a2dae69"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="../_static/copybutton.js?v=f281be69"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=36754332"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '1_Math/1_1_Calculator';</script>
@@ -66,7 +68,7 @@
     <link rel="next" title="Using Uncertainty" href="1_2_uncertainties.html" />
     <link rel="prev" title="Steal This Code" href="../start.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:language" content="None"/>
   </head>
   
   
@@ -74,23 +76,19 @@
 
   
   
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -112,20 +110,12 @@
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
-</div>
-
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
-    </header>
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
   
-
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
-      
-      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -140,11 +130,9 @@
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
-
   
 
 <a class="navbar-brand logo" href="../start.html">
-  
   
   
   
@@ -154,23 +142,12 @@
       
     
     
-    <img src="../_static/Ouroboros-benzene.svg.png" class="logo__image only-light" alt="Steal this Code - Home"/>
-    <script>document.write(`<img src="../_static/Ouroboros-benzene.svg.png" class="logo__image only-dark" alt="Steal this Code - Home"/>`);</script>
+    <img src="../_static/Ouroboros-benzene.svg.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/Ouroboros-benzene.svg.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item">
-
- <script>
- document.write(`
-   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
-        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -191,10 +168,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../2_MatPlotLib/2_2_Curve_Fits.html">Linear Fits</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../2_MatPlotLib/2_3_Curve_Fits.html">Curve Fits</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../2_MatPlotLib/2_4_Fancy_1.html">Advanced Plotting Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2_MatPlotLib/2_5_Notes.html">Notes on Fitting Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2_MatPlotLib/2_6_Plotting_Reaction_Kinetics_to_Determine_Order.html">Plotting Reaction Kinetics</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">SymPy</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../3_SymPy/K01_solving_with_sympy.html">Free Symbolic Math</a></li>
+
 <li class="toctree-l1"><a class="reference internal" href="../3_SymPy/K02_Integrating_Rate_Law_1.html">Integrating Rate Laws</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../3_SymPy/K03_Integrating_MM.html">Integrating the Michaelis-Menten Rate Law</a></li>
 </ul>
@@ -203,8 +183,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../4_SciPy/K04_NumericIntegration.html">Numeric Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../4_SciPy/K05_NumericIntegration_SystemEq.html">Integrating a System</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">PhysOrg\ Examples</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PhysOrg Examples</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../6_PhysOrgExamples/6_0_Introduction.html">Intro to PhysOrg Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../6_PhysOrgExamples/6_1_start.html">Integrating Rate Equations with Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../6_PhysOrgExamples/6_2_kinetics.html">Investigating Reaction Kinetics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../6_PhysOrgExamples/6_3_Problem_ch7_p5.html">Problem 5, Ch. 7</a></li>
@@ -225,7 +206,7 @@
 
       </div>
       
-      <main id="main-content" class="bd-main" role="main">
+      <main id="main-content" class="bd-main">
         
         
 
@@ -234,7 +215,7 @@
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article d-print-none">
+              <div class="bd-header-article">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
@@ -347,22 +328,20 @@
 </button>
 
 
-
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
   </button>
 `);
 </script>
 
-
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+    <i class="fa-solid fa-magnifying-glass"></i>
   </button>
 `);
 </script>
@@ -409,14 +388,14 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article">
+                <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="basic-math-with-python">
-<h1>Basic Math with <em>Python</em><a class="headerlink" href="#basic-math-with-python" title="Link to this heading">#</a></h1>
+  <div class="tex2jax_ignore mathjax_ignore section" id="basic-math-with-python">
+<h1>Basic Math with <em>Python</em><a class="headerlink" href="#basic-math-with-python" title="Permalink to this headline">#</a></h1>
 <p>We will be using <em><strong>Python</strong></em> in this course. The goal is to learn to use and modify this tool for <strong>interpreting experimental results</strong> and solving all sorts of problems. This is <strong>not programming</strong>. Will will not be writing programs. We will be issuing <strong>commands</strong> to our loyal computer and making it do all the hard work for us.</p>
 <p>All of the chapters in this book are <strong>interactive <em>Python</em> notebooks</strong> that have been <strong>converted</strong> to web pages. Please <strong>download</strong> the original notebooks using the link at the top if this page and follow along.</p>
-<section id="a-calculator">
-<h2>A calculator<a class="headerlink" href="#a-calculator" title="Link to this heading">#</a></h2>
+<div class="section" id="a-calculator">
+<h2>A calculator<a class="headerlink" href="#a-calculator" title="Permalink to this headline">#</a></h2>
 <p>We can use this interactive <em>Python</em> notebook as a <strong>calculator</strong>. The output of the last command in any code block, such as the one below, will be displayed. We can display the contects of a variable simply by stating it as the last command. We can also use a <code class="docutils literal notranslate"><span class="pre">print()</span></code> function to output information. <strong>Explore</strong> the three code blocks below.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -502,14 +481,14 @@ Now we fight over the few cents caused by rounding errors
 </div>
 </details>
 </div>
-</section>
-<section id="reduce-reuse-and-recycle">
-<h2>Reduce, Reuse and Recycle<a class="headerlink" href="#reduce-reuse-and-recycle" title="Link to this heading">#</a></h2>
+</div>
+<div class="section" id="reduce-reuse-and-recycle">
+<h2>Reduce, Reuse and Recycle<a class="headerlink" href="#reduce-reuse-and-recycle" title="Permalink to this headline">#</a></h2>
 <p>Examine the code blocks above. You could easily <strong>change the values</strong>, the tax rate or the number of people and <strong>repeat</strong> the calculation quickly. Each of these code blocks is a calculator designed for a purpose. Changing an input will change the result.  You don’t need to start from scratch if you want to tip 15% instead of 20%, you just <strong>change</strong> the one value and <strong>execute</strong> the code.</p>
 <p>Try changing some values and seeing what happense. Use <strong>[shift][return]</strong> to execute the code block.</p>
-</section>
-<section id="more-math-with-numpy">
-<h2>More Math with <em>NumPy</em><a class="headerlink" href="#more-math-with-numpy" title="Link to this heading">#</a></h2>
+</div>
+<div class="section" id="more-math-with-numpy">
+<h2>More Math with <em>NumPy</em><a class="headerlink" href="#more-math-with-numpy" title="Permalink to this headline">#</a></h2>
 <p><em>Python</em> is a <strong>simple</strong> language. It has built-in functions for the basics, but needs help with functions like sine and <em>e</em><sup>x</sup>. The <em><strong>NumPy</strong></em> library has many mathematical functions. It is a mainstay of scientific computation. First we will <strong>import</strong> the library as shown below. Then we will use some of the available tools to demonstrate <strong>trigonometry</strong> and to calculate <strong>exponential growth</strong> of my investment profolio. Examine the code blocks below and see how we use the tools contained inside the <em>NumPy</em> library.</p>
 <p>Observe that we have named the <em>NumPy</em> library that we imported as <code class="docutils literal notranslate"><span class="pre">np</span></code>. This is for convenience (less typing). <code class="docutils literal notranslate"><span class="pre">np</span></code> is now an <strong>object</strong> that contains all the tools of <em>NumPy</em>. To use a function within the library we call it as an extension to the library object. e.g. <code class="docutils literal notranslate"><span class="pre">np.exp(7)</span></code> is a function from <em>NumPy</em> that will give us the exponent of seven or <em>e</em><sup>7</sup>.</p>
 <div class="cell tag_hide-input tag_hide-output docutils container">
@@ -582,8 +561,8 @@ will result in 16470.09 dollars
 </div>
 </details>
 </div>
-<section id="notes-on-the-math">
-<h3>Notes on the Math<a class="headerlink" href="#notes-on-the-math" title="Link to this heading">#</a></h3>
+<div class="section" id="notes-on-the-math">
+<h3>Notes on the Math<a class="headerlink" href="#notes-on-the-math" title="Permalink to this headline">#</a></h3>
 <p>From <strong>trigonometry</strong> we know that, in a right triangle, the ratio of the <strong>opposite</strong> side (height of the tree) to the <strong>adjacent</strong> side (distance from tree) is the tangent of the angle between the adjacent side and the <strong>hyponenuse</strong>. Below is that classic formula from high school trigonometry. If we know any two values, we can calculate the third.</p>
 <div class="math notranslate nohighlight">
 \[\tan(\theta) = \frac{opposite}{adjacent}\]</div>
@@ -595,14 +574,14 @@ will result in 16470.09 dollars
 <span class="math notranslate nohighlight">\(r =\)</span> interest rate per time period <br>
 <span class="math notranslate nohighlight">\(N =\)</span> number or payments per time period <br>
 <span class="math notranslate nohighlight">\(t =\)</span> number of time periods</p>
-</section>
-<section id="have-fun">
-<h3>Have Fun<a class="headerlink" href="#have-fun" title="Link to this heading">#</a></h3>
+</div>
+<div class="section" id="have-fun">
+<h3>Have Fun<a class="headerlink" href="#have-fun" title="Permalink to this headline">#</a></h3>
 <p>Change the values in the code block above and <strong>see what happens</strong>. Imagine different angles and distances in your tree measurement. Try comparing compound interest paid monthly with compound interest paid annually over 10 years. How much difference is there? Talk to your banker.</p>
-</section>
-</section>
-<section id="more-numpy-tools">
-<h2>More <em>NumPy</em> Tools<a class="headerlink" href="#more-numpy-tools" title="Link to this heading">#</a></h2>
+</div>
+</div>
+<div class="section" id="more-numpy-tools">
+<h2>More <em>NumPy</em> Tools<a class="headerlink" href="#more-numpy-tools" title="Permalink to this headline">#</a></h2>
 <p>There is much more to the NumPy library than we will ever use. Below are just a few examples of <em>NumPy</em> that we will use in this course.</p>
 <div class="cell tag_hide-input tag_hide-output docutils container">
 <details class="hide above-input">
@@ -651,9 +630,9 @@ That would be 45.00865166283799 degrees.
 </div>
 </details>
 </div>
-</section>
-<section id="printing-numbers">
-<h2>Printing Numbers<a class="headerlink" href="#printing-numbers" title="Link to this heading">#</a></h2>
+</div>
+<div class="section" id="printing-numbers">
+<h2>Printing Numbers<a class="headerlink" href="#printing-numbers" title="Permalink to this headline">#</a></h2>
 <p>Observe the output above. Do we want all those decimal places. Do we want to use scienific notation? W can do this in output text by using a “formatted string” of “f-string”. Observe the same code again below with the f-string approach applied.</p>
 <div class="cell tag_hide-input tag_hide-output docutils container">
 <details class="hide above-input">
@@ -702,16 +681,16 @@ That would be XXXXXXX45.01XXXXXXXX degrees.
 </div>
 </details>
 </div>
-</section>
-<section id="tale-of-the-tape">
-<h2>Tale of the Tape<a class="headerlink" href="#tale-of-the-tape" title="Link to this heading">#</a></h2>
+</div>
+<div class="section" id="tale-of-the-tape">
+<h2>Tale of the Tape<a class="headerlink" href="#tale-of-the-tape" title="Permalink to this headline">#</a></h2>
 <p>One benefit of using an interactive <em>Python</em> notebook is that all your work remains there for you to examine. You will easily be able to <strong>find and correct your error</strong>. Just make the change in the existing code block and execute. Much like the old-fashioned paper tape machines, this calculator keeps a record of your work so you can check later.</p>
-</section>
-<section id="summary">
-<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">#</a></h2>
 <p>We have learned how to perform <strong>math operations</strong> and used a math function from the <em><strong>NumPy</strong></em> library. We will see more examples of <em>NumPy</em> tools as we move forward. Don’t worry, we won’t need very many of them to handle chemistry.</p>
-</section>
-</section>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -738,10 +717,11 @@ That would be XXXXXXX45.01XXXXXXXX degrees.
 
               
               
-              
-              
-                <footer class="prev-next-footer d-print-none">
+                <footer class="bd-footer-article">
                   
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="../start.html"
@@ -761,7 +741,10 @@ That would be XXXXXXX45.01XXXXXXXX degrees.
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
+</div></div>
+  
 </div>
+
                 </footer>
               
             </div>
@@ -769,7 +752,6 @@ That would be XXXXXXX45.01XXXXXXXX degrees.
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -809,7 +791,6 @@ By Barry Linkletter
   
   <div class="footer-item">
     
-
   <p class="copyright">
     
       © Copyright 2024.
@@ -836,8 +817,8 @@ By Barry Linkletter
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
 
   <footer class="bd-footer">
   </footer>

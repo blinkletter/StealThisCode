@@ -1,63 +1,65 @@
 
+
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../" >
+<html >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Problem 5, Ch. 7 &#8212; Steal this Code</title>
   
   
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
-    <link rel="stylesheet" type="text/css" href="../_static/tufte.css?v=189edcc0" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tufte.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
-  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
-    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="../_static/doctools.js?v=9a2dae69"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="../_static/copybutton.js?v=f281be69"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=36754332"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '6_PhysOrgExamples/6_3_Problem_ch7_p5';</script>
@@ -66,7 +68,7 @@
     <link rel="next" title="Problem 9, Chapter 7" href="6_4_Problem_ch_7_p_9.html" />
     <link rel="prev" title="Investigating Reaction Kinetics" href="6_2_kinetics.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:language" content="None"/>
   </head>
   
   
@@ -74,23 +76,19 @@
 
   
   
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -112,20 +110,12 @@
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
-</div>
-
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
-    </header>
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
   
-
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
-      
-      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -140,11 +130,9 @@
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
-
   
 
 <a class="navbar-brand logo" href="../start.html">
-  
   
   
   
@@ -154,23 +142,12 @@
       
     
     
-    <img src="../_static/Ouroboros-benzene.svg.png" class="logo__image only-light" alt="Steal this Code - Home"/>
-    <script>document.write(`<img src="../_static/Ouroboros-benzene.svg.png" class="logo__image only-dark" alt="Steal this Code - Home"/>`);</script>
+    <img src="../_static/Ouroboros-benzene.svg.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/Ouroboros-benzene.svg.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item">
-
- <script>
- document.write(`
-   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
-        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -191,10 +168,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../2_MatPlotLib/2_2_Curve_Fits.html">Linear Fits</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../2_MatPlotLib/2_3_Curve_Fits.html">Curve Fits</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../2_MatPlotLib/2_4_Fancy_1.html">Advanced Plotting Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2_MatPlotLib/2_5_Notes.html">Notes on Fitting Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2_MatPlotLib/2_6_Plotting_Reaction_Kinetics_to_Determine_Order.html">Plotting Reaction Kinetics</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">SymPy</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../3_SymPy/K01_solving_with_sympy.html">Free Symbolic Math</a></li>
+
 <li class="toctree-l1"><a class="reference internal" href="../3_SymPy/K02_Integrating_Rate_Law_1.html">Integrating Rate Laws</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../3_SymPy/K03_Integrating_MM.html">Integrating the Michaelis-Menten Rate Law</a></li>
 </ul>
@@ -203,8 +183,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../4_SciPy/K04_NumericIntegration.html">Numeric Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../4_SciPy/K05_NumericIntegration_SystemEq.html">Integrating a System</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">PhysOrg\ Examples</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PhysOrg Examples</span></p>
 <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="6_0_Introduction.html">Intro to PhysOrg Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="6_1_start.html">Integrating Rate Equations with Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="6_2_kinetics.html">Investigating Reaction Kinetics</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Problem 5, Ch. 7</a></li>
@@ -225,7 +206,7 @@
 
       </div>
       
-      <main id="main-content" class="bd-main" role="main">
+      <main id="main-content" class="bd-main">
         
         
 
@@ -234,7 +215,7 @@
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article d-print-none">
+              <div class="bd-header-article">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
@@ -347,22 +328,20 @@
 </button>
 
 
-
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
   </button>
 `);
 </script>
 
-
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+    <i class="fa-solid fa-magnifying-glass"></i>
   </button>
 `);
 </script>
@@ -403,14 +382,14 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article">
+                <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="problem-5-ch-7">
-<h1>Problem 5, Ch. 7<a class="headerlink" href="#problem-5-ch-7" title="Link to this heading">#</a></h1>
+  <div class="tex2jax_ignore mathjax_ignore section" id="problem-5-ch-7">
+<h1>Problem 5, Ch. 7<a class="headerlink" href="#problem-5-ch-7" title="Permalink to this headline">#</a></h1>
 <p>Python can help you solve the problems in your text book. In this notebook I will use <em>Python</em> code to plot and curve fit the Arrhenius equation to the data given in problem 5 of chapter 7. I will leave it to yopu to interpret the magnitude of the values of <span class="math notranslate nohighlight">\(E_a\)</span> and the pre-exponetial value, <span class="math notranslate nohighlight">\(A\)</span>.</p>
 <a class="center reference internal image-reference" href="../_images/p5.png"><img alt="../_images/p5.png" class="center" src="../_images/p5.png" style="width: 800px;" /></a>
-<section id="the-arrhenius-equation">
-<h2>The Arrhenius Equation<a class="headerlink" href="#the-arrhenius-equation" title="Link to this heading">#</a></h2>
+<div class="section" id="the-arrhenius-equation">
+<h2>The Arrhenius Equation<a class="headerlink" href="#the-arrhenius-equation" title="Permalink to this headline">#</a></h2>
 <p>This is one of the most famous equations of physical chemistry. You first saw it in your first year of chemistry and here it come around again. Everything that you learned previously is needed as you move forward. Embrace the past, it defines your future. Yes, you are shackled to the past, no matter what the poets say.</p>
 <p>The Arrhenenius equation relates rate to temperature by defining an activation energy for the reaction and a pre-exponential factor that incorporates a lot of ideas, including the change in entropy to reach the transition state.</p>
 <div class="math notranslate nohighlight">
@@ -419,9 +398,9 @@ document.write(`
 <div class="math notranslate nohighlight">
 \[ \ln{\left( k_{obs} \right)} = \ln{A} - {\frac{E_a}{R} \cdot \frac{1}{T}}\]</div>
 <p>So if we plot <span class="math notranslate nohighlight">\(\ln{\left( k_{obs} \right)}\)</span> vs <span class="math notranslate nohighlight">\(\frac{1}{T}\)</span> we should getn a straight line withn a slope of <span class="math notranslate nohighlight">\(\frac{E_a}{R}\)</span> and a y-intercept of \ln{A}.</p>
-</section>
-<section id="the-data">
-<h2>The Data<a class="headerlink" href="#the-data" title="Link to this heading">#</a></h2>
+</div>
+<div class="section" id="the-data">
+<h2>The Data<a class="headerlink" href="#the-data" title="Permalink to this headline">#</a></h2>
 <p>I will use the <em>Python</em> code below to create a dataframe for the data listed in the textbook. In the data matrix that I create I will list paired values of temperature and observed rate constant. Then I will convert the array to a dataframe using the <em>Pandas</em> dataframe function.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
@@ -436,7 +415,7 @@ document.write(`
 <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">linregress</span>
 
 <span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/blinkletter/StealThisBook/main/6_PhysOrgExamples/&quot;</span>
-
+<span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;../6_PhysOrgExamples/&quot;</span>
 
 
 
@@ -499,9 +478,9 @@ document.write(`
 </table>
 </div></div></div>
 </div>
-</section>
-<section id="the-plot">
-<h2>The Plot<a class="headerlink" href="#the-plot" title="Link to this heading">#</a></h2>
+</div>
+<div class="section" id="the-plot">
+<h2>The Plot<a class="headerlink" href="#the-plot" title="Permalink to this headline">#</a></h2>
 <p>Now we just need to fit the data to a straight line. We could define a linear function and use the <code class="docutils literal notranslate"><span class="pre">scipy.optimize.curve_fit()</span></code> function or we can use the linear regression method with the <code class="docutils literal notranslate"><span class="pre">scipy.stats.linregress()</span></code> function.  Both methods will give exactly the same result but will return statistical scores differently. In this case I will use the <code class="docutils literal notranslate"><span class="pre">linregress</span></code> function.</p>
 <p>In the code below I will plot the data, fit the data to a straight line, and plot the result of that fit. I will also report the <span class="math notranslate nohighlight">\(R^2\)</span> value and report the parameters (slope and intercept) from the linear regression.</p>
 <div class="cell tag_hide-input docutils container">
@@ -566,7 +545,7 @@ document.write(`
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/beabe81690227c265d5deed553697e1b897553ee3d468e20ee22c476c31158d1.png" src="../_images/beabe81690227c265d5deed553697e1b897553ee3d468e20ee22c476c31158d1.png" />
+<img alt="../_images/0f1ea27c40e79d5d81284d2499c5d722799c192172326f7b821c5b190dac929f.png" src="../_images/0f1ea27c40e79d5d81284d2499c5d722799c192172326f7b821c5b190dac929f.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope = -13147.8
 intercept = 28.443
 RSQ = 0.999
@@ -574,9 +553,9 @@ RSQ = 0.999
 </div>
 </div>
 </div>
-</section>
-<section id="calculating-a-and-e-a">
-<h2>Calculating A and <span class="math notranslate nohighlight">\(E_a\)</span><a class="headerlink" href="#calculating-a-and-e-a" title="Link to this heading">#</a></h2>
+</div>
+<div class="section" id="calculating-a-and-e-a">
+<h2>Calculating A and <span class="math notranslate nohighlight">\(E_a\)</span><a class="headerlink" href="#calculating-a-and-e-a" title="Permalink to this headline">#</a></h2>
 <p>We know that the intercept is <span class="math notranslate nohighlight">\(\ln{A}\)</span> and the slope is <span class="math notranslate nohighlight">\(- {\frac{E_a}{R}}\)</span></p>
 <p>The code below will report the values of A and <span class="math notranslate nohighlight">\(E_a\)</span>.</p>
 <div class="cell tag_hide-input docutils container">
@@ -611,14 +590,14 @@ The average temperature is 618.5K
 </div>
 </div>
 </div>
-</section>
-<section id="your-turn">
-<h2>Your Turn<a class="headerlink" href="#your-turn" title="Link to this heading">#</a></h2>
+</div>
+<div class="section" id="your-turn">
+<h2>Your Turn<a class="headerlink" href="#your-turn" title="Permalink to this headline">#</a></h2>
 <p>We have calculated the values of <span class="math notranslate nohighlight">\(E_a\)</span> and <span class="math notranslate nohighlight">\(A\)</span> in a Jupyter notebook. The code and the output of the code are present in the same document so you can evaluate the exact methods used to reach any conclusions.</p>
 <p>What does an A value of <span class="math notranslate nohighlight">\(2.3 \times 10^{12}\)</span> mean when the temperature is in the temperature range of 620 K? (see page 367 and thereabouts in your textbook)</p>
 <p>What does an activation energy of <span class="math notranslate nohighlight">\(110 \frac{kJ}{mole}\)</span> mean? Would it be a fast reaction at room temperature or slow? Is the temperature of 620 K necessary?</p>
-</section>
-</section>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -645,10 +624,11 @@ The average temperature is 618.5K
 
               
               
-              
-              
-                <footer class="prev-next-footer d-print-none">
+                <footer class="bd-footer-article">
                   
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="6_2_kinetics.html"
@@ -668,7 +648,10 @@ The average temperature is 618.5K
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
+</div></div>
+  
 </div>
+
                 </footer>
               
             </div>
@@ -676,7 +659,6 @@ The average temperature is 618.5K
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -710,7 +692,6 @@ By Barry Linkletter
   
   <div class="footer-item">
     
-
   <p class="copyright">
     
       © Copyright 2024.
@@ -737,8 +718,8 @@ By Barry Linkletter
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
 
   <footer class="bd-footer">
   </footer>

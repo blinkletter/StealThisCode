@@ -1,63 +1,65 @@
 
+
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../" >
+<html >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Curve Fits &#8212; Steal this Code</title>
   
   
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
-    <link rel="stylesheet" type="text/css" href="../_static/tufte.css?v=189edcc0" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tufte.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
-  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
-    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="../_static/doctools.js?v=9a2dae69"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="../_static/copybutton.js?v=f281be69"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=36754332"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '2_MatPlotLib/2_3_Curve_Fits';</script>
@@ -66,7 +68,7 @@
     <link rel="next" title="Advanced Plotting Example" href="2_4_Fancy_1.html" />
     <link rel="prev" title="Linear Fits" href="2_2_Curve_Fits.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:language" content="None"/>
   </head>
   
   
@@ -74,23 +76,19 @@
 
   
   
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -112,20 +110,12 @@
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
-</div>
-
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
-    </header>
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
   
-
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
-      
-      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -140,11 +130,9 @@
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
-
   
 
 <a class="navbar-brand logo" href="../start.html">
-  
   
   
   
@@ -154,23 +142,12 @@
       
     
     
-    <img src="../_static/Ouroboros-benzene.svg.png" class="logo__image only-light" alt="Steal this Code - Home"/>
-    <script>document.write(`<img src="../_static/Ouroboros-benzene.svg.png" class="logo__image only-dark" alt="Steal this Code - Home"/>`);</script>
+    <img src="../_static/Ouroboros-benzene.svg.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/Ouroboros-benzene.svg.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item">
-
- <script>
- document.write(`
-   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
-        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -191,10 +168,13 @@
 <li class="toctree-l1"><a class="reference internal" href="2_2_Curve_Fits.html">Linear Fits</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Curve Fits</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2_4_Fancy_1.html">Advanced Plotting Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_5_Notes.html">Notes on Fitting Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_6_Plotting_Reaction_Kinetics_to_Determine_Order.html">Plotting Reaction Kinetics</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">SymPy</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../3_SymPy/K01_solving_with_sympy.html">Free Symbolic Math</a></li>
+
 <li class="toctree-l1"><a class="reference internal" href="../3_SymPy/K02_Integrating_Rate_Law_1.html">Integrating Rate Laws</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../3_SymPy/K03_Integrating_MM.html">Integrating the Michaelis-Menten Rate Law</a></li>
 </ul>
@@ -203,8 +183,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../4_SciPy/K04_NumericIntegration.html">Numeric Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../4_SciPy/K05_NumericIntegration_SystemEq.html">Integrating a System</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">PhysOrg\ Examples</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PhysOrg Examples</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../6_PhysOrgExamples/6_0_Introduction.html">Intro to PhysOrg Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../6_PhysOrgExamples/6_1_start.html">Integrating Rate Equations with Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../6_PhysOrgExamples/6_2_kinetics.html">Investigating Reaction Kinetics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../6_PhysOrgExamples/6_3_Problem_ch7_p5.html">Problem 5, Ch. 7</a></li>
@@ -225,7 +206,7 @@
 
       </div>
       
-      <main id="main-content" class="bd-main" role="main">
+      <main id="main-content" class="bd-main">
         
         
 
@@ -234,7 +215,7 @@
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article d-print-none">
+              <div class="bd-header-article">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
@@ -347,22 +328,20 @@
 </button>
 
 
-
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
   </button>
 `);
 </script>
 
-
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+    <i class="fa-solid fa-magnifying-glass"></i>
   </button>
 `);
 </script>
@@ -403,13 +382,13 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article">
+                <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="curve-fits">
-<h1>Curve Fits<a class="headerlink" href="#curve-fits" title="Link to this heading">#</a></h1>
+  <div class="tex2jax_ignore mathjax_ignore section" id="curve-fits">
+<h1>Curve Fits<a class="headerlink" href="#curve-fits" title="Permalink to this headline">#</a></h1>
 <p>We fit a linear function in the previous notebook. Let us <strong>steal all that code</strong> and repurpose it to fit the arbitrary function that defines the <strong>Michaelis-Menten equation</strong>.</p>
-<section id="non-linear-curve-fits">
-<h2>Non-linear Curve Fits<a class="headerlink" href="#non-linear-curve-fits" title="Link to this heading">#</a></h2>
+<div class="section" id="non-linear-curve-fits">
+<h2>Non-linear Curve Fits<a class="headerlink" href="#non-linear-curve-fits" title="Permalink to this headline">#</a></h2>
 <p>We can fit the x,y data to the asymptotic Michaelis-Menten equation and obtain <span class="math notranslate nohighlight">\(\rm K_M\)</span> and <span class="math notranslate nohighlight">\(\rm V{max}\)</span> using a least squares minimization.</p>
 <div class="math notranslate nohighlight">
 \[ \nu = V_{max} \frac{[S]}{[S] + K_M}\]</div>
@@ -468,12 +447,12 @@ document.write(`
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/7fe4374334d1128161c015048da35e90c75197e45372c588107cf14b085e967a.png" src="../_images/7fe4374334d1128161c015048da35e90c75197e45372c588107cf14b085e967a.png" />
+<img alt="../_images/ddbcde9c77c185b969103fc71fb6eeab050cbb51d38a0e1cc97c99f95aa38743.png" src="../_images/ddbcde9c77c185b969103fc71fb6eeab050cbb51d38a0e1cc97c99f95aa38743.png" />
 </div>
 </div>
-</section>
-<section id="the-curve-fit">
-<h2>The Curve Fit<a class="headerlink" href="#the-curve-fit" title="Link to this heading">#</a></h2>
+</div>
+<div class="section" id="the-curve-fit">
+<h2>The Curve Fit<a class="headerlink" href="#the-curve-fit" title="Permalink to this headline">#</a></h2>
 <p>The plot above clearly is a curve. What <strong>sparameters</strong> would fit this data best? Let us perform a curve fit in the example below. Note the function definition. We must <strong>define a function and then optimize the parameters</strong> to fit the data.</p>
 <p><strong>NOTE:</strong> all this code is almost identical to the previous notebook.  <strong>I stole it all</strong>. Compare the linear fit notebook with this one and <strong>observe where I made changes</strong>. The major change is the function being defined for the curve fit. I also changed variable names to better describe what we are doing. That is all.</p>
 <div class="cell tag_hide-input docutils container">
@@ -507,9 +486,9 @@ The KM is 3.809 +/- 0.3326
 </div>
 </div>
 </div>
-</section>
-<section id="add-the-line">
-<h2>Add the Line<a class="headerlink" href="#add-the-line" title="Link to this heading">#</a></h2>
+</div>
+<div class="section" id="add-the-line">
+<h2>Add the Line<a class="headerlink" href="#add-the-line" title="Permalink to this headline">#</a></h2>
 <p>We now have values for slope and intercept. We will <strong>visualize</strong> this proposed line fit with the data. First we make a series of numbers from zero to the end of the x-axis data and then we use the slope and intercept to calculate the y-axis values according to our line fit. Then we steal the code for plotting the points and add an extra command to <strong>plot the line</strong>. Examine the code below.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
@@ -572,16 +551,16 @@ The KM is 3.809 +/- 0.3326
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/33bb10ce5b2f4337d9f88498a16a927c1bb86960c315519d8fa7305c416274e9.png" src="../_images/33bb10ce5b2f4337d9f88498a16a927c1bb86960c315519d8fa7305c416274e9.png" />
+<img alt="../_images/b7f6300f6c7d2e2e94e42596bf307fd8460af5a08d4a541877ff04bb073ca4d3.png" src="../_images/b7f6300f6c7d2e2e94e42596bf307fd8460af5a08d4a541877ff04bb073ca4d3.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The Vmax is 81.538 +/- 3.1087
 The KM is 3.809 +/- 0.3326
 </pre></div>
 </div>
 </div>
 </div>
-</section>
-<section id="the-fancy-version">
-<h2>The Fancy Version<a class="headerlink" href="#the-fancy-version" title="Link to this heading">#</a></h2>
+</div>
+<div class="section" id="the-fancy-version">
+<h2>The Fancy Version<a class="headerlink" href="#the-fancy-version" title="Permalink to this headline">#</a></h2>
 <p>I will <strong>steal the code</strong> for the more styled plot in the previous notebook and present the plot of data with the line fit again but with <strong>more style</strong>.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
@@ -643,19 +622,19 @@ The KM is 3.809 +/- 0.3326
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/c9ee03528c7dfb2d9b9af6f4420b501abb4014a0d837e03db6c2ee47e9c58c99.png" src="../_images/c9ee03528c7dfb2d9b9af6f4420b501abb4014a0d837e03db6c2ee47e9c58c99.png" />
+<img alt="../_images/211896e4024d66946b188728a9e91ab771ee4568c44c05a3fa29150508ff6745.png" src="../_images/211896e4024d66946b188728a9e91ab771ee4568c44c05a3fa29150508ff6745.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The Vmax is 81.538 +/- 3.1087
 The KM is 3.809 +/- 0.3326
 </pre></div>
 </div>
 </div>
 </div>
-</section>
-<section id="the-benefits-of-theft">
-<h2>The Benefits of Theft<a class="headerlink" href="#the-benefits-of-theft" title="Link to this heading">#</a></h2>
+</div>
+<div class="section" id="the-benefits-of-theft">
+<h2>The Benefits of Theft<a class="headerlink" href="#the-benefits-of-theft" title="Permalink to this headline">#</a></h2>
 <p>I took the code for the linear fits and made <strong>one major change</strong> (changed the function being fit) and several minor ones (variable names and labels). It took me 3 minutes to write a curve fit notebook for non-linear curve fits when I started with the <strong>previous notebook</strong> on linear fits. Steal freely, admit to it in detail, and give credit where credit is due. That is the way of science.</p>
-</section>
-</section>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -682,10 +661,11 @@ The KM is 3.809 +/- 0.3326
 
               
               
-              
-              
-                <footer class="prev-next-footer d-print-none">
+                <footer class="bd-footer-article">
                   
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="2_2_Curve_Fits.html"
@@ -705,7 +685,10 @@ The KM is 3.809 +/- 0.3326
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
+</div></div>
+  
 </div>
+
                 </footer>
               
             </div>
@@ -713,7 +696,6 @@ The KM is 3.809 +/- 0.3326
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -747,7 +729,6 @@ By Barry Linkletter
   
   <div class="footer-item">
     
-
   <p class="copyright">
     
       © Copyright 2024.
@@ -774,8 +755,8 @@ By Barry Linkletter
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
 
   <footer class="bd-footer">
   </footer>

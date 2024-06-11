@@ -5,15 +5,15 @@ I want to introduce you to the **power** of using computers to analyze and visua
 
 Most science students have never really commanded a computer. Apps command you, not the other way around. Learning to **interpret and adapt** a computer program for your own purposes is an essential skill in science. 
 
-The goal of this course is to introduce students to **biochemistry**, not computer science. I will not be teaching **programming**. We will use programs that have been written and adapt them as needed. Along the way the basics of commanding a computer with written instructions will be revealed to you.
+The goal of our program is to explore **chemistry**, not computer science. I will not be teaching **programming**. We will use programs that have been written and adapt them as needed. Along the way the basics of commanding a computer with written instructions will be revealed to you.
 
 ## Programming as Theft
 
-We will use *Python* only as a **tool**. All code will be written for you in the first set of exercises. You will need only change a few values to adapt the code to your needs. Once you have experienced changing and **reusing** code that was written for you you will be asked to **steal** it and **adapt** it to solve the final problems in this course. You will never need to change much, but will hopefully gain the ability to find useful code, steal it and **use it**. Steal it from me; steal it from the internet; give your code to friends. Always **give credit** where credit is due.
+We will use *Python* only as a **tool**. All code will be written for you in the first sets of exercises. You will need only change a few values to adapt the code to your needs. Once you have experienced changing and **reusing** code that was written for you you will be asked to **steal** it and **adapt** it to solve the final problems in this course. You will never need to change much, but will hopefully gain the ability to find useful code, steal it and **use it**. Steal it from me; steal it from the internet; give your code to friends. Always **give credit** where credit is due.
 
 ## Things to Steal
 
-**All the code** that you will need in the first half of our exercises will be **available** in the information pages for the lab or tutorial in question. This book is intended to provide some basic **examples** of *Python* code for performing **calculations and visualizing data**. You will see that the programs that you are using during our tutorials we all stolen from this book and changed to suit you. Examine, play with, and **steal the code** in the interactive notebooks linked below.
+**All the code** that you will need in the first half of our exercises will be **available** in the information pages for the lab or tutorial in question. This book is intended to provide some basic **examples** of *Python* code for performing **calculations and visualizing data**. You will see that the programs that you are using during our tutorials were all stolen from this book and changed to suit you. Examine, play with, and **steal the code** in the interactive notebooks linked below.
 
 ### Math and Calculations
 
@@ -47,13 +47,9 @@ We will use *Python* only as a **tool**. All code will be written for you in the
 >**Tools**: *MatPlotLib*, *NumPy*, *SciPy*, *Pandas*  <br>
 >**Skills**: More examples of plots and curve fits. A residual plot is demonstrated. An example of a curve fit with the function plotted over the data is presented. 
 
->**Title**: [Notes on Plotting](2_MatPlotLib/2_6_Plotting_Reaction_Kinetics_to_Determine_Order.ipynb) <br>
+>**Title**: [Example: Order of Reaction](2_MatPlotLib/2_6_Plotting_Reaction_Kinetics_to_Determine_Order.ipynb) <br>
 >**Tools**: *MatPlotLib*, *NumPy*, *SciPy*, *Pandas*  <br>
 >**Skills**: More examples of plots and curve fits. Using plots and line fits to determine the order of a reaction. 
-
-
-
-
 
 
 ### Calculus with SymPy

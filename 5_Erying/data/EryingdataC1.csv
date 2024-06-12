@@ -4,18 +4,24 @@
 # Inorganica Chimica Acta, 2006, 359, 1478-1484
 # https://doi.org/10.1016/j.ica.2005.11.042.
 # 
-# from Supplementary material. data digitized from plot. Figure S-28
-# Figure S-28. Eyring plot from the variable-temperature thermal decay kinetics data for 3b in CH2Cl2.
+# From Table 2 in the paper
 #
-"TEMP(K)", "Keq", "Error"
-273,      5,       3      
-298,      65,      5             
-303,      110,     5              
-312,      250,     5              
-316,      345,     10              
-321,      475,     15              
-330,      950,     50              
-350       3300,    120                
+# k is the "fluxional rate constant" for interchange between the bidentate forms
+# of the complex. See figure 3 for the experiment. Rate constant is in units of s^-1
+#
+# Given the nature of the experiment (fitting simulated spectra against data to
+# determine exchange rates between the two identical bidentate forms) I would 
+# estimate a large error in these results. No standard deviations are reported.
+# 
+"TEMP(K)", "Keq"
+273,          5    
+298,         65           
+303,        110            
+312,        250            
+316,        345            
+321,        475            
+330,        950            
+350,       3300              
 
 
 

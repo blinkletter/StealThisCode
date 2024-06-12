@@ -1,0 +1,20 @@
+# from "Correlation Between Structural, Spectroscopic, and Reactivity Properties 
+# Within a Series of Structurally Analogous Metastable Manganese(III)–Alkylperoxo 
+# Complexes"
+# Michael K. Coggins, Vlad Martin-Diaconescu, Serena DeBeer, and Julie A. Kovacs
+# Journal of the American Chemical Society 2013 135 (11), 4260-4272
+# http://doi.org/10.1021/ja308915x#
+# 
+# Comp[are to Eyring plot in Figure 8 (4a)
+# Compare to plots in Supplementary material. Figures S-24 (1a), S-25 (3a), S-26 (4a) and S-28 (3b)
+# Note: 4a repeated twice: one of those must be 2a
+# Eyring plot data from the variable-temperature thermal decay kinetics data for 1a in CH2Cl2.
+# T is in degrees K. First-order rate constants are in s^-1
+# data from Table 5
+#
+"T",    "3a",     "1a",    "3b",     "2a",     "4a"
+293,    0.00278,  0.00189, 0.00257,  0.0051,   0.00473   
+273,    0.00101,  0.00043, 0.00079,  0.001,    0.000528  
+268,    0.000623, 0.00033, 0.000698, 0.000559, 0.000308   
+258,    0.000205, 0.00013, 0.00015,  0.000172, 0.000105   
+

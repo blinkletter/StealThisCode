@@ -1,65 +1,63 @@
 
-
 <!DOCTYPE html>
 
 
-<html >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <title>Notes on Fitting Data &#8212; Steal this Code</title>
   
   
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/tufte.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../_static/tufte.css?v=189edcc0" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '2_MatPlotLib/2_5_Notes';</script>
@@ -68,7 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="next" title="Plotting Reaction Kinetics" href="2_6_Plotting_Reaction_Kinetics_to_Determine_Order.html" />
     <link rel="prev" title="Advanced Plotting Example" href="2_4_Fancy_1.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="None"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
   
   
@@ -76,19 +74,23 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -110,12 +112,20 @@ const thebe_selector_output = ".output, .cell_output"
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -130,9 +140,11 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="../start.html">
+  
   
   
   
@@ -142,12 +154,23 @@ const thebe_selector_output = ".output, .cell_output"
       
     
     
-    <img src="../_static/Ouroboros-benzene.svg.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/Ouroboros-benzene.svg.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../_static/Ouroboros-benzene.svg.png" class="logo__image only-light" alt="Steal this Code - Home"/>
+    <script>document.write(`<img src="../_static/Ouroboros-benzene.svg.png" class="logo__image only-dark" alt="Steal this Code - Home"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -206,7 +229,7 @@ const thebe_selector_output = ".output, .cell_output"
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -215,7 +238,7 @@ const thebe_selector_output = ".output, .cell_output"
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
@@ -328,20 +351,22 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
+
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script>
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
@@ -393,13 +418,13 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
-  <div class="tex2jax_ignore mathjax_ignore section" id="notes-on-fitting-data">
-<h1>Notes on Fitting Data<a class="headerlink" href="#notes-on-fitting-data" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="notes-on-fitting-data">
+<h1>Notes on Fitting Data<a class="headerlink" href="#notes-on-fitting-data" title="Link to this heading">#</a></h1>
 <p>Here is another example of curve fitting. We will also calculate and plot residuals from the curve fit. You should always plot residuals as an important test of the fit of your mathematical model to the data.</p>
-<div class="section" id="the-tools">
-<h2>The Tools<a class="headerlink" href="#the-tools" title="Permalink to this headline">#</a></h2>
+<section id="the-tools">
+<h2>The Tools<a class="headerlink" href="#the-tools" title="Link to this heading">#</a></h2>
 <p>As always, we must begin by importing the <strong>tools</strong> that we will be using.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -415,9 +440,9 @@ document.write(`
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="your-data">
-<h2>Your Data<a class="headerlink" href="#your-data" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="your-data">
+<h2>Your Data<a class="headerlink" href="#your-data" title="Link to this heading">#</a></h2>
 <p>As before, we will create a data set. Here we <strong>load the data</strong> from a text file.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -443,9 +468,9 @@ document.write(`
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="plot-the-data">
-<h2>Plot The Data<a class="headerlink" href="#plot-the-data" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="plot-the-data">
+<h2>Plot The Data<a class="headerlink" href="#plot-the-data" title="Link to this heading">#</a></h2>
 <p>First we will <strong>plot the data</strong>. It looks like exponential growth. Do you agree?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -465,18 +490,18 @@ document.write(`
 <img alt="../_images/3e80411ff50e9337b6765fb5a9f4a460509e84b80554b6366f378928dbdb0813.png" src="../_images/3e80411ff50e9337b6765fb5a9f4a460509e84b80554b6366f378928dbdb0813.png" />
 </div>
 </div>
-</div>
-<div class="section" id="propose-a-model">
-<h2>Propose a Model<a class="headerlink" href="#propose-a-model" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="propose-a-model">
+<h2>Propose a Model<a class="headerlink" href="#propose-a-model" title="Link to this heading">#</a></h2>
 <p>Are we doomed? First we must understand the data by <strong>fitting it to a model</strong>. This looks like exponential growth (we know that living things follow this model when resources are unlimited) so let us model that hypothesis and see if it is a good fit. The formula for exponential growth of a disease is…</p>
 <div class="math notranslate nohighlight">
 \[\frac{Z_t}{Z_0}=e^{(r-1)t}\]</div>
 <p><span class="math notranslate nohighlight">\(\frac{Z_t}{Z_0}\)</span> = relative increase in zombie population <br>
 <em>r</em> = replication factor (r = 1 means balanced zombie production/destruction)<br>
 <em>t</em> = time</p>
-</div>
-<div class="section" id="linearizing-the-equation">
-<h2>Linearizing the Equation<a class="headerlink" href="#linearizing-the-equation" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="linearizing-the-equation">
+<h2>Linearizing the Equation<a class="headerlink" href="#linearizing-the-equation" title="Link to this heading">#</a></h2>
 <p>Most simple equations can be <strong>converted to a linear form</strong>. We can log both sides to get the following linear equation.</p>
 <div class="math notranslate nohighlight">
 \[\ln\left(\frac{Z_t}{Z_0}\right)=(r-1)\cdot t \]</div>
@@ -505,9 +530,9 @@ document.write(`
 <img alt="../_images/ccb32c9a2111a20d549a7cbc1c0a6d2f295d3a66f335597a56995c31a9ab7175.png" src="../_images/ccb32c9a2111a20d549a7cbc1c0a6d2f295d3a66f335597a56995c31a9ab7175.png" />
 </div>
 </div>
-</div>
-<div class="section" id="fit-the-line">
-<h2>Fit the Line<a class="headerlink" href="#fit-the-line" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="fit-the-line">
+<h2>Fit the Line<a class="headerlink" href="#fit-the-line" title="Link to this heading">#</a></h2>
 <p>The statistical tools in <em>SciPy</em> can be used to perform a <strong>curve fit</strong> optimization. We will construct a <strong>line</strong> based on the parameters of the line fit and <strong>display</strong> that line on the same plot as the data. <strong>Does it fit</strong>? We can also report <strong>statistical parameters</strong> from the line fit calculation to help us with that decision. We will not use any statistics other than the parameters for the fit itself in this example. Consider the following code and determine what each command accomplishes. Did the linearized data fit the <strong>linear function</strong>?</p>
 <p><strong>Note</strong>: The <code class="docutils literal notranslate"><span class="pre">scipy.optimize.curve_fit()</span></code> function returns a list that contains a list of coefficients (your answers) and a matrix for the covariance (your statistical scores). The coefficients will follow the order that they are defined in the function used for the fit. See the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.curve_fit.html">documentation</a> for more information.</p>
 <div class="cell docutils container">
@@ -549,9 +574,9 @@ The intercept is -0.009 +/- 0.048
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="fit-the-line-with-linear-regression">
-<h2>Fit the Line with Linear Regression<a class="headerlink" href="#fit-the-line-with-linear-regression" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="fit-the-line-with-linear-regression">
+<h2>Fit the Line with Linear Regression<a class="headerlink" href="#fit-the-line-with-linear-regression" title="Link to this heading">#</a></h2>
 <p>In the above code we used the <code class="docutils literal notranslate"><span class="pre">scipy.optimize.curve_fit()</span></code> function to <strong>fit</strong> an arbitrary function to data. This is a <strong>general-purpose</strong> method and works with any function. You may be familiar with Microsoft <em>Excel</em> and the need to fit <strong>linear</strong> data (unless you want to bother with the <em>solver</em> system of <em>Excel</em>). <em>Excel</em> uses a <strong>linear regression</strong> method. It is exactly the same as a <strong>curve fit</strong> but assumes that the function is always a linear <em>y = mx + b</em> system.</p>
 <p><em><strong>SciPy</strong></em> has the same linear regression function. We can use the <code class="docutils literal notranslate"><span class="pre">scipy.stats.linregress()</span></code> function. We send it the <em>x,y</em> data and it returns an <strong>object</strong> that contains all the results, including standard <strong>statistical information</strong>. Consider the code below and examine the purpose of each command.</p>
 <div class="cell docutils container">
@@ -589,9 +614,9 @@ RSQ = 1.000
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="fit-the-curve">
-<h2>Fit the Curve<a class="headerlink" href="#fit-the-curve" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="fit-the-curve">
+<h2>Fit the Curve<a class="headerlink" href="#fit-the-curve" title="Link to this heading">#</a></h2>
 <p>Linear fits are so “Excel”. We can <strong>fit the curve</strong> function itself without needing to linearize the data.  This is more broadly applicable. However, I do recommend linearizing where possible because a subtle curve in what is supposed to be a straight line <strong>stands out</strong> to our human brains. We would see clearly that, even though the fit is close, the model is wrong. We would not pick up that slight difference in fitting a curve (is it slightly too curved?) and would need to use statistical analysis to detect such a <strong>deviation from the model</strong> (such as plotting the residuals - which you should always do, even with linear plots.)</p>
 <p>All we have to do is use the <strong>exact same</strong> code block as above but with a different curve fit function. That is the power of these notebooks. <strong>Cut and paste</strong> is a useful tool here.</p>
 <div class="cell docutils container">
@@ -624,9 +649,9 @@ RSQ = 1.000
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="smoothing-the-curve">
-<h2>Smoothing the Curve<a class="headerlink" href="#smoothing-the-curve" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="smoothing-the-curve">
+<h2>Smoothing the Curve<a class="headerlink" href="#smoothing-the-curve" title="Link to this heading">#</a></h2>
 <p>Observe above that the curve is a <strong>series of straight lines</strong> connecting the data points calculated at the given values of the <em>x</em>-axis. To make a <strong>smooth curve</strong>, we should use many more points. We will make a set of <em>x</em>-values with 100 evenly spaced values between the minimum and maximum values of the data <em>x</em>-axis. Consider the following clode block and try to <strong>understand</strong> what each command does.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -673,9 +698,9 @@ RSQ = 0.9987
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="plotting-residuals">
-<h2>Plotting Residuals<a class="headerlink" href="#plotting-residuals" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="plotting-residuals">
+<h2>Plotting Residuals<a class="headerlink" href="#plotting-residuals" title="Link to this heading">#</a></h2>
 <p>We can <strong>check the model</strong> by plotting the <strong>residuals</strong>. This is the difference between the experimental <em>y</em>-axis and the calculated <em>y</em>-axis from the fit to the model. <strong>Random error</strong> will be distributed evenly obove and below zero. A systematic mismatch between the model and the data should be evident as a detectable trend in the plot. If it deviates from a random cloud then we may need to <strong>revise our hypothesis</strong>.</p>
 <p>The plots below seems to have no systematic deviation from <em>y = 0</em> other than <strong>random noise</strong>. A perfect fit.</p>
 <div class="cell docutils container">
@@ -709,21 +734,21 @@ RSQ = 0.9987
 <img alt="../_images/86a07142538d1bd295ff7b29c4edafe7f6e6bd2eee75e5203218799032d66c17.png" src="../_images/86a07142538d1bd295ff7b29c4edafe7f6e6bd2eee75e5203218799032d66c17.png" />
 </div>
 </div>
-</div>
-<div class="section" id="summary">
-<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
 <p>Our skills are complete. We can <strong>plot</strong> experimental data and <strong>fit</strong> that data to an arbitrary function. We can <strong>visualize</strong> the line fit and <strong>evaluate</strong> if our model is valid. We now have a block of code that can be <strong>repurposed</strong> in our experimental analyses. Choose one of these code blocks and use it as a <strong>recipe</strong> for plotting your experimental data. Write once, use many times - that is the way of <em>Python</em>.</p>
-<div class="section" id="what-we-have-accomplished">
-<h3>What We Have Accomplished<a class="headerlink" href="#what-we-have-accomplished" title="Permalink to this headline">#</a></h3>
+<section id="what-we-have-accomplished">
+<h3>What We Have Accomplished<a class="headerlink" href="#what-we-have-accomplished" title="Link to this heading">#</a></h3>
 <p>We have had an introduction to using <em><strong>NumPy</strong></em> with <em><strong>Python</strong></em> to give us a useful calculator; using <em><strong>Pandas</strong></em> to import and manipulate data as dataframes; using <em><strong>MatPlotLib</strong></em> to plot functions and experimental data; and using <em><strong>SciPy</strong></em> to optimize curve fits for model functions and to perform linear regression fits for linear functions.</p>
-</div>
-<div class="section" id="a-look-ahead">
-<h3>A Look Ahead<a class="headerlink" href="#a-look-ahead" title="Permalink to this headline">#</a></h3>
+</section>
+<section id="a-look-ahead">
+<h3>A Look Ahead<a class="headerlink" href="#a-look-ahead" title="Link to this heading">#</a></h3>
 <p>As we proceed through <strong>exploring chemistry</strong> using data analysis, we will see <strong>new tools</strong> and techniques introduced where appropriate. These will be useful and convenient but we can do, everything in this course using nothing more that the tools that we have already presented. <em>Python</em> with <em>NumPy</em>, <em>SciPy</em>, <em>Pandas</em> and <em>MatPlotLib</em> will be our <strong>toolbox</strong>. Let us move forward and continue to use data to understand chemical concepts whenever we can.</p>
-</div>
-</div>
-<div class="section" id="resources">
-<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">#</a></h2>
+</section>
+</section>
+<section id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Link to this heading">#</a></h2>
 <p>The <strong>data file</strong> can be obtained from the resources section of the course <strong>moodle</strong> site. The contents of the file are displayed below so that you can make it yourself if you are unable to access moodle.</p>
 <p><strong>data/2_3_Data.txt</strong></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Days</span><span class="p">,</span><span class="n">Zombies</span>
@@ -737,8 +762,8 @@ RSQ = 0.9987
 <span class="mi">22</span><span class="p">,</span><span class="mi">744</span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -765,11 +790,10 @@ RSQ = 0.9987
 
               
               
-                <footer class="bd-footer-article">
+              
+              
+                <footer class="prev-next-footer d-print-none">
                   
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="2_4_Fancy_1.html"
@@ -789,10 +813,7 @@ RSQ = 0.9987
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -800,6 +821,7 @@ RSQ = 0.9987
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -844,6 +866,7 @@ By Barry Linkletter
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
       © Copyright 2024.
@@ -870,8 +893,8 @@ By Barry Linkletter
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
 
   <footer class="bd-footer">
   </footer>

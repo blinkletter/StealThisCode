@@ -1,0 +1,29 @@
+# from "Synthesis and characterization of a fluxional Re(I) carbonyl complex fac-[Re(CO)3(dpop′)Cl] with the nominally tri-dentate ligand dipyrido(2,3-a:3′,2′-j)phenazine (dpop′)"
+#
+# Kristin D. Zimmer, Richard Shoemaker, Ronald R. Ruminski
+# Inorganica Chimica Acta, 2006, 359, 1478-1484
+# https://doi.org/10.1016/j.ica.2005.11.042.
+# 
+# from Supplementary material. data digitized from plot. Figure S-28
+# Figure S-28. Eyring plot from the variable-temperature thermal decay kinetics data for 3b in CH2Cl2.
+#
+"TEMP(K)", "Keq", "Error"
+273,      5,       3      
+298,      65,      5             
+303,      110,     5              
+312,      250,     5              
+316,      345,     10              
+321,      475,     15              
+330,      950,     50              
+350       3300,    120                
+
+
+
+
+
+
+
+
+
+
+

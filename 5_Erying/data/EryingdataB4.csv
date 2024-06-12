@@ -1,0 +1,22 @@
+# from "Correlation Between Structural, Spectroscopic, and Reactivity Properties 
+# Within a Series of Structurally Analogous Metastable Manganese(III)–Alkylperoxo 
+# Complexes"
+#
+# Michael K. Coggins, Vlad Martin-Diaconescu, Serena DeBeer, and Julie A. Kovacs
+# Journal of the American Chemical Society 2013 135 (11), 4260-4272
+# http://doi.org/10.1021/ja308915x#
+# 
+# from Supplementary material. data digitized from plot. Figure S-28
+# Figure S-28. Eyring plot from the variable-temperature thermal decay kinetics data for 3b in CH2Cl2.
+#
+"1/T (K-1)"", "k/T", "Error k/T"
+0.00341,      -11.644,   0.5
+0.00366,      -12.767,   0.5
+0.00373,      -12.849,   0.5
+0.00388,      -14.384,   0.5
+
+
+
+
+
+

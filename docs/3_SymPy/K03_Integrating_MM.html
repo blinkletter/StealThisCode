@@ -1,65 +1,63 @@
 
-
 <!DOCTYPE html>
 
 
-<html >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <title>Integrating the Michaelis-Menten Rate Law &#8212; Steal this Code</title>
   
   
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/tufte.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../_static/tufte.css?v=189edcc0" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '3_SymPy/K03_Integrating_MM';</script>
@@ -68,7 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="next" title="Numeric Integration" href="../4_SciPy/K04_NumericIntegration.html" />
     <link rel="prev" title="Integrating Rate Laws" href="K02_Integrating_Rate_Law_1.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="None"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
   
   
@@ -76,19 +74,23 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -110,12 +112,20 @@ const thebe_selector_output = ".output, .cell_output"
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -130,9 +140,11 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="../start.html">
+  
   
   
   
@@ -142,12 +154,23 @@ const thebe_selector_output = ".output, .cell_output"
       
     
     
-    <img src="../_static/Ouroboros-benzene.svg.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/Ouroboros-benzene.svg.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../_static/Ouroboros-benzene.svg.png" class="logo__image only-light" alt="Steal this Code - Home"/>
+    <script>document.write(`<img src="../_static/Ouroboros-benzene.svg.png" class="logo__image only-dark" alt="Steal this Code - Home"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -206,7 +229,7 @@ const thebe_selector_output = ".output, .cell_output"
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -215,7 +238,7 @@ const thebe_selector_output = ".output, .cell_output"
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
@@ -328,20 +351,22 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
+
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script>
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
@@ -390,10 +415,10 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
-  <div class="tex2jax_ignore mathjax_ignore section" id="integrating-the-michaelis-menten-rate-law">
-<h1>Integrating the Michaelis-Menten Rate Law<a class="headerlink" href="#integrating-the-michaelis-menten-rate-law" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="integrating-the-michaelis-menten-rate-law">
+<h1>Integrating the Michaelis-Menten Rate Law<a class="headerlink" href="#integrating-the-michaelis-menten-rate-law" title="Link to this heading">#</a></h1>
 <p>Some rate laws are not easily integrated without very advanced mathematics. For example, below is the rate law for an enzyme catalyzed reaction (the famous Michaelis-Menten equation) and its analytical intergrated form…</p>
 <div class="math notranslate nohighlight">
 \[-\frac{d[S]}{dt} = V_{max}\frac{[S]}{K_M + [S]} \]</div>
@@ -402,8 +427,8 @@ document.write(`
 <div class="math notranslate nohighlight">
 \[ [S]_t = K_M \cdot {W}(\frac{[S]_0}{K_M} e^{\frac{[S]_0-V_{max}t}{K_M}}) \]</div>
 <p>…where ‘<span class="math notranslate nohighlight">\(W\)</span>’ is the Lambert function. The Lambert function is defined as a function satisfying <span class="math notranslate nohighlight">\(W(z)e^{W(z)} = z\)</span></p>
-<div class="section" id="symbolic-integration">
-<h2>Symbolic Integration<a class="headerlink" href="#symbolic-integration" title="Permalink to this headline">#</a></h2>
+<section id="symbolic-integration">
+<h2>Symbolic Integration<a class="headerlink" href="#symbolic-integration" title="Link to this heading">#</a></h2>
 <p>Let us attempt to solve the differential equation for the Michaelis-Menten equation. As before we will define the reaction progress as the amount of substrate consumed, <span class="math notranslate nohighlight">\(x\)</span>. We can then say that…</p>
 <div class="math notranslate nohighlight">
 \[ [S] = [S]_0 - x \]</div>
@@ -473,8 +498,8 @@ document.write(`
 \[\displaystyle x_{t}{\left(t \right)} = - K_{M} W\left(- \frac{e^{\frac{K_{M} \log{\left(- S_{0} \right)} + S_{0} - V_{max} t}{K_{M}}}}{K_{M}}\right) + S_{0}\]</div>
 </div>
 </div>
-<div class="section" id="wow">
-<h3>Wow!<a class="headerlink" href="#wow" title="Permalink to this headline">#</a></h3>
+<section id="wow">
+<h3>Wow!<a class="headerlink" href="#wow" title="Link to this heading">#</a></h3>
 <p>Wow! It worked! We now have an equation for the value of <span class="math notranslate nohighlight">\(x\)</span> as a function of <span class="math notranslate nohighlight">\(t\)</span>. As before, we can replace the rhs of the equation with the expression for <span class="math notranslate nohighlight">\(x_t\)</span>. In the code above we had stated that…</p>
 <div class="math notranslate nohighlight">
 \[ [S]_t = [S]_0 - x_t(t) \]</div>
@@ -531,10 +556,10 @@ document.write(`
 \[\displaystyle S_{t} = K_{M} W\left(\frac{S_{0} e^{\frac{S_{0} - V_{max} t}{K_{M}}}}{K_{M}}\right)\]</div>
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="plot-with-sympy">
-<h2>Plot with <em>SymPy</em><a class="headerlink" href="#plot-with-sympy" title="Permalink to this headline">#</a></h2>
+</section>
+</section>
+<section id="plot-with-sympy">
+<h2>Plot with <em>SymPy</em><a class="headerlink" href="#plot-with-sympy" title="Link to this heading">#</a></h2>
 <p>We can plot the function, strange Lambert functiona and all, using <code class="docutils literal notranslate"><span class="pre">sympy.plotting.plot()</span></code>. Consider the code below. Try different substrate consentrations and not the shape of the curve. You may have to change the plot limits as you go.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
@@ -597,9 +622,9 @@ document.write(`
 <img alt="../_images/c15cfcf1b70ba19fe1d4d320225befd25a58d10a44ccae3b933b857f0ed748e4.png" src="../_images/c15cfcf1b70ba19fe1d4d320225befd25a58d10a44ccae3b933b857f0ed748e4.png" />
 </div>
 </div>
-</div>
-<div class="section" id="make-it-a-function">
-<h2>Make It a Function<a class="headerlink" href="#make-it-a-function" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="make-it-a-function">
+<h2>Make It a Function<a class="headerlink" href="#make-it-a-function" title="Link to this heading">#</a></h2>
 <p>Let us now take this analytical integration of the Michaelis-Menten equation and convert it to a function as we have done previously. Then we can create a set of <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> values and plot the value of the substrate concentration, <span class="math notranslate nohighlight">\([S]\)</span>, over time, <span class="math notranslate nohighlight">\(t\)</span>.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
@@ -690,9 +715,9 @@ document.write(`
 <img alt="../_images/06acbd61222ee1b113f5899aa1e33ee7f915f7a01c494fd859a83c7200f78ba9.png" src="../_images/06acbd61222ee1b113f5899aa1e33ee7f915f7a01c494fd859a83c7200f78ba9.png" />
 </div>
 </div>
-</div>
-<div class="section" id="curve-fit-to-the-analytical-function">
-<h2>Curve Fit to the Analytical Function<a class="headerlink" href="#curve-fit-to-the-analytical-function" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="curve-fit-to-the-analytical-function">
+<h2>Curve Fit to the Analytical Function<a class="headerlink" href="#curve-fit-to-the-analytical-function" title="Link to this heading">#</a></h2>
 <p>We now have a function that was created from the <em>SymPy</em> analytical integration of our rate law for Michaelis-Menten kinetics. We can curve fit this function against experimental data and get the parameters for <span class="math notranslate nohighlight">\(K_M\)</span> and <span class="math notranslate nohighlight">\(V_{max}\)</span> from a single experiment where we measure the concentration of product over time.</p>
 <p>However the Lambert function that is built in to our integration will return complex numbers (<span class="math notranslate nohighlight">\(n+ij\)</span>) and the <code class="docutils literal notranslate"><span class="pre">scipy.optimize.curve_fit()</span></code> function cannot accept complex numbers. There may be ways around this within <em>SciPy</em> but my hasty web search directed me to a project called <em>LMFit</em> (More information can be <a class="reference external" href="https://lmfit.github.io/lmfit-py/">found here</a>)</p>
 <div class="cell tag_hide-input docutils container">
@@ -710,8 +735,8 @@ document.write(`
 </div>
 </details>
 </div>
-<div class="section" id="using-lmfit">
-<h3>Using <em>LMFit</em><a class="headerlink" href="#using-lmfit" title="Permalink to this headline">#</a></h3>
+<section id="using-lmfit">
+<h3>Using <em>LMFit</em><a class="headerlink" href="#using-lmfit" title="Link to this heading">#</a></h3>
 <p>The <em>LMFit</em> library is built on top of <em>SciPy</em>. It has a number of improvements to the methods that <em>SciPy</em> uses to perform least-squares fits to curves. It is not part of the standard library and will have to be installed in Google Colab.</p>
 <p>Examine the code below where we fit the reaction data to the function that represents the integrated equation.</p>
 <div class="cell tag_hide-input docutils container">
@@ -808,9 +833,9 @@ document.write(`
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="plot-the-fit-against-data">
-<h3>Plot the Fit Against Data<a class="headerlink" href="#plot-the-fit-against-data" title="Permalink to this headline">#</a></h3>
+</section>
+<section id="plot-the-fit-against-data">
+<h3>Plot the Fit Against Data<a class="headerlink" href="#plot-the-fit-against-data" title="Link to this heading">#</a></h3>
 <p>Below we will steal the code for plotting data against a curve fit and change it to use our function and data. Let’s go.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
@@ -917,10 +942,10 @@ Initial conc is calculated to be 2.505+/-0.020
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="plotting-data-with-fixed-s-0">
-<h2>Plotting Data with Fixed <span class="math notranslate nohighlight">\([S]_0\)</span><a class="headerlink" href="#plotting-data-with-fixed-s-0" title="Permalink to this headline">#</a></h2>
+</section>
+</section>
+<section id="plotting-data-with-fixed-s-0">
+<h2>Plotting Data with Fixed <span class="math notranslate nohighlight">\([S]_0\)</span><a class="headerlink" href="#plotting-data-with-fixed-s-0" title="Link to this heading">#</a></h2>
 <p>We probably know the initial concentration of substrate.  In the experiment above it was included in the data set at time zero but was still allowed to be calculated as a parameter in the curve fit. More parameters results in more degrees of freedom and can increase errors in the fitted parameters.</p>
 <p>The code below sets up the function with a set initial value for <span class="math notranslate nohighlight">\([S]_0\)</span> and only fits for the two parameters of <span class="math notranslate nohighlight">\(K_M\)</span> and <span class="math notranslate nohighlight">\(V_{max}\)</span>.</p>
 <div class="cell tag_hide-input docutils container">
@@ -1095,9 +1120,9 @@ The KM is 1.450+/-0.237
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="extra">
-<h2>Extra<a class="headerlink" href="#extra" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="extra">
+<h2>Extra<a class="headerlink" href="#extra" title="Link to this heading">#</a></h2>
 <p>The code below was used to generate the data for the curve fit above. It is presented here for archival purposes.</p>
 <div class="cell tag_hide-input tag_hide-output docutils container">
 <details class="hide above-input">
@@ -1163,8 +1188,8 @@ The KM is 1.450+/-0.237
 </div>
 </details>
 </div>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1191,11 +1216,10 @@ The KM is 1.450+/-0.237
 
               
               
-                <footer class="bd-footer-article">
+              
+              
+                <footer class="prev-next-footer d-print-none">
                   
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="K02_Integrating_Rate_Law_1.html"
@@ -1215,10 +1239,7 @@ The KM is 1.450+/-0.237
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -1226,6 +1247,7 @@ The KM is 1.450+/-0.237
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -1267,6 +1289,7 @@ By Barry Linkletter
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
       © Copyright 2024.
@@ -1293,8 +1316,8 @@ By Barry Linkletter
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
 
   <footer class="bd-footer">
   </footer>

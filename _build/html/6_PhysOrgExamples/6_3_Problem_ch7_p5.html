@@ -1,65 +1,63 @@
 
-
 <!DOCTYPE html>
 
 
-<html >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <title>Problem 5, Ch. 7 &#8212; Steal this Code</title>
   
   
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/tufte.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../_static/tufte.css?v=189edcc0" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '6_PhysOrgExamples/6_3_Problem_ch7_p5';</script>
@@ -68,7 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="next" title="Problem 9, Chapter 7" href="6_4_Problem_ch_7_p_9.html" />
     <link rel="prev" title="Investigating Reaction Kinetics" href="6_2_kinetics.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="None"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
   
   
@@ -76,19 +74,23 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -110,12 +112,20 @@ const thebe_selector_output = ".output, .cell_output"
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -130,9 +140,11 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="../start.html">
+  
   
   
   
@@ -142,12 +154,23 @@ const thebe_selector_output = ".output, .cell_output"
       
     
     
-    <img src="../_static/Ouroboros-benzene.svg.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/Ouroboros-benzene.svg.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../_static/Ouroboros-benzene.svg.png" class="logo__image only-light" alt="Steal this Code - Home"/>
+    <script>document.write(`<img src="../_static/Ouroboros-benzene.svg.png" class="logo__image only-dark" alt="Steal this Code - Home"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -206,7 +229,7 @@ const thebe_selector_output = ".output, .cell_output"
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -215,7 +238,7 @@ const thebe_selector_output = ".output, .cell_output"
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
@@ -328,20 +351,22 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
+
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script>
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
@@ -371,7 +396,11 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-arrhenius-equation">The Arrhenius Equation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-data">The Data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-plot">The Plot</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculating-a-and-e-a">Calculating A and <span class="math notranslate nohighlight">\(E_a\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculating-a-and-e-a">Calculating A and <span class="math notranslate nohighlight">\(E_a\)</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-large-error">A Large Error?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#throwing-a-dart">Throwing a Dart</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#your-turn">Your Turn</a></li>
 </ul>
             </nav>
@@ -382,14 +411,14 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
-  <div class="tex2jax_ignore mathjax_ignore section" id="problem-5-ch-7">
-<h1>Problem 5, Ch. 7<a class="headerlink" href="#problem-5-ch-7" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="problem-5-ch-7">
+<h1>Problem 5, Ch. 7<a class="headerlink" href="#problem-5-ch-7" title="Link to this heading">#</a></h1>
 <p>Python can help you solve the problems in your text book. In this notebook I will use <em>Python</em> code to plot and curve fit the Arrhenius equation to the data given in problem 5 of chapter 7. I will leave it to yopu to interpret the magnitude of the values of <span class="math notranslate nohighlight">\(E_a\)</span> and the pre-exponetial value, <span class="math notranslate nohighlight">\(A\)</span>.</p>
 <a class="center reference internal image-reference" href="../_images/p5.png"><img alt="../_images/p5.png" class="center" src="../_images/p5.png" style="width: 800px;" /></a>
-<div class="section" id="the-arrhenius-equation">
-<h2>The Arrhenius Equation<a class="headerlink" href="#the-arrhenius-equation" title="Permalink to this headline">#</a></h2>
+<section id="the-arrhenius-equation">
+<h2>The Arrhenius Equation<a class="headerlink" href="#the-arrhenius-equation" title="Link to this heading">#</a></h2>
 <p>This is one of the most famous equations of physical chemistry. You first saw it in your first year of chemistry and here it come around again. Everything that you learned previously is needed as you move forward. Embrace the past, it defines your future. Yes, you are shackled to the past, no matter what the poets say.</p>
 <p>The Arrhenenius equation relates rate to temperature by defining an activation energy for the reaction and a pre-exponential factor that incorporates a lot of ideas, including the change in entropy to reach the transition state.</p>
 <div class="math notranslate nohighlight">
@@ -398,9 +427,9 @@ document.write(`
 <div class="math notranslate nohighlight">
 \[ \ln{\left( k_{obs} \right)} = \ln{A} - {\frac{E_a}{R} \cdot \frac{1}{T}}\]</div>
 <p>So if we plot <span class="math notranslate nohighlight">\(\ln{\left( k_{obs} \right)}\)</span> vs <span class="math notranslate nohighlight">\(\frac{1}{T}\)</span> we should getn a straight line withn a slope of <span class="math notranslate nohighlight">\(\frac{E_a}{R}\)</span> and a y-intercept of \ln{A}.</p>
-</div>
-<div class="section" id="the-data">
-<h2>The Data<a class="headerlink" href="#the-data" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="the-data">
+<h2>The Data<a class="headerlink" href="#the-data" title="Link to this heading">#</a></h2>
 <p>I will use the <em>Python</em> code below to create a dataframe for the data listed in the textbook. In the data matrix that I create I will list paired values of temperature and observed rate constant. Then I will convert the array to a dataframe using the <em>Pandas</em> dataframe function.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
@@ -414,6 +443,14 @@ document.write(`
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">linregress</span>
 
+<span class="c1">#!pip install uncertainties           # uncomment to install uncertaities package in Colab</span>
+
+<span class="kn">import</span> <span class="nn">uncertainties</span> <span class="k">as</span> <span class="nn">un</span>
+<span class="kn">from</span> <span class="nn">uncertainties</span> <span class="kn">import</span> <span class="n">unumpy</span> <span class="k">as</span> <span class="n">unp</span>    <span class="c1">## Tools that will replace NumPy and Math </span>
+<span class="kn">from</span> <span class="nn">uncertainties</span> <span class="kn">import</span> <span class="n">umath</span>            <span class="c1">##  commands with versions that use Uncertianties  </span>
+                                           <span class="c1">##  as well as normal values.</span>
+
+
 <span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/blinkletter/StealThisBook/main/6_PhysOrgExamples/&quot;</span>
 <span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;../6_PhysOrgExamples/&quot;</span>
 
@@ -423,6 +460,17 @@ document.write(`
         <span class="p">[</span><span class="mi">603</span><span class="p">,</span> <span class="mi">755</span><span class="p">],</span>
         <span class="p">[</span><span class="mi">627</span><span class="p">,</span> <span class="mi">1700</span><span class="p">],</span>
         <span class="p">[</span><span class="mi">652</span><span class="p">,</span> <span class="mi">4030</span><span class="p">]]</span>
+
+<span class="c1">### use this data set and see if the error improves with more points</span>
+<span class="c1">#data = [[592, 522],   # Temp (K), rate constant ( M^-1 s^-1)</span>
+<span class="c1">#        [603, 755],</span>
+<span class="c1">#        [627, 1700],</span>
+<span class="c1">#        [652, 4030],</span>
+<span class="c1">#        [594, 560],   # Temp (K), rate constant ( M^-1 s^-1)</span>
+<span class="c1">#        [610, 1000],</span>
+<span class="c1">#        [637, 2500],</span>
+<span class="c1">#        [642, 3000]]</span>
+
 
 <span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;T&quot;</span><span class="p">,</span><span class="s2">&quot;k&quot;</span><span class="p">])</span>
 <span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
@@ -478,9 +526,9 @@ document.write(`
 </table>
 </div></div></div>
 </div>
-</div>
-<div class="section" id="the-plot">
-<h2>The Plot<a class="headerlink" href="#the-plot" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="the-plot">
+<h2>The Plot<a class="headerlink" href="#the-plot" title="Link to this heading">#</a></h2>
 <p>Now we just need to fit the data to a straight line. We could define a linear function and use the <code class="docutils literal notranslate"><span class="pre">scipy.optimize.curve_fit()</span></code> function or we can use the linear regression method with the <code class="docutils literal notranslate"><span class="pre">scipy.stats.linregress()</span></code> function.  Both methods will give exactly the same result but will return statistical scores differently. In this case I will use the <code class="docutils literal notranslate"><span class="pre">linregress</span></code> function.</p>
 <p>In the code below I will plot the data, fit the data to a straight line, and plot the result of that fit. I will also report the <span class="math notranslate nohighlight">\(R^2\)</span> value and report the parameters (slope and intercept) from the linear regression.</p>
 <div class="cell tag_hide-input docutils container">
@@ -537,25 +585,35 @@ document.write(`
 <span class="c1">### Print the line fit parameters ###</span>
 <span class="c1">#####################################</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;slope = </span><span class="si">{</span><span class="n">linfit</span><span class="o">.</span><span class="n">slope</span><span class="si">:</span><span class="s2">0.1f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;intercept = </span><span class="si">{</span><span class="n">linfit</span><span class="o">.</span><span class="n">intercept</span><span class="si">:</span><span class="s2">0.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="c1">### create values using uncertainties for error propagation</span>
+
+<span class="n">slope</span> <span class="o">=</span> <span class="n">un</span><span class="o">.</span><span class="n">ufloat</span><span class="p">(</span><span class="n">linfit</span><span class="o">.</span><span class="n">slope</span><span class="p">,</span><span class="n">linfit</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+<span class="n">intercept</span> <span class="o">=</span> <span class="n">un</span><span class="o">.</span><span class="n">ufloat</span><span class="p">(</span><span class="n">linfit</span><span class="o">.</span><span class="n">intercept</span><span class="p">,</span> <span class="n">linfit</span><span class="o">.</span><span class="n">intercept_stderr</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&quot;</span><span class="p">)</span>                            
+
+<span class="c1">### print results</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;slope = </span><span class="si">{</span><span class="n">slope</span><span class="si">:</span><span class="s2">0.1f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;intercept = </span><span class="si">{</span><span class="n">intercept</span><span class="si">:</span><span class="s2">0.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;RSQ = </span><span class="si">{</span><span class="p">(</span><span class="n">linfit</span><span class="o">.</span><span class="n">rvalue</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="si">:</span><span class="s2">0.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/0f1ea27c40e79d5d81284d2499c5d722799c192172326f7b821c5b190dac929f.png" src="../_images/0f1ea27c40e79d5d81284d2499c5d722799c192172326f7b821c5b190dac929f.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope = -13147.8
-intercept = 28.443
+<img alt="../_images/182c58bab611f906157cdfb11f29c2d75bc6a3c1dd7d53063745fedc723e9013.png" src="../_images/182c58bab611f906157cdfb11f29c2d75bc6a3c1dd7d53063745fedc723e9013.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope = -13147.8+/-297.0
+intercept = 28.443+/-0.481
 RSQ = 0.999
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="calculating-a-and-e-a">
-<h2>Calculating A and <span class="math notranslate nohighlight">\(E_a\)</span><a class="headerlink" href="#calculating-a-and-e-a" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="calculating-a-and-e-a">
+<h2>Calculating A and <span class="math notranslate nohighlight">\(E_a\)</span><a class="headerlink" href="#calculating-a-and-e-a" title="Link to this heading">#</a></h2>
 <p>We know that the intercept is <span class="math notranslate nohighlight">\(\ln{A}\)</span> and the slope is <span class="math notranslate nohighlight">\(- {\frac{E_a}{R}}\)</span></p>
 <p>The code below will report the values of A and <span class="math notranslate nohighlight">\(E_a\)</span>.</p>
 <div class="cell tag_hide-input docutils container">
@@ -567,10 +625,13 @@ RSQ = 0.999
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">R</span> <span class="o">=</span> <span class="mf">8.314</span> <span class="c1"># J/mole</span>
 
-<span class="n">Ea</span> <span class="o">=</span> <span class="o">-</span><span class="n">linfit</span><span class="o">.</span><span class="n">slope</span> <span class="o">*</span> <span class="n">R</span>
+<span class="c1">#Ea = -linfit.slope * R</span>
+<span class="n">Ea</span> <span class="o">=</span> <span class="o">-</span><span class="n">slope</span> <span class="o">*</span> <span class="n">R</span>
+
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The activation energy, Ea, is </span><span class="si">{</span><span class="n">Ea</span><span class="o">/</span><span class="mi">1000</span><span class="si">:</span><span class="s2">0.2f</span><span class="si">}</span><span class="s2"> kJ/mole&quot;</span><span class="p">)</span>
 
-<span class="n">A_value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">linfit</span><span class="o">.</span><span class="n">intercept</span><span class="p">)</span>
+<span class="c1">#A_value = np.exp(linfit.intercept)</span>
+<span class="n">A_value</span> <span class="o">=</span> <span class="n">unp</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">intercept</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The pre-exponential factor, A, is </span><span class="si">{</span><span class="n">A_value</span><span class="si">:</span><span class="s2">0.2e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">()</span>
@@ -582,22 +643,105 @@ RSQ = 0.999
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The activation energy, Ea, is 109.31 kJ/mole
-The pre-exponential factor, A, is 2.25e+12
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The activation energy, Ea, is 109.31+/-2.47 kJ/mole
+The pre-exponential factor, A, is (2.25+/-1.08)e+12
 
 The average temperature is 618.5K
 </pre></div>
 </div>
 </div>
 </div>
+<section id="a-large-error">
+<h3>A Large Error?<a class="headerlink" href="#a-large-error" title="Link to this heading">#</a></h3>
+<p>When we take the line fit we see a veryt large relative error in the calculated “A-value.” The <em>Uncertainties</em> package correclt propagated error through the exponential function. The realtive error is about <span class="math notranslate nohighlight">\(50\%\)</span>. Thats a lot of uncertainty. If we use the resulting values of <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(E_a\)</span> to calculate <span class="math notranslate nohighlight">\(k\)</span> at the average temperature (<span class="math notranslate nohighlight">\(618\ ^\circ C\)</span>), we see that the error in the result is also above <span class="math notranslate nohighlight">\(70\%\)</span>.</p>
+<p>The error is given as the standard deveation. this measn that if we performed the experiment again we would estimate the odds of getting an answer within the stadrad deviation as <span class="math notranslate nohighlight">\(68\%\)</span>. The is a one-sigma confidence level. For a two-sigma confidence level (<span class="math notranslate nohighlight">\(95\%\)</span> change of a result being in the range) we would use an error of twice the standard deviation; for <span class="math notranslate nohighlight">\(99\%\)</span> confidence we would use an error of three standard deviations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rate618</span> <span class="o">=</span> <span class="n">A_value</span> <span class="o">*</span> <span class="n">unp</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">Ea</span><span class="o">/</span><span class="p">(</span><span class="n">R</span> <span class="o">*</span> <span class="n">temp_average</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;k  at </span><span class="si">{</span><span class="n">temp_average</span><span class="si">:</span><span class="s2">0.1f</span><span class="si">}</span><span class="s2"> C is </span><span class="si">{</span><span class="n">rate618</span><span class="si">:</span><span class="s2">0.0f</span><span class="si">}</span><span class="s2"> M^-1s^-1&quot;</span><span class="p">)</span>
+</pre></div>
 </div>
-<div class="section" id="your-turn">
-<h2>Your Turn<a class="headerlink" href="#your-turn" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>k  at 618.5 C is 1320+/-898 M^-1s^-1
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="throwing-a-dart">
+<h3>Throwing a Dart<a class="headerlink" href="#throwing-a-dart" title="Link to this heading">#</a></h3>
+<p>When we plot the Arrhenius plot starting so that the y-intercept, which defines the A-value, is on the plot, we see that the data points are very far away from the intercept relative to their span. The confidence for the y-intercept is therefor low. We need more points or a larger range in temperature (preferable both) to increase the precision of our line fit when we extend the slope so far away from our data.</p>
+<p>The linear regression function in <em>SciPy</em> estimated the standard deviation for the calculated intercept to be large because of the distance from the data points. The math tools provided by the <em>Uncertainties</em> package propagated the error through the math functions (do you know the rule for handling error in exponents and in logarithmic functions? The <em>Uncertainties</em> package will do it for you.)</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#####################################################</span>
+<span class="c1">### Get series of data to plot from the dataframe ###</span>
+<span class="c1">#####################################################</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;T&quot;</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;k&quot;</span><span class="p">])</span>
+
+
+<span class="c1">##################################################</span>
+<span class="c1">### Setup a figure with two plots side-by-side ###</span>
+<span class="c1">### and choose a stylesheet                    ###</span>
+<span class="c1">##################################################</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="n">path</span> <span class="o">+</span> <span class="s2">&quot;S2_classic2.mplstyle&quot;</span><span class="p">)</span>        
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>  
+<span class="n">ax</span><span class="o">.</span><span class="n">margins</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">.07</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">.07</span><span class="p">,</span> <span class="n">tight</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>                     <span class="c1"># add 7% empty space around outside of plot area   </span>
+
+
+<span class="c1">#########################################</span>
+<span class="c1">### Plot the data and the line fit.   ###</span>
+<span class="c1">#########################################</span>
+
+<span class="n">x_fit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="mi">10</span><span class="p">)</span>
+
+<span class="n">linfit</span> <span class="o">=</span> <span class="n">linregress</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="n">fity</span> <span class="o">=</span> <span class="n">linfit</span><span class="o">.</span><span class="n">slope</span> <span class="o">*</span> <span class="n">x_fit</span> <span class="o">+</span> <span class="n">linfit</span><span class="o">.</span><span class="n">intercept</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_fit</span><span class="p">,</span> <span class="n">fity</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s2">&quot;o&quot;</span><span class="p">)</span>  <span class="c1"># plotting the data AFTER the line will put the points at the front of the stack of images</span>
+
+<span class="c1">############################</span>
+<span class="c1">### Set labels and scale ###</span>
+<span class="c1">############################</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Arrhenius Plot&quot;</span><span class="p">,</span>       
+          <span class="n">ylabel</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\ln{\left( k_</span><span class="si">{obs}</span><span class="s2"> \right)}~/ \left( M^{-1}s^{-1} \right)$&quot;</span><span class="p">,</span> 
+          <span class="n">xlabel</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\frac</span><span class="si">{1}{T}</span><span class="s2">~/ \left( K^{-1} \right)$&quot;</span><span class="p">,</span>                
+          <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="kc">None</span><span class="p">],</span>                  
+          <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span><span class="kc">None</span><span class="p">]</span>
+         <span class="p">)</span>
+
+<span class="c1">#fig.savefig(&quot;plot.pdf&quot;)   # use this to save the figure in PDF format</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>                 <span class="c1"># output the combined plot plots</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../_images/4f659791f6ab4961dfad0de28be6f0f158df5a217cee954c73b85124a76c9947.png" src="../_images/4f659791f6ab4961dfad0de28be6f0f158df5a217cee954c73b85124a76c9947.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="your-turn">
+<h2>Your Turn<a class="headerlink" href="#your-turn" title="Link to this heading">#</a></h2>
 <p>We have calculated the values of <span class="math notranslate nohighlight">\(E_a\)</span> and <span class="math notranslate nohighlight">\(A\)</span> in a Jupyter notebook. The code and the output of the code are present in the same document so you can evaluate the exact methods used to reach any conclusions.</p>
+<p>We have also learned that error analysis is very important. We saw that a 4-point Arrhenius plot was able to produce a precise energy of activation but that the pre-exponential factor (as calculated from the distant y-intercept) was essential meaningless. Rates calculated at given temperatures using the plot above had errors greater than the nominal value at <span class="math notranslate nohighlight">\(2\sigma\)</span>  .</p>
 <p>What does an A value of <span class="math notranslate nohighlight">\(2.3 \times 10^{12}\)</span> mean when the temperature is in the temperature range of 620 K? (see page 367 and thereabouts in your textbook)</p>
 <p>What does an activation energy of <span class="math notranslate nohighlight">\(110 \frac{kJ}{mole}\)</span> mean? Would it be a fast reaction at room temperature or slow? Is the temperature of 620 K necessary?</p>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -624,11 +768,10 @@ The average temperature is 618.5K
 
               
               
-                <footer class="bd-footer-article">
+              
+              
+                <footer class="prev-next-footer d-print-none">
                   
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="6_2_kinetics.html"
@@ -648,10 +791,7 @@ The average temperature is 618.5K
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -659,6 +799,7 @@ The average temperature is 618.5K
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -669,7 +810,11 @@ The average temperature is 618.5K
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-arrhenius-equation">The Arrhenius Equation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-data">The Data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-plot">The Plot</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculating-a-and-e-a">Calculating A and <span class="math notranslate nohighlight">\(E_a\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculating-a-and-e-a">Calculating A and <span class="math notranslate nohighlight">\(E_a\)</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-large-error">A Large Error?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#throwing-a-dart">Throwing a Dart</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#your-turn">Your Turn</a></li>
 </ul>
   </nav></div>
@@ -692,6 +837,7 @@ By Barry Linkletter
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
       © Copyright 2024.
@@ -718,8 +864,8 @@ By Barry Linkletter
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
 
   <footer class="bd-footer">
   </footer>

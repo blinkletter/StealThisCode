@@ -9,7 +9,7 @@
 # from Supplementary material. data digitized from plot. Figure S-25
 # Figure S-25. Eyring plot from the variable-temperature thermal decay kinetics data for 3a in CH2Cl2
 #
-"1/T (K-1)"", "ln k/T", "Error k/T"
+"1/T (K-1)", "ln k/T", "Error ln k/T"
 0.00341,       -11.935,   0.5
 0.00366,       -13.124,   0.5
 0.00373,       -13.622,   0.5

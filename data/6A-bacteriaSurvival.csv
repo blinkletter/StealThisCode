@@ -1,0 +1,19 @@
+# "The survival of Escherichia coli O157 on a range of metal surfaces."
+# S.A. Wilks, H. Michels, C.W. Keevil,
+# International Journal of Food Microbiology,
+# 2005, 105, 445-454.
+# https://doi.org/10.1016/j.ijfoodmicro.2005.04.021.
+#
+TIME (MIN), C51000, C71000
+0,   1430000000,  1430000000  
+15,  1600000000,  1030000000  
+30,   927000000,   927000000  
+45,   282000000,   670000000  
+60,   315000000,   540000000  
+75,      534000,   540000000  
+90,       12100,   540000000  
+105,          1,      163000  
+120,          1,           1  
+180,          1,           1  
+270,          1,           1  
+360,          1,           1  

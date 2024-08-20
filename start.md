@@ -1,11 +1,7 @@
 
 # Steal This Code
 
-I want to introduce you to the **power** of using computers to analyze and visualize data. Spreadsheets are great for budgeting but they are difficult to use when data gets "big." And **big data** is here to stay. **Biology** and **chemistry** are rapidly becoming data-intensive fields. The tools to command all this data reside in specialized tools like "***R***" and general-purpose languages like ***Python***.
-
-Most science students have never really commanded a computer. Apps command you, not the other way around. Learning to **interpret and adapt** a computer program for your own purposes is an essential skill in science. 
-
-The goal of our program is to explore **chemistry**, not computer science. I will not be teaching **programming**. We will use programs that have been written and adapt them as needed. Along the way the basics of commanding a computer with written instructions will be revealed to you.
+This book contains workbooks that outline various methods of data analysis and plotting with *Python*. It is a collection of *Python* notebooks that I have written over the years for various purposes. The major purpose of this is to provide a library of my own code and documnetation for myself so that I can more easily re-use the work that I have done and not have to relearn and re-invent wheels when I need to solve a problem that I had already solved a few years prior. This record of examples is meant to be mined for useful bits. Steal some of it or steal all of it, just don';t spend time writing code that someone else already has written.
 
 ## Programming as Theft
 

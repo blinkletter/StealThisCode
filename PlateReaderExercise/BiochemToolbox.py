@@ -1089,7 +1089,7 @@ def make_plate_data_for_setup(file_name):
     df = pd.read_csv(file_name,
                      comment = "#",
                      skipinitialspace=True)
-    df.dropna(axis = 0, inplace = True)   # remove any rows with NaN values
+   # df.dropna(axis = 0, inplace = True)   # remove any rows with NaN values
 
     # Make dictionary of lists for constructing the final dataframe
     dictionary = {}
@@ -1119,3 +1119,84 @@ def calculate_e_NPA(pH = 7.0):
     
     return(e_NPA)
 
+def make_data_files_plates(setupdata, file_name):
+    '''Will take the dataframe of setupdata and output a series of csv files 
+    that represent the plate reader data for the experiment
+    
+    '''
+
+    eq, f = BT.get_integrated_MM_function()  # eq is sympy equation object, f is the corresponding function
+
+    time_start = 0.5        ### start at 30 second (0.5 minutes)
+    time_end = 60           ### The end time (minutes)
+    n_points = 360          ### number of points - increase if needed
+
+    voltage_error = 0.001   ### parameters to define output range and error
+    random_error = 0.001
+    max_value = 4
+
+    dt = time_end / n_points          ### time step, delta t
+    t_line = np.arange(time_start,    ### time vector (list of time points)
+                    time_end + dt, 
+                    dt) 
+
+    ### Note: Lane names, enzyme conc list, KM list and Vmax list must all be
+    ### same length or this will fail. Row names and row concentration lists 
+    ### must also have equal lengths.
+
+    parameters = zip(setupdata["lane_name"], 
+                    setupdata["Enzyme"], 
+                    setupdata["Vmax"], 
+                    setupdata["KM"])
+
+    for p in parameters:
+        lane_name, E_name, Vmax_value, KM_value = p   ### unpack kcat, KM and [E]
+
+        row_df = setupdata[["row_name","S_conc"]].dropna()
+        row_info = zip(row_df["row_name"], row_df["S_conc"])
+
+        for row in row_info:
+            row_name, S0_value = row      ### unpack row name and substrate conc
+            plate_df = pd.DataFrame([])   ### start with empty dataframe
+            #print(row_name)
+
+            ### Calculate product from enzyme reaction 
+            product_E = S0_value - f(t_line, S0_value, KM_value, Vmax_value)   
+            product_E = np.real(product_E)  ### complex numbers fixed
+
+            ### Calculate product from uncatalyzed reaction 
+            product_NPA = S0_value - S0_value * np.exp(-1E-3 * t_line)
+            product = product_E + product_NPA
+            absorbance = product * e_NPA   ### result in absorbance units
+
+            ### Add voltage error 
+            fraction_transmittance  = 1 / (10 ** absorbance)                      
+            fraction_transmittance = np.random.normal(fraction_transmittance, 
+                                                    voltage_error, 
+                                                    len(fraction_transmittance))
+
+            ### Replace negative transmittance values with a very low value to avoid math errors with np.log10
+            fraction_transmittance[fraction_transmittance <= 0] = 1E-6
+
+            ### Calculate absorbance
+            absorbance = -np.log10(fraction_transmittance)
+
+            ### Add random error ro absorbance
+            absorbance = np.random.normal(absorbance,     
+                                        random_error, 
+                                        len(absorbance))   
+
+            ### Clean generated data set. 
+            absorbance[absorbance > max_value] = max_value   ### cap values to maximum absorbance            
+            absorbance = np.nan_to_num(absorbance,  ### replace any NaN with max value
+                            copy = True, 
+                            nan = max_value)   
+
+            ### insert the two data arrays into the dataframe
+            plate_df["time"] = t_line
+            plate_df["abs"] = absorbance
+
+            ### Write data out to file using lane_name and row_name
+            out_file_name = file_name + "_" + str(lane_name) + "_" + str(row_name) + ".csv"
+            
+            plate_df.to_csv(out_file_name, float_format='%10.4g')

@@ -39,7 +39,7 @@ def MM(S, Vmax, KM):
     """
 
     return Vmax * S / (S + KM)
-        
+
 def MM_curve_fit(x,y):
     """A function to fit x,y data to the Michaelis-Menten equation
     
@@ -62,13 +62,13 @@ def MM_curve_fit(x,y):
     ### Interpret the results
     v_max, KM = params   ### pull out the two values in the params object
 
-    perr = np.sqrt(np.diag(stats)) ### convert covariance matrix to stdev 
-    stdev_v_max, stdev_KM = perr   ### pull out the two stdev values 
+    perr = np.sqrt(np.diag(stats)) ### convert covariance matrix to stdev
+    stdev_v_max, stdev_KM = perr   ### pull out the two stdev values
 
     v_max_u = un.ufloat(v_max,stdev_v_max)  ### create uncertainty values
-    KM_u = un.ufloat(KM,stdev_KM) 
+    KM_u = un.ufloat(KM,stdev_KM)
 
-    return v_max_u, KM_u     
+    return v_max_u, KM_u
 
 def MM_Plot(x, y, x_lim = (None,None), y_lim = (None,None),
             title = "", x_label = "", y_label = "", file_name = "Plot.pdf" ):
@@ -113,7 +113,7 @@ def MM_Plot(x, y, x_lim = (None,None), y_lim = (None,None),
     ### make a list of x values from zero to the end of the line
     ################################
     
-    x_fit = np.linspace(0, np.max(x), 100) 
+    x_fit = np.linspace(0, np.max(x), 100)
     
     ################################
     ### Feed that list into the function for the line fit
@@ -125,14 +125,14 @@ def MM_Plot(x, y, x_lim = (None,None), y_lim = (None,None),
     ### Create an empty plot
     #####################
         
-    plt.rcdefaults()           
-    fig, ax = plt.subplots(nrows=1, ncols=1, figsize=(4,3))  
+    plt.rcdefaults()
+    fig, ax = plt.subplots(nrows=1, ncols=1, figsize=(4,3))
     
     ######################
     ### Plot the data and the curve fit line
     #####################
 
-    ax.scatter(x, y, 
+    ax.scatter(x, y,
             marker='o',                 ### Plot the x and y data 
             color='white',              ### markers are this color
             edgecolors = 'black',       ### outline of markers is this color
@@ -141,7 +141,7 @@ def MM_Plot(x, y, x_lim = (None,None), y_lim = (None,None),
             zorder = 1                  ### everything is in layer 1 (the top layer in this case)
             )
 
-    ax.plot(x_fit, y_fit, 
+    ax.plot(x_fit, y_fit,
             linestyle = '-',            ### use a line between points
             linewidth='0.5',            ### make the line thin
             color = 'black',            ### the line is black
@@ -153,11 +153,11 @@ def MM_Plot(x, y, x_lim = (None,None), y_lim = (None,None),
     ### Apply the style parameters
     #####################
 
-    ax.set(xlabel=x_label, 
+    ax.set(xlabel=x_label,
             ylabel=y_label,
             title = title,
-            xlim=x_lim,                  
-            ylim=y_lim      
+            xlim=x_lim,
+            ylim=y_lim
           )
 
     ######################
@@ -213,10 +213,10 @@ def line_curve_fit(x,y):
     slope, intercept = params   ### pull out the two values in the params object
     
     perr = np.sqrt(np.diag(stats))        ### convert covariance matrix to stdev values
-    stdev_slope, stdev_intercept = perr   ### pull out the two stdev values 
+    stdev_slope, stdev_intercept = perr   ### pull out the two stdev values
     
     slope_u = un.ufloat(slope,stdev_slope)               ## create a value with uncertainty built in
-    intercept_u = un.ufloat(intercept,stdev_intercept)  
+    intercept_u = un.ufloat(intercept,stdev_intercept)
     
     return slope_u, intercept_u
 
@@ -273,14 +273,14 @@ def Linear_Plot(x, y, x_lim = (None,None), y_lim = (None,None),
     ### Create an empty plot
     #####################
         
-    plt.rcdefaults()           
-    fig, ax = plt.subplots(nrows=1, ncols=1, figsize=(4,3))  
+    plt.rcdefaults()
+    fig, ax = plt.subplots(nrows=1, ncols=1, figsize=(4,3))
     
     ######################
     ### Plot the data and the curve fit line
     #####################
 
-    ax.scatter(x, y, 
+    ax.scatter(x, y,
             marker='o',                 ### Plot the x and y data 
             color='white',              ### markers are this color
             edgecolors = 'black',       ### outline of markers is this color
@@ -300,11 +300,11 @@ def Linear_Plot(x, y, x_lim = (None,None), y_lim = (None,None),
     ### Apply the style parameters
     #####################
 
-    ax.set(xlabel=x_label, 
+    ax.set(xlabel=x_label,
             ylabel=y_label,
             title = title,
-            xlim=x_lim,                  
-            ylim=y_lim      
+            xlim=x_lim,
+            ylim=y_lim
           )
 
     ######################
@@ -359,7 +359,7 @@ def get_integrated_MM_function():
     diffeq = diffeq.subs({St: (S0 - xt(t))})    ### Substitute the term with S0-x
 
     ##########################
-    ### Solve the differential equation 
+    ### Solve the differential equation
     ##########################
 
     res = sym.dsolve(diffeq, ics={xt(0): 0})    ### Solve the differential equation. Initial condition is x(t) = 0 when t = 0
@@ -371,10 +371,10 @@ def get_integrated_MM_function():
     eq = res.subs(xt(t), S0-St)            ### substitute x for So - St
     eq = sym.simplify(eq)                  ### Simplify the result
     eq = sym.Eq(eq.lhs - S0, eq.rhs - S0)  ### Subtract S0 from both sides of the equation
-    eq = sym.Eq(-eq.lhs, -eq.rhs)          ### take the negative of both sides of the equation 
+    eq = sym.Eq(-eq.lhs, -eq.rhs)          ### take the negative of both sides of the equation
 
     ##########################
-    ### Display the final form of equation 
+    ### Display the final form of equation
     ##########################
 
     #print("The integrated rate law for the MM equation")
@@ -384,7 +384,7 @@ def get_integrated_MM_function():
     ### create function in terms of t, S0, KM and Vmax
     ##########################
 
-    f = sym.lambdify([t, S0, KM, Vmax], eq.rhs)   
+    f = sym.lambdify([t, S0, KM, Vmax], eq.rhs)
     return eq,f
 
 
@@ -453,8 +453,8 @@ def read_plate_setup(file_name, pH = 7.0):
             "E_Name_list": E_Name_list,}, e_NPA
 
 
-def plot_lanes(data_file_name, Column_list, Row_list, 
-               Fraction_time_span = 1, Line_Fit = True, 
+def plot_lanes(data_file_name, Column_list, Row_list,
+               Fraction_time_span = 1, Line_Fit = True,
                Display_Plot = True, Display_Data = True,
                fancy = False, tiny_points = False, tiny_line = False):
 
@@ -495,9 +495,9 @@ def plot_lanes(data_file_name, Column_list, Row_list,
     plt.ioff()           ### switch off interactive display of plots. plt.show() needed to display a plot now
     plt.rcdefaults()     ### resets the plot defaults so we always start in the same place
     if fancy:
-        plt.style.use("../styles/tufte.mplstyle")     ### Then add a fancy style sheet   
+        plt.style.use("../styles/tufte.mplstyle")     ### Then add a fancy style sheet
     
-    fig, ax = plt.subplots(nrows=1, ncols=1, figsize=(5,4))  
+    fig, ax = plt.subplots(nrows=1, ncols=1, figsize=(5,4))
 
     slope_list = []; slope_stderr_list = []
     int_list = []; int_stderr_list = []; rsq_list = [];
@@ -513,7 +513,7 @@ def plot_lanes(data_file_name, Column_list, Row_list,
             df = pd.read_csv(in_file_name)
             points_used = int(Fraction_time_span * len(df["time"]))
     
-            x = df["time"][0:points_used] 
+            x = df["time"][0:points_used]
             y = df["abs"][0:points_used]
     
             
@@ -535,52 +535,52 @@ def plot_lanes(data_file_name, Column_list, Row_list,
                 well_row_list.append(row_name)
 
                 x_fit = np.linspace(0,np.max(x),10)
-                ax.plot(x_fit, linear_function(x_fit, slope, intercept), 
-                        linestyle = '-', 
-                        linewidth='0.5', 
-                        color = 'black', 
+                ax.plot(x_fit, linear_function(x_fit, slope, intercept),
+                        linestyle = '-',
+                        linewidth='0.5',
+                        color = 'black',
                         zorder = 0)
             ### end of if:
 
             if tiny_line:
-                ax.plot(x, y, 
-                    #marker=None, 
-                    color='black', 
-                    linewidth = 0.5, 
-                    ms=8, 
+                ax.plot(x, y,
+                    #marker=None,
+                    color='black',
+                    linewidth = 0.5,
+                    ms=8,
                     zorder = 1)
             if tiny_points:
-                ax.scatter(x, y, 
-                    marker='o', 
-                    color='black', 
+                ax.scatter(x, y,
+                    marker='o',
+                    color='black',
                     edgecolors = 'none',
-                    linewidths = 0.5, 
-                    s=2, 
+                    linewidths = 0.5,
+                    s=2,
                     zorder = 2)
             else:
-                ax.scatter(x, y, 
-                    marker='o', 
-                    color='white', 
+                ax.scatter(x, y,
+                    marker='o',
+                    color='white',
                     edgecolors = 'black',
-                    linewidths = 0.5, 
-                    s=32, 
+                    linewidths = 0.5,
+                    s=32,
                     zorder = 2)
-                ax.scatter(x, y, 
-                    marker='o', 
-                    color='white', 
+                ax.scatter(x, y,
+                    marker='o',
+                    color='white',
                     edgecolors = None,
-                    linewidths = 0.5, 
-                    s=64, 
+                    linewidths = 0.5,
+                    s=64,
                     zorder = 1)
             ### end of if tiny_points:
         ### end of for row_name:
     ###end of for column_name:
-            
-    ax.set(xlabel= r"Time $/min$",  
+
+    ax.set(xlabel= r"Time $/min$",
            ylabel=r"$A_{405}$",
            #title = "Lane # "+lane_name,
-           xlim=[None, None],                  
-           ylim=[None, None]      
+           xlim=[None, None],
+           ylim=[None, None]
             )
 
 
@@ -591,9 +591,9 @@ def plot_lanes(data_file_name, Column_list, Row_list,
                "int": int_list,
                "int stderr":int_stderr_list,
                "RSQ": rsq_list}
-    results = pd.DataFrame(results) 
+    results = pd.DataFrame(results)
 
-    display(results)  
+    display(results)
 
     fig.tight_layout()  # otherwise the right y-label is slightly clipped
     plt.savefig(data_file_name + ".pdf")     ### export the plot as this
@@ -605,7 +605,7 @@ def plot_lanes(data_file_name, Column_list, Row_list,
     return results
 
 
-def dual_plot_w_residuals(filename, lane_name, row_name, 
+def dual_plot_w_residuals(filename, lane_name, row_name,
                           Fraction_time_span = 1,
                           plot_file = "plots/Cell_w_residuals_2_plot",
                           fancy = False):
@@ -645,9 +645,9 @@ def dual_plot_w_residuals(filename, lane_name, row_name,
     plt.ioff()           ### switch off interactive display of plots. plt.show() needed to display a plot now
     plt.rcdefaults()     ### resets the plot defaults so we always start in the same place
     if fancy:
-        plt.style.use("../styles/tufte.mplstyle")     ### Then add a fancy style sheet   
+        plt.style.use("../styles/tufte.mplstyle")     ### Then add a fancy style sheet
     
-    fig, ax = plt.subplots(nrows=1, ncols=2, figsize=(7,3))  
+    fig, ax = plt.subplots(nrows=1, ncols=2, figsize=(7,3))
     
     in_file_name = filename + "_" + lane_name + "_" + row_name + ".csv"
     df = pd.read_csv(in_file_name)
@@ -670,65 +670,65 @@ def dual_plot_w_residuals(filename, lane_name, row_name,
     ##print(f"slope = {slope:0.3g}")
     x_fit = np.linspace(0,np.max(x),10)
     
-    ax[0].plot(x_fit, linear_function(x_fit, slope, intercept), 
-               linestyle = '-', 
-               linewidth='0.5', 
-               color = 'black', 
+    ax[0].plot(x_fit, linear_function(x_fit, slope, intercept),
+               linestyle = '-',
+               linewidth='0.5',
+               color = 'black',
                zorder = 0)
-    ax[0].scatter(x, y, 
-                  marker='o', 
-                  color='lightgray', 
+    ax[0].scatter(x, y,
+                  marker='o',
+                  color='lightgray',
                   edgecolors = 'black',
-                  linewidths = 0.5, 
-                  s=8, 
+                  linewidths = 0.5,
+                  s=8,
                   zorder = 2)
-    ax[0].scatter(x, y, 
-                  marker='o', 
-                  color='white', 
+    ax[0].scatter(x, y,
+                  marker='o',
+                  color='white',
                   edgecolors = None,
-                  linewidths = 0.5, 
-                  s=32, 
+                  linewidths = 0.5,
+                  s=32,
                   zorder = 1)
-    ax[0].set(xlabel= r"Time $/min$",  
+    ax[0].set(xlabel= r"Time $/min$",
               ylabel=r"$A_{405}$",
      #              title = "Lane # "+lane_name,
-              xlim=[-0.05*np.max(x), None],                  
-              ylim=[-0.05*np.max(y), None]      
+              xlim=[-0.05*np.max(x), None],
+              ylim=[-0.05*np.max(y), None]
              )
     
     residuals = y - linear_function(x, slope, intercept)
     y = residuals
-    ax[1].hlines(0, xmin = 0, xmax = np.max(x), 
-                 colors='black', linestyles='solid', 
+    ax[1].hlines(0, xmin = 0, xmax = np.max(x),
+                 colors='black', linestyles='solid',
                  linewidths = 0.5, zorder = 0)
-    ax[1].plot(x, y, 
-               linestyle = '-', 
-               linewidth='3', 
-               color = 'white', 
+    ax[1].plot(x, y,
+               linestyle = '-',
+               linewidth='3',
+               color = 'white',
                zorder = 1)
-    ax[1].plot(x, y, 
-               linestyle = '-', 
-               linewidth='0.5', 
-               color = 'black', 
+    ax[1].plot(x, y,
+               linestyle = '-',
+               linewidth='0.5',
+               color = 'black',
                zorder = 1)
-    ax[1].scatter(x, y, 
-                  marker='o', 
-                  color='lightgray', 
+    ax[1].scatter(x, y,
+                  marker='o',
+                  color='lightgray',
                   edgecolors = 'black',
-                  linewidths = 0.5, 
-                  s=8, 
+                  linewidths = 0.5,
+                  s=8,
                   zorder = 3)
-    ax[1].scatter(x, y, 
-                  marker='o', 
-                  color='white', 
+    ax[1].scatter(x, y,
+                  marker='o',
+                  color='white',
                   edgecolors = None,
-                  linewidths = 0.5, 
-                  s=32, 
+                  linewidths = 0.5,
+                  s=32,
                   zorder = 2)
-    ax[1].set(xlabel= r"Time  $/min$", 
+    ax[1].set(xlabel= r"Time  $/min$",
               ylabel="Residuals",
      #         title = "Lane # "+lane_name,
-     #         xlim=[None, None],                  
+     #         xlim=[None, None],
               ylim=[-.02, +0.02])
     
     fig.tight_layout()  # otherwise the right y-label is slightly clipped
@@ -739,7 +739,7 @@ def dual_plot_w_residuals(filename, lane_name, row_name,
 
 
 
-def plot_four_w_residuals(filename, lane_name, row_name, 
+def plot_four_w_residuals(filename, lane_name, row_name,
                           Fraction_time_span_medium = 0.2,
                           Fraction_time_span_short = 0.05,
                           plot_file = "plots/Cell_w_residuals_4_plot",
@@ -787,9 +787,9 @@ def plot_four_w_residuals(filename, lane_name, row_name,
     
     plt.rcdefaults()     ### resets the plot defaults so we always start in the same place
     if fancy:
-        plt.style.use("../styles/tufte.mplstyle")     ### Then add a fancy style sheet   
+        plt.style.use("../styles/tufte.mplstyle")     ### Then add a fancy style sheet
     
-    fig, ax = plt.subplots(nrows=2, ncols=2, figsize=(7,6))  
+    fig, ax = plt.subplots(nrows=2, ncols=2, figsize=(7,6))
     
     in_file_name = filename + "_" + lane_name + "_" + row_name + ".csv"
     df = pd.read_csv(in_file_name)
@@ -808,25 +808,25 @@ def plot_four_w_residuals(filename, lane_name, row_name,
     
     #########################################################################
     
-    ax[0][0].scatter(x_all, y_all, 
-            marker='o', 
-            color='lightgray', 
+    ax[0][0].scatter(x_all, y_all,
+            marker='o',
+            color='lightgray',
             edgecolors = 'black',
-            linewidths = 0.5, 
-            s=8, 
+            linewidths = 0.5,
+            s=8,
             zorder = 2)
-    ax[0][0].scatter(x_all, y_all, 
-            marker='o', 
-            color='white', 
+    ax[0][0].scatter(x_all, y_all,
+            marker='o',
+            color='white',
             edgecolors = None,
-            linewidths = 0.5, 
-            s=32, 
+            linewidths = 0.5,
+            s=32,
             zorder = 1)
-    ax[0][0].set(xlabel= r"Time $/min$",  
+    ax[0][0].set(xlabel= r"Time $/min$",
               ylabel=r"$A_{405}$",
      #         title = "Lane # "+lane_name,
-              xlim=[-0.05*np.max(x), None],                  
-              ylim=[-0.05*np.max(y), None]      
+              xlim=[-0.05*np.max(x), None],
+              ylim=[-0.05*np.max(y), None]
              )
     
     #########################################################################
@@ -840,30 +840,30 @@ def plot_four_w_residuals(filename, lane_name, row_name,
     
     x_fit = np.linspace(0,np.max(x2),10)
     
-    ax[0][1].plot(x_fit, linear_function(x_fit, slope2, intercept2), 
-            linestyle = '-', 
-            linewidth='0.5', 
-            color = 'black', 
+    ax[0][1].plot(x_fit, linear_function(x_fit, slope2, intercept2),
+            linestyle = '-',
+            linewidth='0.5',
+            color = 'black',
             zorder = 0)
-    ax[0][1].scatter(x2, y2, 
-            marker='o', 
-            color='lightgray', 
+    ax[0][1].scatter(x2, y2,
+            marker='o',
+            color='lightgray',
             edgecolors = 'black',
-            linewidths = 0.5, 
-            s=8, 
+            linewidths = 0.5,
+            s=8,
             zorder = 2)
-    ax[0][1].scatter(x2, y2, 
-            marker='o', 
-            color='white', 
+    ax[0][1].scatter(x2, y2,
+            marker='o',
+            color='white',
             edgecolors = None,
-            linewidths = 0.5, 
-            s=16, 
+            linewidths = 0.5,
+            s=16,
             zorder = 1)
-    ax[0][1].set(xlabel= r"Time $/min$",  
+    ax[0][1].set(xlabel= r"Time $/min$",
               ylabel=r"$A_{405}$",
      #         title = "Lane # "+lane_name,
-              xlim=[-0.05*np.max(x), None],                  
-              ylim=[-0.05*np.max(y), None]      
+              xlim=[-0.05*np.max(x), None],
+              ylim=[-0.05*np.max(y), None]
              )
     
     #########################################################################
@@ -877,30 +877,30 @@ def plot_four_w_residuals(filename, lane_name, row_name,
     
     x_fit = np.linspace(0,np.max(x),10)
     
-    ax[1][0].plot(x_fit, linear_function(x_fit, slope, intercept), 
-            linestyle = '-', 
-            linewidth='0.5', 
-            color = 'black', 
+    ax[1][0].plot(x_fit, linear_function(x_fit, slope, intercept),
+            linestyle = '-',
+            linewidth='0.5',
+            color = 'black',
             zorder = 0)
-    ax[1][0].scatter(x, y, 
-            marker='o', 
-            color='lightgray', 
+    ax[1][0].scatter(x, y,
+            marker='o',
+            color='lightgray',
             edgecolors = 'black',
-            linewidths = 0.5, 
-            s=8, 
+            linewidths = 0.5,
+            s=8,
             zorder = 2)
-    ax[1][0].scatter(x, y, 
-            marker='o', 
-            color='white', 
+    ax[1][0].scatter(x, y,
+            marker='o',
+            color='white',
             edgecolors = None,
-            linewidths = 0.5, 
-            s=32, 
+            linewidths = 0.5,
+            s=32,
             zorder = 1)
-    ax[1][0].set(xlabel= r"Time $/min$",  
+    ax[1][0].set(xlabel= r"Time $/min$",
               ylabel=r"$A_{405}$",
      #         title = "Lane # "+lane_name,
-              xlim=[-0.05*np.max(x), None],                  
-              ylim=[-0.05*np.max(y), None]      
+              xlim=[-0.05*np.max(x), None],
+              ylim=[-0.05*np.max(y), None]
              )
     
     #########################################################################
@@ -909,37 +909,37 @@ def plot_four_w_residuals(filename, lane_name, row_name,
     
     residuals = y - linear_function(x, slope, intercept)
     y = residuals
-    ax[1][1].hlines(0, xmin = 0, xmax = np.max(x), 
-                 colors='black', linestyles='solid', 
+    ax[1][1].hlines(0, xmin = 0, xmax = np.max(x),
+                 colors='black', linestyles='solid',
                  linewidths = 0.5, zorder = 0)
-    ax[1][1].plot(x, y, 
-            linestyle = '-', 
-            linewidth='3', 
-            color = 'white', 
+    ax[1][1].plot(x, y,
+            linestyle = '-',
+            linewidth='3',
+            color = 'white',
             zorder = 1)
-    ax[1][1].plot(x, y, 
-            linestyle = '-', 
-            linewidth='0.5', 
-            color = 'black', 
+    ax[1][1].plot(x, y,
+            linestyle = '-',
+            linewidth='0.5',
+            color = 'black',
             zorder = 1)
-    ax[1][1].scatter(x, y, 
-            marker='o', 
-            color='lightgray', 
+    ax[1][1].scatter(x, y,
+            marker='o',
+            color='lightgray',
             edgecolors = 'black',
-            linewidths = 0.5, 
+            linewidths = 0.5,
             s=8, 
             zorder = 3)
-    ax[1][1].scatter(x, y, 
-            marker='o', 
-            color='white', 
+    ax[1][1].scatter(x, y,
+            marker='o',
+            color='white',
             edgecolors = None,
-            linewidths = 0.5, 
-            s=32, 
+            linewidths = 0.5,
+            s=32,
             zorder = 2)
-    ax[1][1].set(xlabel= r"Time  $/min$", 
+    ax[1][1].set(xlabel= r"Time  $/min$",
               ylabel="Residuals",
      #         title = "Lane # "+lane_name,
-     #         xlim=[None, None],                  
+     #         xlim=[None, None],
               ylim=[-.02, +0.02]
                )
     
@@ -952,10 +952,10 @@ def plot_four_w_residuals(filename, lane_name, row_name,
 
 
 def contact_sheet(data_root_name,
-                  columns = ["1","2","3","4","5","6",
-                             "7","8","9","10","11","12"],
-                  enzymes = ["","","","","","","","","","","",""],
-                  rows = ["A","B","C","D","E","F","G","H"], 
+                  columns = ("1","2","3","4","5","6",
+                             "7","8","9","10","11","12"),
+                  enzymes = ("","","","","","","","","","","",""),
+                  rows = ("A","B","C","D","E","F","G","H"),
                   fancy = False):
     """Plots 12 plots, one for each column of plate
     
@@ -1113,7 +1113,7 @@ def make_plate_data_for_setup(file_name):
     dictionary["Enzyme"] = df["Enzyme"]
 
     df2 = pd.DataFrame.from_dict(dictionary)
-    return df2 
+    return df2
 
 
 def make_data_files_plates(setupdata, file_name, pH = 7.0):
@@ -1134,16 +1134,16 @@ def make_data_files_plates(setupdata, file_name, pH = 7.0):
 
     dt = time_end / n_points          ### time step, delta t
     t_line = np.arange(time_start,    ### time vector (list of time points)
-                    time_end + dt, 
-                    dt) 
+                    time_end + dt,
+                    dt)
 
     ### Note: Lane names, enzyme conc list, KM list and Vmax list must all be
-    ### same length or this will fail. Row names and row concentration lists 
+    ### same length or this will fail. Row names and row concentration lists
     ### must also have equal lengths.
 
-    parameters = zip(setupdata["lane_name"], 
-                    setupdata["Enzyme"], 
-                    setupdata["Vmax"], 
+    parameters = zip(setupdata["lane_name"],
+                    setupdata["Enzyme"],
+                    setupdata["Vmax"],
                     setupdata["KM"])
 
     for p in parameters:
@@ -1158,10 +1158,10 @@ def make_data_files_plates(setupdata, file_name, pH = 7.0):
             #print(row_name)
 
             ### Calculate product from enzyme reaction 
-            product_E = S0_value - f(t_line, S0_value, KM_value, Vmax_value)   
+            product_E = S0_value - f(t_line, S0_value, KM_value, Vmax_value)
             product_E = np.real(product_E)  ### complex numbers fixed
 
-            ### Calculate product from uncatalyzed reaction 
+            ### Calculate product from uncatalyzed reaction
             e_NPA = calculate_e_NPA(pH)
 
             product_NPA = S0_value - S0_value * np.exp(-1E-3 * t_line)
@@ -1170,7 +1170,7 @@ def make_data_files_plates(setupdata, file_name, pH = 7.0):
 
             ### Add voltage error 
             fraction_transmittance  = 1 / (10 ** absorbance)                      
-            fraction_transmittance = np.random.normal(fraction_transmittance, 
+            fraction_transmittance = np.random.normal(fraction_transmittance,
                                                     voltage_error, 
                                                     len(fraction_transmittance))
 
@@ -1181,15 +1181,15 @@ def make_data_files_plates(setupdata, file_name, pH = 7.0):
             absorbance = -np.log10(fraction_transmittance)
 
             ### Add random error ro absorbance
-            absorbance = np.random.normal(absorbance,     
-                                        random_error, 
-                                        len(absorbance))   
+            absorbance = np.random.normal(absorbance,
+                                        random_error,
+                                        len(absorbance))
 
-            ### Clean generated data set. 
-            absorbance[absorbance > max_value] = max_value   ### cap values to maximum absorbance            
+            ### Clean generated data set.
+            absorbance[absorbance > max_value] = max_value   ### cap values to maximum absorbance
             absorbance = np.nan_to_num(absorbance,  ### replace any NaN with max value
-                            copy = True, 
-                            nan = max_value)   
+                            copy = True,
+                            nan = max_value)
 
             ### insert the two data arrays into the dataframe
             plate_df["time"] = t_line
@@ -1199,3 +1199,4 @@ def make_data_files_plates(setupdata, file_name, pH = 7.0):
             out_file_name = file_name + "_" + str(lane_name) + "_" + str(row_name) + ".csv"
             
             plate_df.to_csv(out_file_name, float_format='%10.4g')
+            

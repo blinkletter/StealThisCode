@@ -38,7 +38,7 @@ def MM(S, Vmax, KM):
         The calculated initial rate(s)
     """
 
-    return(Vmax * S / (S + KM))
+    return Vmax * S / (S + KM)
         
 def MM_curve_fit(x,y):
     """A function to fit x,y data to the Michaelis-Menten equation
@@ -68,7 +68,7 @@ def MM_curve_fit(x,y):
     v_max_u = un.ufloat(v_max,stdev_v_max)  ### create uncertainty values
     KM_u = un.ufloat(KM,stdev_KM) 
 
-    return(v_max_u, KM_u)     
+    return v_max_u, KM_u     
 
 def MM_Plot(x, y, x_lim = (None,None), y_lim = (None,None),
             title = "", x_label = "", y_label = "", file_name = "Plot.pdf" ):
@@ -183,7 +183,7 @@ def linear(x, slope, intercept):  ### Take x values, slope and intercept and ret
     float or numpy array
         The calculated y values
     """
-    return(slope * x + intercept)
+    return slope * x + intercept
 
 def line_curve_fit(x,y):
     """A function to fit x,y data to a linear equation
@@ -218,7 +218,7 @@ def line_curve_fit(x,y):
     slope_u = un.ufloat(slope,stdev_slope)               ## create a value with uncertainty built in
     intercept_u = un.ufloat(intercept,stdev_intercept)  
     
-    return(slope_u, intercept_u)
+    return slope_u, intercept_u
 
 def Linear_Plot(x, y, x_lim = (None,None), y_lim = (None,None),           
             title = "", x_label = "", y_label = "", file_name = "Plot.pdf" ):
@@ -385,7 +385,24 @@ def get_integrated_MM_function():
     ##########################
 
     f = sym.lambdify([t, S0, KM, Vmax], eq.rhs)   
-    return(eq,f)
+    return eq,f
+
+
+
+def calculate_e_NPA(pH = 7.0):
+    ### parameters to get extinction coeff for NPA at give pH value
+    e_NPAA = 18300  ### extinction coeff for NPA anion
+    pKa_NPA = 7.15 ### pKa for p-nitrophenol
+
+    ### Calculated Values from the above lists
+    Ka = 10 ** -pKa_NPA   ### extinction coeff for NPA at given pH
+    H = 10 ** -pH
+    e_NPA = e_NPAA * (Ka / (H + Ka))   # abs of phenolate anion at pH value
+    
+    return e_NPA
+
+
+
 
 def read_plate_setup(file_name, pH = 7.0):
     """Reads a file name for a plate plan and returns lists of the data
@@ -427,14 +444,7 @@ def read_plate_setup(file_name, pH = 7.0):
     E_Name_list = df["Enzyme"]
 
     ### parameters to get extinction coeff for NPA at give pH value
-    pH = 7.0
-    e_NPAA = 18300  ### extinction coeff for NPA anion
-    pKa_NPA = 7.15 ### pKa for p-nitrophenol
-
-    ### Calculated Values from the above lists
-    Ka = 10 ** -pKa_NPA   ### extinction coeff for NPA at given pH
-    H = 10 ** -pH
-    e_NPA = e_NPAA * (Ka / (H + Ka))
+    e_NPA = calculate_e_NPA(pH = 7.0)
 
     return df, {"row_name_list": row_name_list,
             "S_conc_list": S_conc_list,
@@ -592,7 +602,7 @@ def plot_lanes(data_file_name, Column_list, Row_list,
     results.to_csv(data_file_name + ".csv")
     print("Plot saved as "+data_file_name + ".pdf")
     print("Data saved as "+data_file_name + ".csv")
-    return(results)
+    return results
 
 
 def dual_plot_w_residuals(filename, lane_name, row_name, 
@@ -726,7 +736,6 @@ def dual_plot_w_residuals(filename, lane_name, row_name,
     plt.show()
 
     print("Plot saved as "+plot_file+"_"+lane_name+"_"+row_name+".pdf")
-    return()
 
 
 
@@ -939,7 +948,6 @@ def plot_four_w_residuals(filename, lane_name, row_name,
     plt.show()
 
     print("Plot saved as "+plot_file+"_"+lane_name+"_"+row_name+".pdf")
-    return()
 
 
 
@@ -974,14 +982,14 @@ def contact_sheet(data_root_name,
     plt.ioff()      ### switch off interactive display of plots. plt.show() needed to display a plot now
     plt.rcdefaults()     ### resets the plot defaults so we always start in the same place
     if fancy:
-        plt.style.use("../styles/tufte.mplstyle")     ### Then add a fancy style sheet   
+        plt.style.use("../styles/tufte.mplstyle")     ### Then add a fancy style sheet
     
-    fig, ax = plt.subplots(nrows=4, 
-                           ncols=3, 
-                           figsize=(7,10), 
-                        #   sharex=True, 
+    fig, ax = plt.subplots(nrows=4,
+                           ncols=3,
+                           figsize=(7,10),
+                        #   sharex=True,
                         #   sharey=True
-                           )  
+                           )
     n = 0  ### set counter
     coldata = zip(columns, enzymes)
     for lane_name, enzyme in coldata:
@@ -990,10 +998,10 @@ def contact_sheet(data_root_name,
         plot_col = n % 3
     
         ax[plot_row][plot_col].set(
-                    xlabel = None, 
+                    xlabel = None,
                     ylabel = None,
             #        title = "Lane # "+lane_name,
-            #        xlim = [None, None],                  
+            #        xlim = [None, None],
                     ylim = [-.1, 4.1])
         
 
@@ -1011,8 +1019,8 @@ def contact_sheet(data_root_name,
         ax[1][plot_col].set_xticks([])
         ax[2][plot_col].set_xticks([])
     
-        ax[plot_row][plot_col].text(0, 3.4, "Column: "+str(lane_name)) 
-        ax[plot_row][plot_col].text(0, 3.0, enzyme) 
+        ax[plot_row][plot_col].text(0, 3.4, "Column: "+str(lane_name))
+        ax[plot_row][plot_col].text(0, 3.0, enzyme)
 
     
         for row_name in rows:
@@ -1021,27 +1029,27 @@ def contact_sheet(data_root_name,
                 + row_name + ".csv"
             df = pd.read_csv(in_file_name)
     
-            x = df["time"] 
-            y = df["abs"] 
+            x = df["time"]
+            y = df["abs"]
             
-            ax[plot_row][plot_col].plot(x, y, 
-                                        linestyle = '-', 
-                                        linewidth='0.3', 
-                                        color = 'black', 
+            ax[plot_row][plot_col].plot(x, y,
+                                        linestyle = '-',
+                                        linewidth='0.3',
+                                        color = 'black',
                                         zorder = 0)
-            #ax[plot_row][plot_col].scatter(x, y, 
-            #                               marker='o', 
-            #                               color='black', 
+            #ax[plot_row][plot_col].scatter(x, y,
+            #                               marker='o',
+            #                               color='black',
             #                               edgecolors = None,
-            #                               linewidths = 0.5, 
-            #                               s=1, 
+            #                               linewidths = 0.5,
+            #                               s=1,
             #                               zorder = 2)
-            #ax[plot_row][plot_col].scatter(x, y, 
-            #                               marker='o', 
-            #                               color='white', 
+            #ax[plot_row][plot_col].scatter(x, y,
+            #                               marker='o',
+            #                               color='white',
             #                               edgecolors = None,
-            #                               linewidths = 0.5, 
-            #                               s=4, 
+            #                               linewidths = 0.5,
+            #                               s=4,
             #                               zorder = 1)
         ### end of for row_name in row_name_list:
 
@@ -1049,11 +1057,13 @@ def contact_sheet(data_root_name,
     ### end of for lane_name in lane_name_list:
 
     fig.tight_layout()  # otherwise the right y-label is slightly clipped
-    plt.savefig("plots/plot_contact_sheet.pdf")     ### export the plot as this
-    plt.show()                 ### display the plot in this notebook
-    print("Plot saved as plots/plot_contact_sheet.pdf")
 
-    return()
+    ### Last characters of data_root_name is expected to be the plate number
+    save_name = "plots/plot_contact_sheet_"+data_root_name[-2:]+".pdf"
+    plt.savefig(save_name) ### export the plot as this
+    #plt.show()                 ### display the plot in this notebook
+    print(f"Plot saved as {save_name}")
+
 
 
 
@@ -1103,29 +1113,16 @@ def make_plate_data_for_setup(file_name):
     dictionary["Enzyme"] = df["Enzyme"]
 
     df2 = pd.DataFrame.from_dict(dictionary)
-    return(df2)
-    
+    return df2 
 
 
-def calculate_e_NPA(pH = 7.0):
-    ### parameters to get extinction coeff for NPA at give pH value
-    e_NPAA = 18300  ### extinction coeff for NPA anion
-    pKa_NPA = 7.15 ### pKa for p-nitrophenol
-
-    ### Calculated Values from the above lists
-    Ka = 10 ** -pKa_NPA   ### extinction coeff for NPA at given pH
-    H = 10 ** -pH
-    e_NPA = e_NPAA * (Ka / (H + Ka))   # abs of phenolate anion at pH value
-    
-    return(e_NPA)
-
-def make_data_files_plates(setupdata, file_name):
+def make_data_files_plates(setupdata, file_name, pH = 7.0):
     '''Will take the dataframe of setupdata and output a series of csv files 
     that represent the plate reader data for the experiment
     
     '''
 
-    eq, f = BT.get_integrated_MM_function()  # eq is sympy equation object, f is the corresponding function
+    eq, f = get_integrated_MM_function()  # eq is sympy equation object, f is the corresponding function
 
     time_start = 0.5        ### start at 30 second (0.5 minutes)
     time_end = 60           ### The end time (minutes)
@@ -1165,6 +1162,8 @@ def make_data_files_plates(setupdata, file_name):
             product_E = np.real(product_E)  ### complex numbers fixed
 
             ### Calculate product from uncatalyzed reaction 
+            e_NPA = calculate_e_NPA(pH)
+
             product_NPA = S0_value - S0_value * np.exp(-1E-3 * t_line)
             product = product_E + product_NPA
             absorbance = product * e_NPA   ### result in absorbance units

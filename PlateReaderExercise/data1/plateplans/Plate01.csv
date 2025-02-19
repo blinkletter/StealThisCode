@@ -2,7 +2,7 @@
 ### E_Conce is in nM
 ### S_Conc is in mM
 "Column", "Enzyme", "E_Conc", "Row", "S_Conc"
-"1",      "None",    0,        "A",   0.005
+"1",      "Blank",    0,        "A",   0.005
 "2",      "wt1",     0.5,      "B",   0.01
 "3",      "BL_oaO",  0.5,      "C",   0.02
 "4",      "BL_z1n",  0.5,      "D",   0.04        

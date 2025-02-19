@@ -13,7 +13,7 @@ from scipy.optimize import curve_fit      ## import tools
 import numpy as np                       
 from matplotlib import pyplot as plt     
 import pandas as pd
-
+from sklearn.metrics import r2_score
 
 
 import uncertainties as un               ## import Uncertainties tool
@@ -387,8 +387,6 @@ def get_integrated_MM_function():
     f = sym.lambdify([t, S0, KM, Vmax], eq.rhs)
     return eq,f
 
-
-
 def calculate_e_NPA(pH = 7.0):
     ### parameters to get extinction coeff for NPA at give pH value
     e_NPAA = 18300  ### extinction coeff for NPA anion
@@ -400,9 +398,6 @@ def calculate_e_NPA(pH = 7.0):
     e_NPA = e_NPAA * (Ka / (H + Ka))   # abs of phenolate anion at pH value
     
     return e_NPA
-
-
-
 
 def read_plate_setup(file_name, pH = 7.0):
     """Reads a file name for a plate plan and returns lists of the data
@@ -451,7 +446,6 @@ def read_plate_setup(file_name, pH = 7.0):
             "lane_name_list": lane_name_list,
             "E_conc_list": E_conc_list,
             "E_Name_list": E_Name_list,}, e_NPA
-
 
 def plot_lanes(data_file_name, Column_list, Row_list,
                Fraction_time_span = 1, Line_Fit = True,
@@ -512,19 +506,19 @@ def plot_lanes(data_file_name, Column_list, Row_list,
                             + "_" + row_name + ".csv"
             df = pd.read_csv(in_file_name)
             points_used = int(Fraction_time_span * len(df["time"]))
-    
+
             x = df["time"][0:points_used]
             y = df["abs"][0:points_used]
-    
-            
+
+
             if Line_Fit:
-                param,cov = curve_fit(linear_function, x,y)
+                param,cov = curve_fit(linear_function, x, y)
                 slope, intercept = param
 
                 perr = np.sqrt(np.diag(cov))
                 slope_stderr, int_stderr = perr
-                r, p = pearsonr(x, y)
-                rsq = r ** 2
+
+                rsq = r2_score(y, linear_function(x, *param))
 
                 slope_list.append(slope)
                 slope_stderr_list.append(slope_stderr)
@@ -603,7 +597,6 @@ def plot_lanes(data_file_name, Column_list, Row_list,
     print("Plot saved as "+data_file_name + ".pdf")
     print("Data saved as "+data_file_name + ".csv")
     return results
-
 
 def dual_plot_w_residuals(filename, lane_name, row_name,
                           Fraction_time_span = 1,
@@ -737,6 +730,140 @@ def dual_plot_w_residuals(filename, lane_name, row_name,
 
     print("Plot saved as "+plot_file+"_"+lane_name+"_"+row_name+".pdf")
 
+def plot_w_residuals(filename, lane_name, row_name,
+                          Fraction_time_span = 1,
+                          plot_file = "plots/plot_w_residuals.pdf",
+                          fancy = False):
+    
+    """Plot abs vs time data for a well with linear fit and residuals
+    
+    Arguments
+    ---------
+    
+    filename: string
+        The file root name. the well column and row will be added to 
+        this name to get the file name needed.
+    lane_name, row_name: strings
+        The column and row label. Will be used to access the file
+    Fraction_time_span: float
+        The fraction of the time span to plt. Default is 1 for 100%
+    plot_file: string
+        The file name of the plot to be written as pdf. Will append the
+        column and row label to give "file_12_A.pdf" for example
+
+    Returns:
+    --------
+    
+    Nul
+
+    Does not return any objects but will output a figure with Two plots 
+        Plot 1: Plot with time span chose by Fraction_time_span
+        Plot 2: residuals for plot 
+    """
+    
+    def linear_function(x, slope, int):
+        return slope*x + int
+    
+    def linear_function_int0(x, slope):
+        return slope*x
+    
+    plt.ioff()           ### switch off interactive display of plots. plt.show() needed to display a plot now
+    plt.rcdefaults()     ### resets the plot defaults so we always start in the same place
+    if fancy:
+        plt.style.use("../styles/tufte.mplstyle")     ### Then add a fancy style sheet
+    
+    fig, ax = plt.subplots(nrows=2, ncols=1, figsize=[4,5], height_ratios=[1, 4])  
+    
+    in_file_name = filename + "_" + lane_name + "_" + row_name + ".csv"
+    df = pd.read_csv(in_file_name)
+    
+    points_used = int(Fraction_time_span * len(df["time"]))
+    
+    x = df["time"][0:points_used]
+    y = df["abs"][0:points_used]
+    
+    param,cov = curve_fit(linear_function, x,y)
+    slope, intercept = param
+    
+    ##param,cov = curve_fit(linear_function_int0, x,y)
+    ##[slope] = param
+    
+    
+    perr = np.sqrt(np.diag(cov))
+    slope_stderr, int_stderr = perr
+    print(f"slope = {slope:0.3g} +/- {slope_stderr:0.3g}")
+    ##print(f"slope = {slope:0.3g}")
+    x_fit = np.linspace(0,np.max(x),10)
+    
+    ax[1].plot(x_fit, linear_function(x_fit, slope, intercept),
+               linestyle = '-',
+               linewidth='0.5',
+               color = 'black',
+               zorder = 0)
+    ax[1].scatter(x, y,
+                  marker='o',
+                  color='lightgray',
+                  edgecolors = 'black',
+                  linewidths = 0.5,
+                  s=8,
+                  zorder = 2)
+#    ax[1].scatter(x, y,
+#                  marker='o',
+#                  color='white',
+#                  edgecolors = None,
+#                  linewidths = 0.5,
+#                  s=32,
+#                  zorder = 1)
+    ax[1].set(xlabel= r"Time $/min$",
+              ylabel=r"$A_{405}$",
+     #              title = "Lane # "+lane_name,
+              xlim=[-0.05*np.max(x), None],
+              ylim=[-0.05*np.max(y), None]
+             )
+    
+    residuals = y - linear_function(x, slope, intercept)
+    y = residuals
+    ax[0].hlines(0, xmin = 0, xmax = np.max(x),
+                 colors='black', linestyles='solid',
+                 linewidths = 0.5, zorder = 0)
+#    ax[0].plot(x, y,
+#               linestyle = '-',
+#               linewidth='3',
+#               color = 'white',
+#               zorder = 1)
+#    ax[0].plot(x, y,
+#               linestyle = '-',
+#               linewidth='0.5',
+#               color = 'black',
+#               zorder = 1)
+    ax[0].scatter(x, y,
+                  marker='o',
+                  color='lightgray',
+                  edgecolors = 'black',
+                  linewidths = 0.5,
+                  s=8,
+                  zorder = 3)
+#    ax[0].scatter(x, y,
+#                  marker='o',
+#                  color='white',
+#                  edgecolors = None,
+#                  linewidths = 0.5,
+#                  s=32,
+#                  zorder = 2)
+    ax[0].set(xlabel= r"",
+              ylabel="Residuals",
+     #         title = "Lane # "+lane_name,
+     #         xlim=[None, None],
+              ylim=[-.01, +0.01]
+               )
+    ax[0].set_xticks([])
+
+
+    fig.tight_layout()  # otherwise the right y-label is slightly clipped
+    plt.savefig(plot_file+"_"+lane_name+"_"+row_name+".pdf")     ### export the plot as this
+    plt.show()
+
+    print("Plot saved as "+plot_file+"_"+lane_name+"_"+row_name+".pdf")
 
 
 def plot_four_w_residuals(filename, lane_name, row_name,
@@ -949,8 +1076,6 @@ def plot_four_w_residuals(filename, lane_name, row_name,
 
     print("Plot saved as "+plot_file+"_"+lane_name+"_"+row_name+".pdf")
 
-
-
 def contact_sheet(data_root_name,
                   columns = ("1","2","3","4","5","6",
                              "7","8","9","10","11","12"),
@@ -983,7 +1108,7 @@ def contact_sheet(data_root_name,
     plt.rcdefaults()     ### resets the plot defaults so we always start in the same place
     if fancy:
         plt.style.use("../styles/tufte.mplstyle")     ### Then add a fancy style sheet
-    
+
     fig, ax = plt.subplots(nrows=4,
                            ncols=3,
                            figsize=(7,10),
@@ -993,17 +1118,17 @@ def contact_sheet(data_root_name,
     n = 0  ### set counter
     coldata = zip(columns, enzymes)
     for lane_name, enzyme in coldata:
-        
+
         plot_row = n // 3   ### use counter to get column and row
         plot_col = n % 3
-    
+
         ax[plot_row][plot_col].set(
                     xlabel = None,
                     ylabel = None,
             #        title = "Lane # "+lane_name,
             #        xlim = [None, None],
                     ylim = [-.1, 4.1])
-        
+
 
         ### Column 0 gets y-axis label and ticks.
         ax[plot_row][0].set(ylabel= r"$A_{405}$")
@@ -1064,13 +1189,6 @@ def contact_sheet(data_root_name,
     #plt.show()                 ### display the plot in this notebook
     print(f"Plot saved as {save_name}")
 
-
-
-
-##################
-
-### FUNCTIONS FOR EXPLORATION 1
-
 def make_plate_data_for_setup(file_name):
     '''takes a plate setup file name and uses the data to construct
     a plate plan.
@@ -1114,7 +1232,6 @@ def make_plate_data_for_setup(file_name):
 
     df2 = pd.DataFrame.from_dict(dictionary)
     return df2
-
 
 def make_data_files_plates(setupdata, file_name, pH = 7.0):
     '''Will take the dataframe of setupdata and output a series of csv files 

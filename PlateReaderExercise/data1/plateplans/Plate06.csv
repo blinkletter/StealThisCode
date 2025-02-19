@@ -4,7 +4,7 @@
 ### kcat is in s^-1
 ### KM is in mM
 "Column", "Enzyme",        "E_Conc", "Row", "S_Conc"
-"1",      "None",           0,        "A",   0.005
+"1",      "Blank",           0,        "A",   0.005
 "2",      "BL_GS0",         0.5,      "B",   0.01
 "3",      "BL_A3M",         0.5,      "C",   0.02
 "4",      "BL_9VI",         0.5,      "D",   0.03

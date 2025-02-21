@@ -1701,3 +1701,95 @@ def make_data_files_plates(setupdata, file_name, pH = 7.0):
             out_file_name = file_name + "_" + str(lane_name) + "_" + str(row_name) + ".csv"
             
             plate_df.to_csv(out_file_name, float_format='%10.4g')
+
+def collect_lanes(data_file_path, plate_name_list,
+               Fraction_time_span = 1,
+               result_file_path = "data1/results/analysis_results_"):
+
+    """Determines slope of initial rate in each cell given time fraction.
+
+    Will fit data to linear curve fit and collect slopes and intercept data for
+    all wells according to a list of plate file names. Slopes calculated for
+    initial slope given a fraction of the total time span.
+    Will save the data as a separate file for each lane.
+    
+    Arguments
+    ---------
+    data_file_name: string
+        The data file name. Filenames will be this plus column and row
+        e.g. "name_10_C.csv"
+    Column_list, Row_list: Array like
+        list of names for column, row to be plotted.
+        Will usually be one column and some rows but can be as many as wanted
+    Fraction_time_span: float
+        The fraction of the time span to plt. Default is 1 for 100%
+    
+    Returns
+    -------
+    result: nul
+    Will output .csv files
+    """
+    def linear_function(x, slope, intercept):
+        return slope * x + intercept
+
+    for plate_name in plate_name_list:
+
+        plate_df, plate, e_NPA = read_plate_setup("data1/plateplans/" \
+                                            + plate_name + ".csv", pH = 7.0)
+
+        column_list = plate_df["Column"]
+        enzyme_names = plate_df["Enzyme"]
+        enzyme_concs = plate_df["E_Conc"]
+        row_list = plate_df["Row"].dropna()
+        substrate_concs = plate_df["S_Conc"].dropna()
+
+        for lane_name, enzyme_name, enzyme_conc in zip(column_list, enzyme_names, enzyme_concs):
+
+            slope_list = []; slope_stderr_list = []
+            int_list = []; int_stderr_list = []; rsq_list = []
+            plate_list = []; well_lane_list = []; well_row_list=[]
+            enzyme_name_list = []; enzyme_conc_list = []
+            substrate_conc_list = []
+
+            for row_name, substrate_conc in zip(row_list, substrate_concs):
+                in_file_name = data_file_path + plate_name \
+                                + "_" + str(lane_name) \
+                                + "_" + row_name + ".csv"
+                df = pd.read_csv(in_file_name)
+                points_used = int(Fraction_time_span * len(df["time"]))
+
+                x = df["time"][0:points_used]
+                y = df["abs"][0:points_used]
+
+                param, cov = curve_fit(linear_function, x, y)
+                slope, intercept = un.correlated_values(param, cov)
+                rsq = r2_score(y, linear_function(x, *param))
+
+                slope_list.append(slope.nominal_value)
+                slope_stderr_list.append(slope.std_dev)
+                int_list.append(intercept._nominal_value)
+                int_stderr_list.append(intercept.std_dev)
+                rsq_list.append(rsq)
+                well_lane_list.append(str(lane_name))
+                well_row_list.append(row_name)
+                plate_list.append(plate_name)
+                enzyme_name_list.append(enzyme_name)
+                enzyme_conc_list.append(enzyme_conc)
+                substrate_conc_list.append(substrate_conc)
+                ### end of if:
+
+            results = {"Plate": plate_list,
+                       "Column":well_lane_list,
+                       "Enzyme":enzyme_name_list,
+                       "E_Conc":enzyme_conc_list,
+                       "Row":well_row_list,
+                       "S_Conc":substrate_conc_list,
+                       "slope":slope_list,
+                       "slope stderr":slope_stderr_list,
+                       "int": int_list,
+                       "int stderr":int_stderr_list,
+                       "RSQ": rsq_list}
+            result = pd.DataFrame(results)        
+            result.to_csv(result_file_path +"_"+ plate_name +"_"+ str(lane_name) +"_"+ ".csv")
+            print("Data saved as " + result_file_path +"_"+ plate_name +"_"+ str(lane_name) +"_"+ ".csv")
+

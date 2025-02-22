@@ -398,13 +398,12 @@ def calculate_e_NPA(pH = 7.0):
     
     return e_NPA
 
-def read_plate_setup(file_name, pH = 7.0):
+def read_plate_setup(file_name):
     """Reads a file name for a plate plan and returns lists of the data
 
     Arguments:
     ----------
     file_name: string
-    pH: float
 
     Returns:
     --------
@@ -412,39 +411,16 @@ def read_plate_setup(file_name, pH = 7.0):
         The dataframe read in from the file. Some columns are different 
         lengths so it will be separated into lists (Pandas series) and 
         those are returned in the dictionary below.
-    dictionary 
-        {"row_name_list",
-         "S_conc_list",
-         "lane_name_list",
-         "E_conc_list",
-         "E_Name_list"}
-    float
-        The extinction coefficent of nitrophenolate at the given pH
 
     Example
     -------
-    df, plate, e405 = read_plate_setup{"platesetup.csv", pH = 7.0}
+    df = read_plate_setup{"platesetup.csv"}
     """
-    
+
     df = pd.read_csv(file_name,
                      comment = "#",
                      skipinitialspace=True)
-
-    row_name_list = df["Row"].dropna()
-    S_conc_list = df["S_Conc"].dropna() * 1E-3  ### convert millimolar to molar
-
-    lane_name_list = df["Column"]
-    E_conc_list = df["E_Conc"] * 1E-9  ### convert nanomolar to molar
-    E_Name_list = df["Enzyme"]
-
-    ### parameters to get extinction coeff for NPA at give pH value
-    e_NPA = calculate_e_NPA(pH = 7.0)
-
-    return df, {"row_name_list": row_name_list,
-            "S_conc_list": S_conc_list,
-            "lane_name_list": lane_name_list,
-            "E_conc_list": E_conc_list,
-            "E_Name_list": E_Name_list,}, e_NPA
+    return df
 
 def plot_wells(data_file_path, plate_name_list, Column_list, Row_list,
                Fraction_time_span = 1,
@@ -1702,9 +1678,9 @@ def make_data_files_plates(setupdata, file_name, pH = 7.0):
             
             plate_df.to_csv(out_file_name, float_format='%10.4g')
 
-def collect_lanes(data_file_path, plate_name_list,
-               Fraction_time_span = 1,
-               result_file_path = "data1/results/analysis_results_"):
+def collect_lanes(data_file_path, plate_name_list, plate_plan_path,
+                Fraction_time_span = 1,
+                result_file_path = "data1/results/analysis_results_"):
 
     """Determines slope of initial rate in each cell given time fraction.
 
@@ -1734,8 +1710,7 @@ def collect_lanes(data_file_path, plate_name_list,
 
     for plate_name in plate_name_list:
 
-        plate_df, plate, e_NPA = read_plate_setup("data1/plateplans/" \
-                                            + plate_name + ".csv", pH = 7.0)
+        plate_df = read_plate_setup(plate_plan_path + plate_name + ".csv")
 
         column_list = plate_df["Column"]
         enzyme_names = plate_df["Enzyme"]

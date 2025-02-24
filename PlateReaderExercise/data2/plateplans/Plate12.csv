@@ -1,0 +1,18 @@
+### Plate Plan Setup File
+### E_Conc is in nM
+### S_Conc is in mM
+### kcat is in s^-1
+### KM is in mM
+"Column", "Enzyme",        "E_Conc", "Row", "S_Conc"
+"1",      "Blank",           0,        "A",   0.005
+"2",      "BL_74V",         0.5,      "B",   0.01
+"3",      "BL_EU4",         0.5,      "C",   0.02
+"4",      "BL_1FJ",         0.5,      "D",   0.03
+"5",      "BL_7DD",         0.5,      "E",   0.06
+"6",      "BL_06Q",         0.5,      "F",   0.10
+"7",      "BL_HHN",         0.5,      "G",   0.20
+"8",      "BL_N4Y",         0.5,      "H",   0.50
+"9",      "BL_ILN",         0.5,         ,       
+"10",     "BL_KK7",         0.5,         ,       
+"11",     "BL_LSX",         0.5,         ,       
+"12",     "BL_AWA",         0.5,         ,       

@@ -492,17 +492,15 @@ def plot_wells(data_file_path, plate_name_list, Column_list, Row_list,
 
                 if True:
                     param,cov = curve_fit(linear_function, x, y)
-                    slope, intercept = param
+                    slope, intercept = un.correlated_values(param,cov)
 
-                    perr = np.sqrt(np.diag(cov))
-                    slope_stderr, int_stderr = perr
 
                     rsq = r2_score(y, linear_function(x, *param))
 
-                    slope_list.append(slope)
-                    slope_stderr_list.append(slope_stderr)
-                    int_list.append(intercept)
-                    int_stderr_list.append(int_stderr)
+                    slope_list.append(slope.n)
+                    slope_stderr_list.append(slope.s)
+                    int_list.append(intercept.n)
+                    int_stderr_list.append(intercept.s)
                     rsq_list.append(rsq)
                     well_lane_list.append(str(lane_name))
                     well_row_list.append(row_name)
@@ -513,7 +511,7 @@ def plot_wells(data_file_path, plate_name_list, Column_list, Row_list,
                     fig, ax = plt.subplots(nrows=1, ncols=1, figsize=(5,4))
 
                     x_fit = np.linspace(0,np.max(x),10)
-                    ax.plot(x_fit, linear_function(x_fit, slope, intercept),
+                    ax.plot(x_fit, linear_function(x_fit, *param),
                             linestyle = '-',
                             linewidth='0.5',
                             color = 'black',
@@ -559,7 +557,7 @@ def plot_wells(data_file_path, plate_name_list, Column_list, Row_list,
 
                     ax.set(xlabel= r"Time $/min$",
                            ylabel=r"$A_{405}$",
-                           #title = "Lane # "+lane_name,
+                           title = f"{plate_name}-{lane_name}-{row_name}",
                            xlim=[0, None],
                            ylim=[q, None]
                             )
@@ -1155,7 +1153,7 @@ def plot_six_w_residuals(filename, lane_name, row_name,
         return slope*x
     
     plt.ioff()           ### switch off interactive display of plots. plt.show() needed to display a plot now
-    
+    plt.close()
     plt.rcdefaults()     ### resets the plot defaults so we always start in the same place
     if fancy:
         plt.style.use("../styles/tufte.mplstyle")     ### Then add a fancy style sheet

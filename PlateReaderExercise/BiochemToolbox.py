@@ -389,7 +389,7 @@ def get_integrated_MM_function():
 def calculate_e_NPA(pH = 7.0):
     ### parameters to get extinction coeff for NPA at give pH value
     e_NPAA = 18300  ### extinction coeff for NPA anion
-    pKa_NPA = 7.15 ### pKa for p-nitrophenol
+    pKa_NPA = 7.15  ### pKa for p-nitrophenol
 
     ### Calculated Values from the above lists
     Ka = 10 ** -pKa_NPA   ### extinction coeff for NPA at given pH
@@ -1604,7 +1604,7 @@ def make_data_files_plates(setupdata, file_name, pH = 7.0):
     time_end = 60           ### The end time (minutes)
     n_points = 360          ### number of points - increase if needed
 
-    voltage_error = 0.001   ### parameters to define output range and error
+    voltage_error = 0.000   ### parameters to define output range and error
     random_error = 0.000
     max_value = 4
 
@@ -1626,10 +1626,13 @@ def make_data_files_plates(setupdata, file_name, pH = 7.0):
         lane_name, E_name, Vmax_value, KM_value = p   ### unpack kcat, KM and [E]
 
         row_df = setupdata[["row_name","S_conc"]].dropna()
+        print(row_df)
         row_info = zip(row_df["row_name"], row_df["S_conc"])
+
 
         for row in row_info:
             row_name, S0_value = row      ### unpack row name and substrate conc
+
             plate_df = pd.DataFrame([])   ### start with empty dataframe
             #print(row_name)
 
@@ -1640,7 +1643,7 @@ def make_data_files_plates(setupdata, file_name, pH = 7.0):
             ### Calculate product from uncatalyzed reaction
             e_NPA = calculate_e_NPA(pH)
 
-            product_NPA = S0_value - S0_value * np.exp(-1E-5 * t_line)
+            product_NPA = 0*(S0_value - S0_value * np.exp(-1E-5 * t_line))   #### REMOVE 0 
             product = product_E + product_NPA
             absorbance = product * e_NPA   ### result in absorbance units
 
@@ -1735,23 +1738,27 @@ def collect_lanes(data_file_path, plate_name_list, plate_plan_path,
             substrate_conc_list = []
 
             for row_name, substrate_conc in zip(row_list, substrate_concs):
+                ### get abs vs time data from file
                 in_file_name = data_file_path + plate_name \
                                 + "_" + str(lane_name) \
                                 + "_" + row_name + ".csv"
                 df = pd.read_csv(in_file_name)
-                points_used = int(Fraction_time_span * len(df["time"]))
 
+                ### Trim data list to time fraction
+                points_used = int(Fraction_time_span * len(df["time"]))
                 x = df["time"][0:points_used]
                 y = df["abs"][0:points_used]
 
+                ### Curve fit to get slope in abs/time and intercept in abs
                 param, cov = curve_fit(linear_function, x, y)
                 slope, intercept = un.correlated_values(param, cov)
                 rsq = r2_score(y, linear_function(x, *param))
 
-                slope = slope / e_NPA    # convert abs per second to molar per second 
-                slope = slope * 1E6 * 60  # convert molar per second to micromolar per minute
+                ### Convert slope from abs/time to conc/time
+                slope = slope / e_NPA    # convert abs per min to molar per min        ############################
+                slope = slope * 1E6  # convert molar per min to micromolar per minute  ############################
 
-                intercept = intercept / e_NPA    # convert abs to molar 
+                intercept = intercept / e_NPA    # convert abs to molar
                 intercept = intercept * 1E6  # convert molar micromolar
 
                 slope_list.append(slope.nominal_value)
@@ -1808,7 +1815,7 @@ def collect_lanes(data_file_path, plate_name_list, plate_plan_path,
             
             result = pd.DataFrame(results)        
             result.to_csv(result_file_path +"_"+ plate_name +"_"+ str(lane_name) + ".csv")
-#            print("Data saved as " + result_file_path +"_"+ plate_name +"_"+ str(lane_name) ".csv")
+            print("Data saved as " + result_file_path +"_"+ plate_name +"_"+ str(lane_name) + ".csv")
         print(f"{plate_name} complete")
 
 def plot_lanes_MM(result_file_path, plate_name_list, Column_list, 

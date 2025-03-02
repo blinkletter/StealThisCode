@@ -422,169 +422,6 @@ def read_plate_setup(file_name):
                      skipinitialspace=True)
     return df
 
-def plot_wells(data_file_path, plate_name_list, Column_list, Row_list,
-               Fraction_time_span = 1,
-               Make_Plots = False, 
-               plot_file_path = "plots/analysis_plot_",
-               Save_Data = False, 
-               result_file_path = "data1/data/analysis_results",
-               fancy = False, tiny_points = False, tiny_line = False):
-
-    """Loads and plots data files. Can return line fit.
-
-    Will make a plot of all the wells designated by columns and rows
-    Will fit data to linear curve fit and collect slopes and intercept data
-    Will save the plot as a pdf
-    Will save the data as a csv file with same filename as pdf
-    
-    Arguments
-    ---------
-    data_file_name: string
-        The data file name. Filenames will be this plus column and row
-        e.g. "name_10_C.csv"
-    Column_list, Row_list: Array like
-        list of names for column, row to be plotted.
-        Will usually be one column and some rows but can be as many as wanted
-    Fraction_time_span: float
-        The fraction of the time span to plt. Default is 1 for 100%
-    Line_Fit: boolean
-        If True then line fits will be performed for each well and data
-        written to lists and put into the result dataframe
-    Display_Plot, Display_Data: booleans
-        If True then the plot will be created and displayed and the
-        dataframe displayed, respectively.
-    
-    Returns
-    -------
-    result: pandas dataframe
-        The results of line fits. Will be empty if Line_Fit = False
-    """
-    def linear_function(x, slope, intercept):
-        return slope * x + intercept
-    
-    #print(Column_list)
-
-    plt.ioff()           ### switch off interactive display of plots. plt.show() needed to display a plot now
-    plt.rcdefaults()     ### resets the plot defaults so we always start in the same place
-    if fancy:
-        plt.style.use("../styles/tufte.mplstyle")     ### Then add a fancy style sheet
-    
-
-    slope_list = []; slope_stderr_list = []
-    int_list = []; int_stderr_list = []; rsq_list = [];
-    plate_list = []; well_lane_list = []; well_row_list=[]
-
-    for plate_name in plate_name_list:
-        #print(plate_name)
-        for lane_name in Column_list:
-        #print(lane_name)
-
-            for row_name in Row_list:
-                in_file_name = data_file_path + plate_name \
-                                + "_" + str(lane_name) \
-                                + "_" + row_name + ".csv"
-                df = pd.read_csv(in_file_name)
-                points_used = int(Fraction_time_span * len(df["time"]))
-
-                x = df["time"][0:points_used]
-                y = df["abs"][0:points_used]
-
-
-                if True:
-                    param,cov = curve_fit(linear_function, x, y)
-                    slope, intercept = un.correlated_values(param,cov)
-
-
-                    rsq = r2_score(y, linear_function(x, *param))
-
-                    slope_list.append(slope.n)
-                    slope_stderr_list.append(slope.s)
-                    int_list.append(intercept.n)
-                    int_stderr_list.append(intercept.s)
-                    rsq_list.append(rsq)
-                    well_lane_list.append(str(lane_name))
-                    well_row_list.append(row_name)
-                    plate_list.append(plate_name)
-                ### end of if:
-
-                if Make_Plots:
-                    fig, ax = plt.subplots(nrows=1, ncols=1, figsize=(5,4))
-
-                    x_fit = np.linspace(0,np.max(x),10)
-                    ax.plot(x_fit, linear_function(x_fit, *param),
-                            linestyle = '-',
-                            linewidth='0.5',
-                            color = 'black',
-                            zorder = 0)
-
-                    if tiny_line:
-                        ax.plot(x, y,
-                            #marker=None,
-                            color='black',
-                            linewidth = 0.5,
-                            ms=8,
-                            zorder = 1)
-                    if tiny_points:
-                        ax.scatter(x, y,
-                            marker='o',
-                            color='black',
-                            edgecolors = 'none',
-                            linewidths = 0.5,
-                            s=2,
-                            zorder = 2)
-                    else:
-                        ax.scatter(x, y,
-                            marker='o',
-                            color='white',
-                            edgecolors = 'black',
-                            linewidths = 0.5,
-                            s=32,
-                            zorder = 2)
-                        ax.scatter(x, y,
-                            marker='o',
-                            color='white',
-                            edgecolors = None,
-                            linewidths = 0.5,
-                            s=64,
-                            zorder = 1)
-                    ### end of if tiny_points:
-                ### end of for row_name:
-            ###end of for column_name:
-                    if np.min(y) < 0:
-                        q = np.min(y) - 0.05*np.max(y)
-                    else:
-                        q = -0.05*np.max(y)
-
-                    ax.set(xlabel= r"Time $/min$",
-                           ylabel=r"$A_{405}$",
-                           title = f"{plate_name}-{lane_name}-{row_name}",
-                           xlim=[0, None],
-                           ylim=[q, None]
-                            )
-                    fig.tight_layout()  # otherwise the right y-label is slightly clipped
-                    plt.savefig(plot_file_path +"_"+ plate_name +"_"+ str(lane_name) \
-                                +"_"+ row_name + ".pdf")     ### export the plot as this
-                    plt.close()
-
-
-    results = {"Plate": plate_list,
-               "Column":well_lane_list,
-               "Row":well_row_list,
-               "slope":slope_list,
-               "slope stderr":slope_stderr_list,
-               "int": int_list,
-               "int stderr":int_stderr_list,
-               "RSQ": rsq_list}
-    results = pd.DataFrame(results)
-
-        #display(results)
-
-    if Save_Data:
-        results.to_csv(result_file_path + ".csv")
-        print("Data saved as " + result_file_path + ".csv")
-
-    return results
-
 def dual_plot_w_residuals(filename, lane_name, row_name,
                           Fraction_time_span = 1,
                           plot_file = "plots/Cell_w_residuals_2_plot",
@@ -1517,21 +1354,21 @@ def contact_sheet(data_root_name,
             
             ax[plot_row][plot_col].plot(x, y,
                                         linestyle = '-',
-                                        linewidth='0.3',
+                                        linewidth='0.5',
                                         color = 'black',
                                         zorder = 0)
             #ax[plot_row][plot_col].scatter(x, y,
             #                               marker='o',
             #                               color='black',
             #                               edgecolors = None,
-            #                               linewidths = 0.5,
+            #                               linewidths = 0,
             #                               s=1,
             #                               zorder = 2)
             #ax[plot_row][plot_col].scatter(x, y,
             #                               marker='o',
             #                               color='white',
             #                               edgecolors = None,
-            #                               linewidths = 0.5,
+            #                               linewidths = 0,
             #                               s=4,
             #                               zorder = 1)
         ### end of for row_name in row_name_list:
@@ -1548,257 +1385,13 @@ def contact_sheet(data_root_name,
     plt.close()
     print(f"Plot saved as {save_name}")
 
-def make_plate_data_for_setup(file_name):
-    '''takes a plate setup file name and uses the data to construct
-    a plate plan.
-
-    input: file_name: path to csv file. Must contain columns for...
-        "Column": Corresponds to column in plate.
-        "enzyme": text string of enzyme name
-        "E_conc": float of enzyme concentration in nanomolar
-        "Row": Row designations on plate/ Usually A to H
-        "S_Conc": Substrate concentration in each row in millimolar
-        "kcat": kcat value for each enzyme in per second
-        "KM": KM value for each enzyme in millimolar
-    
-    returns: dataframe containing 
-
-        "row_name": same as "Row"
-        "S_conc": Substrate concentration converted to molar
-        "lane_name": same as the "Column" 
-        "E_conc": Enzyme conc converted to molar
-        "kcat": kcat converted to per minute
-        "Vmax": calculated from kcat and E_conc. In molar per minute
-        "KM": KM converted to molar
-        "Enzyme": Same as "enzyme" above
-    '''
-    #Load and clean data file
-    df = pd.read_csv(file_name,
-                     comment = "#",
-                     skipinitialspace=True)
-   # df.dropna(axis = 0, inplace = True)   # remove any rows with NaN values
-
-    # Make dictionary of lists for constructing the final dataframe
-    dictionary = {}
-    dictionary["row_name"] = df["Row"]
-    dictionary["S_conc"] = df["S_Conc"] * 1E-3  ### convert millimolar to molar
-    dictionary["lane_name"] = df["Column"]
-    dictionary["E_conc"] = df["E_Conc"] * 1E-9  ### convert nanomolar to molar
-    dictionary["kcat"] = df["kcat"] * 60        ### convert /s to /min
-    dictionary["Vmax"] = dictionary["kcat"] * dictionary["E_conc"] ## Vmax from kcat and [E]
-    dictionary["KM"] = df["KM"] * 1E-3          ### convert mM to M
-    dictionary["Enzyme"] = df["Enzyme"]
-
-    df2 = pd.DataFrame.from_dict(dictionary)
-    return df2
-
-def make_data_files_plates(setupdata, file_name, pH = 7.0):
-    '''Will take the dataframe of setupdata and output a series of csv files 
-    that represent the plate reader data for the experiment
-    
-    '''
-
-    eq, f = get_integrated_MM_function()  # eq is sympy equation object, f is the corresponding function
-
-    time_start = 0.5        ### start at 30 second (0.5 minutes)
-    time_end = 60           ### The end time (minutes)
-    n_points = 360          ### number of points - increase if needed
-
-    voltage_error = 0.001   ### parameters to define output range and error
-    random_error = 0.0001
-    max_value = 4
-
-    dt = time_end / n_points          ### time step, delta t
-    t_line = np.arange(time_start,    ### time vector (list of time points)
-                    time_end + dt,
-                    dt)
-
-    ### Note: Lane names, enzyme conc list, KM list and Vmax list must all be
-    ### same length or this will fail. Row names and row concentration lists
-    ### must also have equal lengths.
-
-    parameters = zip(setupdata["lane_name"],
-                    setupdata["Enzyme"],
-                    setupdata["Vmax"],
-                    setupdata["KM"])
-
-    for p in parameters:
-        lane_name, E_name, Vmax_value, KM_value = p   ### unpack kcat, KM and [E]
-
-        row_df = setupdata[["row_name","S_conc"]].dropna()
-        print(row_df)
-        row_info = zip(row_df["row_name"], row_df["S_conc"])
-
-
-        for row in row_info:
-            row_name, S0_value = row      ### unpack row name and substrate conc
-
-            plate_df = pd.DataFrame([])   ### start with empty dataframe
-            #print(row_name)
-
-            ### Calculate product from enzyme reaction 
-            product_E = S0_value - f(t_line, S0_value, KM_value, Vmax_value)
-            product_E = np.real(product_E)  ### complex numbers fixed
-
-            ### Calculate product from uncatalyzed reaction
-            e_NPA = calculate_e_NPA(pH)
-
-            product_NPA = 0*(S0_value - S0_value * np.exp(-1E-5 * t_line))   #### REMOVE 0 
-            product = product_E + product_NPA
-            absorbance = product * e_NPA   ### result in absorbance units
-
-            ### Add voltage error 
-            fraction_transmittance  = 1 / (10 ** absorbance)                      
-            fraction_transmittance = np.random.normal(fraction_transmittance,
-                                                    voltage_error, 
-                                                    len(fraction_transmittance))
-
-            ### Replace negative transmittance values with a very low value to avoid math errors with np.log10
-            fraction_transmittance[fraction_transmittance <= 0] = 1E-6
-
-            ### Calculate absorbance
-            absorbance = -np.log10(fraction_transmittance)
-
-            ### Add random error ro absorbance
-            absorbance = np.random.normal(absorbance,
-                                        random_error,
-                                        len(absorbance))
-
-            ### Clean generated data set.
-            absorbance[absorbance > max_value] = max_value   ### cap values to maximum absorbance
-            absorbance = np.nan_to_num(absorbance,  ### replace any NaN with max value
-                            copy = True,
-                            nan = max_value)
-
-            ### insert the two data arrays into the dataframe
-            plate_df["time"] = t_line
-            plate_df["abs"] = absorbance
-
-            ### Write data out to file using lane_name and row_name
-            out_file_name = file_name + "_" + str(lane_name) + "_" + str(row_name) + ".csv"
-            
-            plate_df.to_csv(out_file_name, float_format='%10.4g')
-
-def collect_lanes(data_file_path, plate_name_list, plate_plan_path,
-                Fraction_time_span = 1, 
-                pH = 7,
-                result_file_path = "data1/results/analysis_results_",
-                make_plots = True,
-                plot_file_path = "data1/plots/",
-                fancy = True):
-
-    """Determines slope of initial rate in each cell given time fraction.
-
-    Will fit data to linear curve fit and collect slopes and intercept data for
-    all wells according to a list of plate file names. Slopes calculated for
-    initial slope given a fraction of the total time span.
-    Will save the data as a separate file for each lane.
-    
-    Arguments
-    ---------
-    data_file_name: string
-        The data file name. Filenames will be this plus column and row
-        e.g. "name_10_C.csv"
-    Column_list, Row_list: Array like
-        list of names for column, row to be plotted.
-        Will usually be one column and some rows but can be as many as wanted
-    Fraction_time_span: float
-        The fraction of the time span to plt. Default is 1 for 100%
-    
-    Returns
-    -------
-    result: nul
-    Will output .csv files
-    """
-
-    def linear_function(x, slope, intercept):
-        return slope * x + intercept
-
-    plt.ioff()           ### switch off interactive display of plots. plt.show() needed to display a plot now
-    plt.rcdefaults()     ### resets the plot defaults so we always start in the same place
-    if fancy:
-        plt.style.use("../styles/tufte.mplstyle")     ### Then add a fancy style sheet
-
-    e_NPA = calculate_e_NPA(pH = pH)
-
-    for plate_name in plate_name_list:
-
-        plate_df = read_plate_setup(plate_plan_path + plate_name + ".csv")
-
-        column_list = plate_df["Column"]
-        enzyme_names = plate_df["Enzyme"]
-        enzyme_concs = plate_df["E_Conc"]
-        row_list = plate_df["Row"].dropna()
-        substrate_concs = plate_df["S_Conc"].dropna()
-
-        for lane_name, enzyme_name, enzyme_conc in zip(column_list, enzyme_names, enzyme_concs):
-
-            slope_list = []; slope_stderr_list = []
-            int_list = []; int_stderr_list = []; rsq_list = []
-            plate_list = []; well_lane_list = []; well_row_list=[]
-            enzyme_name_list = []; enzyme_conc_list = []
-            substrate_conc_list = []
-
-            for row_name, substrate_conc in zip(row_list, substrate_concs):
-                ### get abs vs time data from file
-                in_file_name = data_file_path + plate_name \
-                                + "_" + str(lane_name) \
-                                + "_" + row_name + ".csv"
-                df = pd.read_csv(in_file_name)
-
-                ### Trim data list to time fraction
-                points_used = int(Fraction_time_span * len(df["time"]))
-                x = df["time"][0:points_used]
-                y = df["abs"][0:points_used]
-
-                ### Curve fit to get slope in abs/time and intercept in abs
-                param, cov = curve_fit(linear_function, x, y)
-
-                rsq = r2_score(y, linear_function(x, *param))
-                slope, intercept = un.correlated_values(param, cov)
-
-                ### Convert slope from abs/time to conc/time
-                slope = slope / e_NPA    # convert abs per min to molar per min        ############################
-                slope = slope * 1E6  # convert molar per min to micromolar per minute  ############################
-
-                intercept = intercept / e_NPA    # convert abs to molar
-                intercept = intercept * 1E6  # convert molar micromolar
-
-                slope_list.append(slope.nominal_value)
-                slope_stderr_list.append(slope.std_dev)
-                int_list.append(intercept.nominal_value)
-                int_stderr_list.append(intercept.std_dev)
-                rsq_list.append(rsq)
-                well_lane_list.append(str(lane_name))
-                well_row_list.append(row_name)
-                plate_list.append(plate_name)
-                enzyme_name_list.append(enzyme_name)
-                enzyme_conc_list.append(enzyme_conc)
-                substrate_conc_list.append(substrate_conc)
-
-            results = {"Plate": plate_list,
-                       "Column":well_lane_list,
-                       "Enzyme":enzyme_name_list,
-                       "E_Conc":enzyme_conc_list,
-                       "Row":well_row_list,
-                       "S_Conc":substrate_conc_list,
-                       "slope":slope_list,                # micromolar per minute
-                       "slope stderr":slope_stderr_list,  # micromolar per minute
-                       "int": int_list,                   # micromolar
-                       "int stderr":int_stderr_list,      # micromolar
-                       "RSQ": rsq_list}
-            
-            result = pd.DataFrame(results)        
-            result.to_csv(result_file_path +"_"+ plate_name +"_"+ str(lane_name) + ".csv")
-            print("Data saved as " + result_file_path +"_"+ plate_name +"_"+ str(lane_name) + ".csv")
-        print(f"{plate_name} complete")
-
-def plot_wells2(data_file_path, plate_name_list, Column_list, Row_list,
+def plot_wells2(plate_name_list, Column_list, Row_list,
+                data_file_path = "data2/data/",
                 plate_plan_path = "data2/plateplans/",
                 Fraction_time_span = 1,
                 Make_Plots = False, 
                 plot_file_path = "plots/analysis_plot_",
-                Save_Data = False, 
+                Save_Data = True, 
                 result_file_path = "data1/data/analysis_results",
                 fancy = False, tiny_points = False, tiny_line = False):
 
@@ -1974,19 +1567,18 @@ def plot_wells2(data_file_path, plate_name_list, Column_list, Row_list,
                        }
             results = pd.DataFrame(results)
 
-                #display(results)
-
             if Save_Data:
                 results.to_csv(f"{result_file_path}_{plate_name}_{lane_name}.csv")
-                print(f"Data saved as {result_file_path}_{plate_name}_{lane_name}.csv")
+                #print(f"Data saved as {result_file_path}_{plate_name}_{lane_name}.csv")
+        print(f"{plate_name} done")
 
-def plot_lanes_MM(result_file_path, plate_name_list, Column_list, 
+def plot_lanes_MM(plate_name_list, Column_list,
+                    result_file_path = "data2/results/analysis_results_",
                     final_file_path = "data1/kinetic_values",
                     Make_Plots = False,
                     plot_file_path = "plots/lanes_plot_",
                     fancy = True,
-                    pH = 7.0
-                    ):
+                    pH = 7.0):
     
     """Loads and plots data files. Can return line fit.
 
@@ -2053,33 +1645,32 @@ def plot_lanes_MM(result_file_path, plate_name_list, Column_list,
             E_conc = df["E_conc"][0]
 
             (param, cov, *other) = curve_fit(MM, x, y,
-                                   p0=None, 
-                                   sigma=y_u, 
-                                   absolute_sigma=True, 
+                                   p0=None,
+                                   sigma=y_u,
+                                   absolute_sigma=True,
                                    bounds=(0, np.inf)
                                 )
             rsq = r2_score(y, MM(x, *param))
 
             Vmax_u, KM_u = un.correlated_values(param, cov)
-            print(Vmax_u, KM_u)
 
-            Vmax_u_molar_s = Vmax_u / e_NPA     # from abs per min to molar per minute
+            Vmax_u_molar_s = Vmax_u / e_NPA   # from abs per min to molar per minute
             E_conc_molar = E_conc / 1E9       # from nanomolar to molar
-            kcat_u = (Vmax_u_molar_s / 60) / E_conc_molar   # Convert Vmax to molar per second and get kcat in per second 
-            KM_u_molar = KM_u /1000    # From millimolar to molar
+            kcat_u = (Vmax_u_molar_s / 60) / E_conc_molar # Convert Vmax to molar per second and get kcat in per second
+            KM_u_molar = KM_u /1000           # From millimolar to molar
             kcat_KM_u = kcat_u / KM_u_molar
 
-            KM_list.append(KM_u.n)              # millimolar
+            KM_list.append(KM_u.n)            # millimolar
             KM_U_list.append(KM_u.s)
-            kcat_list.append(kcat_u.n)          # per second
+            kcat_list.append(kcat_u.n)        # per second
             kcat_U_list.append(kcat_u.s)
             rsq_list.append(rsq)
             plate_list.append(plate_name)
             lane_list.append(lane_name)
-            kcat_KM_list.append(kcat_KM_u.n)   # per molar per second
+            kcat_KM_list.append(kcat_KM_u.n)  # per molar per second
             kcat_KM_U_list.append(kcat_KM_u.s)
             enzyme_list.append(enzyme)
-            E_conc_list.append(E_conc)          # nanomolar
+            E_conc_list.append(E_conc)        # nanomolar
 
             ### end of if:
             if Make_Plots:
@@ -2131,3 +1722,125 @@ def plot_lanes_MM(result_file_path, plate_name_list, Column_list,
 
     return results
 
+def make_data(setup_file_name, outfile_rootname, pH = 7.0):
+    '''takes a plate setup file name and uses the data to construct
+    a plate plan.
+
+    input: file_name: path to csv file. Must contain columns for...
+        "Column": Corresponds to column in plate.
+        "enzyme": text string of enzyme name
+        "E_conc": float of enzyme concentration in nanomolar
+        "Row": Row designations on plate/ Usually A to H
+        "S_Conc": Substrate concentration in each row in millimolar
+        "kcat": kcat value for each enzyme in per second
+        "KM": KM value for each enzyme in millimolar
+    
+    returns: dataframe containing 
+
+        "row_name": same as "Row"
+        "S_conc": Substrate concentration converted to molar
+        "lane_name": same as the "Column" 
+        "E_conc": Enzyme conc converted to molar
+        "kcat": kcat converted to per minute
+        "Vmax": calculated from kcat and E_conc. In molar per minute
+        "KM": KM converted to molar
+        "Enzyme": Same as "enzyme" above
+    '''
+    #Load and clean data file
+    df = pd.read_csv(setup_file_name,
+                     comment = "#",
+                     skipinitialspace=True)
+
+    # Make dictionary of lists for constructing the final dataframe
+
+    # Get row data
+    row_names = df["Row"].dropna()
+    S_conc = df["S_Conc"].dropna() * 1E-3  ### convert millimolar to molar
+    
+    # get column data
+    column_name = df["Column"]    ### lane names
+    Enzyme = df["Enzyme"]         ### enzyme names
+    E_conc = df["E_Conc"] * 1E-9  ### convert nanomolar to molar
+    kcat = df["kcat"] * 60        ### convert /s to /min
+    Vmax = kcat * E_conc          ### Vmax from kcat and [E] in molar per second
+    KM = df["KM"] * 1E-3          ### convert mM to M
+
+################################################################################
+################################################################################
+################################################################################
+
+    # eq is sympy equation object, f is the corresponding function
+    eq, f = get_integrated_MM_function()  
+
+    # Calculate product from uncatalyzed reaction
+    e_NPA = calculate_e_NPA(pH)
+
+    time_start = 0.5        # start at 30 second (0.5 minutes)
+    time_end = 60           # The end time (minutes)
+    n_points = 360          # number of points - increase if needed
+
+    voltage_error = 0.001   # parameters to define output range and error
+    random_error = 0.0002
+    max_value = 4
+
+    dt = time_end / n_points          # time step, delta t
+    t_line = np.arange(time_start,    # time vector (list of time points)
+                    time_end + dt,
+                    dt)
+
+    # Note: Lane names, enzyme conc list, KM list and Vmax list must all be
+    # same length or this will fail. Row names and row concentration lists
+    # must also have equal lengths.
+
+    col_info = zip(column_name, Enzyme, Vmax, KM)
+
+    for lane_name, E_name, Vmax_value, KM_value in col_info:
+
+        row_info = zip(row_names, S_conc)
+
+        for row_name, S0_value in row_info:
+
+            plate_df = pd.DataFrame([])   ### start with empty dataframe
+            #print(row_name)
+
+            ### Calculate product from enzyme reaction
+            product_E = S0_value - f(t_line, S0_value, KM_value, Vmax_value)
+            product_E = np.real(product_E)  ### complex numbers fixed
+
+            product_NPA = 0*(S0_value - S0_value * np.exp(-1E-5 * t_line))   #### REMOVE 0
+            product = product_E + product_NPA
+            absorbance = product * e_NPA   ### result in absorbance units
+
+            ### Add voltage error 
+            fraction_transmittance  = 10 ** -absorbance                      
+            fraction_transmittance = np.random.normal(fraction_transmittance,
+                                                    voltage_error,
+                                                    len(fraction_transmittance))
+
+            ### Replace negative transmittance values with a very low value to 
+            # avoid math errors with np.log10
+            fraction_transmittance[fraction_transmittance <= 0] = 1E-6
+
+            ### Calculate absorbance
+            absorbance = -np.log10(fraction_transmittance)
+
+            ### Add random error ro absorbance
+            absorbance = np.random.normal(absorbance,
+                                        random_error,
+                                        len(absorbance))
+
+            ### Clean generated data set.
+            absorbance[absorbance > max_value] = max_value   ### cap values to maximum absorbance
+            absorbance = np.nan_to_num(absorbance,  ### replace any NaN with max value
+                            copy = True,
+                            nan = max_value)
+
+            ### insert the two data arrays into the dataframe
+            plate_df["time"] = t_line
+            plate_df["abs"] = absorbance
+
+            ### Write data out to file using lane_name and row_name
+            out_file_name = outfile_rootname + "_" + str(lane_name) \
+                + "_" + str(row_name) + ".csv"
+#            print(out_file_name)
+            plate_df.to_csv(out_file_name, float_format='%10.4g')

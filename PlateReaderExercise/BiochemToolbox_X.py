@@ -1787,6 +1787,171 @@ def collect_lanes(data_file_path, plate_name_list, plate_plan_path,
 #            print("Data saved as " + result_file_path +"_"+ plate_name +"_"+ str(lane_name) +"_"+ ".csv")
         print(f"{plate_name} complete")
 
+def plot_wells2(data_file_path, plate_name_list, Column_list, Row_list,
+               Fraction_time_span = 1,
+               Make_Plots = False, 
+               plot_file_path = "plots/analysis_plot_",
+               Save_Data = False, 
+               result_file_path = "data1/data/analysis_results",
+               fancy = False, tiny_points = False, tiny_line = False):
+
+    """Loads and plots data files. Can return line fit.
+
+    Will make a plot of all the wells designated by columns and rows
+    Will fit data to linear curve fit and collect slopes and intercept data
+    Will save the plot as a pdf
+    Will save the data as a csv file with same filename as pdf
+    
+    Arguments
+    ---------
+    data_file_name: string
+        The data file name. Filenames will be this plus column and row
+        e.g. "name_10_C.csv"
+    Column_list, Row_list: Array like
+        list of names for column, row to be plotted.
+        Will usually be one column and some rows but can be as many as wanted
+    Fraction_time_span: float
+        The fraction of the time span to plt. Default is 1 for 100%
+    Line_Fit: boolean
+        If True then line fits will be performed for each well and data
+        written to lists and put into the result dataframe
+    Display_Plot, Display_Data: booleans
+        If True then the plot will be created and displayed and the
+        dataframe displayed, respectively.
+    
+    Returns
+    -------
+    result: pandas dataframe
+        The results of line fits. Will be empty if Line_Fit = False
+    """
+    def linear_function(x, slope, intercept):
+        return slope * x + intercept
+    
+    #print(Column_list)
+
+    plt.ioff()           ### switch off interactive display of plots. plt.show() needed to display a plot now
+    plt.rcdefaults()     ### resets the plot defaults so we always start in the same place
+    if fancy:
+        plt.style.use("../styles/tufte.mplstyle")     ### Then add a fancy style sheet
+    
+
+    slope_list = []; slope_stderr_list = []
+    int_list = []; int_stderr_list = []; rsq_list = [];
+    plate_list = []; well_lane_list = []; well_row_list=[]
+
+    for plate_name in plate_name_list:
+        #print(plate_name)
+
+
+        for lane_name in Column_list:
+        #print(lane_name)
+
+            slope_list = []; slope_stderr_list = []
+            int_list = []; int_stderr_list = []; rsq_list = [];
+            plate_list = []; well_lane_list = []; well_row_list=[]
+
+
+            for row_name in Row_list:
+                in_file_name = data_file_path + plate_name \
+                                + "_" + str(lane_name) \
+                                + "_" + row_name + ".csv"
+                df = pd.read_csv(in_file_name)
+
+                points_used = int(Fraction_time_span * len(df["time"]))
+                x = df["time"][0:points_used]
+                y = df["abs"][0:points_used]
+
+                param,cov = curve_fit(linear_function, x, y)
+                slope, intercept = un.correlated_values(param, cov)
+
+                rsq = r2_score(y, linear_function(x, *param))
+
+                slope_list.append(slope.n)
+                slope_stderr_list.append(slope.s)
+                int_list.append(intercept.n)
+                int_stderr_list.append(int.s)
+                rsq_list.append(rsq)
+                well_lane_list.append(str(lane_name))
+                well_row_list.append(row_name)
+                plate_list.append(plate_name)
+
+                if Make_Plots:
+                    fig, ax = plt.subplots(nrows=1, ncols=1, figsize=(5,4))
+
+                    x_fit = np.linspace(0,np.max(x),10)
+                    ax.plot(x_fit, linear_function(x_fit, *param),
+                            linestyle = '-',
+                            linewidth='0.5',
+                            color = 'black',
+                            zorder = 0)
+
+                    if tiny_line:
+                        ax.plot(x, y,
+                            #marker=None,
+                            color='black',
+                            linewidth = 0.5,
+                            ms=8,
+                            zorder = 1)
+                    if tiny_points:
+                        ax.scatter(x, y,
+                            marker='o',
+                            color='black',
+                            edgecolors = 'none',
+                            linewidths = 0.5,
+                            s=2,
+                            zorder = 2)
+                    else:
+                        ax.scatter(x, y,
+                            marker='o',
+                            color='white',
+                            edgecolors = 'black',
+                            linewidths = 0.5,
+                            s=32,
+                            zorder = 2)
+                        ax.scatter(x, y,
+                            marker='o',
+                            color='white',
+                            edgecolors = None,
+                            linewidths = 0.5,
+                            s=64,
+                            zorder = 1)
+                    ### end of if tiny_points:
+                    if np.min(y) < 0:
+                        q = np.min(y) - 0.05*np.max(y)
+                    else:
+                        q = -0.05*np.max(y)
+
+                    ax.set(xlabel= r"Time $/min$",
+                           ylabel=r"$A_{405}$",
+                           #title = "Lane # "+lane_name,
+                           xlim=[0, None],
+                           ylim=[q, None]
+                            )
+                    fig.tight_layout()  # otherwise the right y-label is slightly clipped
+                    plt.savefig(plot_file_path +"_"+ plate_name +"_"+ str(lane_name) \
+                                +"_"+ row_name + ".pdf")     ### export the plot as this
+                    plt.close()
+                ### end of if plots
+            ### end of for row_name:
+
+
+            results = {"Plate": plate_list,
+                       "Column":well_lane_list,
+                       "Row":well_row_list,
+                       "slope":slope_list,
+                       "slope stderr":slope_stderr_list,
+                       "int": int_list,
+                       "int stderr":int_stderr_list,
+                       "RSQ": rsq_list}
+            results = pd.DataFrame(results)
+
+                #display(results)
+
+            if Save_Data:
+                results.to_csv(f"{result_file_path}_{plate_name}_{lane_name}.csv")
+                print(f"Data saved as {result_file_path}_{plate_name}_{lane_name}.csv")
+
+
 def plot_lanes_MM(result_file_path, plate_name_list, Column_list, 
                     final_file_path = "data1/kinetic_values",
                     Make_Plots = False,

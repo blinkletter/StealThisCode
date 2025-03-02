@@ -1604,8 +1604,8 @@ def make_data_files_plates(setupdata, file_name, pH = 7.0):
     time_end = 60           ### The end time (minutes)
     n_points = 360          ### number of points - increase if needed
 
-    voltage_error = 0.000   ### parameters to define output range and error
-    random_error = 0.000
+    voltage_error = 0.001   ### parameters to define output range and error
+    random_error = 0.0001
     max_value = 4
 
     dt = time_end / n_points          ### time step, delta t
@@ -1680,7 +1680,8 @@ def make_data_files_plates(setupdata, file_name, pH = 7.0):
             plate_df.to_csv(out_file_name, float_format='%10.4g')
 
 def collect_lanes(data_file_path, plate_name_list, plate_plan_path,
-                Fraction_time_span = 1, pH = 7,
+                Fraction_time_span = 1, 
+                pH = 7,
                 result_file_path = "data1/results/analysis_results_",
                 make_plots = True,
                 plot_file_path = "data1/plots/",
@@ -1709,6 +1710,7 @@ def collect_lanes(data_file_path, plate_name_list, plate_plan_path,
     result: nul
     Will output .csv files
     """
+
     def linear_function(x, slope, intercept):
         return slope * x + intercept
 
@@ -1751,8 +1753,9 @@ def collect_lanes(data_file_path, plate_name_list, plate_plan_path,
 
                 ### Curve fit to get slope in abs/time and intercept in abs
                 param, cov = curve_fit(linear_function, x, y)
-                slope, intercept = un.correlated_values(param, cov)
+
                 rsq = r2_score(y, linear_function(x, *param))
+                slope, intercept = un.correlated_values(param, cov)
 
                 ### Convert slope from abs/time to conc/time
                 slope = slope / e_NPA    # convert abs per min to molar per min        ############################
@@ -1763,7 +1766,7 @@ def collect_lanes(data_file_path, plate_name_list, plate_plan_path,
 
                 slope_list.append(slope.nominal_value)
                 slope_stderr_list.append(slope.std_dev)
-                int_list.append(intercept._nominal_value)
+                int_list.append(intercept.nominal_value)
                 int_stderr_list.append(intercept.std_dev)
                 rsq_list.append(rsq)
                 well_lane_list.append(str(lane_name))
@@ -1772,34 +1775,6 @@ def collect_lanes(data_file_path, plate_name_list, plate_plan_path,
                 enzyme_name_list.append(enzyme_name)
                 enzyme_conc_list.append(enzyme_conc)
                 substrate_conc_list.append(substrate_conc)
-
-###                if Make_Plots:
-###                    fig, ax = plt.subplots(nrows=1, ncols=1, figsize=(5,4))
-###                    x_fit = np.linspace(0,np.max(x),10)
-###                    ax.plot(x_fit, linear_function(x_fit, *param),
-###                            linestyle = '-',
-###                            linewidth='0.5',
-###                            color = 'black',
-###                            zorder = 0)
-###                    ax.scatter(x, y,
-###                        marker='o',
-###                        color='white',
-###                        edgecolors = 'black',
-###                        linewidths = 0.5,
-###                        s=16,
-###                        zorder = 2)
-###
-###                    ax.set(xlabel= r"time $/min$",
-###                           ylabel=r"Abs",
-###                           title = f"{enzyme}, Plate {plate_name}, Well {lane_name}-{row_name}",
-###                           xlim=[-0.05*np.max(x), np.max(x)*1.05],
-###                           ylim=[-0.05*np.max(y), np.max(y)*1.05]
-###                            )
-###                    fig.tight_layout()  # otherwise the right y-label is slightly clipped
-###                    plt.savefig(f"{plot_file_path}_{plate_name}_{lane_name}.pdf")     ### export the plot as this
-###                    plt.close()
-
-
 
             results = {"Plate": plate_list,
                        "Column":well_lane_list,
@@ -1818,11 +1793,199 @@ def collect_lanes(data_file_path, plate_name_list, plate_plan_path,
             print("Data saved as " + result_file_path +"_"+ plate_name +"_"+ str(lane_name) + ".csv")
         print(f"{plate_name} complete")
 
+def plot_wells2(data_file_path, plate_name_list, Column_list, Row_list,
+                plate_plan_path = "data2/plateplans/",
+                Fraction_time_span = 1,
+                Make_Plots = False, 
+                plot_file_path = "plots/analysis_plot_",
+                Save_Data = False, 
+                result_file_path = "data1/data/analysis_results",
+                fancy = False, tiny_points = False, tiny_line = False):
+
+    """Loads and plots data files. Can return line fit.
+
+    Will make a plot of all the wells designated by columns and rows
+    Will fit data to linear curve fit and collect slopes and intercept data
+    Will save the plot as a pdf
+    Will save the data as a csv file with same filename as pdf
+    
+    Arguments
+    ---------
+    data_file_name: string
+        The data file name. Filenames will be this plus column and row
+        e.g. "name_10_C.csv"
+    Column_list, Row_list: Array like
+        list of names for column, row to be plotted.
+        Will usually be one column and some rows but can be as many as wanted
+    Fraction_time_span: float
+        The fraction of the time span to plt. Default is 1 for 100%
+    Line_Fit: boolean
+        If True then line fits will be performed for each well and data
+        written to lists and put into the result dataframe
+    Display_Plot, Display_Data: booleans
+        If True then the plot will be created and displayed and the
+        dataframe displayed, respectively.
+    
+    Returns
+    -------
+    result: pandas dataframe
+        The results of line fits. Will be empty if Line_Fit = False
+    """
+
+    def linear_function(x, slope, intercept):
+        return slope * x + intercept
+    
+    #print(Column_list)
+
+    plt.ioff()           ### switch off interactive display of plots. plt.show() needed to display a plot now
+    plt.rcdefaults()     ### resets the plot defaults so we always start in the same place
+    if fancy:
+        plt.style.use("../styles/tufte.mplstyle")     ### Then add a fancy style sheet
+    
+
+    slope_list = []; slope_stderr_list = []
+    int_list = []; int_stderr_list = []; rsq_list = [];
+    plate_list = []; well_lane_list = []; well_row_list=[];
+
+    for plate_name in plate_name_list:
+        #print(plate_name)
+
+        plateplan_df = read_plate_setup(plate_plan_path + plate_name + ".csv")
+
+        mask = plateplan_df["Column"].isin(Column_list)
+        column_df = plateplan_df[mask][["Column", "Enzyme", "E_Conc"]]
+
+        mask = plateplan_df["Row"].isin(Row_list)
+        row_df = plateplan_df[mask][["Row", "S_Conc"]]
+
+        column_name_list = column_df["Column"]
+        enzyme_names = column_df["Enzyme"]
+        enzyme_concs = column_df["E_Conc"]
+        row_list = row_df["Row"]
+        substrate_concs = row_df["S_Conc"]
+
+        for lane_name, e_name, e_conc in zip(column_name_list, enzyme_names, enzyme_concs):
+        #print(lane_name)
+
+            slope_list = []; slope_stderr_list = []
+            int_list = []; int_stderr_list = []; rsq_list = [];
+            plate_list = []; well_lane_list = []; well_row_list=[]
+            E_conc_list = []; S_conc_list = []; E_name_list=[]
+
+
+            for row_name, s_conc in zip(row_list, substrate_concs):
+                in_file_name = data_file_path + plate_name \
+                                + "_" + str(lane_name) \
+                                + "_" + row_name + ".csv"
+                df = pd.read_csv(in_file_name)
+
+                points_used = int(Fraction_time_span * len(df["time"]))
+                x = df["time"][0:points_used]
+                y = df["abs"][0:points_used]
+
+                param,cov = curve_fit(linear_function, x, y)
+                slope, intercept = un.correlated_values(param, cov)
+
+                rsq = r2_score(y, linear_function(x, *param))
+
+                slope_list.append(slope.n)
+                slope_stderr_list.append(slope.s)
+                int_list.append(intercept.n)
+                int_stderr_list.append(intercept.s)
+                rsq_list.append(rsq)
+                well_lane_list.append(str(lane_name))
+                well_row_list.append(row_name)
+                plate_list.append(plate_name)
+                E_conc_list.append(e_conc)
+                E_name_list.append(e_name)
+                S_conc_list.append(s_conc)
+
+                if Make_Plots:
+                    fig, ax = plt.subplots(nrows=1, ncols=1, figsize=(5,4))
+
+                    x_fit = np.linspace(0,np.max(x),10)
+                    ax.plot(x_fit, linear_function(x_fit, *param),
+                            linestyle = '-',
+                            linewidth='0.5',
+                            color = 'black',
+                            zorder = 0)
+
+                    if tiny_line:
+                        ax.plot(x, y,
+                            #marker=None,
+                            color='black',
+                            linewidth = 0.5,
+                            ms=8,
+                            zorder = 1)
+                    if tiny_points:
+                        ax.scatter(x, y,
+                            marker='o',
+                            color='black',
+                            edgecolors = 'none',
+                            linewidths = 0.5,
+                            s=2,
+                            zorder = 2)
+                    else:
+                        ax.scatter(x, y,
+                            marker='o',
+                            color='white',
+                            edgecolors = 'black',
+                            linewidths = 0.5,
+                            s=32,
+                            zorder = 2)
+                        ax.scatter(x, y,
+                            marker='o',
+                            color='white',
+                            edgecolors = None,
+                            linewidths = 0.5,
+                            s=64,
+                            zorder = 1)
+                    ### end of if tiny_points:
+                    if np.min(y) < 0:
+                        q = np.min(y) - 0.05*np.max(y)
+                    else:
+                        q = -0.05*np.max(y)
+
+                    ax.set(xlabel= r"Time $/min$",
+                           ylabel=r"$A_{405}$",
+                           #title = "Lane # "+lane_name,
+                           xlim=[0, None],
+                           ylim=[q, None]
+                            )
+                    fig.tight_layout()  # otherwise the right y-label is slightly clipped
+                    plt.savefig(plot_file_path +"_"+ plate_name +"_"+ str(lane_name) \
+                                +"_"+ row_name + ".pdf")     ### export the plot as this
+                    plt.close()
+                ### end of if plots
+            ### end of for row_name:
+
+
+            results = {"Plate": plate_list,
+                       "Column": well_lane_list,
+                       "E_name": E_name_list,
+                       "E_conc": E_conc_list,
+                       "Row": well_row_list,
+                       "S_conc": S_conc_list,
+                       "slope": slope_list,
+                       "slope stderr": slope_stderr_list,
+                       "int": int_list,
+                       "int stderr": int_stderr_list,
+                       "RSQ": rsq_list
+                       }
+            results = pd.DataFrame(results)
+
+                #display(results)
+
+            if Save_Data:
+                results.to_csv(f"{result_file_path}_{plate_name}_{lane_name}.csv")
+                print(f"Data saved as {result_file_path}_{plate_name}_{lane_name}.csv")
+
 def plot_lanes_MM(result_file_path, plate_name_list, Column_list, 
                     final_file_path = "data1/kinetic_values",
                     Make_Plots = False,
                     plot_file_path = "plots/lanes_plot_",
-                    fancy = True
+                    fancy = True,
+                    pH = 7.0
                     ):
     
     """Loads and plots data files. Can return line fit.
@@ -1865,7 +2028,8 @@ def plot_lanes_MM(result_file_path, plate_name_list, Column_list,
     if fancy:
         plt.style.use("../styles/tufte.mplstyle")     ### Then add a fancy style sheet
     
-
+    e_NPA = calculate_e_NPA(pH = pH)
+    print(f"eNPA = {e_NPA:0.2f}")
     KM_list = []; KM_U_list = []
     kcat_list = []; kcat_U_list = []
     rsq_list = []
@@ -1883,40 +2047,39 @@ def plot_lanes_MM(result_file_path, plate_name_list, Column_list,
             df = pd.read_csv(in_file_name)
             y = df["slope"]
             y_u = df["slope stderr"]
-            x = df["S_Conc"]
+            x = df["S_conc"]
             
-            enzyme = df["Enzyme"][0]
-            E_conc = df["E_Conc"][0]
+            enzyme = df["E_name"][0]
+            E_conc = df["E_conc"][0]
 
             (param, cov, *other) = curve_fit(MM, x, y,
                                    p0=None, 
-            #                       sigma=y_u, 
-            #                       absolute_sigma=False, 
-            #                       bounds=(0, np.inf)
+                                   sigma=y_u, 
+                                   absolute_sigma=True, 
+                                   bounds=(0, np.inf)
                                 )
             rsq = r2_score(y, MM(x, *param))
 
             Vmax_u, KM_u = un.correlated_values(param, cov)
             print(Vmax_u, KM_u)
 
-            Vmax_u_molar_s = Vmax_u /60 /1E6     # from micromolar per min to molar per second
-            E_conc_molar = E_conc / 1E9
-            kcat_u = Vmax_u/E_conc
-            kcat_u_molar = kcat_u /60 *1E6   # From micromolar per min to molar per second
-            KM_u_molar = KM_u /1000    # From millilomar to molar
-
+            Vmax_u_molar_s = Vmax_u / e_NPA     # from abs per min to molar per minute
+            E_conc_molar = E_conc / 1E9       # from nanomolar to molar
+            kcat_u = (Vmax_u_molar_s / 60) / E_conc_molar   # Convert Vmax to molar per second and get kcat in per second 
+            KM_u_molar = KM_u /1000    # From millimolar to molar
             kcat_KM_u = kcat_u / KM_u_molar
-            KM_list.append(KM_u.n)
+
+            KM_list.append(KM_u.n)              # millimolar
             KM_U_list.append(KM_u.s)
-            kcat_list.append(kcat_u.n)
+            kcat_list.append(kcat_u.n)          # per second
             kcat_U_list.append(kcat_u.s)
             rsq_list.append(rsq)
             plate_list.append(plate_name)
             lane_list.append(lane_name)
-            kcat_KM_list.append(kcat_KM_u.n)
+            kcat_KM_list.append(kcat_KM_u.n)   # per molar per second
             kcat_KM_U_list.append(kcat_KM_u.s)
             enzyme_list.append(enzyme)
-            E_conc_list.append(E_conc)
+            E_conc_list.append(E_conc)          # nanomolar
 
             ### end of if:
             if Make_Plots:
@@ -1938,7 +2101,7 @@ def plot_lanes_MM(result_file_path, plate_name_list, Column_list,
 
                 ax.set(xlabel= r"[S] $/mM$",
                        ylabel=r"rate $\mu M/min$",
-                       title = f"{enzyme}, Plate {plate_name}, Lane {lane_name}",
+                       title = f"{enzyme}, {plate_name}, Lane {lane_name}",
                        xlim=[-0.05*np.max(x), np.max(x)*1.05],
                        ylim=[-0.05*np.max(y), np.max(y)*1.05]
                         )
@@ -1951,11 +2114,11 @@ def plot_lanes_MM(result_file_path, plate_name_list, Column_list,
                "Column":lane_list,
                "Enzyme": enzyme_list,
                "E_conc": E_conc_list,
-               "KM":KM_list,
+               "KM (mM)":KM_list,
                "KM stderr":KM_U_list,
-               "kcat": kcat_list,
+               "kcat (/s)": kcat_list,
                "kcat stderr":kcat_U_list,
-               "kcat/KM": kcat_KM_list,
+               "kcat/KM (M/s)": kcat_KM_list,
                "kcat/KM stderr":kcat_KM_U_list,
                "RSQ": rsq_list}
     

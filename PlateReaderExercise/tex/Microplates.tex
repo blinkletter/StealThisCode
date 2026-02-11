@@ -2,8 +2,6 @@
 \PassOptionsToPackage{full}{textcomp}
 \documentclass[]{tufte-handout}
 %\usepackage{fontspec}
-%\usepackage{ETbb}
-
 
 % load babel package and options here
 %\usepackage[p,osf]{ETbb} % osf in text, tabular lining figures in math
@@ -23,17 +21,18 @@
 \usepackage{booktabs} % book-quality tables
 %\usepackage{units}    % non-stacked fractions and better unit spacing
 \usepackage{multicol} % multiple column layout facilities
-\usepackage{multirow} % multiple column layout facilities
 \usepackage{lipsum}   % filler text
+%\usepackage{verbatim}
 \usepackage{fancyvrb} % extended verbatim environments
   \fvset{fontsize=\normalsize}% default font size for fancy-verbatim environments
+  \DefineShortVerb{\|}
 \usepackage{gensymb} % provides symbols like \degree
-\usepackage{ragged2e} % enables hyphenation in ragged-right justification
+%\usepackage{ragged2e} % enables hyphenation in ragged-right justification
 \usepackage[normalize-symbols]{textalpha} %enables \textalpha for alpha symbol etc.
 
 \usepackage{hyperref} % enables styling of href and url
 \hypersetup{
-    pdftitle={Tutorial 3},
+    pdftitle={Mechanisms},
     pdfauthor={Barry Linkletter},
     colorlinks=true,
     linkcolor=blue,
@@ -43,22 +42,37 @@
     frenchlinks=false,
     pdfpagemode=FullScreen,
     }
+    \urlstyle{same}
+\makeatletter
+% Inspired by http://anti.teamidiot.de/nei/2009/09/latex_url_slash_spacingkerning/
+% but slightly less kern and shorter underscore
+\let\UrlSpecialsOld\UrlSpecials
+\def\UrlSpecials{\UrlSpecialsOld\do\/{\Url@slash}\do\_{\Url@underscore}}%
+\def\Url@slash{\@ifnextchar/{\kern-.03em\mathchar47\kern-.15em}%
+    {\kern-.0em\mathchar47\kern-.08em\penalty\UrlBigBreakPenalty}}
+\def\Url@underscore{\nfss@text{\leavevmode \kern.06em\vbox{\hrule\@width.3em}}}
+\makeatother
 
 \usepackage{enumitem} % allows resuming enumerate lists.
 \usepackage{mathtools}
 \usepackage{mhchem}
 
 \usepackage{siunitx} % provides "S" column class for aligning decimals.  
-
+         \sisetup{uncertainty-mode = separate}
 
 \usepackage{nicefrac}
 
-\usepackage{varioref}
+\usepackage[nospace]{varioref}
+    \renewcommand\reftextfaceafter{on the following page}
+    \renewcommand\reftextafter {on the next page}
+    \renewcommand\reftextfacebefore{on the previous page}
+    \renewcommand\reftextbefore {on the previous page}
 
-\usepackage{babel}
+\newcommand{\tss}[1]{\textsuperscript{#1}}
+
+\usepackage[english]{babel}
 \usepackage{float}
 \usepackage{stackrel}
-
 
 \usepackage[shortconst]{physconst}
 
@@ -69,9 +83,54 @@
   fileext = los ,
   listname = {List of Schemes} ,
   name = Scheme
-]{scheme}                    % provides scheme numbering for chemical schemes
+]{scheme}
 
+\usepackage{newfloat}
+\DeclareFloatingEnvironment[
+  fileext = loe ,
+  listname = {List of Eqs} ,
+  name = Equation
+]{equate}
 
+%%%%%%%%%%%%%%
+\usepackage{listings}
+\usepackage{xcolor}
+
+% Define colors for syntax highlighting
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+% Configure listings style
+\lstdefinestyle{mystyle}{
+%    backgroundcolor=\color{backcolour},
+    backgroundcolor=\color{white},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=false, %default is true
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+\lstset{style=mystyle}
+%%%%%%%%%%%
+
+\usepackage[abs]{overpic}
+
+\usepackage{paralist}
+\usepackage{multirow}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
 \newcommand{\Km}{$\rm K_M$}
 \newcommand{\Vmax}{$\rm V_{max}$}

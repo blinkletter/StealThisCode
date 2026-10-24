@@ -27,7 +27,7 @@ parts:
         - file: 4_SciPy/K05_NumericIntegration_SystemEq.ipynb
     - caption: "PhysOrg Examples"
       chapters:
-        - file: 6_PhysOrgExamples/6_0_Introduction.ipynb
+        - file: 6_PhysOrgExamples/6_0_Introduction.md
         - file: 6_PhysOrgExamples/6_1_start.ipynb
         - file: 6_PhysOrgExamples/6_2_kinetics.ipynb
         - file: 6_PhysOrgExamples/6_3_Problem_ch7_p5.ipynb

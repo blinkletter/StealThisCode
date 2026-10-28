@@ -45,11 +45,10 @@ project:
         - file: 6_PhysOrgExamples/6_3_Problem_ch7_p5.ipynb
         - file: 6_PhysOrgExamples/6_4_Problem_ch_7_p_9.ipynb
         - file: 6_PhysOrgExamples/6_5_Problem_ch7_p11.ipynb
-    
 site:
   template: book-theme
-  parts:
-    primary_sidebar_footer: primary-sidebar-footer.md
+#  parts:
+#    primary_sidebar_footer: primary-sidebar-footer.md
   options:
     style: ./custom.css
     folders: true
